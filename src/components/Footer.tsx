@@ -1,0 +1,58 @@
+import React from 'react';
+import Link from 'next/link';
+import { MapPin, Phone } from 'lucide-react';
+import { AgnaaLogo } from './AgnaaLogo';
+
+export const Footer = () => {
+  return (
+    <footer className="bg-[#F5F5F7] border-t border-gray-200 pt-20 pb-10 text-gray-500 font-medium">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div className="col-span-1 md:col-span-2 space-y-6">
+          <div className="flex items-center mb-6">
+            <AgnaaLogo className="w-auto h-10 grayscale hover:grayscale-0 transition-all duration-500" />
+          </div>
+          <p className="max-w-md text-lg font-bold">Design. Build. Soul. Architecture and execution that outlives generations.</p>
+          <div className="flex gap-6 pt-4 font-bold">
+            {['@agnaadesign', '@agnaasol', '@agnaaarchive'].map(ig => (
+              <a key={ig} href="#" className="text-[#1C1C72] hover:text-[#7B2DBF] hover:drop-shadow-[0_0_8px_rgba(123,45,191,0.3)] transition-all">{ig}</a>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h4 className="text-[#1C1C72] font-black uppercase tracking-widest text-sm mb-6">Explore</h4>
+          <ul className="space-y-4 font-bold">
+            <li><Link href="/portfolio" className="hover:text-[#7B2DBF] transition-colors">Portfolio</Link></li>
+            <li><Link href="/design-studio" className="hover:text-[#7B2DBF] transition-colors">Design Studio</Link></li>
+            <li><Link href="/constructions" className="hover:text-[#7B2DBF] transition-colors">Constructions</Link></li>
+            <li><Link href="/foundation" className="hover:text-[#7B2DBF] transition-colors">Foundation</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-[#1C1C72] font-black uppercase tracking-widest text-sm mb-6">Contact</h4>
+          <ul className="space-y-5 font-bold">
+            <li className="flex items-start gap-3">
+              <MapPin size={20} className="shrink-0 text-[#7B2DBF]"/> 
+              469 TNGOS Colony, Financial District, Gachibowli, Hyderabad
+            </li>
+            <li className="flex items-center gap-3">
+              <Phone size={20} className="shrink-0 text-[#7B2DBF]"/> 
+              +91-8826214348
+            </li>
+            <li className="pt-4">
+              <Link href="/calculators" className="text-sm font-bold text-[#1C1C72] border-b border-[#1C1C72] pb-1 hover:text-[#7B2DBF] hover:border-[#7B2DBF] transition-all">
+                Access Free Calculators
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="container mx-auto px-4 text-sm border-t border-gray-300 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 font-bold text-gray-400">
+        <p>© 2026 AGNAA Architects. All rights reserved.</p>
+        <div className="flex gap-6">
+          <a href="#" className="hover:text-[#7B2DBF] transition-colors">Privacy Policy</a>
+          <a href="#" className="hover:text-[#7B2DBF] transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+  );
+};
