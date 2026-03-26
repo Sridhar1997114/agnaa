@@ -41,6 +41,11 @@ export default function CostCalculator() {
 
   // PDF Generation State
   const [isGenerating, setIsGenerating] = useState(false);
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    setCurrentDate(new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }));
+  }, []);
 
   // Toggle Service Selection
   const toggleService = (id: string) => {
@@ -169,8 +174,7 @@ export default function CostCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans selection:bg-[#7B2DBF]/30 selection:text-white">
-      <Header />
+    <div className="min-h-screen bg-black text-white font-sans selection:bg-[#7B2DBF]/30 selection:text-white pb-20">
       
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-6 relative overflow-hidden">
@@ -186,7 +190,7 @@ export default function CostCalculator() {
               <span className="text-xs font-semibold tracking-widest text-[#E0E0E0] uppercase">Enterprise Grade Estimator</span>
             </div>
             
-            <h1 className="text-5xl lg:text-7xl font-bold tracking-tighter mb-6 leading-[1.1]">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter mb-6 leading-[1.1]">
               Predictable <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Pricing.</span><br/>
               Unmatched Value.
             </h1>
@@ -197,8 +201,8 @@ export default function CostCalculator() {
             </p>
           </div>
           
-          {/* Quick Summary Card */}
-          <div className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-md relative overflow-hidden">
+          {/* Quick Summary Card - Hidden on mobile, shown on lg */}
+          <div className="hidden lg:block bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-md relative overflow-hidden">
              <div className="absolute top-0 right-0 w-32 h-32 bg-[#7B2DBF]/20 blur-[50px] rounded-full"></div>
              <p className="text-gray-400 font-medium mb-2 uppercase tracking-widest text-xs">Estimated Value</p>
              <div className="text-5xl font-black tracking-tighter mb-4 text-white">
@@ -227,10 +231,10 @@ export default function CostCalculator() {
           <div className="space-y-12">
             
             {/* Step 1: Project Details */}
-            <div className="bg-[#111] border border-white/5 rounded-3xl p-8">
+            <div className="bg-[#111] border border-white/5 rounded-3xl p-6 md:p-8">
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-10 h-10 rounded-full bg-[#1C1C72]/30 flex items-center justify-center text-[#7B2DBF] font-bold">1</div>
-                <h2 className="text-2xl font-bold">Project Parameters</h2>
+                <div className="w-10 h-10 rounded-full bg-[#1C1C72]/30 flex items-center justify-center text-[#7B2DBF] font-bold shrink-0">1</div>
+                <h2 className="text-xl md:text-2xl font-bold">Project Parameters</h2>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -303,7 +307,7 @@ export default function CostCalculator() {
               
               <div className="mt-8">
                 <label className="block text-sm font-medium text-gray-400 mb-4">Design Complexity Level</label>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                   {[
                     { id: 'simple', label: 'Simple', desc: 'Basic, functional' },
                     { id: 'medium', label: 'Medium', desc: 'Standard details' },
@@ -313,14 +317,14 @@ export default function CostCalculator() {
                     <button
                       key={lvl.id}
                       onClick={() => setParams({...params, complexity: lvl.id as any})}
-                      className={`p-4 rounded-xl border text-left transition-all ${
+                      className={`p-5 rounded-2xl border text-left transition-all ${
                         params.complexity === lvl.id 
-                          ? 'border-[#7B2DBF] bg-[#7B2DBF]/10' 
+                          ? 'border-[#7B2DBF] bg-[#7B2DBF]/10 ring-1 ring-[#7B2DBF]/50' 
                           : 'border-white/10 bg-white/5 hover:border-white/20'
                       }`}
                     >
-                      <div className="font-bold mb-1">{lvl.label}</div>
-                      <div className="text-xs text-gray-500">{lvl.desc}</div>
+                      <div className="font-bold mb-1 text-sm md:text-base">{lvl.label}</div>
+                      <div className="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider">{lvl.desc}</div>
                     </button>
                   ))}
                 </div>
@@ -328,10 +332,10 @@ export default function CostCalculator() {
             </div>
 
             {/* Step 2: Service Selection */}
-            <div className="bg-[#111] border border-white/5 rounded-3xl p-8">
+            <div className="bg-[#111] border border-white/5 rounded-3xl p-6 md:p-8">
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-10 h-10 rounded-full bg-[#1C1C72]/30 flex items-center justify-center text-[#7B2DBF] font-bold">2</div>
-                <h2 className="text-2xl font-bold">Select Services</h2>
+                <div className="w-10 h-10 rounded-full bg-[#1C1C72]/30 flex items-center justify-center text-[#7B2DBF] font-bold shrink-0">2</div>
+                <h2 className="text-xl md:text-2xl font-bold">Select Services</h2>
               </div>
 
               {/* Category Tabs */}
@@ -367,28 +371,28 @@ export default function CostCalculator() {
                     <div 
                       key={service.id}
                       onClick={() => toggleService(service.id)}
-                      className={`p-5 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                      className={`p-4 md:p-5 rounded-2xl border flex items-center justify-between cursor-pointer transition-all ${
                         isSelected 
-                          ? 'border-[#7B2DBF] bg-[#1C1C72]/20' 
+                          ? 'border-[#7B2DBF] bg-[#1C1C72]/20 shadow-[0_0_20px_rgba(123,45,191,0.1)]' 
                           : 'border-white/5 bg-white/5 hover:border-white/20'
                       }`}
                     >
-                      <div className="flex items-center gap-4">
-                        <div className={`w-6 h-6 rounded-full flex items-center justify-center border transition-colors ${
+                      <div className="flex items-center gap-3 md:gap-4 overflow-hidden">
+                        <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center border transition-colors shrink-0 ${
                           isSelected ? 'bg-[#7B2DBF] border-[#7B2DBF]' : 'border-gray-600'
                         }`}>
-                          {isSelected && <CheckCircle size={14} className="text-white" />}
+                          {isSelected && <CheckCircle size={12} className="text-white md:size-14" />}
                         </div>
-                        <div>
-                          <h3 className={`font-bold ${isSelected ? 'text-white' : 'text-gray-300'}`}>{service.name}</h3>
-                          <p className="text-sm text-gray-500 mt-1">{service.basis === 'Flat' ? 'Fixed Fee' : service.basis} • {service.days}</p>
+                        <div className="truncate">
+                          <h3 className={`font-bold text-sm md:text-base ${isSelected ? 'text-white' : 'text-gray-300'}`}>{service.name}</h3>
+                          <p className="text-[10px] md:text-sm text-gray-500 mt-0.5 truncate uppercase tracking-widest">{service.basis === 'Flat' ? 'Fixed Fee' : service.basis} • {service.days}</p>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className={`font-bold ${isSelected ? 'text-white' : 'text-gray-400'}`}>
+                      <div className="text-right shrink-0 ml-4">
+                        <div className={`font-bold text-sm md:text-base ${isSelected ? 'text-white' : 'text-gray-400'}`}>
                           {price.low === price.high 
                             ? `₹${price.low.toLocaleString()}` 
-                            : `₹${price.low.toLocaleString()} - ₹${price.high.toLocaleString()}`}
+                            : `₹${Math.round(price.low/1000)}k - ₹${Math.round(price.high/1000)}k`}
                         </div>
                       </div>
                     </div>
@@ -399,8 +403,8 @@ export default function CostCalculator() {
 
           </div>
 
-          {/* Right Column: Sticky Summary */}
-          <div className="lg:sticky lg:top-32 h-fit">
+          {/* Right Column: Sticky Summary - Desktop Only */}
+          <div className="hidden lg:block lg:sticky lg:top-32 h-fit">
             <div className="bg-[#111] border border-white/10 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
                <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-[#7B2DBF]/10 blur-[60px] rounded-full pointer-events-none"></div>
                
@@ -467,6 +471,37 @@ export default function CostCalculator() {
         </div>
       </section>
 
+      {/* Sticky Mobile Summary Bar */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 p-4 bg-black/80 backdrop-blur-xl border-t border-white/10 safe-area-bottom">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex flex-col">
+            <span className="text-[10px] text-[#7B2DBF] font-bold uppercase tracking-[0.2em] mb-0.5">Estimated Total</span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-black text-white">₹{totals.agnaaLow.toLocaleString()}</span>
+              {selectedServices.size > 0 && (
+                <span className="text-[10px] text-gray-500 font-medium">({selectedServices.size} {selectedServices.size === 1 ? 'Service' : 'Services'})</span>
+              )}
+            </div>
+            <div className="text-[8px] text-gray-600 uppercase tracking-widest mt-0.5">Market Price: ₹{totals.market.toLocaleString()}</div>
+          </div>
+          
+          <button 
+            onClick={handleDownloadQuote}
+            disabled={isGenerating || selectedServices.size === 0}
+            className="bg-[#7B2DBF] text-white font-bold h-12 px-6 rounded-xl flex items-center gap-2 hover:bg-[#6A24A8] transition-all active:scale-95 disabled:opacity-50"
+          >
+            {isGenerating ? (
+              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+            ) : (
+              <>
+                <FileText size={16} />
+                <span>Get Quote</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
       {/* Hidden PDF Component */}
       <QuotePDF 
         projectDetails={params}
@@ -474,10 +509,8 @@ export default function CostCalculator() {
         totalAgnaaLow={totals.agnaaLow}
         totalAgnaaHigh={totals.agnaaHigh}
         totalMarketPrice={totals.market}
-        date={new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+        date={currentDate}
       />
-
-      <Footer />
     </div>
   );
 }
