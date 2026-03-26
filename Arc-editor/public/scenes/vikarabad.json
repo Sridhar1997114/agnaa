@@ -1,0 +1,11 @@
+{
+  "name": "Vikarabad Residence",
+  "version": "1.0",
+  "objects": [
+    {
+      "type": "wall",
+      "position": [0, 0, 0],
+      "length": 10
+    }
+  ]
+}

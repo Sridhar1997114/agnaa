@@ -1,0 +1,49 @@
+:root {
+  /* Arc / AGNAA BRAND */
+  --brand-navy:       #1C1C72;
+  --brand-violet:     #7B2DBF;
+  --brand-gradient:   linear-gradient(180deg, #7B2DBF 0%, #1C1C72 100%);
+  
+  /* BACKGROUNDS */
+  --bg-dark:          #0D0D14;
+  --bg-card:          #14141F;
+  --bg-darkest:       #0A0A12;
+  
+  /* TEXT */
+  --text-primary:     #FFFFFF;
+  --text-muted:       #8888AA;
+  
+  /* ACCENTS */
+  --accent-violet:    #7B2DBF;
+  --accent-navy:      #1C1C72;
+  --border-glow:      rgba(123, 45, 191, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body { 
+  font-family: 'Inter', sans-serif; 
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, button, .toolbar-label { 
+  font-family: 'Space Grotesk', sans-serif; 
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}

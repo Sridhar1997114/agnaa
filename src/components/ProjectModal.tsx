@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, MapPin, Calendar, Building } from 'lucide-react';
+import { X, MapPin, Calendar, Building, Box } from 'lucide-react';
 import { Button } from './Button';
 
 interface Project {
@@ -43,8 +43,16 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             A masterclass in modern {project.type.toLowerCase()} design located in the heart of {project.loc}. 
             This project showcases AGNAA's commitment to precision, utilizing local materials and advanced structural techniques to deliver a timeless aesthetic.
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <Button href="/start-project" variant="primary" className="px-8 py-4">Like This? Start Yours</Button>
+            <a 
+              href={`https://arc.agnaa.in?scene=${project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:shadow-[0_0_20px_rgba(123,45,191,0.5)] rounded-full font-bold transition-all duration-500 flex items-center justify-center gap-2 relative overflow-hidden text-center"
+            >
+              Explore in 3D <Box size={20} />
+            </a>
           </div>
         </div>
       </div>

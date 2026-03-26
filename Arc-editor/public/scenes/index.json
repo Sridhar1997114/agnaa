@@ -1,0 +1,16 @@
+{
+  "vikarabad": {
+    "name": "Vikarabad Residences",
+    "location": "Vikarabad, Telangana",
+    "year": "2025",
+    "architect": "Sridhar",
+    "portfolioUrl": "https://agnaa.in/portfolio/vikarabad"
+  },
+  "skyline-residence": {
+    "name": "Skyline Residence",
+    "location": "Jubilee Hills, Hyderabad",
+    "year": "2024",
+    "architect": "Sridhar",
+    "portfolioUrl": "https://agnaa.in/portfolio/skyline-residence"
+  }
+}

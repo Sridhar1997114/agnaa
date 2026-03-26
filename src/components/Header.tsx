@@ -57,9 +57,9 @@ export const Header = () => {
         
         <div className="hidden lg:flex items-center gap-6">
           <Link 
-            href="/calculators" 
-            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent ${pathname === '/calculators' ? 'bg-[#1C1C72] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#7B2DBF]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
-            title="Precision Calculators"
+            href="/cost" 
+            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent ${pathname === '/cost' ? 'bg-[#1C1C72] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#7B2DBF]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
+            title="Cost Calculator"
           >
             <Calculator size={20} strokeWidth={2} />
           </Link>
@@ -89,10 +89,10 @@ export const Header = () => {
             </Link>
           ))}
           <Link 
-            href="/calculators"
-            className={`text-left text-lg py-3 border-b border-gray-100 font-bold flex items-center gap-3 ${pathname === '/calculators' ? 'text-[#7B2DBF]' : 'text-gray-500'}`}
+            href="/cost"
+            className={`text-left text-lg py-3 border-b border-gray-100 font-bold flex items-center gap-3 ${pathname === '/cost' ? 'text-[#7B2DBF]' : 'text-gray-500'}`}
           >
-            <Calculator size={20} /> Precision Tools
+            <Calculator size={20} /> Cost Calculator
           </Link>
           <div className="pt-6 flex flex-col gap-4">
             <a href="https://wa.me/918826214348" className="flex items-center justify-center gap-2 text-lg font-bold bg-[#F5F5F7] py-4 rounded-2xl text-[#1C1C72] border border-gray-200 hover:border-[#7B2DBF]/50 transition-all">

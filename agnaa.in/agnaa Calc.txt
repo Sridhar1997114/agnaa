@@ -1,0 +1,438 @@
+import React, { useState, useEffect, useMemo } from 'react';
+import { 
+  Calculator, Users, CheckCircle, Printer, MapPin, Hammer, AlertCircle,
+  Package, GripVertical, LayoutGrid, Hexagon, Waves, Grid, AppWindow,
+  DoorClosed, Zap, Paintbrush, Droplets, Utensils, Ruler, ArrowRight
+} from 'lucide-react';
+
+// --- SHARED COMPONENTS ---
+
+const AgnaaLogo = ({ className = "w-auto h-10" }) => (
+  <svg viewBox="0 0 4000 4000" className={className} xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="#7B2DBF" />
+        <stop offset="100%" stopColor="#1C1C72" />
+      </linearGradient>
+    </defs>
+    <g fill="url(#logo-gradient)">
+      <path fillRule="evenodd" d="M104.5,3397.1 L104.5,1340.9 L703.1,1108.1 L703.1,3397.1 L503.5,3397.1 L503.5,2200 L304,2200 L304,3397.1 Z M304,2000.4 L503.5,2000.4 L503.5,1399.8 L304,1477.3 Z" />
+      <path fillRule="evenodd" d="M902.6,3197.6 L902.6,3397.1 L1501.1,3397.1 L1501.1,797.7 L902.6,1030.5 L902.6,2200 L1301.6,2200 L1301.6,3197.6 Z M1102.1,1167 L1301.6,1089.4 L1301.6,2000.4 L1102.1,2000.4 Z" />
+      <polygon fillRule="evenodd" points="1700.7,3397.1 1900.2,3397.1 1900.2,856.7 1999.9,817.8 2099.7,856.7 2099.7,3397.1 2299.2,3397.1 2299.2,720.1 1999.9,603.8 1700.7,720.1" />
+      <path fillRule="evenodd" d="M2498.9,1011.8 L2897.9,1167 L2897.9,2000.4 L2498.9,2000.4 L2498.9,3397.1 L3097.4,3397.1 L3097.4,1030.5 L2498.9,797.7 Z M2698.4,2200 L2897.9,2200 L2897.9,3197.6 L2698.4,3197.6 Z" />
+      <path fillRule="evenodd" d="M3296.9,1108.1 L3895.5,1340.9 L3895.5,3397.1 L3696,3397.1 L3696,2200 L3496.5,2200 L3496.5,3397.1 L3296.9,3397.1 Z M3496.5,1399.8 L3696,1477.3 L3696,2000.4 L3496.5,2000.4 Z" />
+    </g>
+  </svg>
+);
+
+const Button = ({ children, variant = 'primary', className = '', onClick }) => {
+  const base = "px-6 py-3 rounded-full font-bold transition-all duration-500 flex items-center justify-center gap-2 relative overflow-hidden shadow-sm active:scale-95";
+  const variants = {
+    primary: "bg-[#1C1C72] text-white border border-[#1C1C72] hover:border-[#7B2DBF] hover:shadow-[0_0_20px_rgba(123,45,191,0.5)]",
+    outline: "bg-white text-[#1C1C72] border-2 border-[#1C1C72] hover:border-[#7B2DBF] hover:text-[#7B2DBF]"
+  };
+  return (
+    <button onClick={onClick} className={`${base} ${variants[variant]} ${className}`}>
+      {children}
+    </button>
+  );
+};
+
+const Toast = ({ message, type = 'success', onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(onClose, 3000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-5 print:hidden">
+      <div className={`px-6 py-4 rounded-2xl border shadow-[0_0_20px_rgba(123,45,191,0.3)] text-white flex items-center gap-3 ${type === 'error' ? 'bg-red-600 border-red-500' : 'bg-[#1C1C72] border-[#7B2DBF]'}`}>
+        {type === 'error' ? <AlertCircle size={20} /> : <CheckCircle size={20} className="text-[#7B2DBF]" />}
+        <span className="font-bold">{message}</span>
+      </div>
+    </div>
+  );
+};
+
+// --- DATA ---
+
+const MATERIALS = [
+  { id: 'cement', label: 'Cement', unit: 'Bags', icon: Package, getQty: (a) => Math.ceil(a * 0.45), rates: { Basic: 380, Standard: 413, Premium: 450 } },
+  { id: 'steel', label: 'Steel', unit: 'KG', icon: GripVertical, getQty: (a) => Math.ceil(a * 3.5), rates: { Basic: 65, Standard: 75, Premium: 85 } },
+  { id: 'bricks', label: 'Bricks', unit: 'PCS', icon: LayoutGrid, getQty: (a) => Math.ceil(a * 19), rates: { Basic: 7, Standard: 9, Premium: 12 } },
+  { id: 'aggregate', label: 'Aggregate', unit: 'Tons', icon: Hexagon, getQty: (a) => Number((a * 1.9 * 0.045).toFixed(1)), rates: { Basic: 900, Standard: 1100, Premium: 1350 } },
+  { id: 'sand', label: 'Sand', unit: 'Tons', icon: Waves, getQty: (a) => Number((a * 2.0 * 0.045).toFixed(1)), rates: { Basic: 1100, Standard: 1350, Premium: 1650 } },
+  { id: 'flooring', label: 'Flooring', unit: 'Sqft', icon: Grid, getQty: (a) => a, rates: { Basic: 80, Standard: 120, Premium: 200 } },
+  { id: 'windows', label: 'Windows', unit: 'Sqft', icon: AppWindow, getQty: (a) => Math.ceil(a * 0.17), rates: { Basic: 300, Standard: 450, Premium: 600 } },
+  { id: 'doors', label: 'Doors', unit: 'Sqft', icon: DoorClosed, getQty: (a) => Math.ceil(a * 0.18), rates: { Basic: 400, Standard: 600, Premium: 900 } },
+  { id: 'electrical', label: 'Electrical', unit: 'Sqft', icon: Zap, getQty: (a) => a, rates: { Basic: 50, Standard: 75, Premium: 110 } },
+  { id: 'painting', label: 'Painting', unit: 'Sqft', icon: Paintbrush, getQty: (a) => Math.ceil(a * 6), rates: { Basic: 20, Standard: 30, Premium: 45 } },
+  { id: 'sanitary', label: 'Plumbing', unit: 'Sqft', icon: Droplets, getQty: (a) => a, rates: { Basic: 70, Standard: 100, Premium: 150 } },
+  { id: 'kitchen', label: 'Kitchen', unit: 'Sqft', icon: Utensils, getQty: (a) => Math.ceil(a * 0.055), rates: { Basic: 950, Standard: 1200, Premium: 1800 } },
+  { id: 'contractor', label: 'Services cost', unit: 'Sqft', icon: Hammer, getQty: (a) => a, rates: { Basic: 220, Standard: 250, Premium: 300 } },
+  { id: 'architect', label: 'Architect Fee', unit: 'Sqft', icon: Ruler, getQty: (a) => a, rates: { Basic: 100, Standard: 150, Premium: 250 } },
+];
+
+const COLORS = ['#1C1C72', '#2A1B81', '#3B1A91', '#4D1AA1', '#6019B1', '#7B2DBF', '#9335D2', '#AA3CE5', '#C445F8', '#38B6FF', '#0094FF', '#0071FF', '#4A4A4A', '#8B5CF6'];
+
+// --- DONUT CHART COMPONENT ---
+
+const RadialDonutChart = ({ data, total }) => {
+  const [hoveredId, setHoveredId] = useState(null);
+
+  if (!total || total === 0) return null;
+
+  let cumulativePercent = 0;
+  const slices = data.map(slice => {
+    const percent = slice.value / total;
+    const startPercent = cumulativePercent;
+    const endPercent = cumulativePercent + percent;
+    const midPercent = startPercent + percent / 2;
+    cumulativePercent += percent;
+    return { ...slice, percent, startPercent, endPercent, midPercent };
+  }).filter(s => s.percent > 0);
+
+  const pieRadius = 135; 
+  const labelRadiusBase = 140; // Even closer to chart
+
+  return (
+    <div className="relative w-full h-full min-h-[480px] flex items-center justify-center pointer-events-none overflow-visible">
+      <div className="absolute z-10 pointer-events-auto" style={{ width: pieRadius * 2, height: pieRadius * 2 }}>
+        <svg viewBox="-1 -1 2 2" className="transform -rotate-90 w-full h-full overflow-visible">
+          {slices.map((slice, i) => {
+            const isHovered = hoveredId === slice.id;
+            const scale = isHovered ? 1.06 : 1;
+            const startX = Math.cos(2 * Math.PI * slice.startPercent);
+            const startY = Math.sin(2 * Math.PI * slice.startPercent);
+            const endX = Math.cos(2 * Math.PI * slice.endPercent);
+            const endY = Math.sin(2 * Math.PI * slice.endPercent);
+            const largeArcFlag = slice.percent > 0.5 ? 1 : 0;
+            const pathData = `M ${startX} ${startY} A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY} L 0 0`;
+            
+            return (
+              <path 
+                key={i} 
+                d={pathData} 
+                fill={slice.color} 
+                onMouseEnter={() => setHoveredId(slice.id)}
+                onMouseLeave={() => setHoveredId(null)}
+                className="transition-all duration-300 stroke-[#F5F5F7] stroke-[0.015] cursor-pointer" 
+                style={{ 
+                  transform: `scale(${scale})`,
+                  transformOrigin: '0 0'
+                }}
+              />
+            );
+          })}
+          <circle cx="0" cy="0" r="0.62" fill="#F5F5F7" />
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center flex-col text-center pointer-events-none transition-all duration-300">
+           <span className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.25em] mb-1">Total</span>
+           <span className="text-xl md:text-3xl font-black text-[#1C1C72] tracking-tighter leading-none">{(total/100000).toFixed(1)}L</span>
+        </div>
+      </div>
+
+      {slices.map((slice) => {
+        const angle = slice.midPercent * 2 * Math.PI;
+        const isHovered = hoveredId === slice.id;
+        const iconRadius = pieRadius * (isHovered ? 0.88 : 0.81); 
+        const x = Math.sin(angle) * iconRadius;
+        const y = -Math.cos(angle) * iconRadius;
+        return (
+          <div 
+            key={`icon-${slice.id}`}
+            className="absolute z-20 flex items-center justify-center pointer-events-none transition-all duration-300"
+            style={{
+              left: `calc(50% + ${x}px)`,
+              top: `calc(50% + ${y}px)`,
+              transform: `translate(-50%, -50%) scale(${isHovered ? 1.3 : 1.1})`,
+            }}
+          >
+            {slice.icon && <slice.icon size={13} className="text-white opacity-95 drop-shadow-sm" />}
+          </div>
+        );
+      })}
+
+      {slices.map((slice, i) => {
+        const angle = slice.midPercent * 2 * Math.PI;
+        const isRight = slice.midPercent < 0.5;
+        const isHovered = hoveredId === slice.id;
+        
+        let labelRadius = labelRadiusBase + (isHovered ? 10 : 0);
+        
+        // Dynamic Anti-collision logic to prevent text overlap
+        if (slice.midPercent < 0.1 || slice.midPercent > 0.9 || (slice.midPercent > 0.4 && slice.midPercent < 0.6)) {
+          labelRadius += (i % 2 === 0 ? 25 : -15);
+        } else {
+          labelRadius += (i % 2 === 0 ? 12 : -8);
+        }
+
+        const x = Math.sin(angle) * labelRadius;
+        const y = -Math.cos(angle) * labelRadius;
+
+        return (
+          <div 
+            key={`text-${slice.id}`} 
+            className="absolute z-20 flex items-center transition-all duration-300 pointer-events-none"
+            style={{
+              left: `calc(50% + ${x}px)`,
+              top: `calc(50% + ${y}px)`,
+              transform: `translate(${isRight ? '0%' : '-100%'}, -50%) scale(${isHovered ? 1.08 : 1})`,
+              whiteSpace: 'nowrap'
+            }}
+          >
+            <div className={`flex flex-row items-center gap-1.5 ${isRight ? 'ml-1.5' : 'mr-1.5'} drop-shadow-sm transition-all duration-300`} style={{ color: slice.color }}>
+               {!isRight && (
+                 <span className={`text-[9px] font-black`}>
+                   {Number(slice.qty).toLocaleString('en-IN')} <span className="text-[7px] font-medium opacity-70 uppercase tracking-tighter">{slice.unit}</span>
+                 </span>
+               )}
+               {!isRight && <span className="opacity-40 text-[9px] font-medium">—</span>}
+               
+               <span className={`text-[8px] md:text-[9px] uppercase tracking-wider font-black leading-tight`}>{slice.label}</span>
+
+               {isRight && <span className="opacity-40 text-[9px] font-medium">—</span>}
+               {isRight && (
+                 <span className={`text-[9px] font-black`}>
+                   {Number(slice.qty).toLocaleString('en-IN')} <span className="text-[7px] font-medium opacity-70 uppercase tracking-tighter">{slice.unit}</span>
+                 </span>
+               )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// --- MAIN UI ---
+
+const CalculatorsPage = () => {
+  const [activeTab, setActiveTab] = useState('design');
+  const [area, setArea] = useState(2000);
+  const [location, setLocation] = useState('Hyderabad');
+  const [isCalculated, setIsCalculated] = useState(false);
+  const [toast, setToast] = useState(null);
+  
+  const LOCATIONS = ['Hyderabad', 'Bengaluru', 'Chennai', 'Mumbai', 'Delhi NCR', 'Pune', 'Kolkata'];
+  const isSupported = location === 'Hyderabad';
+  
+  const [itemQualities, setItemQualities] = useState(
+    MATERIALS.reduce((acc, mat) => ({ ...acc, [mat.id]: 'Standard' }), {})
+  );
+
+  const handleItemQualityChange = (id, quality) => {
+    setItemQualities(prev => ({ ...prev, [id]: quality }));
+  };
+
+  const handleGenerate = () => {
+    if (!area || area <= 0) {
+      setToast({ message: "Invalid Area", type: 'error' });
+      return;
+    }
+    setIsCalculated(true);
+  };
+
+  const breakdown = useMemo(() => {
+    const numericArea = Number(area) || 0;
+    return MATERIALS.map((mat, index) => {
+      const qty = mat.getQty(numericArea);
+      const quality = itemQualities[mat.id];
+      const standardRate = mat.rates[quality];
+      const discountPercent = (mat.id === 'contractor' || mat.id === 'architect') ? 0.10 : 0.05; 
+      const agnaaRate = standardRate * (1 - discountPercent);
+      return { 
+        ...mat, qty, quality,
+        standardAmount: qty * standardRate, 
+        agnaaAmount: qty * agnaaRate,
+        color: COLORS[index % COLORS.length]
+      };
+    });
+  }, [area, itemQualities]);
+
+  const totalStandardAmount = breakdown.reduce((sum, item) => sum + item.standardAmount, 0);
+  const totalAgnaaAmount = breakdown.reduce((sum, item) => sum + item.agnaaAmount, 0);
+  const totalSavings = totalStandardAmount - totalAgnaaAmount;
+  const costPerSqft = area > 0 ? Math.round(totalAgnaaAmount / area) : 0;
+  const standardCostPerSqft = area > 0 ? Math.round(totalStandardAmount / area) : 0;
+
+  const chartData = breakdown.map(item => ({ 
+    id: item.id, label: item.label, value: item.agnaaAmount, color: item.color, qty: item.qty, unit: item.unit, icon: item.icon
+  }));
+
+  return (
+    <>
+      <style>{`
+        @media print {
+          body * { visibility: hidden; }
+          #printable-report, #printable-report * { visibility: visible; }
+          #printable-report { position: absolute; left: 0; top: 0; width: 100%; padding: 2rem; }
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .responsive-price { font-size: clamp(1.8rem, 7vw, 4.5rem); }
+      `}</style>
+
+      <div className="bg-white min-h-screen pt-32 pb-20 print:hidden">
+        
+        <div className="container mx-auto px-4 max-w-7xl mb-12">
+           <div className="bg-[#F5F5F7] p-2 rounded-[2.5rem] border border-gray-200 shadow-sm flex flex-col md:flex-row items-stretch md:items-center gap-2 overflow-hidden">
+              <div className="flex-1 flex flex-col md:flex-row items-center gap-2 md:gap-4 px-6 py-4 md:py-0">
+                 <div className="flex-1 w-full">
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1">Built-up Area (Sqft)</label>
+                    <input 
+                      type="number" 
+                      value={area} 
+                      onChange={(e) => { setArea(e.target.value); setIsCalculated(false); }}
+                      className="bg-transparent text-[#1C1C72] text-xl font-black outline-none w-full border-b-2 border-gray-200 focus:border-[#7B2DBF] transition-colors pb-1"
+                      placeholder="e.g. 2000"
+                    />
+                 </div>
+                 <div className="w-[1px] h-10 bg-gray-200 hidden md:block"></div>
+                 <div className="flex-1 w-full relative">
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1">Location</label>
+                    <select value={location} onChange={(e) => { setLocation(e.target.value); setIsCalculated(false); }} className="bg-transparent text-[#1C1C72] text-xl font-black outline-none w-full appearance-none cursor-pointer">
+                      {LOCATIONS.map(loc => <option key={loc} value={loc}>{loc}</option>)}
+                    </select>
+                 </div>
+              </div>
+              <Button onClick={handleGenerate} className="px-10 py-5 !rounded-[2rem] bg-[#1C1C72] hover:bg-[#7B2DBF] shadow-xl">
+                 Generate Estimate <ArrowRight size={20} className="ml-2" />
+              </Button>
+           </div>
+        </div>
+
+        {isCalculated && (
+          <div className="container mx-auto px-4 max-w-7xl animate-in fade-in duration-700">
+            {isSupported ? (
+              <>
+                <div className="grid lg:grid-cols-12 gap-8 mb-8">
+                  <div className="lg:col-span-8 bg-[#F5F5F7] rounded-[3rem] border border-gray-200 shadow-sm p-4 flex items-center justify-center relative overflow-hidden min-h-[550px]">
+                     <RadialDonutChart data={chartData} total={totalAgnaaAmount} />
+                  </div>
+
+                  <div className="lg:col-span-4 bg-[#1C1C72] rounded-[3rem] shadow-2xl p-10 flex flex-col justify-between text-white relative overflow-hidden h-auto min-h-[550px]">
+                     <div className="absolute -right-20 -top-20 opacity-5 scale-[2.5]"><AgnaaLogo /></div>
+                     <div className="relative z-10 w-full">
+                       <div className="mb-10 w-full">
+                         <span className="text-indigo-200/50 text-[10px] font-black uppercase tracking-[0.25em] block mb-4">Rate Analysis</span>
+                         <div className="flex flex-row items-center gap-3 w-full">
+                           <div className="bg-white/10 border border-white/20 px-4 py-2.5 rounded-2xl backdrop-blur-md flex-1 min-w-0 text-center">
+                             <span className="text-[9px] text-indigo-300 uppercase font-bold block mb-0.5 tracking-wider">Market</span>
+                             <span className="text-sm font-black whitespace-nowrap">₹{standardCostPerSqft.toLocaleString('en-IN')}<span className="text-[10px] opacity-60 ml-0.5">/ft²</span></span>
+                           </div>
+                           <div className="bg-[#7B2DBF] border border-[#9B51E0] px-4 py-2.5 rounded-2xl shadow-xl flex-1 text-center transform -translate-y-2">
+                             <span className="text-[9px] text-white/70 uppercase font-bold block mb-0.5 tracking-wider">Agnaa</span>
+                             <span className="text-sm font-black whitespace-nowrap">₹{costPerSqft.toLocaleString('en-IN')}<span className="text-[10px] opacity-60 ml-0.5">/ft²</span></span>
+                           </div>
+                         </div>
+                       </div>
+
+                       <div className="mb-12 w-full">
+                         <span className="text-indigo-300 font-black uppercase tracking-[0.35em] text-[10px] mb-3 block">Standard Market Cost</span>
+                         <span className="responsive-price font-black text-white drop-shadow-2xl tracking-tighter leading-none block break-words">
+                           ₹{totalStandardAmount.toLocaleString('en-IN')}
+                         </span>
+                       </div>
+                     </div>
+                     
+                     <div className="relative z-10 bg-white/5 border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-xl group hover:border-[#7B2DBF]/50 transition-all w-full">
+                       <div className="absolute top-0 left-0 w-2 h-full bg-[#7B2DBF]"></div>
+                       <span className="text-gray-400 font-bold uppercase tracking-[0.2em] text-[9px] mb-2 block">Agnaa Intelligent Design</span>
+                       <span className="text-4xl md:text-5xl font-black text-white block mb-5 tracking-tighter">₹{totalAgnaaAmount.toLocaleString('en-IN')}</span>
+                       <div className="inline-flex items-center gap-2 text-[11px] font-black text-[#7B2DBF] bg-white px-5 py-2.5 rounded-full uppercase tracking-wider shadow-lg max-w-full">
+                           <CheckCircle size={16} className="flex-shrink-0" />
+                           <span className="truncate">Save ₹{totalSavings.toLocaleString('en-IN')} at agnaa</span>
+                       </div>
+                     </div>
+                  </div>
+                </div>
+
+                {/* QUICK PRINT BUTTON BELOW DASHBOARD */}
+                <div className="flex justify-end mb-12">
+                   <button 
+                     onClick={() => window.print()}
+                     className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#1C1C72] hover:text-[#7B2DBF] transition-colors bg-[#F5F5F7] px-6 py-3 rounded-xl border border-gray-200"
+                   >
+                     <Printer size={16} /> Print Summary Report
+                   </button>
+                </div>
+
+                <div className="bg-white border border-gray-200 rounded-[3rem] overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto no-scrollbar">
+                    <table className="w-full text-left border-collapse min-w-[900px]">
+                      <thead>
+                        <tr className="bg-[#F5F5F7] text-[#1C1C72] text-[10px] uppercase tracking-[0.2em] border-b border-gray-200">
+                          <th className="p-8 font-black w-1/4">Resource</th>
+                          <th className="p-8 font-black w-1/6">Requirement</th>
+                          <th className="p-8 font-black w-1/3 text-center">Quality Tier</th>
+                          <th className="p-8 font-black text-right bg-indigo-50/50">Cost Estimate</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-100">
+                        {breakdown.map((item) => (
+                          <tr key={item.id} className="hover:bg-[#F5F5F7]/30 transition-colors group">
+                            <td className="p-8 font-black text-[#1C1C72] flex items-center gap-4">
+                              <div className="p-3 rounded-2xl bg-white shadow-sm border border-gray-100" style={{ color: item.color }}><item.icon size={22} /></div>
+                              <span className="text-lg">{item.label}</span>
+                            </td>
+                            <td className="p-8 text-[#1C1C72] font-black text-xl">
+                              {Number(item.qty).toLocaleString('en-IN')} <span className="text-[10px] text-gray-400 font-bold uppercase ml-1">{item.unit}</span>
+                            </td>
+                            <td className="p-8">
+                              <div className="flex justify-center gap-3">
+                                {['Basic', 'Standard', 'Premium'].map((q) => (
+                                  <label key={q} className="flex items-center gap-2 cursor-pointer group/radio">
+                                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${item.quality === q ? 'border-[#1C1C72] bg-[#1C1C72]' : 'border-gray-200 bg-white group-hover/radio:border-[#7B2DBF]'}`}>{item.quality === q && <div className="w-2 h-2 bg-white rounded-full" />}</div>
+                                    <span className={`text-[10px] font-black tracking-widest uppercase ${item.quality === q ? 'text-[#1C1C72]' : 'text-gray-400'}`}>{q}</span>
+                                    <input type="radio" name={`quality-${item.id}`} value={q} checked={item.quality === q} onChange={(e) => handleItemQualityChange(item.id, e.target.value)} className="hidden" />
+                                  </label>
+                                ))}
+                              </div>
+                            </td>
+                            <td className="p-8 bg-indigo-50/20 text-right">
+                               <div className="font-black text-[#1C1C72] text-2xl mb-2">₹{Number(item.standardAmount).toLocaleString('en-IN')}</div>
+                               <div className="inline-flex items-center gap-2 text-[9px] font-black tracking-[0.1em] text-[#7B2DBF] uppercase bg-white px-3 py-1.5 rounded-xl border border-[#7B2DBF]/20 shadow-sm">
+                                 <span>Save </span>
+                                 <span className="text-sm font-black">₹{Number(item.standardAmount - item.agnaaAmount).toLocaleString('en-IN')}</span>
+                                 <span> at agnaa</span>
+                               </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div className="mt-16 flex justify-center">
+                  <Button onClick={() => window.print()} variant="primary" className="px-16 py-6 text-xl shadow-2xl hover:-translate-y-2 active:scale-95"><Printer size={24} className="mr-2" /> Download Detailed PDF</Button>
+                </div>
+              </>
+            ) : (
+              <div className="bg-[#F5F5F7] p-20 rounded-[3rem] text-center border border-gray-200">
+                 <MapPin size={64} className="text-[#7B2DBF] mx-auto mb-6 opacity-30" />
+                 <h3 className="text-4xl font-black text-[#1C1C72] mb-4">City Support Coming Soon</h3>
+                 <p className="text-gray-500 max-w-xl mx-auto text-lg leading-relaxed">Agnaa is expanding. Building efficient vendor networks in {location} now.</p>
+              </div>
+            )}
+          </div>
+        )}
+        {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+      </div>
+    </>
+  );
+};
+
+export default function App() {
+  return (
+    <div className="font-sans antialiased bg-white text-[#1C1C72]">
+      <header className="fixed top-0 w-full z-40 bg-white/90 backdrop-blur-2xl border-b border-gray-100 py-6 print:hidden">
+        <div className="container mx-auto px-4 flex justify-between items-center max-w-7xl">
+          <AgnaaLogo className="w-auto h-10" />
+          <div className="p-3.5 rounded-full bg-[#F5F5F7] text-[#1C1C72] border border-[#7B2DBF]/10 shadow-sm"><Calculator size={22} /></div>
+        </div>
+      </header>
+      <main><CalculatorsPage /></main>
+    </div>
+  );
+}
