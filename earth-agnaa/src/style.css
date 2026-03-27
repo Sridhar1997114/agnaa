@@ -1,0 +1,103 @@
+:root {
+  --brand-navy: #1C1C72;
+  --brand-violet: #7B2DBF;
+  --brand-dark: #0D0D14;
+  --brand-card: #14141F;
+  --brand-light: #F0F0F6;
+  --brand-muted: #8888AA;
+}
+
+html, body, #cesiumContainer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--brand-dark);
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.header {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(20, 20, 31, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1rem 2rem;
+  border-radius: 100px;
+  border: 1px solid rgba(123, 45, 191, 0.2);
+  width: fit-content;
+}
+
+.logo {
+  height: 32px;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--brand-light);
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.brand-text {
+  color: var(--brand-violet);
+  font-weight: 600;
+}
+
+.controls {
+  pointer-events: auto;
+  align-self: flex-end;
+}
+
+button {
+  background: var(--brand-navy);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(28, 28, 114, 0.3);
+}
+
+button:hover {
+  background: var(--brand-violet);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(123, 45, 191, 0.4);
+}
+
+/* Cesium Customization */
+.cesium-viewer-toolbar {
+  top: 100px !important;
+  right: 2rem !important;
+}
+
+.cesium-viewer-bottom {
+  display: none !important; /* Hide defaults for clean look */
+}
+
+.cesium-performanceDisplay-defaultContainer {
+  top: unset !important;
+  bottom: 2rem !important;
+  left: 2rem !important;
+}

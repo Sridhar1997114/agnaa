@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Box, Cylinder, Cone } from '@react-three/drei';
+import { OrbitControls, Box, Cylinder, Cone, PerspectiveCamera, OrthographicCamera } from '@react-three/drei';
 import {
   Download, Camera, Share, Mail, MessageCircle,
   ChevronUp, ChevronDown, RotateCw, Trash2,
@@ -43,20 +43,21 @@ type BuildingBlock = {
 const AgnaaIcon = () => (
   <svg viewBox="0 0 4000 4000" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="lgArc" x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient id="lgArc" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#7B2DBF" />
-        <stop offset="100%" stopColor="#1C1C72" />
+        <stop offset="100%" stopColor="#3B82F6" />
       </linearGradient>
     </defs>
-    <g fill="url(#lgArc)">
-      <path fillRule="evenodd" d="M104.5,3397.1 L104.5,1340.9 L703.1,1108.1 L703.1,3397.1 L503.5,3397.1 L503.5,2200 L304,2200 L304,3397.1 Z M304,2000.4 L503.5,2000.4 L503.5,1399.8 L304,1477.3 Z"/>
-      <path fillRule="evenodd" d="M902.6,3197.6 L902.6,3397.1 L1501.1,3397.1 L1501.1,797.7 L902.6,1030.5 L902.6,2200 L1301.6,2200 L1301.6,3197.6 Z M1102.1,1167 L1301.6,1089.4 L1301.6,2000.4 L1102.1,2000.4 Z"/>
-      <polygon fillRule="evenodd" points="1700.7,3397.1 1900.2,3397.1 1900.2,856.7 1999.9,817.8 2099.7,856.7 2099.7,3397.1 2299.2,3397.1 2299.2,720.1 1999.9,603.8 1700.7,720.1"/>
-      <path fillRule="evenodd" d="M2498.9,1011.8 L2897.9,1167 L2897.9,2000.4 L2498.9,2000.4 L2498.9,3397.1 L3097.4,3397.1 L3097.4,1030.5 L2498.9,797.7 Z M2698.4,2200 L2897.9,2200 L2897.9,3197.6 L2698.4,3197.6 Z"/>
-      <path fillRule="evenodd" d="M3296.9,1108.1 L3895.5,1340.9 L3895.5,3397.1 L3696,3397.1 L3696,2200 L3496.5,2200 L3496.5,3397.1 L3296.9,3397.1 Z M3496.5,1399.8 L3696,1477.3 L3696,2000.4 L3496.5,2000.4 Z"/>
+    <g fill="url(#lgArc)" fillRule="evenodd">
+      <path d="M104.5,3397.1 L104.5,1340.9 L703.1,1108.1 L703.1,3397.1 L503.5,3397.1 L503.5,2200 L304,2200 L304,3397.1 Z M304,2000.4 L503.5,2000.4 L503.5,1399.8 L304,1477.3 Z"/>
+      <path d="M902.6,3197.6 L902.6,3397.1 L1501.1,3397.1 L1501.1,797.7 L902.6,1030.5 L902.6,2200 L1301.6,2200 L1301.6,3197.6 Z M1102.1,1167 L1301.6,1089.4 L1301.6,2000.4 L1102.1,2000.4 Z"/>
+      <polygon points="1700.7,3397.1 1900.2,3397.1 1900.2,856.7 1999.9,817.8 2099.7,856.7 2099.7,3397.1 2299.2,3397.1 2299.2,720.1 1999.9,603.8 1700.7,720.1"/>
+      <path d="M2498.9,1011.8 L2897.9,1167 L2897.9,2000.4 L2498.9,2000.4 L2498.9,3397.1 L3097.4,3397.1 L3097.4,1030.5 L2498.9,797.7 Z M2698.4,2200 L2897.9,2200 L2897.9,3197.6 L2698.4,3197.6 Z"/>
+      <path d="M3296.9,1108.1 L3895.5,1340.9 L3895.5,3397.1 L3696,3397.1 L3696,2200 L3496.5,2200 L3496.5,3397.1 L3296.9,3397.1 Z M3496.5,1399.8 L3696,1477.3 L3696,2000.4 L3496.5,2000.4 Z"/>
     </g>
   </svg>
 );
+
 
 /* ───────────── Toast ───────────── */
 const Toast = ({ message, visible }: { message: string; visible: boolean }) => (
@@ -78,9 +79,9 @@ const Toast = ({ message, visible }: { message: string; visible: boolean }) => (
 const MobileBlock = () => (
   <div style={{ backgroundColor: '#0D0D14', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 24, textAlign: 'center' }}>
     <div style={{ width: 48, height: 48, marginBottom: 24 }}><AgnaaIcon /></div>
-    <h1 style={{ fontSize: 24, color: '#FFFFFF', marginBottom: 16 }}>Arc works best on desktop.</h1>
+    <h1 style={{ fontSize: 24, color: '#FFFFFF', marginBottom: 16 }}>Arc 3D works best on desktop.</h1>
     <p style={{ fontFamily: 'Inter', fontSize: 15, color: '#8888AA', maxWidth: 320, marginBottom: 32 }}>
-      Open this link on a laptop or desktop for the full 3D experience.
+      Open this link on a laptop or desktop for the full 3D architectural experience.
     </p>
     <a href="https://agnaa.in/portfolio" style={{ background: 'var(--brand-gradient)', color: '#FFFFFF', fontFamily: 'Space Grotesk', fontSize: 14, padding: '14px 32px', borderRadius: 8, textDecoration: 'none' }}>
       View Agnaa Portfolio &rarr;
@@ -95,7 +96,7 @@ const LoadingScreen = () => (
     <div style={{ width: 200, height: 3, background: '#14141F', marginTop: 24, borderRadius: 2, overflow: 'hidden' }}>
       <div style={{ height: '100%', background: 'var(--brand-gradient)', width: '100%', animation: 'load 2s ease-out forwards' }} />
     </div>
-    <p style={{ fontFamily: 'Inter', fontSize: 13, color: '#8888AA', marginTop: 16 }}>Loading Arc...</p>
+    <p style={{ fontFamily: 'Inter', fontSize: 13, color: '#8888AA', marginTop: 16 }}>Loading Arc 3D...</p>
     <style>{`
       @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
       @keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
@@ -113,20 +114,20 @@ const SplashScreen = ({ onLoadScene }: { onLoadScene: (target: string) => void }
       <rect width="100%" height="100%" fill="url(#grid)" />
     </svg>
     <div style={{ zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div style={{ height: 72, width: 200, marginBottom: 24, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <img src="/logo-full-light.svg" style={{ height: '100%' }} alt="Agnaa" />
+      <div style={{ height: 120, width: 200, marginBottom: 32, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <img src="/agnaa_logo.svg" style={{ height: '100%', filter: 'drop-shadow(0 0 10px rgba(123,45,191,0.3))' }} alt="Agnaa" />
       </div>
-      <h1 style={{ fontSize: 56, color: '#FFFFFF', letterSpacing: '-0.02em', margin: 0, marginBottom: 8 }}>Arc</h1>
-      <p style={{ fontFamily: 'Inter', fontSize: 16, color: '#8888AA', marginBottom: 8 }}>by Agnaa Design Studio</p>
-      <p style={{ fontFamily: 'Inter', fontSize: 15, color: '#8888AA', fontStyle: 'italic', marginBottom: 40 }}>"Where Every Line Has Purpose."</p>
+      <h1 style={{ fontSize: 72, fontWeight: 700, color: '#FFFFFF', letterSpacing: '-0.03em', margin: 0, marginBottom: 8, fontFamily: "'Space Grotesk', sans-serif" }}>Arc 3D</h1>
+      <p style={{ fontFamily: 'Inter', fontSize: 18, fontWeight: 500, color: 'var(--text-muted)', marginBottom: 8 }}>by Agnaa Design Studio</p>
+      <p style={{ fontFamily: 'Inter', fontSize: 15, color: '#4ADE80', fontStyle: 'italic', marginBottom: 48, letterSpacing: '0.05em' }}>"Where Every Line Has Purpose."</p>
       <div style={{ display: 'flex', gap: 24, marginBottom: 60 }}>
-        <button onClick={() => onLoadScene('blank')} style={{ background: 'var(--brand-gradient)', color: '#FFFFFF', fontSize: 14, padding: '14px 32px', borderRadius: 8 }}>
+        <button onClick={() => onLoadScene('blank')} style={{ background: 'var(--grad-purple-blue)', color: '#FFFFFF', fontSize: 15, fontWeight: 700, padding: '16px 40px', borderRadius: 12, border: 'none', cursor: 'pointer', boxShadow: '0 8px 25px rgba(123,45,191,0.4)', transition: 'all 0.2s' }}>
           + New Project
         </button>
         <button onClick={() => {
           const input = document.createElement('input');
           input.type = 'file'; input.accept = '.json'; input.click();
-        }} style={{ background: 'var(--bg-card)', border: '1px solid var(--border-glow)', color: '#FFFFFF', fontSize: 14, padding: '14px 32px', borderRadius: 8 }}>
+        }} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#FFFFFF', fontSize: 15, fontWeight: 600, padding: '16px 40px', borderRadius: 12, cursor: 'pointer', transition: 'all 0.2s' }}>
           ⤴ Load Scene
         </button>
       </div>
@@ -136,26 +137,42 @@ const SplashScreen = ({ onLoadScene }: { onLoadScene: (target: string) => void }
 );
 
 /* ───────────── Header ───────────── */
-const Header = ({ onShare, blockCount }: { onShare: () => void; blockCount: number }) => (
-  <header style={{ height: 52, background: 'var(--bg-darkest)', borderBottom: '1px solid rgba(123,45,191,0.2)', padding: '0 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-      <div style={{ width: 32, height: 32 }}><img src="/logo-icon.svg" style={{ width: '100%', height: '100%' }} alt="Logo" /></div>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-        <span style={{ fontSize: 18, fontWeight: 600, color: '#FFFFFF' }}>Arc</span>
-        <span style={{ fontSize: 11, color: 'var(--text-muted)', letterSpacing: '0.1em' }}>by Agnaa</span>
-        <span style={{ color: 'var(--text-muted)' }}>·</span>
-        <span style={{ color: 'var(--accent-violet)', fontWeight: 600 }}>3D</span>
+const Header = ({ onShare, blockCount, viewMode, setViewMode }: { onShare: () => void; blockCount: number; viewMode: '3D' | '2D'; setViewMode: (v: '3D' | '2D') => void }) => (
+  <header style={{ height: 60, background: 'var(--bg-dark)', borderBottom: '1px solid rgba(123,45,191,0.2)', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative', zIndex: 100 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      {/* AGNAA Logo */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <img src="/agnaa_logo.svg" alt="AGNAA" style={{ height: 44, width: 'auto' }} />
+        <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.2)' }} />
+        <span style={{ fontSize: 18, fontWeight: 700, color: '#FFFFFF', letterSpacing: '-0.02em', fontFamily: "'Space Grotesk', sans-serif" }}>Arc 3D</span>
       </div>
-      <span style={{ fontSize: 11, color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '2px 8px', borderRadius: 4, marginLeft: 8 }}>
-        {blockCount} blocks
+      <span style={{ fontSize: 10, fontWeight: 600, color: '#3B82F6', background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.2)', padding: '2px 8px', borderRadius: 10, marginLeft: 4, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        {blockCount} {blockCount === 1 ? 'Block' : 'Blocks'}
       </span>
     </div>
+    
+    {/* 2D/3D Toggle Center */}
+    <div style={{ display: 'flex', background: 'rgba(255,255,255,0.03)', borderRadius: 25, padding: 4, border: '1px solid rgba(255,255,255,0.05)', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
+      <button
+        onClick={() => setViewMode('2D')}
+        style={{ width: 85, padding: '6px 0', borderRadius: 20, fontSize: 11, fontWeight: viewMode === '2D' ? 700 : 500, color: viewMode === '2D' ? '#FFF' : 'var(--text-muted)', background: viewMode === '2D' ? 'var(--accent-primary)' : 'transparent', border: 'none', cursor: 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', textTransform: 'uppercase', letterSpacing: '0.03em' }}
+      >
+        2D PLAN
+      </button>
+      <button
+        onClick={() => setViewMode('3D')}
+        style={{ width: 70, padding: '4px 0', borderRadius: 18, fontSize: 11, fontWeight: viewMode === '3D' ? 700 : 500, color: viewMode === '3D' ? '#FFF' : '#888', background: viewMode === '3D' ? '#1C1C72' : 'transparent', border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}
+      >
+        3D VIEW
+      </button>
+    </div>
+
     <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-      <a href="https://agnaa.in" style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--text-muted)' }}>&larr; agnaa.in</a>
-      <button onClick={onShare} style={{ fontFamily: 'Inter', fontSize: 13, border: '1px solid var(--border-glow)', background: 'var(--bg-card)', color: '#FFFFFF', borderRadius: 6, padding: '6px 12px' }}>
+      <a href="https://agnaa.in" style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--text-muted)', fontWeight: 500 }}>&larr; agnaa.in</a>
+      <button onClick={onShare} style={{ fontFamily: 'Inter', fontSize: 13, border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: '#FFFFFF', borderRadius: 8, padding: '8px 16px', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s' }}>
         Share &nearr;
       </button>
-      <a href="https://agnaa.in/#contact" style={{ fontFamily: 'Space Grotesk', fontSize: 13, background: 'var(--brand-gradient)', color: '#FFFFFF', borderRadius: 8, padding: '8px 20px', textDecoration: 'none' }}>
+      <a href="https://agnaa.in/#contact" style={{ fontFamily: 'Space Grotesk', fontSize: 13, fontWeight: 700, background: 'var(--grad-purple-blue)', color: '#FFFFFF', borderRadius: 10, padding: '10px 24px', textDecoration: 'none', boxShadow: '0 4px 15px rgba(123,45,191,0.3)', transition: 'all 0.2s' }}>
         Start a Project &rarr;
       </a>
     </div>
@@ -270,8 +287,8 @@ const BuildToolbar = ({
 }) => {
   return (
     <div style={{
-      width: 240, height: '100%', background: 'var(--bg-card)',
-      borderRight: '1px solid var(--border-glow)', overflowY: 'auto',
+      width: 240, height: '100%', background: 'var(--bg-dark)',
+      borderRight: '1px solid rgba(255,255,255,0.08)', overflowY: 'auto',
       fontFamily: 'Inter', fontSize: 13, color: '#FFFFFF',
       display: 'flex', flexDirection: 'column',
     }}>
@@ -283,14 +300,15 @@ const BuildToolbar = ({
               key={bt.id}
               onClick={() => onAddBlock(bt)}
               style={{
-                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
-                padding: '10px 4px', background: 'var(--bg-darkest)', border: '1px solid rgba(123,45,191,0.15)',
-                borderRadius: 8, color: '#FFFFFF', fontSize: 11, cursor: 'pointer',
-                transition: 'all 0.2s', fontFamily: 'Inter',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+                padding: '12px 6px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 12, color: '#FFFFFF', fontSize: 11, cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontFamily: 'Inter', fontWeight: 500,
               }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLButtonElement).style.borderColor = '#7B2DBF';
-                (e.currentTarget as HTMLButtonElement).style.background = 'rgba(123,45,191,0.12)';
+                (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--brand-blue)';
+                (e.currentTarget as HTMLButtonElement).style.background = 'rgba(59,130,246,0.1)';
+                (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
               }}
               onMouseLeave={e => {
                 (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(123,45,191,0.15)';
@@ -322,7 +340,7 @@ const BuildToolbar = ({
                     pos[i] = parseFloat(e.target.value);
                     onUpdateBlock(selectedBlock.id, { position: pos });
                   }}
-                  style={{ flex: 1, accentColor: '#7B2DBF' }}
+                  style={{ flex: 1, accentColor: 'var(--brand-blue)' }}
                 />
               </div>
             ))}
@@ -363,7 +381,7 @@ const BuildToolbar = ({
                     sz[i] = parseFloat(e.target.value);
                     onUpdateBlock(selectedBlock.id, { size: sz });
                   }}
-                  style={{ flex: 1, accentColor: '#7B2DBF' }}
+                  style={{ flex: 1, accentColor: 'var(--brand-blue)' }}
                 />
                 <span style={{ width: 28, fontSize: 10, color: 'var(--text-muted)', textAlign: 'right' }}>
                   {selectedBlock.size[i].toFixed(1)}
@@ -385,7 +403,7 @@ const BuildToolbar = ({
                   rot[1] = parseFloat(e.target.value);
                   onUpdateBlock(selectedBlock.id, { rotation: rot });
                 }}
-                style={{ flex: 1, accentColor: '#7B2DBF' }}
+                style={{ flex: 1, accentColor: 'var(--brand-violet)' }}
               />
               <span style={{ width: 28, fontSize: 10, color: 'var(--text-muted)', textAlign: 'right' }}>
                 {selectedBlock.rotation[1]}°
@@ -403,10 +421,13 @@ const BuildToolbar = ({
                   onClick={() => onUpdateBlock(selectedBlock.id, { color: c })}
                   style={{
                     width: 24, height: 24, borderRadius: 4, background: c, cursor: 'pointer',
-                    border: selectedBlock.color === c ? '2px solid #7B2DBF' : '1px solid rgba(255,255,255,0.15)',
-                    transition: 'transform 0.15s',
+                    border: selectedBlock.color === c ? '2px solid var(--brand-blue)' : '1px solid rgba(255,255,255,0.15)',
+                    transition: 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
                   }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.15)'; }}
+                  onMouseEnter={e => { 
+                    (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.2)';
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 10px ' + c + '80';
+                  }}
                   onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; }}
                 />
               ))}
@@ -474,7 +495,7 @@ const BuildToolbar = ({
 
       {/* ── Footer ── */}
       <div style={{ marginTop: 'auto', padding: '12px', borderTop: '1px solid rgba(123,45,191,0.15)', textAlign: 'center' }}>
-        <p style={{ fontSize: 10, color: 'var(--text-muted)' }}>Arc by Agnaa · v1.0</p>
+        <p style={{ fontSize: 10, color: 'var(--text-muted)' }}>Arc 3D by Agnaa · v1.0</p>
       </div>
     </div>
   );
@@ -540,6 +561,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [sceneData, setSceneData] = useState<any>(null);
   const [toastMsg, setToastMsg] = useState("");
+  const [viewMode, setViewMode] = useState<'3D' | '2D'>('3D');
 
   const showToast = (msg: string) => { setToastMsg(msg); setTimeout(() => setToastMsg(""), 3000); };
 
@@ -594,23 +616,58 @@ export default function App() {
     showToast("Link copied! Share with your client.");
   };
 
-  /* ── Init ── */
+  /* ── Init & Auto-Save ── */
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const data = params.get('data');
+    
+    // Attempt Auto-load from local storage if no URL data
+    if (!data) {
+      setTimeout(() => {
+        setLoading(false);
+        try {
+          const saved = localStorage.getItem('agnaa_arc_save');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed.blocks && parsed.blocks.length > 0) {
+              setBlocks(parsed.blocks);
+              setSceneData(parsed);
+              showToast("Loaded saved project");
+            } else {
+              setSceneData({ empty: true });
+            }
+          } else {
+            setSceneData({ empty: true });
+          }
+        } catch (e) {
+          setSceneData({ empty: true });
+        }
+      }, 800);
+      return;
+    }
+
+    // Load from URL
     setTimeout(() => {
       setLoading(false);
-      if (data) {
-        try {
-          const parsed = JSON.parse(atob(data));
-          if (parsed.blocks) setBlocks(parsed.blocks);
-          setSceneData(parsed);
-        } catch {
-          setSceneData({ broken: true });
-        }
+      try {
+        const parsed = JSON.parse(atob(data));
+        if (parsed.blocks) setBlocks(parsed.blocks);
+        setSceneData(parsed);
+      } catch {
+        setSceneData({ broken: true });
       }
     }, 1500);
   }, []);
+
+  // Auto-save whenever blocks change
+  useEffect(() => {
+    if (loading || !sceneData) return; // don't overwrite during load
+    if (blocks.length > 0) {
+       localStorage.setItem('agnaa_arc_save', JSON.stringify({ blocks, meta: { updated: Date.now() } }));
+    } else {
+       localStorage.removeItem('agnaa_arc_save'); // Clear if empty
+    }
+  }, [blocks, loading, sceneData]);
 
   if (isMobile) return <MobileBlock />;
   if (loading) return <LoadingScreen />;
@@ -618,7 +675,7 @@ export default function App() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Header onShare={handleShare} blockCount={blocks.length} />
+      <Header onShare={handleShare} blockCount={blocks.length} viewMode={viewMode} setViewMode={setViewMode} />
       <div style={{ flex: 1, display: 'flex', position: 'relative' }}>
         {/* Left Toolbar */}
         <BuildToolbar
@@ -631,17 +688,36 @@ export default function App() {
         />
 
         {/* 3D Canvas */}
-        <div style={{ flex: 1, position: 'relative', background: '#0A0A12' }}>
+        <div style={{ flex: 1, position: 'relative', background: '#000000' }}>
           <ExportPanel sceneData={{ blocks }} onShare={handleShare} />
+          
+          {/* Watermark Logo (Top Right) */}
+          <div style={{ position: 'absolute', top: 16, right: 232, pointerEvents: 'none', opacity: 0.6, zIndex: 40 }}>
+            <div style={{ width: 80, height: 80 }}><AgnaaIcon /></div>
+          </div>
+
           <WhatsAppFloat />
+
           <Toast message={toastMsg} visible={!!toastMsg} />
 
-          <Canvas camera={{ position: [8, 6, 8] }} gl={{ powerPreference: 'high-performance', preserveDrawingBuffer: true }}>
+          <Canvas gl={{ powerPreference: 'high-performance', preserveDrawingBuffer: true }}>
+            {viewMode === '3D' ? (
+              <PerspectiveCamera makeDefault position={[8, 6, 8]} fov={50} />
+            ) : (
+              <OrthographicCamera makeDefault position={[0, 15, 0]} zoom={40} rotation={[-Math.PI / 2, 0, 0]} />
+            )}
+            
             <ambientLight intensity={0.8} />
             <directionalLight position={[10, 10, 10]} intensity={1.2} />
             <directionalLight position={[-5, 5, -5]} intensity={0.4} />
-            <OrbitControls makeDefault enableDamping dampingFactor={0.08} />
-            <gridHelper args={[20, 20, '#2A2A3A', '#1A1A2A']} />
+            
+            {viewMode === '3D' ? (
+              <OrbitControls makeDefault enableDamping dampingFactor={0.08} />
+            ) : (
+              <OrbitControls makeDefault enableRotate={false} enableDamping dampingFactor={0.08} target={[0, 0, 0]} />
+            )}
+            
+            <gridHelper args={[20, 20, '#333333', '#111111']} />
 
             {/* Ground plane */}
             <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>

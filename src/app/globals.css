@@ -30,3 +30,52 @@
     to { transform: translateY(0); }
   }
 }
+
+:root {
+  --agn-background: #0F172A;
+  --agn-card: #1E293B;
+  --agn-primary: #3B82F6;
+  --agn-text: #F1F5F9;
+  --agn-navy: #1C1C72;
+  --agn-violet: #7B2DBF;
+}
+
+.chat-bubble-agn {
+  background: linear-gradient(135deg, var(--agn-navy), var(--agn-violet));
+  border-radius: 20px 20px 5px 20px;
+  box-shadow: 0 8px 32px rgba(28, 28, 114, 0.3);
+  color: white;
+}
+
+.chat-bubble-user {
+  background: #E2E8F0;
+  border-radius: 20px 20px 20px 5px;
+  color: #1E293B;
+}
+
+.shimmer-bg {
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.chat-bubble-animate {
+  animation: bubbleIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes bubbleIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+

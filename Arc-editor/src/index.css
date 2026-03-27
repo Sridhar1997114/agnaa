@@ -1,22 +1,29 @@
 :root {
-  /* Arc / AGNAA BRAND */
+  /* Arc 3D / AGNAA BRAND */
   --brand-navy:       #1C1C72;
   --brand-violet:     #7B2DBF;
-  --brand-gradient:   linear-gradient(180deg, #7B2DBF 0%, #1C1C72 100%);
+  --brand-blue:       #3B82F6;
+  
+  /* PREMIUM GRADIENTS */
+  --grad-white-blue:  linear-gradient(135deg, #FFFFFF 0%, #D4EAFF 100%);
+  --grad-purple-blue: linear-gradient(135deg, #7B2DBF 0%, #3B82F6 100%);
+  --grad-blue-purple: linear-gradient(135deg, #3B82F6 0%, #7B2DBF 100%);
+  --grad-dark:        linear-gradient(180deg, #0A0A12 0%, #14141F 100%);
+  --brand-gradient:   var(--grad-purple-blue);
   
   /* BACKGROUNDS */
-  --bg-dark:          #0D0D14;
-  --bg-card:          #14141F;
-  --bg-darkest:       #0A0A12;
+  --bg-dark:          #07070B;
+  --bg-card:          #11111A;
+  --bg-darkest:       #050508;
   
   /* TEXT */
   --text-primary:     #FFFFFF;
-  --text-muted:       #8888AA;
+  --text-muted:       #94A3B8;
   
   /* ACCENTS */
-  --accent-violet:    #7B2DBF;
-  --accent-navy:      #1C1C72;
-  --border-glow:      rgba(123, 45, 191, 0.3);
+  --accent-primary:   #7B2DBF;
+  --accent-secondary: #3B82F6;
+  --border-glow:      rgba(123, 45, 191, 0.2);
 }
 
 * {

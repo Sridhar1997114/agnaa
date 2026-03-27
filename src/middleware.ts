@@ -13,6 +13,21 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  // Handle redirects for broken/legacy links
+  if (pathname === '/construction-cost') {
+    return NextResponse.redirect(new URL('/calculators', request.url));
+  }
+  
+  if (pathname === '/cost' && !hostname.startsWith('cost.agnaa.in')) {
+    // Optionally redirect /cost to /calculators if calculators is the primary tool
+    // For now, let's just fix the 404s the user saw.
+    return NextResponse.redirect(new URL('/calculators', request.url));
+  }
+
+  if (pathname === '/construction') {
+    return NextResponse.redirect(new URL('/constructions', request.url));
+  }
+
   return NextResponse.next();
 }
 
