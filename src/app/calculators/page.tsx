@@ -255,12 +255,29 @@ export default function CalculatorsPage() {
           scale: 3, 
           useCORS: true, 
           letterRendering: true,
-          windowWidth: 794
+          windowWidth: 794,
+          width: 794,
+          x: 0,
+          y: 0,
+          scrollX: 0,
+          scrollY: 0
         },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       
+      const wrapper = document.getElementById('pdf-export-wrapper');
+      if (wrapper) {
+        wrapper.style.top = '0px';
+        wrapper.style.left = '0px';
+      }
+      
       await html2pdf().set(opt).from(el).save();
+      
+      if (wrapper) {
+        wrapper.style.top = '-9999px';
+        wrapper.style.left = '-9999px';
+      }
+
       setToast({ msg: 'Precision Estimate Downloaded!', err: false });
     } catch(err) {
       console.error('PDF Generation Error:', err);
@@ -290,7 +307,7 @@ export default function CalculatorsPage() {
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" strategy="afterInteractive" />
       
       {/* ─── HIDDEN A4 PDF EXPORT — 794×1123px (A4 @ 96dpi) ─── */}
-      <div style={{ position:'absolute', top:'-9999px', left:'-9999px', opacity:0, pointerEvents:'none', overflow:'hidden', width:'794px', height:'1123px' }}>
+      <div id="pdf-export-wrapper" style={{ position:'absolute', top:'-9999px', left:'-9999px', opacity:0.01, zIndex:-1000, pointerEvents:'none', overflow:'hidden', width:'794px', height:'1123px' }}>
         <div id="agnaa-pdf-view-hq" style={{ width:'794px', height:'1123px', background:'#fff', position:'relative', fontFamily:'Inter, sans-serif', color:'#0F172A', display:'flex', flexDirection:'column', overflow:'hidden' }}>
           
           {/* Subtle Watermark */}

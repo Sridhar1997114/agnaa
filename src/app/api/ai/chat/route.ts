@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
         : '';
 
     const body = {
-      system_instruction: {
+      systemInstruction: {
         parts: [{ text: AGNAA_SYSTEM_PROMPT + finalSuffix }],
       },
       contents,

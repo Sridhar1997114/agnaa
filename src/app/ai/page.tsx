@@ -125,29 +125,48 @@ export default function AgnaaChat() {
       <main className="flex-1 overflow-y-auto pt-8 pb-32 px-4 md:px-0">
         <div className="max-w-3xl mx-auto">
           {messages.length === 0 ? (
-            <div className="chat-bubble-animate flex flex-col items-center justify-center h-[50vh] text-center px-4">
-              <svg
-                viewBox="0 0 4000 4000"
-                className="w-24 h-24 mb-6 animate-pulse drop-shadow-[0_0_30px_rgba(123,45,191,0.6)]"
-                fill="url(#agnaa-gradient)"
-                fillRule="evenodd"
-              >
-                <path d="M104.5,3397.1 L104.5,1340.9 L703.1,1108.1 L703.1,3397.1 L503.5,3397.1 L503.5,2200 L304,2200 L304,3397.1 Z M304,2000.4 L503.5,2000.4 L503.5,1399.8 L304,1477.3 Z" />
-                <path d="M902.6,3197.6 L902.6,3397.1 L1501.1,3397.1 L1501.1,797.7 L902.6,1030.5 L902.6,2200 L1301.6,2200 L1301.6,3197.6 Z M1102.1,1167 L1301.6,1089.4 L1301.6,2000.4 L1102.1,2000.4 Z" />
-                <polygon points="1700.7,3397.1 1900.2,3397.1 1900.2,856.7 1999.9,817.8 2099.7,856.7 2099.7,3397.1 2299.2,3397.1 2299.2,720.1 1999.9,603.8 1700.7,720.1" />
-                <path d="M2498.9,1011.8 L2897.9,1167 L2897.9,2000.4 L2498.9,2000.4 L2498.9,3397.1 L3097.4,3397.1 L3097.4,1030.5 L2498.9,797.7 Z M2698.4,2200 L2897.9,2200 L2897.9,3197.6 L2698.4,3197.6 Z" />
-                <path d="M3296.9,1108.1 L3895.5,1340.9 L3895.5,3397.1 L3696,3397.1 L3696,2200 L3496.5,2200 L3496.5,3397.1 L3296.9,3397.1 Z M3496.5,1399.8 L3696,1477.3 L3696,2000.4 L3496.5,2000.4 Z" />
-              </svg>
+            <div className="chat-bubble-animate flex flex-col items-center justify-center min-h-[60vh] text-center px-4 w-full">
               <h2
-                className="text-2xl md:text-3xl text-white font-semibold mb-3"
+                className="text-3xl md:text-5xl text-white font-bold mb-4 tracking-tight"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
-                Ready to design your vision?
+                Experience Agnaa Intelligence™
               </h2>
-              <p className="text-gray-400 max-w-md text-sm md:text-base leading-relaxed">
-                Ask about layouts, materials, G+5 RERA rules, or the Vikarabad
-                10/30/10/50 agroforestry model.
+              <p className="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed mb-10">
+                Watch how our AI architect transforms raw ideas into precision G+5 floor plans, material specs, and RERA-compliant designs in seconds.
               </p>
+              
+              <div className="relative w-full max-w-4xl aspect-video rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(123,45,191,0.2)] border border-white/10 group cursor-pointer">
+                {/* Simulated Video Player */}
+                <div className="absolute inset-0 bg-[#161622] flex items-center justify-center">
+                  <video 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                    src="https://cdn.pixabay.com/video/2023/11/09/188463-882956740_large.mp4"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D14] via-transparent to-transparent opacity-80" />
+                  
+                  {/* Play Button Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-[0_0_30px_rgba(123,45,191,0.4)] group-hover:scale-110 transition-transform duration-500">
+                      <svg className="w-8 h-8 text-white ml-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-12 flex items-center gap-4 text-sm text-gray-500 font-medium uppercase tracking-widest">
+                <span>Layout Generation</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7B2DBF]"></span>
+                <span>Cost Estimation</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7B2DBF]"></span>
+                <span>Legal Review</span>
+              </div>
             </div>
           ) : (
             <div className="flex flex-col justify-end pt-10">
