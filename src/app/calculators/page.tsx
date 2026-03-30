@@ -128,14 +128,27 @@ export default function CalculatorsPage() {
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
   const [isVerified, setIsVerified] = useState(false);
 
+  const recaptchaRef = React.useRef<any>(null);
+
   // ─── AUTH LOGIC ───────────────────────────────────────────────────────────
-  const setupRecaptcha = () => {
-    if ((window as any).recaptchaVerifier) return;
-    (window as any).recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-      'size': 'invisible',
-      'callback': () => console.log('Recaptcha resolved')
-    });
-  };
+  useEffect(() => {
+    if (showOtpModal && !recaptchaRef.current) {
+      try {
+        recaptchaRef.current = new RecaptchaVerifier(auth, 'recaptcha-container', {
+          'size': 'invisible',
+          'callback': () => console.log('Recaptcha resolved')
+        });
+      } catch (err) {
+        console.error("Recaptcha Init Error:", err);
+      }
+    }
+    return () => {
+      if (!showOtpModal && recaptchaRef.current) {
+        recaptchaRef.current.clear();
+        recaptchaRef.current = null;
+      }
+    };
+  }, [showOtpModal]);
 
   const handleSendOtp = async () => {
     if (!phone || phone.length < 10) {
@@ -144,17 +157,16 @@ export default function CalculatorsPage() {
     }
     setIsSendingOtp(true);
     try {
-      setupRecaptcha();
       const formattedPhone = phone.startsWith('+') ? phone : `+91${phone}`;
-      const result = await signInWithPhoneNumber(auth, formattedPhone, (window as any).recaptchaVerifier);
+      const result = await signInWithPhoneNumber(auth, formattedPhone, recaptchaRef.current);
       setConfirmationResult(result);
       setToast({ msg: "OTP sent to your phone", err: false });
     } catch (err: any) {
       console.error(err);
       setToast({ msg: err.message || "Failed to send OTP", err: true });
-      if ((window as any).recaptchaVerifier) {
-        (window as any).recaptchaVerifier.clear();
-        (window as any).recaptchaVerifier = null;
+      if (recaptchaRef.current) {
+        recaptchaRef.current.clear();
+        recaptchaRef.current = null;
       }
     } finally {
       setIsSendingOtp(false);
@@ -196,11 +208,8 @@ export default function CalculatorsPage() {
   };
 
   const handleStartDownloadFlow = () => {
-    if (isVerified) {
-      executeGatedDownload();
-    } else {
-      setShowOtpModal(true);
-    }
+    // Auth bypass as requested: directly execute download
+    executeGatedDownload();
   };
 
   const breakdown = useMemo(() => MATERIALS.map((mat, i) => {
@@ -262,7 +271,6 @@ export default function CalculatorsPage() {
   if (showPreview) {
     return (
       <div className={`min-h-screen bg-[#0F172A] overflow-y-auto py-10 ${inter.variable} ${plusJakarta.variable}`}>
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" strategy="afterInteractive" />
         <div className="fixed top-4 right-4 z-[9999] flex gap-3">
           <button onClick={() => setShowPreview(false)} className="bg-white/10 hover:bg-white/20 text-white rounded-full p-3 backdrop-blur-md transition-all">
             <X size={20} />
@@ -272,107 +280,6 @@ export default function CalculatorsPage() {
             Export PDF Now
           </button>
         </div>
-
-        {/* ─── HIDDEN A4 PDF EXPORT — 794×1123px (A4 @ 96dpi) ─── */}
-        <div style={{ position:'fixed', top:0, left:'50%', transform:'translateX(-50%)', zIndex:-100, opacity:0, pointerEvents:'none', overflow:'hidden', width:'794px', height:'1123px' }}>
-          <div id="agnaa-pdf-view-hq" style={{ width:'794px', height:'1123px', background:'#fff', position:'relative', fontFamily:'Inter,sans-serif', color:'#0F172A', display:'flex', flexDirection:'column', overflow:'hidden' }}>
-
-            <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:420, opacity:0.03, zIndex:0, pointerEvents:'none' }}>
-              <AgnaaLogo fill="#1C1C72" />
-            </div>
-
-            {/* 1. HEADER — 70px */}
-            <div style={{ background:'linear-gradient(135deg,#1C1C72 0%,#7B2DBF 100%)', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'0 48px', height:'70px', flexShrink:0, zIndex:1 }}>
-              <div style={{ display:'flex', alignItems:'center', gap:12 }}>
-                <AgnaaLogo fill="#FFFFFF" width={32} height={32} />
-                <div style={{ width:1, height:30, background:'rgba(255,255,255,0.2)', margin:'0 6px' }} />
-                <div>
-                  <div style={{ fontSize:16, fontWeight:900, color:'#fff', letterSpacing:'-0.02em', textTransform:'uppercase', lineHeight:1.1 }}>AGNAA DESIGN STUDIO</div>
-                  <div style={{ fontSize:10, color:'rgba(255,255,255,0.6)', fontStyle:'italic' }}>Design. Build. Soul.</div>
-                </div>
-              </div>
-              <div style={{ textAlign:'right' }}>
-                <div style={{ fontSize:9, fontWeight:900, color:'rgba(255,255,255,0.5)', textTransform:'uppercase', letterSpacing:'0.2em', marginBottom:2 }}>Precision Construction Estimate</div>
-                <div style={{ fontSize:14, fontWeight:700, color:'#fff' }}>{today}</div>
-              </div>
-            </div>
-
-            {/* 2. SCOPE BAR — 52px */}
-            <div style={{ background:'#fff', borderBottom:'1px solid #E5E7EB', display:'flex', flexShrink:0, height:'52px', zIndex:1 }}>
-              {([['Built-up Area', `${fmt(numArea)} SQFT`], ['Location', location], ['Standard', 'A-GRADE PRECISION']] as [string,string][]).map(([label, val], i) => (
-                <div key={i} style={{ flex:1, borderRight: i<2 ? '1px solid #E5E7EB' : 'none', display:'flex', flexDirection:'column', justifyContent:'center', padding:'0 24px' }}>
-                  <div style={{ fontSize:8, fontWeight:900, color:'#94A3B8', textTransform:'uppercase', letterSpacing:'0.15em', marginBottom:1 }}>{label}</div>
-                  <div style={{ fontSize:13, fontWeight:800, color: i===2 ? '#7B2DBF' : '#0F172A' }}>{val}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* 3. KPI CARDS — 68px */}
-            <div style={{ display:'flex', gap:10, padding:'8px 40px', flexShrink:0, height:'68px', alignItems:'center' }}>
-              {[
-                { label:'Market Total', value:`₹${fmt(totalMkt)}`, bg:'#F8F8FC', border:'1px solid rgba(28,28,114,0.15)', color:'#0F172A', labelColor:'#64748B' },
-                { label:'Agnaa Intelligent', value:`₹${fmt(totalAgnaa)}`, bg:'linear-gradient(135deg,#7B2DBF,#1C1C72)', border:'none', color:'#fff', labelColor:'rgba(255,255,255,0.6)' },
-                { label:'Total Savings', value:`₹${fmt(savings)}`, bg:'#F0FDF4', border:'1px solid #BBF7D0', color:'#15803D', labelColor:'#16A34A' },
-              ].map((card, i) => (
-                <div key={i} style={{ flex:1, height:52, background:card.bg, border:card.border, borderRadius:10, display:'flex', flexDirection:'column', justifyContent:'center', padding:'0 16px' }}>
-                  <div style={{ fontSize:8, fontWeight:900, color:card.labelColor, textTransform:'uppercase', letterSpacing:'0.15em' }}>{card.label}</div>
-                  <div style={{ fontSize:18, fontWeight:700, color:card.color, fontVariantNumeric:'tabular-nums' }}>{card.value}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* 4. TABLE — fills remaining space */}
-            <div style={{ flex:1, overflow:'hidden', minHeight:0, display:'flex', flexDirection:'column' }}>
-              <table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed' }}>
-                <thead>
-                  <tr style={{ background:'#0F172A' }}>
-                    <th style={{ padding:'6px 18px', fontSize:9, color:'#fff', textTransform:'uppercase', fontWeight:900, letterSpacing:'0.15em', textAlign:'left', width:'34%' }}>Construction Resource</th>
-                    <th style={{ padding:'6px 18px', fontSize:9, color:'rgba(255,255,255,0.7)', textTransform:'uppercase', fontWeight:900, letterSpacing:'0.15em', textAlign:'center', width:'22%' }}>Quantity</th>
-                    <th style={{ padding:'6px 18px', fontSize:9, color:'rgba(255,255,255,0.7)', textTransform:'uppercase', fontWeight:900, letterSpacing:'0.15em', textAlign:'center', width:'18%' }}>Quality</th>
-                    <th style={{ padding:'6px 18px', fontSize:9, color:'#fff', textTransform:'uppercase', fontWeight:900, letterSpacing:'0.15em', textAlign:'right', width:'26%' }}>Agnaa Cost</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {breakdown.map((item: any, idx: number) => (
-                    <tr key={item.id} style={{ background: idx % 2 === 0 ? '#fff' : '#F8FAFC', borderBottom:'1px solid #F1F5F9' }}>
-                      <td style={{ padding:'4px 18px' }}><span style={{ fontSize:11, fontWeight:800, color:'#0F172A', textTransform:'uppercase' }}>{item.label}</span></td>
-                      <td style={{ padding:'4px 18px', textAlign:'center' }}>
-                        <span style={{ fontSize:12, fontWeight:900, color:'#0F172A', fontVariantNumeric:'tabular-nums' }}>{fmt(item.qty)}</span>
-                        <span style={{ fontSize:8, color:'#94A3B8', fontWeight:700, marginLeft:4, textTransform:'uppercase' }}>{item.unit}</span>
-                      </td>
-                      <td style={{ padding:'4px 18px', textAlign:'center' }}>
-                        <span style={{ fontSize:8, fontWeight:900, color:'#7B2DBF', background:'rgba(123,45,191,0.06)', padding:'2px 8px', borderRadius:6, textTransform:'uppercase', letterSpacing:'0.1em' }}>{item.quality}</span>
-                      </td>
-                      <td style={{ padding:'4px 18px', textAlign:'right' }}>
-                        <span style={{ fontSize:12, fontWeight:900, color:'#7B2DBF', fontVariantNumeric:'tabular-nums' }}>₹{fmt(item.agnaaAmt)}</span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* 5. SAVINGS BADGE — 52px */}
-            <div style={{ background:'linear-gradient(90deg,#0F172A,#1E293B)', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'0 40px', height:'52px', flexShrink:0 }}>
-              <div>
-                <div style={{ fontSize:10, fontWeight:900, color:'#fff', textTransform:'uppercase', letterSpacing:'0.25em' }}>AGNAA INTELLIGENT COST</div>
-                <div style={{ fontSize:8, color:'rgba(255,255,255,0.5)', textTransform:'uppercase', letterSpacing:'0.1em' }}>Save {((savings/totalMkt)*100).toFixed(1)}% vs market — Hyderabad</div>
-              </div>
-              <div style={{ fontSize:26, fontWeight:900, color:'#fff', fontVariantNumeric:'tabular-nums' }}>₹{fmt(totalAgnaa)}</div>
-            </div>
-
-            {/* 6. FOOTER — 40px */}
-            <div style={{ borderTop:'1px solid #E5E7EB', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'0 40px', height:'40px', flexShrink:0, background:'#fff' }}>
-              <div style={{ fontSize:8, color:'#94A3B8', fontWeight:700, textTransform:'uppercase', letterSpacing:'0.08em' }}>© 2026 AGNAA DESIGN STUDIO PRIVATE LIMITED • A-GRADE CONSTRUCTION</div>
-              <div style={{ display:'flex', gap:8, alignItems:'center' }}>
-                <span style={{ fontSize:9, fontWeight:900, color:'#7B2DBF' }}>+91 8826214348</span>
-                <span style={{ fontSize:9, color:'#CBD5E1' }}>|</span>
-                <span style={{ fontSize:9, fontWeight:900, color:'#0F172A' }}>WWW.AGNAA.IN</span>
-                <span style={{ fontSize:7, background:'#FEF2F2', color:'#DC2626', fontWeight:900, padding:'2px 6px', borderRadius:4, textTransform:'uppercase', letterSpacing:'0.1em' }}>VALID 30 DAYS</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }
@@ -380,6 +287,123 @@ export default function CalculatorsPage() {
   // ─── SCREEN UI ───
   return (
     <div className={`antialiased bg-white text-[#0F172A] min-h-screen relative ${inter.variable} ${plusJakarta.variable}`}>
+      <Script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" strategy="afterInteractive" />
+      
+      {/* ─── HIDDEN A4 PDF EXPORT — 794×1123px (A4 @ 96dpi) ─── */}
+      <div style={{ position:'absolute', top:'-9999px', left:'-9999px', opacity:0, pointerEvents:'none', overflow:'hidden', width:'794px', height:'1123px' }}>
+        <div id="agnaa-pdf-view-hq" style={{ width:'794px', height:'1123px', background:'#fff', position:'relative', fontFamily:'Inter, sans-serif', color:'#0F172A', display:'flex', flexDirection:'column', overflow:'hidden' }}>
+          
+          {/* Subtle Watermark */}
+          <div style={{ position:'absolute', top:'55%', left:'50%', transform:'translate(-50%,-50%) rotate(-15deg)', width:500, opacity:0.02, zIndex:0, pointerEvents:'none' }}>
+            <AgnaaLogo fill="#1C1C72" />
+          </div>
+
+          {/* 1. PREMIUM HEADER */}
+          <div style={{ background:'linear-gradient(135deg, #1C1C72 0%, #7B2DBF 100%)', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'0 50px', height:'80px', flexShrink:0, zIndex:1 }}>
+            <div style={{ display:'flex', alignItems:'center', gap:14 }}>
+              <AgnaaLogo fill="#FFFFFF" width={38} height={38} />
+              <div style={{ width:1, height:35, background:'rgba(255,255,255,0.15)', margin:'0 4px' }} />
+              <div>
+                <div style={{ fontSize:16, fontWeight:900, color:'#fff', letterSpacing:'-0.01em', textTransform:'uppercase', lineHeight:1 }}>AGNAA DESIGN STUDIO</div>
+                <div style={{ fontSize:9, color:'rgba(255,255,255,0.5)', letterSpacing:'0.05em', fontWeight:500 }}>ARCHITECTURE • CONSTRUCTION • PRECISION</div>
+              </div>
+            </div>
+            <div style={{ textAlign:'right' }}>
+              <div style={{ fontSize:8, fontWeight:900, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:'0.25em', marginBottom:3 }}>Precision Estimate</div>
+              <div style={{ fontSize:14, fontWeight:800, color:'#fff', letterSpacing:'0.02em' }}>{today}</div>
+            </div>
+          </div>
+
+          {/* 2. PARAMETERS BAR */}
+          <div style={{ background:'#fff', borderBottom:'1px solid #F1F5F9', display:'flex', flexShrink:0, height:'60px', zIndex:1 }}>
+            {[
+              ['BUILT-UP AREA', `${fmt(numArea)} SQFT`],
+              ['PROJECT LOCATION', location.toUpperCase()],
+              ['SPECIFICATION', 'A-GRADE PRECISION']
+            ].map(([label, val], i) => (
+              <div key={i} style={{ flex:1, borderRight: i<2 ? '1px solid #F1F5F9' : 'none', display:'flex', flexDirection:'column', justifyContent:'center', padding:'0 30px' }}>
+                <div style={{ fontSize:7, fontWeight:900, color:'#94A3B8', letterSpacing:'0.2em', marginBottom:2 }}>{label}</div>
+                <div style={{ fontSize:13, fontWeight:800, color: i===2 ? '#7B2DBF' : '#0F172A' }}>{val}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* 3. EXECUTIVE SUMMARY CARDS */}
+          <div style={{ display:'flex', gap:12, padding:'20px 45px', flexShrink:0, zIndex:1 }}>
+            {[
+              { label:'MARKET STANDARD', value:`₹${fmt(totalMkt)}`, bg:'#F8FAFC', color:'#475569', iconColor:'#94A3B8' },
+              { label:'AGNAA OPTIMIZED', value:`₹${fmt(totalAgnaa)}`, bg:'linear-gradient(135deg, #7B2DBF, #1C1C72)', color:'#fff', isPrimary:true },
+              { label:'ESTIMATED SAVINGS', value:`₹${fmt(savings)}`, bg:'#F0FDF4', color:'#15803D', isSuccess:true },
+            ].map((card, i) => (
+              <div key={i} style={{ flex:1, height:70, background:card.bg, borderRadius:12, display:'flex', flexDirection:'column', justifyContent:'center', padding:'0 20px', border: card.isPrimary ? 'none' : '1px solid rgba(0,0,0,0.03)', boxShadow: card.isPrimary ? '0 10px 20px -5px rgba(123,45,191,0.3)' : 'none' }}>
+                <div style={{ fontSize:7, fontWeight:900, color: card.isPrimary ? 'rgba(255,255,255,0.6)' : '#94A3B8', letterSpacing:'0.15em', marginBottom:2 }}>{card.label}</div>
+                <div style={{ fontSize:20, fontWeight:900, color:card.color, fontVariantNumeric:'tabular-nums', letterSpacing:'-0.02em' }}>{card.value}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* 4. DETAILED BREAKDOWN TABLE */}
+          <div style={{ flex:1, padding:'0 45px 20px', display:'flex', flexDirection:'column', overflow:'hidden' }}>
+            <div style={{ borderRadius:12, border:'1px solid #F1F5F9', overflow:'hidden' }}>
+              <table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed' }}>
+                <thead>
+                  <tr style={{ background:'#0F172A' }}>
+                    <th style={{ padding:'10px 20px', fontSize:8, color:'#fff', textTransform:'uppercase', fontWeight:900, letterSpacing:'0.2em', textAlign:'left', width:'35%' }}>RESOURCE TYPE</th>
+                    <th style={{ padding:'10px 20px', fontSize:8, color:'rgba(255,255,255,0.6)', textTransform:'uppercase', fontWeight:900, letterSpacing:'0.2em', textAlign:'center', width:'20%' }}>QUANTITY</th>
+                    <th style={{ padding:'10px 20px', fontSize:8, color:'rgba(255,255,255,0.6)', textTransform:'uppercase', fontWeight:900, letterSpacing:'0.2em', textAlign:'center', width:'20%' }}>QUALITY</th>
+                    <th style={{ padding:'10px 20px', fontSize:8, color:'#fff', textTransform:'uppercase', fontWeight:900, letterSpacing:'0.2em', textAlign:'right', width:'25%' }}>AGNAA COST</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {breakdown.map((item: any, idx: number) => (
+                    <tr key={item.id} style={{ background: idx % 2 === 0 ? '#fff' : '#F8FAFC', borderBottom:'1px solid #F1F5F9' }}>
+                      <td style={{ padding:'7px 20px' }}>
+                        <div style={{ fontSize:10, fontWeight:800, color:'#1C1C72', textTransform:'uppercase', letterSpacing:'0.02em' }}>{item.label}</div>
+                      </td>
+                      <td style={{ padding:'7px 20px', textAlign:'center' }}>
+                        <span style={{ fontSize:11, fontWeight:800, color:'#0F172A', fontVariantNumeric:'tabular-nums' }}>{fmt(item.qty)}</span>
+                        <span style={{ fontSize:7, color:'#94A3B8', fontWeight:700, marginLeft:4 }}>{item.unit.toUpperCase()}</span>
+                      </td>
+                      <td style={{ padding:'7px 20px', textAlign:'center' }}>
+                        <span style={{ fontSize:7, fontWeight:900, color:'#7B2DBF', background:'rgba(123,45,191,0.08)', padding:'3px 8px', borderRadius:6, textTransform:'uppercase', letterSpacing:'0.05em' }}>{item.quality}</span>
+                      </td>
+                      <td style={{ padding:'7px 20px', textAlign:'right' }}>
+                        <span style={{ fontSize:11, fontWeight:900, color:'#1C1C72', fontVariantNumeric:'tabular-nums' }}>₹{fmt(item.agnaaAmt)}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* 5. INTELLIGENT TOTAL BAR */}
+          <div style={{ background:'#1C1C72', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'0 50px', height:'70px', flexShrink:0, boxShadow:'0 -10px 30px rgba(28,28,114,0.1)' }}>
+            <div>
+              <div style={{ fontSize:10, fontWeight:900, color:'#fff', textTransform:'uppercase', letterSpacing:'0.3em', marginBottom:2 }}>AGNAA INTELLIGENT COST</div>
+              <div style={{ fontSize:8, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:'0.15em' }}>PRE-NEGOTIATED VENDOR RATES APPLIED</div>
+            </div>
+            <div style={{ textAlign:'right' }}>
+              <div style={{ fontSize:28, fontWeight:900, color:'#fff', fontVariantNumeric:'tabular-nums', lineHeight:1 }}>₹{fmt(totalAgnaa)}</div>
+              <div style={{ fontSize:8, color:'#7B2DBF', fontWeight:900, textTransform:'uppercase' }}>~ {((savings/totalMkt)*100).toFixed(1)}% BELOW MARKET</div>
+            </div>
+          </div>
+
+          {/* 6. LEGAL FOOTER */}
+          <div style={{ borderTop:'1px solid #F1F5F9', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'0 50px', height:'50px', flexShrink:0, background:'#fff' }}>
+            <div style={{ fontSize:7, color:'#94A3B8', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em', maxWidth:350 }}>
+              © 2026 AGNAA DESIGN STUDIO PRIVATE LIMITED • THIS ESTIMATE IS GENERATED BY AGNAA PRECISION ENGINE AND IS VALID FOR 30 DAYS.
+            </div>
+            <div style={{ display:'flex', gap:10, alignItems:'center' }}>
+              <span style={{ fontSize:9, fontWeight:900, color:'#7B2DBF' }}>+91 8826214348</span>
+              <div style={{ width:1, height:12, background:'#E2E8F0' }} />
+              <span style={{ fontSize:9, fontWeight:900, color:'#1C1C72' }}>WWW.AGNAA.IN</span>
+              <span style={{ fontSize:6, background:'#7B2DBF', color:'#fff', fontWeight:900, padding:'3px 7px', borderRadius:4, textTransform:'uppercase', letterSpacing:'0.1em', marginLeft:5 }}>OFFICIAL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-100 px-4 py-3.5 flex items-center justify-between shadow-sm">
         <AgnaaLogo className="h-7 w-auto" />
         <span className="text-[10px] font-black uppercase tracking-widest text-[#7B2DBF]">Precision Calculator</span>
@@ -509,12 +533,12 @@ export default function CalculatorsPage() {
                 <button 
                   onClick={handleStartDownloadFlow}
                   disabled={loadingPdf}
-                  className="flex items-center gap-2.5 bg-gradient-to-r from-[#1C1C72] to-[#7B2DBF] text-white font-black rounded-full px-10 py-3.5 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(123,45,191,0.5)] hover:-translate-y-0.5 active:scale-95 text-sm disabled:opacity-50"
+                  className="flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#1C1C72] to-[#7B2DBF] text-white font-black rounded-full px-12 py-4 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(123,45,191,0.5)] hover:-translate-y-0.5 active:scale-95 text-base disabled:opacity-50"
                 >
                   {loadingPdf ? (
                     <>
                       <Loader2 size={17} className="animate-spin" />
-                      Generating Estimate...
+                      Generating...
                     </>
                   ) : (
                     <>
@@ -534,90 +558,9 @@ export default function CalculatorsPage() {
         </div>
       )}
 
-      {/* ─── OTP MODAL ─── */}
-      {showOtpModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0F172A]/80 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-white rounded-[32px] w-full max-w-md overflow-hidden shadow-2xl border border-white/20 relative">
-            <button 
-              onClick={() => setShowOtpModal(false)}
-              className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors"
-            >
-              <X size={24} />
-            </button>
+      {/* OTP MODAL REMOVED AS PER REQUEST */}
 
-            <div className="bg-gradient-to-br from-[#1C1C72] to-[#7B2DBF] p-8 text-center">
-              <div className="bg-white/10 w-16 h-16 rounded-2xl backdrop-blur-md border border-white/20 flex items-center justify-center mx-auto mb-4">
-                <Phone size={28} className="text-white" />
-              </div>
-              <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Identity Check</h3>
-              <p className="text-indigo-200 text-sm mt-1">Authenticate to unlock your Precision PDF</p>
-            </div>
-
-            <div className="p-8">
-              {!confirmationResult ? (
-                <div className="space-y-6">
-                  <div>
-                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Mobile Number</label>
-                    <div className="relative">
-                      <input 
-                        type="tel" 
-                        value={phone}
-                        onChange={e => setPhone(e.target.value)}
-                        placeholder="9XXXXXXXXX"
-                        className="w-full bg-[#F8F9FA] rounded-2xl px-6 py-4 text-lg font-bold text-[#1C1C72] outline-none border-2 border-transparent focus:border-[#7B2DBF] transition-all"
-                      />
-                      <div className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-300">+91</div>
-                    </div>
-                  </div>
-                  <button 
-                    onClick={handleSendOtp}
-                    disabled={isSendingOtp || !phone}
-                    className="w-full bg-[#1C1C72] text-white font-black rounded-2xl py-4 flex items-center justify-center gap-3 shadow-lg hover:shadow-[#1C1C72]/30 transition-all active:scale-[0.98] disabled:opacity-50"
-                  >
-                    {isSendingOtp ? <Loader2 className="animate-spin" size={20} /> : "Send Quick OTP"}
-                    <ArrowRight size={20} />
-                  </button>
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <div>
-                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Verification Code</label>
-                    <input 
-                      type="text" 
-                      value={otp}
-                      onChange={e => setOtp(e.target.value)}
-                      placeholder="ENTER 6-DIGIT OTP"
-                      maxLength={6}
-                      className="w-full bg-[#F8F9FA] rounded-2xl px-6 py-4 text-center text-2xl font-black text-[#1C1C72] tracking-[0.5em] outline-none border-2 border-[#7B2DBF]/20 focus:border-[#7B2DBF] transition-all"
-                    />
-                  </div>
-                  <button 
-                    onClick={handleVerifyOtp}
-                    disabled={isVerifyingOtp || otp.length < 6}
-                    className="w-full bg-[#7B2DBF] text-white font-black rounded-2xl py-4 flex items-center justify-center gap-3 shadow-lg hover:shadow-[#7B2DBF]/30 transition-all active:scale-[0.98] disabled:opacity-50"
-                  >
-                    {isVerifyingOtp ? <Loader2 className="animate-spin" size={20} /> : <ShieldCheck size={20} />}
-                    Verify & Download
-                  </button>
-                  <button 
-                    onClick={() => setConfirmationResult(null)}
-                    className="w-full text-center text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-[#1C1C72] transition-colors"
-                  >
-                    Change Phone Number
-                  </button>
-                </div>
-              )}
-              
-              <div id="recaptcha-container" className="mt-4 flex justify-center"></div>
-              
-              <div className="mt-8 pt-6 border-t border-gray-100 flex items-center gap-3 justify-center text-gray-400">
-                <ShieldCheck size={16} />
-                <span className="text-[10px] font-bold uppercase tracking-widest">Secure Firebase Auth</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* PREVIEW MODAL REMOVED AS PER REQUEST */}
 
       {toast && (
         <div className="fixed bottom-5 right-5 z-50">
