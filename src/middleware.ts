@@ -13,6 +13,13 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  // Check if the request is coming from the 'ai' subdomain
+  if (hostname.startsWith('ai.agnaa.in') || hostname.startsWith('ai.localhost')) {
+    if (pathname === '/') {
+      return NextResponse.rewrite(new URL('/agnaa-intelligence', request.url));
+    }
+  }
+
   // Handle redirects for broken/legacy links
   if (pathname === '/construction-cost' || pathname === '/calculators') {
     return NextResponse.redirect(new URL('/calc', request.url));

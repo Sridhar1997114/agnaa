@@ -58,8 +58,8 @@ export const Header = () => {
         
         <div className="hidden lg:flex items-center gap-6">
           <Link 
-            href="/agnaa-intelligence" 
-            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent relative group/ai ${pathname === '/agnaa-intelligence' ? 'bg-[#7B2DBF] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#1C1C72]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
+            href="https://ai.agnaa.in" 
+            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent relative group/ai ${pathname === '/agnaa-intelligence' || (typeof window !== 'undefined' && window.location.hostname === 'ai.agnaa.in') ? 'bg-[#7B2DBF] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#1C1C72]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
             title="Agnaa Intelligence AI"
           >
             <Sparkles size={20} strokeWidth={2} className="group-hover/ai:animate-pulse" />
@@ -104,8 +104,8 @@ export const Header = () => {
             <Calculator size={20} /> Agnaa Calc
           </Link>
           <Link 
-            href="/agnaa-intelligence"
-            className={`text-left text-lg py-3 border-b border-gray-100 font-bold flex items-center gap-3 ${pathname === '/agnaa-intelligence' ? 'text-[#7B2DBF]' : 'text-gray-500'}`}
+            href="https://ai.agnaa.in"
+            className={`text-left text-lg py-3 border-b border-gray-100 font-bold flex items-center gap-3 ${pathname === '/agnaa-intelligence' || (typeof window !== 'undefined' && window.location.hostname === 'ai.agnaa.in') ? 'text-[#7B2DBF]' : 'text-gray-500'}`}
           >
             <Sparkles size={20} /> Agnaa AI <span className="bg-[#7B2DBF] text-white text-[10px] px-2 py-0.5 rounded-full">NEW</span>
           </Link>
