@@ -29,7 +29,6 @@ export const Header = () => {
     { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
     { id: 'design-studio', label: 'Design Studio', href: '/design-studio' },
     { id: 'constructions', label: 'Constructions', href: '/constructions' },
-    { id: 'ai', label: 'AI Assistant', href: '/ai' },
     { id: 'foundation', label: 'Foundation', href: '/foundation' }
   ];
 

@@ -24,7 +24,6 @@ export const Footer = () => {
             <li><Link href="/portfolio" className="hover:text-[#7B2DBF] transition-colors">Portfolio</Link></li>
             <li><Link href="/design-studio" className="hover:text-[#7B2DBF] transition-colors">Design Studio</Link></li>
             <li><Link href="/constructions" className="hover:text-[#7B2DBF] transition-colors">Constructions</Link></li>
-            <li><Link href="/ai" className="hover:text-[#7B2DBF] transition-colors">AI Assistant</Link></li>
             <li><Link href="/foundation" className="hover:text-[#7B2DBF] transition-colors">Foundation</Link></li>
           </ul>
         </div>
