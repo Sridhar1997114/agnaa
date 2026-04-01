@@ -1,37 +1,33 @@
-const apiKey = "AIzaSyDxpnTUUUL3H1l9RKwN3IqUmKNha1JiW5s";
-const model = "gemini-2.0-flash";
-const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+const http = require('http');
 
-const body = {
-  system_instruction: {
-    parts: [{ text: "You are Agnaa AI assistant." }],
-  },
-  contents: [
-    {
-      role: "user",
-      parts: [{ text: "Hello, who are you?" }],
-    },
-  ],
+const data = JSON.stringify({
+  messages: [{ role: 'user', content: 'hi' }]
+});
+
+const options = {
+  hostname: 'localhost',
+  port: 3000,
+  path: '/api/chat',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Content-Length': data.length
+  }
 };
 
-async function test() {
-  console.log(`Testing ${model}...`);
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+const req = http.request(options, (res) => {
+  let body = '';
+  res.on('data', (chunk) => body += chunk);
+  res.on('end', () => {
+    console.log('STATUS:', res.statusCode);
+    console.log('HEADERS:', JSON.stringify(res.headers));
+    console.log('BODY:', body);
+  });
+});
 
-    const data = await res.json();
-    if (!res.ok) {
-      console.error("Error response:", JSON.stringify(data, null, 2));
-    } else {
-      console.log("Success response:", JSON.stringify(data, null, 2));
-    }
-  } catch (err) {
-    console.error("Fetch error:", err);
-  }
-}
+req.on('error', (e) => {
+  console.error(`problem with request: ${e.message}`);
+});
 
-test();
+req.write(data);
+req.end();

@@ -7,6 +7,26 @@ interface InputBarProps {
   isLoading: boolean;
 }
 
+function MicIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+      <line x1="12" y1="19" x2="12" y2="22" />
+    </svg>
+  );
+}
+
 function SendIcon() {
   return (
     <svg
@@ -35,9 +55,17 @@ export function InputBar({
     <div className="fixed bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-[#0D0D14] via-[#0D0D14] to-transparent z-50">
       <div className="max-w-3xl mx-auto backdrop-blur-md bg-[#1a1a2e]/70 border border-white/10 rounded-full shadow-[0_4px_30px_rgba(0,0,0,0.3)] transition-all duration-300">
         <form onSubmit={handleSubmit} className="flex items-center gap-2 p-2">
+          <button
+            type="button"
+            className="p-3 text-gray-400 hover:text-[#7B2DBF] hover:bg-white/5 rounded-full transition-all duration-300 ml-1"
+            title="Voice Input"
+            onClick={() => alert("Voice transcription arriving in elite v2 release!")}
+          >
+            <MicIcon />
+          </button>
           <input
             type="text"
-            className="flex-1 bg-transparent border-none outline-none text-white placeholder-gray-400 text-base py-3 pl-5"
+            className="flex-1 bg-transparent border-none outline-none text-white placeholder-gray-400 text-base py-3 px-2"
             placeholder="Ask Agnaa about your project..."
             value={input}
             onChange={handleInputChange}

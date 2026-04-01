@@ -29,7 +29,13 @@ interface ChatMessage {
   content: string;
 }
 
+export async function GET() {
+  console.log('GET /api/chat hit');
+  return NextResponse.json({ status: 'active', model: 'gemini-1.5-flash' });
+}
+
 export async function POST(req: NextRequest) {
+  console.log('POST /api/chat hit');
   try {
     const { messages }: { messages: ChatMessage[] } = await req.json();
 
@@ -53,14 +59,9 @@ export async function POST(req: NextRequest) {
       parts: [{ text: m.content }],
     }));
 
-    const finalSuffix =
-      userCount === 5
-        ? '\n\n(This is your final reply. Tell the user consultation is needed for deeper design.'
-        : '';
-
     const body = {
       system_instruction: {
-        parts: [{ text: AGNAA_SYSTEM_PROMPT + finalSuffix }],
+        parts: [{ text: AGNAA_SYSTEM_PROMPT }],
       },
       contents,
       generationConfig: {
@@ -69,7 +70,7 @@ export async function POST(req: NextRequest) {
       },
     };
 
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
     const geminiRes = await fetch(geminiUrl, {
       method: 'POST',

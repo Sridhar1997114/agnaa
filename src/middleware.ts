@@ -14,14 +14,14 @@ export function middleware(request: NextRequest) {
   }
 
   // Handle redirects for broken/legacy links
-  if (pathname === '/construction-cost') {
-    return NextResponse.redirect(new URL('/calculators', request.url));
+  if (pathname === '/construction-cost' || pathname === '/calculators') {
+    return NextResponse.redirect(new URL('/calc', request.url));
   }
   
   if (pathname === '/cost' && !hostname.startsWith('cost.agnaa.in')) {
-    // Optionally redirect /cost to /calculators if calculators is the primary tool
+    // Optionally redirect /cost to /calc if calc is the primary tool
     // For now, let's just fix the 404s the user saw.
-    return NextResponse.redirect(new URL('/calculators', request.url));
+    return NextResponse.redirect(new URL('/calc', request.url));
   }
 
   if (pathname === '/construction') {

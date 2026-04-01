@@ -88,7 +88,7 @@ const plusJakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-pl
 
 // ─── MAIN PAGE ─────────────────────────────────────────────────────────────
 // ─── INTERNAL COMPONENT (RENDERED ON CLIENT) ───────────────────────────────
-function CalculatorsContent() {
+function CalcContent() {
   const [area,     setArea]     = useState<string>('2000');
   const [location, setLocation] = useState('Hyderabad');
   const [isCalculated, setIsCalculated] = useState(false);
@@ -330,7 +330,7 @@ function CalculatorsContent() {
     {/* MAIN UI */}
     <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-100 px-4 py-3.5 flex items-center justify-between shadow-sm">
       <AgnaaLogo className="h-7 w-auto" />
-      <span className="text-[10px] font-black uppercase tracking-widest text-[#7B2DBF]">Precision Calculator</span>
+      <span className="text-[10px] font-black uppercase tracking-widest text-[#7B2DBF]">Precision Calc</span>
     </div>
 
     <div className="px-4 pt-5 pb-3 max-w-2xl mx-auto">
@@ -495,7 +495,7 @@ function CalculatorsContent() {
 }
 
 // ─── SSR WRAPPER ────────────────────────────────────────────────────────────
-const CalculatorsPage = dynamic(() => Promise.resolve(CalculatorsContent), {
+const CalcPage = dynamic(() => Promise.resolve(CalcContent), {
   ssr: false,
   loading: () => (
     <div className="min-h-screen bg-white flex items-center justify-center">
@@ -509,4 +509,4 @@ const CalculatorsPage = dynamic(() => Promise.resolve(CalculatorsContent), {
   )
 });
 
-export default CalculatorsPage;
+export default CalcPage;

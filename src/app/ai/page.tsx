@@ -45,7 +45,7 @@ export default function AgnaaChat() {
       setIsLoading(true);
 
       try {
-        const res = await fetch("/api/ai/chat", {
+        const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -114,11 +114,21 @@ export default function AgnaaChat() {
           <path d="M3296.9,1108.1 L3895.5,1340.9 L3895.5,3397.1 L3696,3397.1 L3696,2200 L3496.5,2200 L3496.5,3397.1 L3296.9,3397.1 Z M3496.5,1399.8 L3696,1477.3 L3696,2000.4 L3496.5,2000.4 Z" />
         </svg>
         <span
-          className="text-transparent bg-clip-text bg-gradient-to-tr from-[#1C1C72] to-[#7B2DBF] text-2xl font-bold tracking-wide mt-1"
+          className="text-transparent bg-clip-text bg-gradient-to-tr from-[#1C1C72] to-[#7B2DBF] text-2xl font-bold tracking-wide mt-1 flex-1"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
-          AI
+          AI Assistant
         </span>
+        <button
+          onClick={() => {
+            if (confirm("Reset conversation?")) {
+              setMessages([]);
+            }
+          }}
+          className="px-4 py-2 rounded-full border border-white/10 text-xs font-bold text-gray-400 hover:text-white hover:border-white/30 transition-all uppercase tracking-widest"
+        >
+          New Session
+        </button>
       </header>
 
       {/* Main Chat Area */}
@@ -138,29 +148,55 @@ export default function AgnaaChat() {
               
               <div className="relative w-full max-w-4xl aspect-video rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(123,45,191,0.2)] border border-white/10 group cursor-pointer">
                 {/* Simulated Video Player */}
-                <div className="absolute inset-0 bg-[#161622] flex items-center justify-center">
-                  <video 
+                <div className="absolute inset-0 bg-[#1a1a2e] flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#1C1C72]/20 to-[#7B2DBF]/20" />
+                  <video
                     autoPlay 
                     loop 
                     muted 
                     playsInline
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
-                    src="https://cdn.pixabay.com/video/2023/11/09/188463-882956740_large.mp4"
+                    className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700 pointer-events-none"
+                    src="https://cdn.coverr.co/videos/preview/720/coverr-architect-working-on-a-sketch-8531.mp4"
+                    onError={(e) => {
+                      // Fallback if video fails to load due to ORB/CORS
+                      (e.target as HTMLVideoElement).parentElement!.style.background = 'radial-gradient(circle at center, #1C1C72 0%, #0D0D14 100%)';
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D14] via-transparent to-transparent opacity-80" />
-                  
+                </div>  
                   {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-[0_0_30px_rgba(123,45,191,0.4)] group-hover:scale-110 transition-transform duration-500">
-                      <svg className="w-8 h-8 text-white ml-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
+                {/* Play Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-[0_0_30px_rgba(123,45,191,0.4)] group-hover:scale-110 transition-transform duration-500">
+                    <svg className="w-8 h-8 text-white ml-2" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-12 flex items-center gap-4 text-sm text-gray-500 font-medium uppercase tracking-widest">
+              <div className="mt-12 flex flex-wrap justify-center gap-3">
+                {[
+                  "Design a G+5 apartment plan",
+                  "Estimate construction cost for 2000sqft",
+                  "Vikarabad agroforestry ROI",
+                  "Architectural consultation for villa",
+                  "G+5 RERA setback rules in Hyderabad"
+                ].map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => {
+                      setInput(p);
+                      // Trigger submit if you want, or just set input
+                    }}
+                    className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300 hover:bg-[#7B2DBF]/20 hover:text-white hover:border-[#7B2DBF]/50 transition-all duration-300 backdrop-blur-sm"
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-12 flex items-center gap-4 text-xs text-gray-500 font-medium uppercase tracking-widest opacity-60">
                 <span>Layout Generation</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#7B2DBF]"></span>
                 <span>Cost Estimation</span>
