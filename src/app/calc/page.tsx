@@ -103,7 +103,7 @@ function CalcContent() {
   useEffect(() => {
     setIsClient(true);
     setToday(new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }));
-    document.title = "AGNAA DESIGN STUDIO | Precision Calculator";
+    document.title = "AGNAA DESIGN STUDIO | Agnaa Calc";
   }, []);
 
   const numArea    = parseFloat(area) || 0;

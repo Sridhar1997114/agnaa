@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, Calculator } from 'lucide-react';
+import { Menu, X, Phone, Calculator, Sparkles } from 'lucide-react';
 import { AgnaaLogo } from './AgnaaLogo';
 import { Button } from './Button';
 
@@ -58,6 +58,14 @@ export const Header = () => {
         
         <div className="hidden lg:flex items-center gap-6">
           <Link 
+            href="/agnaa-intelligence" 
+            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent relative group/ai ${pathname === '/agnaa-intelligence' ? 'bg-[#7B2DBF] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#1C1C72]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
+            title="Agnaa Intelligence AI"
+          >
+            <Sparkles size={20} strokeWidth={2} className="group-hover/ai:animate-pulse" />
+            <span className="absolute -top-1 -right-2 bg-[#7B2DBF] text-white text-[8px] font-black px-1.5 py-0.5 rounded-full shadow-lg border border-white">NEW</span>
+          </Link>
+          <Link 
             href="/calc" 
             className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent ${pathname === '/calc' ? 'bg-[#1C1C72] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#7B2DBF]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
             title="Agnaa Calc"
@@ -94,6 +102,12 @@ export const Header = () => {
             className={`text-left text-lg py-3 border-b border-gray-100 font-bold flex items-center gap-3 ${pathname === '/calc' ? 'text-[#7B2DBF]' : 'text-gray-500'}`}
           >
             <Calculator size={20} /> Agnaa Calc
+          </Link>
+          <Link 
+            href="/agnaa-intelligence"
+            className={`text-left text-lg py-3 border-b border-gray-100 font-bold flex items-center gap-3 ${pathname === '/agnaa-intelligence' ? 'text-[#7B2DBF]' : 'text-gray-500'}`}
+          >
+            <Sparkles size={20} /> Agnaa AI <span className="bg-[#7B2DBF] text-white text-[10px] px-2 py-0.5 rounded-full">NEW</span>
           </Link>
           <div className="pt-6 flex flex-col gap-4">
             <a href="https://wa.me/918826214348" className="flex items-center justify-center gap-2 text-lg font-bold bg-[#F5F5F7] py-4 rounded-2xl text-[#1C1C72] border border-gray-200 hover:border-[#7B2DBF]/50 transition-all">

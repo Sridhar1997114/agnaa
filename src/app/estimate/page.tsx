@@ -62,7 +62,7 @@ declare global {
 
 function EstimateContent() {
   const searchParams = useSearchParams();
-  const initialSqft = searchParams.get('sqft') || '2000';
+  const initialSqft = searchParams?.get('sqft') || '2000';
   const [area, setArea] = useState<string>(initialSqft);
   const [isGenerating, setIsGenerating] = useState(false);
 
