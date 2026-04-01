@@ -119,18 +119,8 @@ function EstimateContent() {
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       
-      const worker = window.html2pdf().set(opt).from(el);
-      const pdfBlob = await worker.output('blob');
-      const blobWithMime = new Blob([pdfBlob], { type: 'application/pdf' });
-      
-      const url = window.URL.createObjectURL(blobWithMime);
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', fileName);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      // Use html2pdf's native save() which correctly sets the filename
+      await window.html2pdf().set(opt).from(el).save();
     } catch(err) {
       console.error('PDF Generation Error:', err);
     }
