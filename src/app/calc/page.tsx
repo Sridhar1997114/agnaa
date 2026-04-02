@@ -2,63 +2,79 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-
+import { motion, AnimatePresence } from 'framer-motion';
 import { TerminalSearch } from '@/components/layout/TerminalSearch';
+import { 
+  Map, Ruler, Layers, Building, Maximize, Expand, AlignLeft, 
+  Settings, Bug, Box, Grid, Columns,
+  Layout, Square, Droplet, Frame, Scan,
+  Paintbrush, Compass, PenTool, Home, 
+  Zap, RefreshCcw, Database, Calculator, Search, ChevronRight
+} from 'lucide-react';
 
-// Categorized structure mapping to the 29 existing tools
 const CATEGORIES = [
   {
     title: 'Architecture & Spatial Planning',
+    color: 'from-[#7B2DBF]/10 to-[#1C1C72]/10',
+    iconColor: 'text-[#1C1C72]',
     items: [
-      { id: 'plot-area', name: 'Plot Area Module', desc: 'Compute bounds in SqFt, SqYards, Acres & Guntas.', href: '/calc/plot-area' },
-      { id: 'setback-envelope', name: 'Setback Envelope', desc: 'Extrapolate buildable rectangle after offset subtractions.', href: '/calc/setback-envelope' },
-      { id: 'g-n-floor-estimator', name: 'G+N Floor Estimator', desc: 'Distribute permissible built-up area across per-floor levels.', href: '/calc/gn-floor-estimator' },
-      { id: 'fsi', name: 'FAR / FSI Computed', desc: 'Compute Floor Area Ratio and maximum allowable density.', href: '/calc/fsi' },
-      { id: 'built-up-efficiency', name: 'Volumetric Efficiency', desc: 'Calculate percent efficiency of carpet vs. built-up area.', href: '/calc/built-up-efficiency' },
-      { id: 'built-up', name: 'Legacy Area Translate', desc: 'Estimate simple carpet to super built-up scaling.', href: '/calc/built-up' },
-      { id: 'staircase', name: 'Stairway Ergonomics', desc: 'Architectural planning for algorithmic tread/riser ratios.', href: '/calc/staircase' },
+      { id: 'plot-area', name: 'Plot Area Module', desc: 'Compute bounds in SqFt, SqYards, Acres & Guntas.', href: '/calc/plot-area', icon: Map },
+      { id: 'setback-envelope', name: 'Setback Envelope', desc: 'Extrapolate buildable rectangle after offset subtractions.', href: '/calc/setback-envelope', icon: Ruler },
+      { id: 'g-n-floor-estimator', name: 'G+N Floor Estimator', desc: 'Distribute permissible built-up area across per-floor levels.', href: '/calc/gn-floor-estimator', icon: Layers },
+      { id: 'fsi', name: 'FAR / FSI Computed', desc: 'Compute Floor Area Ratio and maximum allowable density.', href: '/calc/fsi', icon: Building },
+      { id: 'built-up-efficiency', name: 'Volumetric Efficiency', desc: 'Calculate percent efficiency of carpet vs. built-up area.', href: '/calc/built-up-efficiency', icon: Maximize },
+      { id: 'built-up', name: 'Legacy Area Translate', desc: 'Estimate simple carpet to super built-up scaling.', href: '/calc/built-up', icon: Expand },
+      { id: 'staircase', name: 'Stairway Ergonomics', desc: 'Architectural planning for algorithmic tread/riser ratios.', href: '/calc/staircase', icon: AlignLeft },
     ]
   },
   {
     title: 'Core Structural & Earthwork',
+    color: 'from-[#7B2DBF]/10 to-[#1C1C72]/10',
+    iconColor: 'text-[#1C1C72]',
     items: [
-      { id: 'excavation-earthwork', name: 'Trench / Excavation', desc: 'Earthwork volume factoring spatial soil bulking expansion.', href: '/calc/excavation-earthwork' },
-      { id: 'anti-termite', name: 'Anti-Termite Treatment', desc: 'Chemical emulsion calculation for sub-grade foundation zones.', href: '/calc/anti-termite' },
-      { id: 'pcc-concrete', name: 'PCC Bed Configuration', desc: 'Volumetric concrete and aggregate breakdown for base.', href: '/calc/pcc-concrete' },
-      { id: 'foundation-footing', name: 'Footing Matrix Array', desc: 'Concrete mass requirements for isolated/combined footings.', href: '/calc/foundation-footing' },
-      { id: 'concrete-shapes', name: 'Advanced Volume Engine', desc: 'Geometric volume formulas for cylinders, cones, and trenches.', href: '/calc/concrete-shapes' },
-      { id: 'steel-rebar', name: 'Reinforcement Steel', desc: 'Compute metric tonnage for column, slab, and beam grids.', href: '/calc/steel-rebar' },
-      { id: 'rcc', name: 'RCC Slab Casting', desc: 'Volume splits for cement, sand, and coarse aggregates.', href: '/calc/rcc' },
+      { id: 'excavation-earthwork', name: 'Trench / Excavation', desc: 'Earthwork volume factoring spatial soil bulking expansion.', href: '/calc/excavation-earthwork', icon: Settings },
+      { id: 'anti-termite', name: 'Anti-Termite Treatment', desc: 'Chemical emulsion calculation for sub-grade foundation zones.', href: '/calc/anti-termite', icon: Bug },
+      { id: 'pcc-concrete', name: 'PCC Bed Configuration', desc: 'Volumetric concrete and aggregate breakdown for base.', href: '/calc/pcc-concrete', icon: Box },
+      { id: 'foundation-footing', name: 'Footing Matrix Array', desc: 'Concrete mass requirements for isolated/combined footings.', href: '/calc/foundation-footing', icon: Grid },
+      { id: 'concrete-shapes', name: 'Advanced Volume Engine', desc: 'Geometric volume formulas for cylinders, cones, and trenches.', href: '/calc/concrete-shapes', icon: Box },
+      { id: 'steel-rebar', name: 'Reinforcement Steel', desc: 'Compute metric tonnage for column, slab, and beam grids.', href: '/calc/steel-rebar', icon: Columns },
+      { id: 'rcc', name: 'RCC Slab Casting', desc: 'Volume splits for cement, sand, and coarse aggregates.', href: '/calc/rcc', icon: Layers },
     ]
   },
   {
     title: 'Masonry & Enabling Works',
+    color: 'from-[#7B2DBF]/10 to-[#1C1C72]/10',
+    iconColor: 'text-[#1C1C72]',
     items: [
-      { id: 'brick', name: 'Brickwork Massing', desc: 'Unit block counts and mortar batching for partition walls.', href: '/calc/brick' },
-      { id: 'aac-blocks', name: 'AAC Block Array', desc: 'Lightweight aerated core elements and thin-bed joining mortar.', href: '/calc/aac-blocks' },
-      { id: 'compound-wall', name: 'Boundary Extension', desc: 'Estimate foundations and masonry for perimeter protection.', href: '/calc/compound-wall' },
-      { id: 'plaster', name: 'Wall Plaster Gauge', desc: 'Render material counts for uniform internal/external surfacing.', href: '/calc/plaster' },
-      { id: 'roofing', name: 'Cladding & Roofing', desc: 'Sheet counts factoring slope overlap and overhang metrics.', href: '/calc/roofing' },
-      { id: 'shuttering', name: 'Shuttering Formwork', desc: 'Calculate contact plywood area required for concrete containment.', href: '/calc/shuttering' },
-      { id: 'scaffolding', name: 'Scaffolding Matrix', desc: 'Required tubular scaffolding area and grid setup volumes.', href: '/calc/scaffolding' },
+      { id: 'brick', name: 'Brickwork Massing', desc: 'Unit block counts and mortar batching for partition walls.', href: '/calc/brick', icon: Grid },
+      { id: 'aac-blocks', name: 'AAC Block Array', desc: 'Lightweight aerated core elements and thin-bed joining mortar.', href: '/calc/aac-blocks', icon: Grid },
+      { id: 'compound-wall', name: 'Boundary Extension', desc: 'Estimate foundations and masonry for perimeter protection.', href: '/calc/compound-wall', icon: Square },
+      { id: 'plaster', name: 'Wall Plaster Gauge', desc: 'Render material counts for uniform internal/external surfacing.', href: '/calc/plaster', icon: Droplet },
+      { id: 'roofing', name: 'Cladding & Roofing', desc: 'Sheet counts factoring slope overlap and overhang metrics.', href: '/calc/roofing', icon: Layout },
+      { id: 'shuttering', name: 'Shuttering Formwork', desc: 'Calculate contact plywood area required for concrete containment.', href: '/calc/shuttering', icon: Frame },
+      { id: 'scaffolding', name: 'Scaffolding Matrix', desc: 'Required tubular scaffolding area and grid setup volumes.', href: '/calc/scaffolding', icon: Scan },
     ]
   },
   {
     title: 'Finishes & Interiors',
+    color: 'from-[#7B2DBF]/10 to-[#1C1C72]/10',
+    iconColor: 'text-[#1C1C72]',
     items: [
-      { id: 'paint', name: 'Paint Surface Yield', desc: 'Estimate gallons correcting for negative wall openings.', href: '/calc/paint' },
-      { id: 'advanced-flooring', name: 'Advanced Tile Topology', desc: 'Stone/tile layouts factoring complex edge cutoff wastage.', href: '/calc/advanced-flooring' },
-      { id: 'tiles', name: 'Simple Floor Grid', desc: 'Orthogonal raw grid array for standard square coverage.', href: '/calc/tiles' },
-      { id: 'interior-cost', name: 'Interiors Fit-Out Matrix', desc: 'Logistical budget scaling for premium spatial finishes.', href: '/calc/interior-cost' },
+      { id: 'paint', name: 'Paint Surface Yield', desc: 'Estimate gallons correcting for negative wall openings.', href: '/calc/paint', icon: Paintbrush },
+      { id: 'advanced-flooring', name: 'Advanced Tile Topology', desc: 'Stone/tile layouts factoring complex edge cutoff wastage.', href: '/calc/advanced-flooring', icon: Compass },
+      { id: 'tiles', name: 'Simple Floor Grid', desc: 'Orthogonal raw grid array for standard square coverage.', href: '/calc/tiles', icon: PenTool },
+      { id: 'interior-cost', name: 'Interiors Fit-Out Matrix', desc: 'Logistical budget scaling for premium spatial finishes.', href: '/calc/interior-cost', icon: Home },
     ]
   },
   {
     title: 'Utilities & Macro Financials',
+    color: 'from-[#7B2DBF]/10 to-[#1C1C72]/10',
+    iconColor: 'text-[#1C1C72]',
     items: [
-      { id: 'electrical', name: 'Electrical Hub Loading', desc: 'Wattage threshold and primary lighting/power node arrays.', href: '/calc/electrical' },
-      { id: 'septic-tank', name: 'Septic Sludge Digester', desc: 'Sanitary volumetric scaling for residential liquid waste.', href: '/calc/septic-tank' },
-      { id: 'tank', name: 'Liquid Sump Array', desc: 'Total maximum storage load capacity for underground reservoirs.', href: '/calc/tank' },
-      { id: 'cost', name: 'Holistic Macro Costing', desc: 'Phase-wise financial distribution of base-build lifecycle.', href: '/estimate' },
+      { id: 'electrical', name: 'Electrical Hub Loading', desc: 'Wattage threshold and primary lighting/power node arrays.', href: '/calc/electrical', icon: Zap },
+      { id: 'septic-tank', name: 'Septic Sludge Digester', desc: 'Sanitary volumetric scaling for residential liquid waste.', href: '/calc/septic-tank', icon: RefreshCcw },
+      { id: 'tank', name: 'Liquid Sump Array', desc: 'Total maximum storage load capacity for underground reservoirs.', href: '/calc/tank', icon: Database },
+      { id: 'cost', name: 'Holistic Macro Costing', desc: 'Phase-wise financial distribution of base-build lifecycle.', href: '/estimate', icon: Calculator },
     ]
   }
 ];
@@ -66,75 +82,79 @@ const CATEGORIES = [
 export default function CalculatorsHub() {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // SVG Abstract Blueprint Hover Component
-  const HoverBlueprint = () => (
-    <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] pointer-events-none transition-opacity duration-300 overflow-hidden draw-svg">
-      <svg className="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="none">
-        <path d="M-10,50 L100,50 L150,150 L300,100 L450,150 M50,-10 L50,210 M250,-10 L250,210 M-10,25 L450,25 M-10,175 L450,175" fill="none" stroke="#1C1C72" strokeWidth="1.5" />
-        <circle cx="150" cy="150" r="10" fill="none" stroke="#1C1C72" strokeWidth="1.5" />
-        <circle cx="300" cy="100" r="15" fill="none" stroke="#1C1C72" strokeWidth="1.5" />
-        <rect x="80" y="30" width="40" height="40" fill="none" stroke="#1C1C72" strokeWidth="1.5" transform="rotate(25 100 50)" />
-      </svg>
-    </div>
-  );
-
   return (
-    <div className="min-h-screen bg-[#FFF] text-[#0F172A] font-inter selection:bg-[#7B2DBF] selection:text-white pb-32">
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes drawBlueprint {
-          0% { stroke-dashoffset: 350; }
-          100% { stroke-dashoffset: 0; }
-        }
-        .draw-svg path, .draw-svg circle, .draw-svg rect {
-          animation: drawBlueprint 20s linear infinite;
-          stroke-dasharray: 4 8;
-        }
-      `}} />
-
-      {/* TERMINAL HEADER */}
-      <div className="border-b border-[#E2E8F0] pt-24 pb-16 px-6 lg:px-12 bg-[#F8FAFC] relative overflow-hidden group">
-        <div className="absolute top-0 right-0 p-8 opacity-5">
-           <svg width="400" height="400" viewBox="0 0 24 24" fill="none" stroke="#1C1C72" strokeWidth="0.5"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+    <div className="min-h-screen bg-[#FDFDFD] text-[#0F172A] font-inter selection:bg-[#7B2DBF] selection:text-white pb-32">
+      
+      {/* ELEGANT HEADER */}
+      <div className="relative overflow-hidden bg-white border-b border-gray-100/60 pt-28 pb-20 px-6 lg:px-12">
+        {/* Soft Ambient Gradients */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-full overflow-hidden pointer-events-none opacity-40">
+          <div className="absolute -top-[40%] -left-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-r from-purple-400/20 to-indigo-400/20 blur-[100px]" />
+          <div className="absolute -top-[20%] -right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-r from-pink-400/20 to-rose-400/20 blur-[100px]" />
         </div>
 
         <div className="max-w-[1400px] mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
-            <div>
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-2 h-2 bg-[#7B2DBF] animate-pulse"></div>
-                <div className="text-[10px] font-black tracking-[0.4em] uppercase text-gray-500">Agnaa Precision Engine // Live System</div>
-              </div>
-              <h1 className="text-4xl md:text-7xl font-black text-[#1C1C72] tracking-tighter leading-none mb-4">
-                CALCULATION<br/>MATRIX<span className="text-[#7B2DBF]">.</span>
-              </h1>
-              <p className="max-w-xl text-gray-500 text-sm md:text-base leading-relaxed font-medium">
-                High-performance engineering tools for architectural validation, material estimation, and structural sanity checks.
-              </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16">
+            <div className="max-w-2xl">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#1C1C72]/5 border border-[#1C1C72]/10 text-[#1C1C72] text-xs font-semibold tracking-wide mb-6"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#7B2DBF] animate-pulse" />
+                AGNAA PRECISION ENGINE
+              </motion.div>
+              <motion.h1 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-6"
+              >
+                Calculation Hub
+              </motion.h1>
+              <motion.p 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-lg md:text-xl text-gray-500 leading-relaxed font-light"
+              >
+                A suite of elegant, high-performance tools engineered for architectural validation, precise material estimation, and structural sanity checks.
+              </motion.p>
             </div>
             
-            <div className="flex flex-col items-end gap-4">
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex-shrink-0"
+            >
                <TerminalSearch />
-               <div className="text-[9px] font-black uppercase tracking-widest text-gray-400">Press ⌘K to jump anywhere</div>
-            </div>
+            </motion.div>
           </div>
           
-          <div className="relative group max-w-4xl">
-            <span className="absolute left-0 top-[12px] md:top-[16px] text-[#1C1C72] text-3xl md:text-5xl font-light opacity-50">&gt;</span>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4 }}
+            className="group relative max-w-2xl"
+          >
+            <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+              <Search className="w-6 h-6 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+            </div>
             <input 
               type="text" 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Filter specific operational modules..." 
-              className="w-full bg-transparent border-none outline-none text-2xl md:text-5xl font-black text-[#1C1C72] placeholder:text-gray-200 pl-10 md:pl-16 py-2"
+              placeholder="Search estimators and modules..." 
+              className="w-full bg-white/80 backdrop-blur-xl border border-gray-200 rounded-3xl outline-none text-xl md:text-2xl font-medium text-gray-800 placeholder:text-gray-400 pl-16 pr-8 py-5 shadow-sm transform transition-all duration-300 focus:shadow-xl focus:border-[#7B2DBF]/30 focus:ring-4 focus:ring-[#7B2DBF]/10"
             />
-            <div className={`absolute bottom-0 left-0 h-[2px] bg-[#1C1C72] transition-all duration-700 ease-out ${searchQuery ? 'w-full' : 'w-0 group-hover:w-full'}`}></div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* DRAFTING MAT GRID */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mt-16">
-        <div className="border-t border-l border-[#E2E8F0]">
+      {/* CALCULATORS GRID */}
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mt-20">
+        <div className="space-y-24">
           {CATEGORIES.map((cat, catIdx) => {
             const filteredItems = cat.items.filter(item => 
               item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -144,75 +164,79 @@ export default function CalculatorsHub() {
             if (filteredItems.length === 0) return null;
 
             return (
-              <div key={cat.title} className="mb-0">
-                {/* DRAFTING TITLE BLOCK */}
-                <div className="grid grid-cols-1 md:grid-cols-[1fr,auto] border-b border-r border-[#E2E8F0] bg-[#F8FAFC]">
-                  <div className="p-6 md:p-8 flex items-end">
-                    <h2 className="text-xs font-black tracking-[0.2em] uppercase text-[#1C1C72]">{cat.title}</h2>
+              <motion.div 
+                key={cat.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5 }}
+              >
+                {/* Category Header */}
+                <div className="flex items-center gap-4 mb-10">
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${cat.color} backdrop-blur-sm shadow-sm border border-white/50`}>
+                     {/* Category Icon */}
+                     {catIdx === 0 && <Compass className={`w-6 h-6 ${cat.iconColor}`} />}
+                     {catIdx === 1 && <Layers className={`w-6 h-6 ${cat.iconColor}`} />}
+                     {catIdx === 2 && <Grid className={`w-6 h-6 ${cat.iconColor}`} />}
+                     {catIdx === 3 && <Paintbrush className={`w-6 h-6 ${cat.iconColor}`} />}
+                     {catIdx === 4 && <Zap className={`w-6 h-6 ${cat.iconColor}`} />}
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 md:flex border-t md:border-t-0 md:border-l border-[#E2E8F0]">
-                    <div className="p-4 md:p-8 border-b sm:border-b-0 sm:border-r border-[#E2E8F0]">
-                      <div className="text-[8px] font-bold tracking-[0.2em] text-gray-400 uppercase mb-1">Status</div>
-                      <div className="text-[10px] font-black text-[#22C55E]">CALIBRATED</div>
-                    </div>
-                    <div className="p-4 md:p-8 border-b sm:border-b-0 sm:border-r border-[#E2E8F0]">
-                      <div className="text-[8px] font-bold tracking-[0.2em] text-gray-400 uppercase mb-1">Format</div>
-                      <div className="text-[10px] font-black text-[#1C1C72]">A4 EXPORT</div>
-                    </div>
-                    <div className="p-4 md:p-8">
-                      <div className="text-[8px] font-bold tracking-[0.2em] text-gray-400 uppercase mb-1">Author</div>
-                      <div className="text-[10px] font-black text-[#1C1C72]">AGNAA ENG.</div>
-                    </div>
+                  <div>
+                    <h2 className="text-2xl font-bold tracking-tight text-gray-900">{cat.title}</h2>
+                    <p className="text-sm font-medium text-gray-400 mt-1">{filteredItems.length} modules available</p>
                   </div>
                 </div>
 
-                {/* ITEMS GRID */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {/* Items Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {filteredItems.map((item, index) => (
                     <Link 
                       key={item.id} 
                       href={item.href}
-                      className="group block relative border-b border-r border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors duration-500 p-6 md:p-8 min-h-[240px] flex flex-col justify-between overflow-hidden"
+                      className="group relative bg-white border border-gray-100 rounded-3xl p-8 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:border-[#1C1C72]/20 transition-all duration-500 overflow-hidden flex flex-col h-[280px]"
                     >
-                      <HoverBlueprint />
+                      {/* Background Gradient Hover Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#7B2DBF]/0 to-[#7B2DBF]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       
-                      <div className="relative z-10 w-full">
-                        <div className="flex justify-between items-start mb-10 w-full border-b border-gray-100 pb-4">
-                          <span className="text-[11px] font-black text-gray-400 font-mono tracking-widest leading-none">
-                            {String(catIdx + 1).padStart(2,'0')}.{String(index + 1).padStart(2,'0')}
-                          </span>
-                          <span className="text-gray-300 group-hover:text-[#1C1C72] transition-colors duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-                          </span>
+                      {/* Content */}
+                      <div className="relative z-10 flex-1 flex flex-col">
+                        <div className="flex items-start justify-between mb-8">
+                          <div className={`w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:scale-110 group-hover:bg-[#1C1C72]/5 group-hover:border-[#1C1C72]/20 group-hover:shadow-lg group-hover:shadow-[#1C1C72]/10 transition-all duration-500 ease-out`}>
+                            <item.icon className={`w-7 h-7 text-gray-400 group-hover:${cat.iconColor} transition-colors duration-500`} strokeWidth={1.5} />
+                          </div>
+                          
+                          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 shadow-sm border border-gray-100">
+                             <ChevronRight className="w-4 h-4 text-[#7B2DBF]" />
+                          </div>
                         </div>
                         
-                        <h3 className="text-lg md:text-xl font-extrabold text-[#1C1C72] mb-3 leading-[1.15] tracking-tight group-hover:underline decoration-2 underline-offset-4 decoration-[#7B2DBF]/30">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-[#1C1C72] transition-colors">
                           {item.name}
                         </h3>
-                      </div>
-                      
-                      <div className="relative z-10 mt-auto">
-                        <p className="text-xs text-gray-500 leading-relaxed font-medium">
+                        
+                        <p className="text-sm text-gray-500 leading-relaxed font-normal mt-auto">
                           {item.desc}
                         </p>
                       </div>
-                      
-                      {/* Technical Crosshairs */}
-                      <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-gray-300 group-hover:border-[#1C1C72] transition-colors"></div>
-                      <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-gray-300 group-hover:border-[#1C1C72] transition-colors"></div>
                     </Link>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
           
           {/* 404 Empty State */}
           {CATEGORIES.every(cat => cat.items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()) || item.desc.toLowerCase().includes(searchQuery.toLowerCase())).length === 0) && (
-            <div className="border-b border-r border-[#E2E8F0] p-24 text-center bg-gray-50">
-              <div className="text-xs font-black tracking-widest uppercase text-gray-400 mb-4 animate-pulse">ERR 404 //</div>
-              <div className="text-2xl font-medium text-[#1C1C72]">No exact matching modules found in system registry.</div>
-            </div>
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+              className="py-32 text-center flex flex-col items-center justify-center"
+            >
+              <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-6">
+                 <Search className="w-10 h-10 text-gray-300" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">No modules found</h3>
+              <p className="text-gray-500 max-w-md">We couldn't find anything matching "{searchQuery}". Try adjusting your search terms or browsing the categories.</p>
+            </motion.div>
           )}
         </div>
       </div>
