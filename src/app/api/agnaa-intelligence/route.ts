@@ -141,8 +141,9 @@ export async function POST(req: NextRequest) {
     };
 
     const modelsToTry = [
-      'gemini-2.0-flash',
-      'gemini-pro-latest'
+      'gemini-1.5-flash',
+      'gemini-1.5-pro',
+      'gemini-2.0-flash-exp'
     ];
 
     let lastErrorText = '';
@@ -193,9 +194,11 @@ export async function POST(req: NextRequest) {
         { label: '📞 Consult with Agnaa', link: '/contact' }
       ]
     });
-  } catch (error: unknown) {
-    console.error('Agnaa Intelligence error:', error);
-    const msg = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json({ error: msg }, { status: 500 });
+  } catch (error: any) {
+    console.error('Agnaa Intelligence critical error:', error);
+    return NextResponse.json({ 
+      error: error.message || 'Unknown error',
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined 
+    }, { status: 500 });
   }
 }

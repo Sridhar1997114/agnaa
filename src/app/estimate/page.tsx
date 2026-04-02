@@ -265,7 +265,7 @@ function EstimateContent() {
         <div id="agnaa-pdf-view" style={{ width:'794px', height:'1123px', background:'#fff', position:'relative', fontFamily:'Inter,sans-serif', color:'#0F172A', display:'flex', flexDirection:'column', overflow:'hidden' }}>
 
           {/* Watermark */}
-          <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:420, opacity:0.03, zIndex:0, pointerEvents:'none' }}>
+          <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:420, opacity:0.05, zIndex:0, pointerEvents:'none' }}>
             <AgnaaLogo fill="#1C1C72" />
           </div>
 
