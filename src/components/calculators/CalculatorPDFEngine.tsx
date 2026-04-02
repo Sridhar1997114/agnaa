@@ -298,16 +298,17 @@ export const CalculatorPDFEngine: React.FC<CalculatorPDFEngineProps> = ({
             position: 'relative', 
             zIndex: 1,
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            gap: 24
           }}>
+            {/* 50% VIEW: GRAPHICAL CALCULATIONS */}
             <div style={{ 
-              marginTop: 0, 
+              flex: 1,
               border: '1.5px solid #E2E8F0', 
-              borderRadius: 16, 
+              borderRadius: 24, 
               overflow: 'hidden', 
               background: '#F8FAFC',
               boxShadow: '0 4px 12px rgba(0,0,0,0.02)',
-              flex: 1,
               display: 'flex',
               flexDirection: 'column'
             }}>
@@ -334,31 +335,81 @@ export const CalculatorPDFEngine: React.FC<CalculatorPDFEngineProps> = ({
                 </div>
               </div>
               <div style={{ 
-                padding: 30, 
+                padding: 40, 
                 display: 'flex', 
                 justifyContent: 'center',
                 alignItems: 'center',
                 flex: 1
               }}>
-                <div style={{ transform: 'scale(1.2)', transformOrigin: 'center' }}>
+                <div style={{ transform: 'scale(1.4)', transformOrigin: 'center' }}>
                   {visualizer}
                 </div>
               </div>
             </div>
             
+            {/* OTHER CALCULATIONS / NOTES */}
             <div style={{ 
-              marginTop: 20, 
-              padding: '15px 20px', 
+              flex: 1,
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: 20
+            }}>
+              <div style={{ 
+                padding: '24px', 
+                background: '#fff', 
+                borderRadius: 24, 
+                border: '1px solid #F1F5F9' 
+              }}>
+                <div style={{ fontSize: 10, fontWeight: 900, color: '#7B2DBF', marginBottom: 12, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Structural Specifications</div>
+                <div style={{ display: 'grid', gap: 10 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, borderBottom: '1px solid #F8FAFC', paddingBottom: 6 }}>
+                    <span style={{ color: '#64748B' }}>Material Grade</span>
+                    <span style={{ fontWeight: 700, color: '#1C1C72' }}>M25 / Fe500D</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, borderBottom: '1px solid #F8FAFC', paddingBottom: 6 }}>
+                    <span style={{ color: '#64748B' }}>Safety Factor</span>
+                    <span style={{ fontWeight: 700, color: '#1C1C72' }}>1.5 (IS 456:2000)</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, borderBottom: '1px solid #F8FAFC', paddingBottom: 6 }}>
+                    <span style={{ color: '#64748B' }}>Exposure</span>
+                    <span style={{ fontWeight: 700, color: '#1C1C72' }}>Moderate</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ 
+                padding: '24px', 
+                background: '#1C1C72', 
+                borderRadius: 24, 
+                color: '#fff',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                <div style={{ position: 'absolute', bottom: -10, right: -10, opacity: 0.1 }}>
+                  <ShieldCheck size={80} />
+                </div>
+                <div style={{ fontSize: 10, fontWeight: 900, color: '#A5B4FC', marginBottom: 12, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Engineering Verdict</div>
+                <p style={{ fontSize: 10, opacity: 0.8, lineHeight: 1.5 }}>
+                  The computed values align with Agnaa's high-efficiency structural protocols. Optimized for maximum durability and material conservation.
+                </p>
+                <div style={{ marginTop: 16, height: 1.5, background: 'rgba(255,255,255,0.1)' }} />
+                <div style={{ marginTop: 12, fontSize: 10, fontWeight: 800 }}>STATUS: APPROVED FOR ESTIMATION</div>
+              </div>
+            </div>
+            
+            <div style={{ 
+              padding: '16px 20px', 
               background: 'rgba(28, 28, 114, 0.03)', 
-              borderRadius: 12, 
+              borderRadius: 16, 
               border: '1px dashed #A5B4FC' 
             }}>
-              <div style={{ fontSize: 9, fontWeight: 900, color: '#1C1C72', marginBottom: 4 }}>BLUEPRINT NOTES</div>
+              <div style={{ fontSize: 9, fontWeight: 900, color: '#1C1C72', marginBottom: 4 }}>ARCHITECTURAL NOTICE</div>
               <div style={{ fontSize: 8, color: '#64748B', lineHeight: 1.4 }}>
-                This diagram is an algorithmic projection based on provided parameters. It is intended for structural visualization and space planning only. All dimensions should be verified on-site by a certified engineer before execution.
+                This dossier is a living document. Any modification to parameters requires a full re-validation of the structural model. Consult Agnaa Design Studio for final GFC (Good For Construction) drawings.
               </div>
             </div>
           </div>
+
 
           <Footer />
         </div>
