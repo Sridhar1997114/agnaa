@@ -41,6 +41,12 @@ export default function InteriorCostCalculator() {
       pdfFileName={`AGNAA_Interior_Calc.pdf`}
       pdfTitle="Interior Fit-Out\nEstimate"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'PLANNING GUIDELINE', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="INTERIOR"
+      visualizerData={{ 
+        area: parseFloat(area) || 0,
+        tier: tier,
+        totalCost: results?.totalCost
+      }}
       inputsContent={
         <div className="grid grid-cols-2 gap-4">
           <div>

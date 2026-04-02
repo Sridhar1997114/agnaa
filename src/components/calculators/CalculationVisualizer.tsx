@@ -3,7 +3,7 @@
 import React from 'react';
 
 interface VisualizerProps {
-  type: 'PLOT' | 'BUILT_UP' | 'FSI' | 'RCC' | 'EXCAVATION' | 'FOOTING' | 'STAIRCASE' | 'WALL' | 'TANK' | 'ROOF' | 'FLOOR' | 'SHAPE' | 'PLASTER' | 'PAINT' | 'ANTI_TERMITE' | 'STEEL' | 'PCC' | 'SETBACK' | 'G_N_FLOOR' | 'SHUTTERING' | 'SCAFFOLDING';
+  type: 'PLOT' | 'BUILT_UP' | 'FSI' | 'RCC' | 'EXCAVATION' | 'FOOTING' | 'STAIRCASE' | 'WALL' | 'TANK' | 'ROOF' | 'FLOOR' | 'SHAPE' | 'PLASTER' | 'PAINT' | 'ANTI_TERMITE' | 'STEEL' | 'PCC' | 'SETBACK' | 'G_N_FLOOR' | 'SHUTTERING' | 'SCAFFOLDING' | 'ELECTRICAL' | 'INTERIOR';
   data: any;
   className?: string;
 }
@@ -102,12 +102,24 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
 
       {/* PLOT / BUILT-UP / FSI VISUALIZERS */}
 
-      {(type === 'PLOT' || type === 'BUILT_UP' || type === 'FSI') && (data.length || data.plotArea || data.carpetArea) && (
+      {(type === 'PLOT' || type === 'BUILT_UP' || type === 'FSI' || type === 'ELECTRICAL' || type === 'INTERIOR') && (data.length || data.plotArea || data.carpetArea || data.area) && (
         <BlueprintLayout 
-          length={parseFloat(data.length || data.plotArea || data.carpetArea || 0)} 
-          width={parseFloat(data.width || (data.plotArea ? Math.sqrt(data.plotArea) : (data.carpetArea ? Math.sqrt(data.carpetArea) : 0)))} 
-          label={type === 'BUILT_UP' ? 'Carpet Area' : type === 'FSI' ? 'Plot Boundary' : 'Property Layout'}
-          subLabel={type === 'FSI' ? `FSI: ${data.fsi || '0.0'}` : type === 'BUILT_UP' ? `S.Built-up: ${Math.round(data.superBuiltUpArea || 0)}` : undefined}
+          length={parseFloat(data.length || data.plotArea || data.carpetArea || data.area || 0)} 
+          width={parseFloat(data.width || (data.plotArea ? Math.sqrt(data.plotArea) : (data.carpetArea ? Math.sqrt(data.carpetArea) : (data.area ? Math.sqrt(data.area) : 0))))} 
+          label={
+            type === 'BUILT_UP' ? 'Carpet Area' : 
+            type === 'FSI' ? 'Plot Boundary' : 
+            type === 'ELECTRICAL' ? 'Electrical Layout' :
+            type === 'INTERIOR' ? 'Interior Blueprint' :
+            'Property Layout'
+          }
+          subLabel={
+            type === 'FSI' ? `FSI: ${data.fsi || '0.0'}` : 
+            type === 'BUILT_UP' ? `S.Built-up: ${Math.round(data.superBuiltUpArea || 0)}` : 
+            type === 'ELECTRICAL' ? `Points: ${data.totalPoints || 0}` :
+            type === 'INTERIOR' ? `Tier: ${data.tier?.toUpperCase()}` :
+            undefined
+          }
         />
       )}
 
@@ -195,9 +207,9 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
 
       {/* Fallback pattern if type not handled yet or data missing */}
       {(!data.length && !data.plotArea && !data.carpetArea && !data.l) && (
-        <div className="w-full aspect-video flex flex-col items-center justify-center bg-[#0F172A] border-2 border-[#1C1C72] rounded-2xl text-[#3B82F6] font-mono text-[10px]">
-          <div className="mb-2 italic uppercase tracking-widest">Awaiting System Input...</div>
-          <svg className="w-12 h-12 opacity-20 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+        <div className="w-full aspect-video flex flex-col items-center justify-center bg-[#FDFDFF] border border-gray-200 rounded-2xl text-[#1C1C72] font-mono text-[10px]">
+          <div className="mb-2 italic uppercase tracking-widest opacity-30">Awaiting System Input...</div>
+          <svg className="w-12 h-12 opacity-10 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
             <path d="M12 2v20M2 12h20" strokeLinecap="round" />
             <circle cx="12" cy="12" r="10" />
           </svg>

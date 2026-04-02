@@ -13,7 +13,19 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Check if the request is coming from the 'ai' subdomain
+  // 1. Strict Subdomain Enforcement for Agnaa Intelligence
+  if (pathname.startsWith('/agnaa-intelligence')) {
+    // If on main domain, redirect to the AI subdomain
+    if (!hostname.startsWith('ai.')) {
+      return NextResponse.redirect(new URL('https://ai.agnaa.in', request.url));
+    }
+    // If on the AI subdomain but using the internal path, redirect to root for a clean URL
+    if (pathname === '/agnaa-intelligence') {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+  }
+
+  // 2. Rewrite root of AI subdomain to internal page
   if (hostname.startsWith('ai.agnaa.in') || hostname.startsWith('ai.localhost')) {
     if (pathname === '/') {
       return NextResponse.rewrite(new URL('/agnaa-intelligence', request.url));

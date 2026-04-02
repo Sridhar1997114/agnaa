@@ -48,6 +48,13 @@ export default function PaverCalculator() {
       pdfFileName={`AGNAA_Paver_${fmt(results?.count || 0)}Nos.pdf`}
       pdfTitle={"Paver & Driveway\nCalculator"}
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'PLANNING GUIDELINE', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="FLOOR"
+      visualizerData={{ 
+        length: (parseFloat(length) || 10) * 3.281, 
+        width: (parseFloat(width) || 4) * 3.281,
+        pattern: 'GRID',
+        tileSize: (parseFloat(paverL) || 0.2) * 39.37 // Convert M to Inch for visualizer
+      }}
       inputsContent={
         <div className="grid grid-cols-2 gap-4">
           <div>

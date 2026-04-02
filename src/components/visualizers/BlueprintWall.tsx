@@ -86,8 +86,8 @@ export const BlueprintWall: React.FC<BlueprintWallProps> = ({ length, height, th
         <path d={`M ${p1.x + 10} ${p1.y - 5} L ${p1.x + 40} ${p1.y - 30}`} fill="none" stroke="#7B2DBF" strokeWidth="0.5" strokeDasharray="2,2" />
         <text x={p1.x + 45} y={p1.y - 35} fill="#7B2DBF" fontSize="7" fontWeight="bold">T: {thickness}" THICK</text>
 
-        {/* Human Context */}
-        <HumanScale x={p0.x - 60} y={p0.y} scale={0.7} />
+        {/* Human Context — Section/Elevation */}
+        <HumanScale x={p0.x - 60} y={p0.y} scale={0.7} variant="section" />
         
         {/* Scale indicator */}
         <g transform="translate(20, 230)" opacity="0.4">

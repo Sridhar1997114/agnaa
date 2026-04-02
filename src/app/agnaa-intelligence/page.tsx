@@ -90,12 +90,28 @@ export default function AgnaaIntelligencePage() {
           if (line.startsWith('## ')) return <div key={i} className={styles.msgHeading}>{line.slice(3)}</div>;
           if (line.startsWith('• ') || line.startsWith('- ')) return <div key={i} className={styles.msgBullet}>· {line.slice(2)}</div>;
           if (line === '') return <div key={i} style={{ height: '5px' }} />;
-          const parts = line.split(/\*\*(.+?)\*\*/g);
+          
+          // Improved parsing for bold AND links
+          const parts = line.split(/(\*\*.+?\*\*|\[.+?\]\(.+?\))/g);
+          
           return (
             <div key={i}>
-              {parts.map((p, j) =>
-                j % 2 === 1 ? <strong key={j} className={`${styles.msgBold} ${isUser ? styles.inUser : ''}`}>{p}</strong> : p
-              )}
+              {parts.map((p, j) => {
+                if (p.startsWith('**') && p.endsWith('**')) {
+                  return <strong key={j} className={`${styles.msgBold} ${isUser ? styles.inUser : ''}`}>{p.slice(2, -2)}</strong>;
+                }
+                if (p.startsWith('[') && p.includes('](')) {
+                  const match = p.match(/\[(.+?)\]\((.+?)\)/);
+                  if (match) {
+                    return (
+                      <a key={j} href={match[2]} target="_blank" rel="noopener noreferrer" className={styles.msgLink}>
+                        {match[1]}
+                      </a>
+                    );
+                  }
+                }
+                return p;
+              })}
             </div>
           );
         })}

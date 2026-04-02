@@ -45,6 +45,13 @@ export default function GreenRoofCalculator() {
       pdfFileName={`AGNAA_GreenRoof_${fmt(results?.weightKG || 0)}KG.pdf`}
       pdfTitle={"Green Roof\nLoad Estimator"}
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'PLANNING GUIDELINE', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="RCC"
+      visualizerData={{ 
+        length: Math.sqrt(parseFloat(area) || 100) * 3.281, 
+        width: Math.sqrt(parseFloat(area) || 100) * 3.281, 
+        thickness: (parseFloat(depth) || 0.15) * 39.37, 
+        preset: 'strong'
+      }}
       inputsContent={
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-2">

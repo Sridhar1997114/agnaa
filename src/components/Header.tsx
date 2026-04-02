@@ -24,15 +24,37 @@ export const Header = () => {
     setIsMenuOpen(false);
   }, [pathname]);
 
+  const getBaseURL = () => {
+    if (typeof window === 'undefined') return 'https://agnaa.in';
+    const host = window.location.host;
+    if (host.includes('localhost')) {
+      return `http://${host.replace(/^ai\./, '')}`;
+    }
+    return 'https://agnaa.in';
+  };
+
+  const baseURL = getBaseURL();
+
   const navLinks = [
-    { id: 'home', label: 'Home', href: '/' },
-    { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
-    { id: 'design-studio', label: 'Design Studio', href: '/design-studio' },
-    { id: 'constructions', label: 'Constructions', href: '/constructions' },
-    { id: 'foundation', label: 'Foundation', href: '/foundation' }
+    { id: 'home', label: 'Home', href: `${baseURL}/` },
+    { id: 'portfolio', label: 'Portfolio', href: `${baseURL}/portfolio` },
+    { id: 'design-studio', label: 'Design Studio', href: `${baseURL}/design-studio` },
+    { id: 'constructions', label: 'Constructions', href: `${baseURL}/constructions` },
+    { id: 'foundation', label: 'Foundation', href: `${baseURL}/foundation` }
   ];
 
-  const currentId = navLinks.find(link => link.href === pathname)?.id || '';
+  const getActiveLink = (links: typeof navLinks, currentPath: string) => {
+    return links.find(link => {
+      try {
+        const url = new URL(link.href);
+        return url.pathname === currentPath;
+      } catch (e) {
+        return link.href === currentPath;
+      }
+    })?.id || '';
+  };
+
+  const currentId = getActiveLink(navLinks, pathname || '/');
 
   return (
     <header className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-xl py-4 shadow-sm border-b border-gray-200' : 'bg-transparent py-6'}`}>

@@ -42,6 +42,11 @@ export default function ElectricalCalculator() {
       pdfFileName={`AGNAA_Electrical_Calc.pdf`}
       pdfTitle="Electrical Load\nCalculator"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'PLANNING GUIDELINE', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="ELECTRICAL"
+      visualizerData={{ 
+        area: results?.area, 
+        totalPoints: (results?.lightPoints || 0) + (results?.fanPoints || 0) + (results?.switchPoints || 0)
+      }}
       inputsContent={
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-2 md:col-span-1">

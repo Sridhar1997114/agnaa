@@ -373,6 +373,20 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
+.msgLink {
+  color: #7B2DBF;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.msgLink:hover {
+  color: #1C1C72;
+  text-decoration-thickness: 2px;
+}
+
 /* ─── Mobile Responsiveness ─── */
 @media (max-width: 640px) {
   .aiPage {

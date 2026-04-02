@@ -58,6 +58,14 @@ export default function TilesCalculator() {
       pdfFileName="AGNAA_Tiles_Report.pdf"
       pdfTitle="TILE ESTIMATION"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'MATERIAL ESTIMATION', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="FLOOR"
+      visualizerData={{ 
+        area: results?.a || parseFloat(area), 
+        length: Math.sqrt(results?.a || parseFloat(area) || 100) * 3.281, 
+        width: Math.sqrt(results?.a || parseFloat(area) || 100) * 3.281,
+        tileSize: results?.unit === 'mm' ? results?.l / 25.4 : results?.l, // roughly convert to inch for visualizer
+        pattern: 'GRID'
+      }}
       inputsContent={
         <div className="space-y-6">
           <div>

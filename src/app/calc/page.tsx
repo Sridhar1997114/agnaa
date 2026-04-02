@@ -1,132 +1,84 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TerminalSearch } from '@/components/layout/TerminalSearch';
 import { 
-  Map, Ruler, Layers, Building, Maximize, Expand, AlignLeft, 
-  Settings, Bug, Box, Grid, Columns,
-  Layout, Square, Droplet, Frame, Scan,
-  Paintbrush, Compass, PenTool, Home, 
-  Zap, RefreshCcw, Database, Calculator, Search, ChevronRight,
-  ArrowUpRight
+  Search, ChevronRight, ChevronLeft, ArrowUpRight, 
+  Layers, Settings, Layout, Grid, Box
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { calculators, CalculatorMeta } from '@/lib/calculators';
 
-const CATEGORIES = [
-  {
-    title: 'Architecture & Spatial Planning',
-    items: [
-      { id: 'plot-area', name: 'Plot Area Module', desc: 'Compute bounds in SqFt, SqYards, Acres & Guntas.', href: '/calc/plot-area', icon: Map },
-      { id: 'setback-envelope', name: 'Setback Envelope', desc: 'Extrapolate buildable rectangle after offset subtractions.', href: '/calc/setback-envelope', icon: Ruler },
-      { id: 'g-n-floor-estimator', name: 'G+N Floor Estimator', desc: 'Distribute permissible built-up area across per-floor levels.', href: '/calc/gn-floor-estimator', icon: Layers },
-      { id: 'fsi', name: 'FAR / FSI Computed', desc: 'Compute Floor Area Ratio and maximum allowable density.', href: '/calc/fsi', icon: Building },
-      { id: 'built-up-efficiency', name: 'Volumetric Efficiency', desc: 'Calculate percent efficiency of carpet vs. built-up area.', href: '/calc/built-up-efficiency', icon: Maximize },
-      { id: 'built-up', name: 'Legacy Area Translate', desc: 'Estimate simple carpet to super built-up scaling.', href: '/calc/built-up', icon: Expand },
-      { id: 'staircase', name: 'Stairway Ergonomics', desc: 'Architectural planning for algorithmic tread/riser ratios.', href: '/calc/staircase', icon: AlignLeft },
-    ]
-  },
-  {
-    title: 'Core Structural & Earthwork',
-    items: [
-      { id: 'excavation-earthwork', name: 'Trench / Excavation', desc: 'Earthwork volume factoring spatial soil bulking expansion.', href: '/calc/excavation-earthwork', icon: Settings },
-      { id: 'anti-termite', name: 'Anti-Termite Treatment', desc: 'Chemical emulsion calculation for sub-grade foundation zones.', href: '/calc/anti-termite', icon: Bug },
-      { id: 'pcc-concrete', name: 'PCC Bed Configuration', desc: 'Volumetric concrete and aggregate breakdown for base.', href: '/calc/pcc-concrete', icon: Box },
-      { id: 'foundation-footing', name: 'Footing Matrix Array', desc: 'Concrete mass requirements for isolated/combined footings.', href: '/calc/foundation-footing', icon: Grid },
-      { id: 'concrete-shapes', name: 'Advanced Volume Engine', desc: 'Geometric volume formulas for cylinders, cones, and trenches.', href: '/calc/concrete-shapes', icon: Box },
-      { id: 'steel-rebar', name: 'Reinforcement Steel', desc: 'Compute metric tonnage for column, slab, and beam grids.', href: '/calc/steel-rebar', icon: Columns },
-      { id: 'rcc', name: 'RCC Slab Casting', desc: 'Volume splits for cement, sand, and coarse aggregates.', href: '/calc/rcc', icon: Layers },
-    ]
-  },
-  {
-    title: 'Masonry & Enabling Works',
-    items: [
-      { id: 'brick', name: 'Brickwork Massing', desc: 'Unit block counts and mortar batching for partition walls.', href: '/calc/brick', icon: Grid },
-      { id: 'aac-blocks', name: 'AAC Block Array', desc: 'Lightweight aerated core elements and thin-bed joining mortar.', href: '/calc/aac-blocks', icon: Grid },
-      { id: 'compound-wall', name: 'Boundary Extension', desc: 'Estimate foundations and masonry for perimeter protection.', href: '/calc/compound-wall', icon: Square },
-      { id: 'plaster', name: 'Wall Plaster Gauge', desc: 'Render material counts for uniform internal/external surfacing.', href: '/calc/plaster', icon: Droplet },
-      { id: 'roofing', name: 'Cladding & Roofing', desc: 'Sheet counts factoring slope overlap and overhang metrics.', href: '/calc/roofing', icon: Layout },
-      { id: 'shuttering', name: 'Shuttering Formwork', desc: 'Calculate contact plywood area required for concrete containment.', href: '/calc/shuttering', icon: Frame },
-      { id: 'scaffolding', name: 'Scaffolding Matrix', desc: 'Required tubular scaffolding area and grid setup volumes.', href: '/calc/scaffolding', icon: Scan },
-    ]
-  },
-  {
-    title: 'Finishes & Interiors',
-    items: [
-      { id: 'paint', name: 'Paint Surface Yield', desc: 'Estimate gallons correcting for negative wall openings.', href: '/calc/paint', icon: Paintbrush },
-      { id: 'advanced-flooring', name: 'Advanced Tile Topology', desc: 'Stone/tile layouts factoring complex edge cutoff wastage.', href: '/calc/advanced-flooring', icon: Compass },
-      { id: 'tiles', name: 'Simple Floor Grid', desc: 'Orthogonal raw grid array for standard square coverage.', href: '/calc/tiles', icon: PenTool },
-      { id: 'interior-cost', name: 'Interiors Fit-Out Matrix', desc: 'Logistical budget scaling for premium spatial finishes.', href: '/calc/interior-cost', icon: Home },
-    ]
-  },
-  {
-    title: 'Utilities & Macro Financials',
-    items: [
-      { id: 'electrical', name: 'Electrical Hub Loading', desc: 'Wattage threshold and primary lighting/power node arrays.', href: '/calc/electrical', icon: Zap },
-      { id: 'septic-tank', name: 'Septic Sludge Digester', desc: 'Sanitary volumetric scaling for residential liquid waste.', href: '/calc/septic-tank', icon: RefreshCcw },
-      { id: 'tank', name: 'Liquid Sump Array', desc: 'Total maximum storage load capacity for underground reservoirs.', href: '/calc/tank', icon: Database },
-      { id: 'cost', name: 'Holistic Macro Costing', desc: 'Phase-wise financial distribution of base-build lifecycle.', href: '/estimate', icon: Calculator },
-    ]
-  }
-];
+const CATEGORY_MAPPING: Record<string, string> = {
+  'Structure': 'Core Structural & Earthwork',
+  'Interior': 'Finishes & Interiors',
+  'Site': 'Site & Landscape Planning',
+  'MEP': 'Utilities & MEP Systems',
+  'Financial': 'Financial & Area Analysis',
+  'Tools': 'Enabling Tools & Helpers'
+};
 
-const CalculatorCard = ({ item, index }: { item: any, index: number }) => {
+const CalculatorCard = ({ item, isCompact = false }: { item: CalculatorMeta, isCompact?: boolean }) => {
   const router = useRouter();
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsClicked(true);
-    // Timing synced with the expansion animation
     setTimeout(() => {
-      router.push(item.href);
+      router.push(item.path);
     }, 600);
   };
 
-  return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, scale: 0.95 },
-        visible: { opacity: 1, scale: 1 }
-      }}
-      transition={{ delay: index * 0.03, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="relative"
-    >
+  if (isCompact) {
+    return (
       <Link 
-        href={item.href}
+        href={item.path}
         onClick={handleClick}
-        className={`group block bg-white/70 backdrop-blur-xl rounded-[1.5rem] p-8 hover:shadow-[0_40px_80px_-20px_rgba(28,28,114,0.12)] transition-all duration-700 border border-white/40 hover:border-[#7B2DBF]/20 overflow-hidden active:scale-[0.98] ${isClicked ? 'opacity-0 scale-105 pointer-events-none' : ''}`}
+        className="group relative flex items-center gap-3 p-3 rounded-2xl bg-white/40 hover:bg-white/80 border border-transparent hover:border-[#7B2DBF]/20 transition-all duration-500 shadow-sm hover:shadow-md"
       >
-        <div className="flex flex-col items-center text-center space-y-6">
-          {/* ROUNDED GRADIENT ICON Container */}
-          <div className="relative">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#1C1C72] to-[#7B2DBF] flex items-center justify-center shadow-[0_12px_24px_-6px_rgba(123,45,191,0.4)] group-hover:shadow-[0_20px_40px_-8px_rgba(123,45,191,0.5)] group-hover:scale-110 group-hover:rotate-[10deg] transition-all duration-700 ease-[0.16, 1, 0.3, 1]">
-              <item.icon className="w-8 h-8 text-white" strokeWidth={1.25} />
-            </div>
-            {/* Pulsing ring */}
-            <div className="absolute inset-0 rounded-full border-2 border-[#7B2DBF]/0 group-hover:border-[#7B2DBF]/20 group-hover:scale-125 transition-all duration-1000"></div>
-          </div>
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1C1C72] to-[#7B2DBF] flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform duration-500">
+          <item.icon size={18} strokeWidth={1.5} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h4 className="text-[11px] font-bold text-[#1C1C72] uppercase tracking-wider truncate group-hover:text-[#7B2DBF] transition-colors">
+            {item.name}
+          </h4>
+        </div>
+        <ArrowUpRight size={14} className="text-slate-300 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+      </Link>
+    );
+  }
 
+  return (
+    <div className="relative h-full">
+      <Link 
+        href={item.path}
+        onClick={handleClick}
+        className={`group relative block h-full bg-white/60 backdrop-blur-xl rounded-[2rem] p-8 border border-white/40 hover:border-[#7B2DBF]/30 hover:shadow-[0_40px_80px_-20px_rgba(28,28,114,0.1)] transition-all duration-700 overflow-hidden ${isClicked ? 'opacity-0 scale-105 pointer-events-none' : ''}`}
+      >
+        <div className="flex flex-col h-full space-y-6">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1C1C72] to-[#7B2DBF] flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-700">
+            <item.icon className="w-8 h-8 text-white" strokeWidth={1.25} />
+          </div>
+          
           <div className="space-y-2">
-            <h3 className="text-sm font-black text-[#1C1C72] uppercase tracking-[0.15em] group-hover:text-[#7B2DBF] transition-colors duration-500">
+            <h3 className="text-lg font-black text-[#1C1C72] uppercase tracking-[0.05em] group-hover:text-[#7B2DBF] transition-colors leading-tight">
               {item.name}
             </h3>
-            <p className="text-xs text-slate-500 font-medium leading-relaxed max-w-[180px] mx-auto opacity-70 group-hover:opacity-100 transition-opacity duration-500">
-              {item.desc}
+            <p className="text-xs text-slate-500 font-medium leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity">
+              {item.description}
             </p>
           </div>
-        </div>
 
-        {/* Minimal indicator */}
-        <div className="absolute bottom-6 right-6 translate-x-2 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500">
-          <div className="w-8 h-8 rounded-full bg-[#1C1C72]/5 flex items-center justify-center">
-            <ArrowUpRight className="w-4 h-4 text-[#1C1C72]" />
+          <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#1C1C72]/30 group-hover:text-[#7B2DBF]/60 transition-colors">
+            Open Module <ArrowUpRight size={12} />
           </div>
         </div>
       </Link>
 
-      {/* Premium Liquid Expansion Reveal */}
       <AnimatePresence>
         {isClicked && (
           <motion.div
@@ -136,59 +88,143 @@ const CalculatorCard = ({ item, index }: { item: any, index: number }) => {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-[100] bg-gradient-to-br from-[#1C1C72] to-[#7B2DBF] flex items-center justify-center pointer-events-none"
           >
-             <motion.div
-               initial={{ scale: 0.8, opacity: 0 }}
-               animate={{ scale: 1, opacity: 1 }}
-               transition={{ delay: 0.2, duration: 0.5 }}
-               className="text-white flex flex-col items-center gap-6"
-             >
+             <div className="flex flex-col items-center gap-6">
                <div className="w-24 h-24 rounded-full border border-white/20 flex items-center justify-center relative overflow-hidden">
-                  <motion.div 
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                  >
+                  <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
                     <item.icon className="w-10 h-10 text-white" strokeWidth={1} />
                   </motion.div>
                   <div className="absolute inset-0 bg-white/5 animate-pulse"></div>
                </div>
-               <div className="text-center">
+               <div className="text-center text-white">
                  <h2 className="text-xl font-black uppercase tracking-[0.4em] mb-2">{item.name}</h2>
                  <p className="text-white/40 text-[10px] font-bold tracking-[0.2em]">INITIALIZING AGNAA PRECISION ENGINE</p>
                </div>
-             </motion.div>
+             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
+  );
+};
+
+const TopDeckCarousel = ({ popularItems }: { popularItems: CalculatorMeta[] }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const checkScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 20);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 20);
+      
+      const index = Math.round(scrollLeft / (clientWidth / (window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3)));
+      setActiveIndex(index);
+    }
+  };
+
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (scrollEl) {
+      scrollEl.addEventListener('scroll', checkScroll);
+      checkScroll();
+      return () => scrollEl.removeEventListener('scroll', checkScroll);
+    }
+  }, []);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { clientWidth } = scrollRef.current;
+      const scrollAmount = direction === 'left' ? -clientWidth : clientWidth;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="relative py-12 px-2 md:px-0">
+      <div className="max-w-[1400px] mx-auto absolute -top-4 left-6 lg:left-12 flex items-center gap-4 z-20">
+         <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#1C1C72]/40">Popular Modules</span>
+         <div className="h-[1px] w-24 bg-gradient-to-r from-[#7B2DBF]/20 to-transparent"></div>
+      </div>
+
+      <div className="group relative">
+        {/* Navigation Buttons */}
+        <div className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block">
+           <button 
+             onClick={() => scroll('left')}
+             disabled={!canScrollLeft}
+             className={`w-14 h-14 rounded-full bg-white shadow-xl flex items-center justify-center border border-slate-100 transition-all ${!canScrollLeft ? 'opacity-20 scale-90 grayscale cursor-not-allowed' : 'hover:scale-110 active:scale-95 text-[#1C1C72]'}`}
+           >
+             <ChevronLeft size={24} strokeWidth={2.5} />
+           </button>
+        </div>
+        <div className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block">
+           <button 
+             onClick={() => scroll('right')}
+             disabled={!canScrollRight}
+             className={`w-14 h-14 rounded-full bg-white shadow-xl flex items-center justify-center border border-slate-100 transition-all ${!canScrollRight ? 'opacity-20 scale-90 grayscale cursor-not-allowed' : 'hover:scale-110 active:scale-95 text-[#1C1C72]'}`}
+           >
+             <ChevronRight size={24} strokeWidth={2.5} />
+           </button>
+        </div>
+
+        {/* Carousel Container */}
+        <div 
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory px-4 md:px-0 pb-12 transition-all"
+        >
+          {popularItems.map((item) => (
+            <div key={item.id} className="min-w-full md:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] snap-start h-[420px]">
+              <CalculatorCard item={item} />
+            </div>
+          ))}
+        </div>
+
+        {/* Indicators */}
+        <div className="flex justify-center gap-2 mt-2">
+          {Array.from({ length: Math.ceil(popularItems.length / (typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3)) }).map((_, i) => (
+            <div 
+              key={i} 
+              className={`h-1 rounded-full transition-all duration-500 ${activeIndex === i ? 'w-8 bg-[#7B2DBF]' : 'w-2 bg-[#1C1C72]/10'}`} 
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default function CalculatorsHub() {
   const [searchQuery, setSearchQuery] = useState('');
+  const popularCalculators = calculators.filter(c => c.popular);
+
+  const groupedCalculators = calculators.reduce((acc, calc) => {
+    const categoryName = CATEGORY_MAPPING[calc.category] || calc.category;
+    if (!acc[categoryName]) acc[categoryName] = [];
+    acc[categoryName].push(calc);
+    return acc;
+  }, {} as Record<string, CalculatorMeta[]>);
 
   return (
     <div className="min-h-screen bg-slate-50 text-[#0F172A] font-inter selection:bg-[#7B2DBF] selection:text-white pb-32 relative overflow-hidden">
       
-      {/* ARCHITECTURAL DOT GRID BACKGROUND */}
+      {/* BACKGROUND ELEMENTS */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
            style={{ backgroundImage: 'radial-gradient(#1C1C72 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
-      
-      {/* FLOWING GRADIENT ORBS */}
       <div className="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-gradient-to-br from-[#7B2DBF]/10 to-transparent blur-[120px] pointer-events-none" />
-      <div className="absolute top-[40%] -left-[10%] w-[40%] h-[40%] rounded-full bg-gradient-to-tr from-[#1C1C72]/5 to-transparent blur-[100px] pointer-events-none" />
-
-      {/* TERMINAL SEARCH - TOP RIGHT */}
+      
       <div className="fixed top-8 right-8 z-[60]">
         <TerminalSearch />
       </div>
 
-      {/* MINIMALIST HEADER */}
-      <div className="relative z-10 pt-40 pb-20 px-6 lg:px-12">
-        <div className="max-w-[1400px] mx-auto text-center">
+      <div className="relative z-10 pt-32 pb-16 px-6 lg:px-12">
+        <div className="max-w-[1400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center mb-16"
           >
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#7B2DBF]/30" />
@@ -199,80 +235,59 @@ export default function CalculatorsHub() {
             <h1 className="text-6xl md:text-8xl font-black text-[#1C1C72] tracking-[-0.05em] mb-10 leading-[0.9]">
               Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C1C72] via-[#7B2DBF] to-[#1C1C72] animate-gradient-x">Engineering</span><br/>Calculators.
             </h1>
+          </motion.div>
 
-            <div className="max-w-2xl mx-auto space-y-12">
-              <p className="text-lg text-slate-500 font-medium leading-relaxed opacity-80 italic">
-                Validating structural integrity through algorithmic excellence.
-              </p>
+          <TopDeckCarousel popularItems={popularCalculators} />
 
-              <div className="relative group max-w-xl mx-auto">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#1C1C72]/10 to-[#7B2DBF]/10 rounded-2xl blur opacity-25 group-focus-within:opacity-100 transition-all duration-1000"></div>
-                <div className="relative flex items-center bg-white rounded-2xl border border-slate-200/60 shadow-[0_20px_40px_-15px_rgba(28,28,114,0.05)] overflow-hidden transition-all duration-500 group-focus-within:shadow-[0_25px_50px_-12px_rgba(123,45,191,0.15)] group-focus-within:border-[#7B2DBF]/30">
-                  <div className="pl-6 pointer-events-none">
-                    <Search className="w-5 h-5 text-slate-400 group-focus-within:text-[#7B2DBF] transition-colors" />
+          {/* SEARCH ZONE */}
+          <div className="max-w-xl mx-auto mb-24 mt-12 relative group">
+            <div className="absolute -inset-4 bg-gradient-to-r from-[#1C1C72]/5 to-[#7B2DBF]/5 rounded-[2.5rem] blur-xl opacity-0 group-focus-within:opacity-100 transition-all duration-1000"></div>
+            <div className="relative flex items-center bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-xl overflow-hidden transition-all duration-500 group-focus-within:border-[#7B2DBF]/30">
+              <div className="pl-6 pointer-events-none">
+                <Search className="w-5 h-5 text-slate-400 group-focus-within:text-[#7B2DBF] transition-colors" />
+              </div>
+              <input 
+                type="text" 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search all engineering systems..." 
+                className="w-full bg-transparent outline-none text-base font-bold text-[#1C1C72] placeholder:text-slate-300 px-4 py-6"
+              />
+            </div>
+          </div>
+
+          {/* ALL CALCULATORS GRID */}
+          <div className="space-y-20">
+            <div className="flex items-center gap-6 mb-12">
+               <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#1C1C72]">Full Library Matrix</h2>
+               <div className="flex-1 h-[1px] bg-gradient-to-r from-[#1C1C72]/10 via-[#1C1C72]/5 to-transparent"></div>
+            </div>
+
+            {Object.entries(groupedCalculators).map(([category, items]) => {
+              const filteredItems = items.filter(item => 
+                item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                item.description.toLowerCase().includes(searchQuery.toLowerCase())
+              );
+
+              if (filteredItems.length === 0) return null;
+
+              return (
+                <div key={category} className="space-y-8">
+                  <div className="flex items-center gap-4">
+                    <h3 className="text-sm font-bold text-[#1C1C72] tracking-tight">{category}</h3>
+                    <div className="h-px flex-1 bg-slate-100"></div>
+                    <span className="text-[10px] font-black text-slate-300 tabular-nums">{filteredItems.length} UNITS</span>
                   </div>
-                  <input 
-                    type="text" 
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search engineering modules..." 
-                    className="w-full bg-transparent outline-none text-base font-bold text-[#1C1C72] placeholder:text-slate-300 placeholder:font-medium px-4 py-6"
-                  />
-                  <div className="pr-6">
-                    <kbd className="hidden md:inline-flex items-center px-2 py-1 bg-slate-50 border border-slate-200 rounded-md text-[10px] font-black text-slate-400">⌘ K</kbd>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {filteredItems.map((item) => (
+                      <CalculatorCard key={item.id} item={item} isCompact={true} />
+                    ))}
                   </div>
                 </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* CALCULATORS GRID */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="space-y-24">
-          {CATEGORIES.map((cat, catIdx) => {
-            const filteredItems = cat.items.filter(item => 
-              item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-              item.desc.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-
-            if (filteredItems.length === 0) return null;
-
-            return (
-              <div key={cat.title}>
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  className="flex items-center gap-4 mb-10"
-                >
-                  <h2 className="text-xs font-black tracking-[0.2em] uppercase text-[#1C1C72]/60">{cat.title}</h2>
-                  <div className="flex-1 h-[1px] bg-gray-100"></div>
-                  <span className="text-[10px] font-bold text-gray-300 tabular-nums">{filteredItems.length} TOOLS</span>
-                </motion.div>
-
-                <motion.div 
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-50px" }}
-                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"
-                >
-                  {filteredItems.map((item, index) => (
-                    <CalculatorCard key={item.id} item={item} index={index} />
-                  ))}
-                </motion.div>
-              </div>
-            );
-          })}
-          
-          {/* Empty State */}
-          {CATEGORIES.every(cat => cat.items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()) || item.desc.toLowerCase().includes(searchQuery.toLowerCase())).length === 0) && (
-            <div className="py-24 text-center">
-              <div className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300 mb-2">No matching systems</div>
-              <div className="text-lg font-medium text-gray-400">Try searching for a different module.</div>
-            </div>
-          )}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ interface BlueprintLayoutProps {
   subLabel?: string;
 }
 
-export const BlueprintLayout: React.FC<BlueprintLayoutProps> = ({ length, width, label = "Plot Area", subLabel }) => {
+export const BlueprintLayout: React.FC<BlueprintLayoutProps> = ({ length, width, label = "Property Layout", subLabel }) => {
   const maxSize = 300;
   const aspectRatio = length / width;
   
@@ -27,64 +27,64 @@ export const BlueprintLayout: React.FC<BlueprintLayoutProps> = ({ length, width,
   const oy = (250 - drawW) / 2;
 
   return (
-    <div className="w-full aspect-video bg-[#0F172A] rounded-2xl relative overflow-hidden border-2 border-[#1C1C72] shadow-2xl group">
-      <div className="absolute inset-0 opacity-10" 
-           style={{ backgroundImage: 'linear-gradient(#475569 1px, transparent 1px), linear-gradient(90deg, #475569 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+    <div className="w-full aspect-video bg-[#FDFDFF] rounded-2xl relative overflow-hidden border border-gray-200 shadow-lg group font-sans">
+      {/* Thin branding blue grid */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none" 
+           style={{ backgroundImage: 'linear-gradient(#1C1C72 1px, transparent 1px), linear-gradient(90deg, #1C1C72 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
       
-      <div className="absolute top-4 left-4 z-10">
-        <div className="text-[10px] font-black text-[#7B2DBF] tracking-[0.2em] uppercase mb-1">Space Planning Layout</div>
-        <div className="text-white font-mono text-xs opacity-50">{length}' L x {width}' W</div>
+      {/* Title - branding violet */}
+      <div className="absolute top-6 left-6 z-10">
+        <div className="text-[10px] font-black text-[#7B2DBF] tracking-[0.3em] uppercase mb-1">Space Planning Layout</div>
+        <div className="text-[9px] font-bold text-[#1C1C72]/40 uppercase tracking-widest">{length}' L × {width}' W</div>
       </div>
 
       <svg viewBox="0 0 400 250" className="w-full h-full p-8 transition-transform duration-700 group-hover:scale-[1.02]">
-        <defs>
-          <pattern id="gridPattern" width="10" height="10" patternUnits="userSpaceOnUse">
-            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#1E293B" strokeWidth="0.5"/>
-          </pattern>
-        </defs>
-
-        {/* Compass / North Arrow */}
-        <g transform="translate(360, 40)" opacity="0.6">
-          <circle r="15" fill="none" stroke="#A5B4FC" strokeWidth="1" strokeDasharray="2,2" />
-          <path d="M 0 -12 L 4 0 L 0 12 L -4 0 Z" fill="#EF4444" />
-          <text y="-18" fill="#A5B4FC" fontSize="8" fontWeight="black" textAnchor="middle">N</text>
-        </g>
+        {/* NO COMPASS — removed as irrelevant for calculators */}
 
         {/* Shaded Area */}
-        <rect x={ox} y={oy} width={drawL} height={drawW} fill="url(#gridPattern)" stroke="#3B82F6" strokeWidth="2" />
-        <rect x={ox} y={oy} width={drawL} height={drawW} fill="#3B82F6" opacity="0.05" />
+        <rect x={ox} y={oy} width={drawL} height={drawW} fill="white" stroke="#1C1C72" strokeWidth="1.5" />
+        <rect x={ox} y={oy} width={drawL} height={drawW} fill="#1C1C72" opacity="0.03" />
 
         {/* Labels */}
         <g transform={`translate(${ox + drawL / 2}, ${oy + drawW / 2})`} textAnchor="middle">
-          <text fill="#3B82F6" fontSize="12" fontWeight="black" className="uppercase tracking-tighter" style={{ filter: 'drop-shadow(0px 0px 2px rgba(59, 130, 246, 0.5))' }}>{label}</text>
-          {subLabel && <text y="15" fill="#A5B4FC" fontSize="8" fontWeight="bold" opacity="0.6" className="uppercase">{subLabel}</text>}
+          <text fill="#7B2DBF" fontSize="11" fontWeight="900" className="uppercase tracking-wider">{label}</text>
+          {subLabel && <text y="16" fill="#1C1C72" fontSize="8" fontWeight="bold" opacity="0.35" className="uppercase">{subLabel}</text>}
         </g>
 
-        {/* Dimension Lines (Professional Architectural Style) */}
-        <g stroke="#A5B4FC" strokeWidth="1" opacity="0.8">
-          {/* Length */}
-          <line x1={ox} y1={oy - 25} x2={ox + drawL} y2={oy - 25} />
-          <line x1={ox} y1={oy - 30} x2={ox + 5} y2={oy - 20} /> {/* Tick */}
-          <line x1={ox + drawL} y1={oy - 30} x2={ox + drawL - 5} y2={oy - 20} stroke="#EF4444" /> {/* Tick */}
+        {/* Dimension Lines — Swiss-Style Ticks */}
+        <g stroke="#1C1C72" strokeWidth="0.5" opacity="0.4">
+          {/* Length (top) */}
+          <line x1={ox} y1={oy - 20} x2={ox + drawL} y2={oy - 20} />
+          <line x1={ox} y1={oy - 25} x2={ox} y2={oy - 15} />
+          <line x1={ox + drawL} y1={oy - 25} x2={ox + drawL} y2={oy - 15} />
           
-          {/* Width */}
-          <line x1={ox + drawL + 25} y1={oy} x2={ox + drawL + 25} y2={oy + drawW} />
-          <line x1={ox + drawL + 20} y1={oy} x2={ox + drawL + 30} y2={oy + 5} /> {/* Tick */}
-          <line x1={ox + drawL + 20} y1={oy + drawW} x2={ox + drawL + 30} y2={oy + drawW - 5} stroke="#EF4444" /> {/* Tick */}
+          {/* Width (right) */}
+          <line x1={ox + drawL + 20} y1={oy} x2={ox + drawL + 20} y2={oy + drawW} />
+          <line x1={ox + drawL + 15} y1={oy} x2={ox + drawL + 25} y2={oy} />
+          <line x1={ox + drawL + 15} y1={oy + drawW} x2={ox + drawL + 25} y2={oy + drawW} />
         </g>
 
-        <g fill="#A5B4FC" fontSize="10" fontWeight="black">
-          <text x={ox + drawL / 2} y={oy - 35} textAnchor="middle" className="tracking-tighter">{length} FT 0"</text>
-          <text x={ox + drawL + 45} y={oy + drawW / 2} textAnchor="middle" transform={`rotate(90 ${ox + drawL + 45} ${oy + drawW / 2})`} className="tracking-tighter">{width} FT 0"</text>
+        {/* Dimension Values */}
+        <g fill="#1C1C72" fontSize="8" fontWeight="900">
+          <text x={ox + drawL / 2} y={oy - 30} textAnchor="middle" className="tracking-tighter">{length} FT</text>
+          <text x={ox + drawL + 38} y={oy + drawW / 2} textAnchor="middle" transform={`rotate(90 ${ox + drawL + 38} ${oy + drawW / 2})`} className="tracking-tighter">{width} FT</text>
         </g>
 
-        {/* Space Usage Indicators (Subtle Crosses) */}
-        <path d={`M ${ox+10} ${oy+10} L ${ox+20} ${oy+20} M ${ox+20} ${oy+10} L ${ox+10} ${oy+20}`} stroke="#3B82F6" strokeWidth="0.5" opacity="0.3" />
+        {/* Corner Markers (subtle) */}
+        <g opacity="0.15" stroke="#1C1C72" strokeWidth="1.5" fill="none">
+          <path d={`M ${ox} ${oy + 15} L ${ox} ${oy} L ${ox + 15} ${oy}`} />
+          <path d={`M ${ox + drawL - 15} ${oy + drawW} L ${ox + drawL} ${oy + drawW} L ${ox + drawL} ${oy + drawW - 15}`} />
+        </g>
 
-        {/* Human Scale */}
-        <HumanScale x={ox - 40} y={oy + drawW} scale={0.7} />
+        {/* Human Scale — Plan View */}
+        <HumanScale x={ox - 35} y={oy + drawW} scale={0.6} variant="plan" />
       </svg>
 
+      {/* Scale indicator */}
+      <div className="absolute bottom-4 left-6 flex items-center gap-2 opacity-30">
+        <div className="w-5 h-0.5 bg-[#1C1C72]"></div>
+        <span className="text-[7px] font-bold text-[#1C1C72] uppercase tracking-widest">NTS</span>
+      </div>
     </div>
   );
 };

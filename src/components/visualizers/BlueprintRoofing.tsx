@@ -89,11 +89,10 @@ export const BlueprintRoofing: React.FC<BlueprintRoofingProps> = ({ slope = 25, 
         <path d={`M ${pLeft.x + 30} ${pLeft.y} A 30 30 0 0 1 ${pLeft.x + 30 * Math.cos(angleRad)} ${pLeft.y - 30 * Math.sin(angleRad)}`} fill="none" stroke="#7B2DBF" strokeWidth="1" />
         <text x={pLeft.x + 40} y={pLeft.y - 10} fill="#7B2DBF" fontSize="9" fontWeight="black">{slope}°</text>
 
-        {/* Compass / North Ref */}
-        <g transform="translate(340, 40) scale(0.6)" opacity="0.2">
-          <circle cx="0" cy="0" r="20" fill="none" stroke="#1C1C72" strokeWidth="1" />
-          <path d="M 0 -15 L 5 15 L 0 10 L -5 15 Z" fill="#1C1C72" />
-          <text y="-25" textAnchor="middle" fontSize="12" fontWeight="black" fill="#1C1C72">N</text>
+        {/* Scale indicator */}
+        <g transform="translate(340, 230)" opacity="0.2">
+          <line x1="0" y1="0" x2="20" y2="0" stroke="#1C1C72" strokeWidth="2" />
+          <text x="25" y="3" fontSize="6" fontWeight="bold" fill="#1C1C72">NTS</text>
         </g>
       </svg>
     </div>

@@ -45,6 +45,13 @@ export default function AacBlocksCalculator() {
       pdfFileName={`AGNAA_AAC_Blocks_${fmt(results?.blocksCount || 0)}nos.pdf`}
       pdfTitle={"AAC Blocks\nCalculator"}
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'PLANNING GUIDELINE', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="WALL"
+      visualizerData={{ 
+        length: parseFloat(length) * 3.28 || 15, 
+        height: parseFloat(height) * 3.28 || 10,
+        thickness: parseFloat(thickness) * 39.37 || 9,
+        label: 'AAC Block Wall'
+      }}
       inputsContent={
         <div className="grid grid-cols-2 gap-4">
           <div>

@@ -39,7 +39,10 @@ export default function BuiltUpAreaCalculator() {
       pdfTitle="Built-up Area\nCalculator"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'AREA CALCULATION', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
       visualizerType="BUILT_UP"
-      visualizerData={{ carpetArea: results?.carpetArea, builtUpArea: results?.builtUpArea, superBuiltUpArea: results?.superBuiltUpArea }}
+      visualizerData={{ 
+        carpetArea: results?.carpetArea || parseFloat(carpetArea), 
+        superBuiltUpArea: results?.superBuiltUpArea || (parseFloat(carpetArea) * 1.35) 
+      }}
       inputsContent={
         <div className="grid grid-cols-1 gap-4">
           <div>

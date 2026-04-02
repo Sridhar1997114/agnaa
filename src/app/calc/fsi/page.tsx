@@ -55,7 +55,11 @@ export default function FSICalculator() {
       pdfTitle="FAR / FSI\nConfiguration"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'DEVELOPMENT POTENTIAL', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
       visualizerType="FSI"
-      visualizerData={{ plotArea: results?.pArea, builtUpArea: results?.bArea || results?.maxBuiltUpArea, fsi: results?.fsi || results?.fValue }}
+      visualizerData={{ 
+        plotArea: results?.pArea || parseFloat(plotArea), 
+        builtUpArea: results?.bArea || results?.maxBuiltUpArea, 
+        fsi: results?.fsi || parseFloat(fsiValue) || 1.0 
+      }}
       inputsContent={
         <div className="space-y-6">
           <div className="flex gap-2 p-1 bg-gray-100 rounded-xl">
