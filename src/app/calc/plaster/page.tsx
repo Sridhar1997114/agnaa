@@ -50,7 +50,7 @@ export default function PlasterCalculator() {
       pdfTitle="PLASTERING ESTIMATION"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'MATERIAL ESTIMATION', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
       visualizerType="PLASTER"
-      visualizerData={{ area: results?.a }}
+      visualizerData={{ area: results?.a, unit: 'FT' }}
       inputsContent={
         <div className="space-y-6">
           <div>

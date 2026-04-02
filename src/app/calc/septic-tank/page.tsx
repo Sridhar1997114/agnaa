@@ -49,9 +49,9 @@ export default function SepticTankCalculator() {
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'PLANNING GUIDELINE', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
       visualizerType="TANK"
       visualizerData={{ 
-        length: results?.recommendedLength || 1.5,
-        width: results?.recommendedWidth || 0.75,
-        depth: results?.recommendedDepth || 1.0
+        length: (results?.recommendedLength || 0) * 3.281,
+        width: (results?.recommendedWidth || 0) * 3.281,
+        depth: (results?.recommendedDepth || 0) * 3.281
       }}
       inputsContent={
         <div className="space-y-6">

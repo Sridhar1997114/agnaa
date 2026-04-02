@@ -126,6 +126,7 @@ export default function BuiltUpEfficiencyCalculator() {
         carpetArea: parseFloat(carpetArea),
         superBuiltUpArea: parseFloat(superBuiltUpArea) || parseFloat(builtUpArea),
         efficiency: results.carpetToBuiltUpPercent,
+        unit: 'FT'
       } : undefined}
     />
   );

@@ -142,6 +142,7 @@ export default function FlooringCostCalculator() {
       visualizerType="FLOOR"
       visualizerData={results ? {
         area: parseFloat(area),
+        unit: 'M'
       } : undefined}
     />
   );

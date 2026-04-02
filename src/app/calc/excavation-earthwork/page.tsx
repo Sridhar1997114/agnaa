@@ -49,7 +49,11 @@ export default function ExcavationCalculator() {
       pdfTitle="Excavation / Earthwork\nCalculator"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'PLANNING GUIDELINE', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
       visualizerType="EXCAVATION"
-      visualizerData={{ length, width, depth }}
+      visualizerData={{ 
+        length: parseFloat(length) * 3.281, 
+        width: parseFloat(width) * 3.281, 
+        depth: parseFloat(depth) * 3.281 
+      }}
       inputsContent={
         <div className="grid grid-cols-2 gap-4">
           <div>

@@ -9,9 +9,10 @@ interface BlueprintWallProps {
   height: number; // feet
   thickness: number; // inches
   label?: string;
+  unit?: 'FT' | 'M';
 }
 
-export const BlueprintWall: React.FC<BlueprintWallProps> = ({ length, height, thickness, label }) => {
+export const BlueprintWall: React.FC<BlueprintWallProps> = ({ length, height, thickness, label, unit = 'FT' }) => {
   const s = 10; 
   const wallL = length * s;
   const wallH = height * s;
@@ -79,8 +80,8 @@ export const BlueprintWall: React.FC<BlueprintWallProps> = ({ length, height, th
         </g>
 
         {/* Numerical Data Labels */}
-        <text x={(p0.x + p1.x)/2} y={p0.y + 40} fill="#1C1C72" fontSize="8" fontWeight="900" textAnchor="middle" className="tracking-tighter">L: {length} FT</text>
-        <text x={p0.x - 40} y={(p0.y + t0.y)/2} fill="#1C1C72" fontSize="8" fontWeight="900" textAnchor="middle" transform={`rotate(-90 ${p0.x - 40} ${(p0.y + t0.y)/2})`}>H: {height} FT</text>
+        <text x={(p0.x + p1.x)/2} y={p0.y + 40} fill="#1C1C72" fontSize="8" fontWeight="900" textAnchor="middle" className="tracking-tighter">L: {length} {unit}</text>
+        <text x={p0.x - 40} y={(p0.y + t0.y)/2} fill="#1C1C72" fontSize="8" fontWeight="900" textAnchor="middle" transform={`rotate(-90 ${p0.x - 40} ${(p0.y + t0.y)/2})`}>H: {height} {unit}</text>
 
         {/* Thickness callout */}
         <path d={`M ${p1.x + 10} ${p1.y - 5} L ${p1.x + 40} ${p1.y - 30}`} fill="none" stroke="#7B2DBF" strokeWidth="0.5" strokeDasharray="2,2" />

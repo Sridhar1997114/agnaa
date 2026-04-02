@@ -8,9 +8,10 @@ interface BlueprintLayoutProps {
   width: number; // feet
   label?: string;
   subLabel?: string;
+  unit?: 'FT' | 'M';
 }
 
-export const BlueprintLayout: React.FC<BlueprintLayoutProps> = ({ length, width, label = "Property Layout", subLabel }) => {
+export const BlueprintLayout: React.FC<BlueprintLayoutProps> = ({ length, width, label = "Property Layout", subLabel, unit = 'FT' }) => {
   const maxSize = 300;
   const aspectRatio = length / width;
   
@@ -35,7 +36,7 @@ export const BlueprintLayout: React.FC<BlueprintLayoutProps> = ({ length, width,
       {/* Title - branding violet */}
       <div className="absolute top-6 left-6 z-10">
         <div className="text-[10px] font-black text-[#7B2DBF] tracking-[0.3em] uppercase mb-1">Space Planning Layout</div>
-        <div className="text-[9px] font-bold text-[#1C1C72]/40 uppercase tracking-widest">{length}' L × {width}' W</div>
+        <div className="text-[9px] font-bold text-[#1C1C72]/40 uppercase tracking-widest">{length}{unit} L × {width}{unit} W</div>
       </div>
 
       <svg viewBox="0 0 400 250" className="w-full h-full p-8 transition-transform duration-700 group-hover:scale-[1.02]">
@@ -66,8 +67,8 @@ export const BlueprintLayout: React.FC<BlueprintLayoutProps> = ({ length, width,
 
         {/* Dimension Values */}
         <g fill="#1C1C72" fontSize="8" fontWeight="900">
-          <text x={ox + drawL / 2} y={oy - 30} textAnchor="middle" className="tracking-tighter">{length} FT</text>
-          <text x={ox + drawL + 38} y={oy + drawW / 2} textAnchor="middle" transform={`rotate(90 ${ox + drawL + 38} ${oy + drawW / 2})`} className="tracking-tighter">{width} FT</text>
+          <text x={ox + drawL / 2} y={oy - 30} textAnchor="middle" className="tracking-tighter">{length} {unit}</text>
+          <text x={ox + drawL + 38} y={oy + drawW / 2} textAnchor="middle" transform={`rotate(90 ${ox + drawL + 38} ${oy + drawW / 2})`} className="tracking-tighter">{width} {unit}</text>
         </g>
 
         {/* Corner Markers (subtle) */}

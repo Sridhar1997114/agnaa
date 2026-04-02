@@ -9,9 +9,10 @@ interface BlueprintSlabProps {
   thickness: number; // inches
   preset?: 'economy' | 'safe' | 'strong';
   label?: string;
+  unit?: 'FT' | 'M';
 }
 
-export const BlueprintSlab: React.FC<BlueprintSlabProps> = ({ length, width, thickness, preset = 'safe', label = "RCC Structural Section" }) => {
+export const BlueprintSlab: React.FC<BlueprintSlabProps> = ({ length, width, thickness, preset = 'safe', label = "RCC Structural Section", unit = 'FT' }) => {
   const s = 15;
   const slabL = Math.min(length, 20) * s;
   const slabH = (thickness / 12) * s * 2;
@@ -91,7 +92,7 @@ export const BlueprintSlab: React.FC<BlueprintSlabProps> = ({ length, width, thi
           <line x1={ox} y1={oy + 25} x2={ox + slabL} y2={oy + 25} stroke="#1C1C72" strokeWidth="0.5" />
           <line x1={ox} y1={oy + 20} x2={ox} y2={oy + 30} stroke="#1C1C72" strokeWidth="0.5" />
           <line x1={ox + slabL} y1={oy + 20} x2={ox + slabL} y2={oy + 30} stroke="#1C1C72" strokeWidth="0.5" />
-          <text x={ox + slabL/2} y={oy + 40} fill="#1C1C72" fontSize="8" fontWeight="900" textAnchor="middle" className="tracking-tighter">SPAN: {length} FT</text>
+          <text x={ox + slabL/2} y={oy + 40} fill="#1C1C72" fontSize="8" fontWeight="900" textAnchor="middle" className="tracking-tighter">SPAN: {length} {unit}</text>
 
           <line x1={ox + slabL + 10} y1={oy} x2={ox + slabL + 10} y2={oy - slabH} stroke="#1C1C72" strokeWidth="0.5" />
           <line x1={ox + slabL + 5} y1={oy} x2={ox + slabL + 15} y2={oy} stroke="#1C1C72" strokeWidth="0.5" />

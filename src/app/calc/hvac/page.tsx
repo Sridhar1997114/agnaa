@@ -101,6 +101,12 @@ export default function HVACCalculator() {
       }
       pdfTotalValue={`${fmt(results?.estimatedTonnage || 0)} TR`}
       pdfTotalSubtitle="AC CAPACITY"
+      visualizerType="SHAPE"
+      visualizerData={results ? {
+        area: parseFloat(area) * 10.764,
+        thickness: parseFloat(height) * 3.281, // Room height in FT
+        label: 'HVAC Cooling Volume'
+      } : undefined}
     />
   );
 }

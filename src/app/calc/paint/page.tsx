@@ -41,7 +41,7 @@ export default function PaintCalculator() {
       pdfTitle="PAINT ESTIMATION"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'MATERIAL ESTIMATION', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
       visualizerType="PAINT"
-      visualizerData={{ carpetArea: results?.a }}
+      visualizerData={{ area: results?.a, unit: 'FT' }}
       inputsContent={
         <div className="space-y-6">
           <div>

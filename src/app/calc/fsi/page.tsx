@@ -58,7 +58,8 @@ export default function FSICalculator() {
       visualizerData={{ 
         plotArea: results?.pArea || parseFloat(plotArea), 
         builtUpArea: results?.bArea || results?.maxBuiltUpArea, 
-        fsi: results?.fsi || parseFloat(fsiValue) || 1.0 
+        fsi: results?.fsi || parseFloat(fsiValue) || 1.0,
+        unit: 'FT' // Standardizing on FT for layout previews
       }}
       inputsContent={
         <div className="space-y-6">

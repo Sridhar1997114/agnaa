@@ -7,9 +7,10 @@ interface BlueprintFlooringProps {
   width: number;
   pattern: 'GRID' | 'DIAGONAL' | 'STAGGERED' | 'HERRINGBONE';
   tileSize: number; // inches
+  unit?: 'FT' | 'M';
 }
 
-export const BlueprintFlooring: React.FC<BlueprintFlooringProps> = ({ length, width, pattern, tileSize }) => {
+export const BlueprintFlooring: React.FC<BlueprintFlooringProps> = ({ length, width, pattern, tileSize, unit = 'FT' }) => {
   const s = 10;
   const canvasW = Math.min(300, length * s);
   const canvasH = Math.min(200, width * s);
@@ -65,8 +66,8 @@ export const BlueprintFlooring: React.FC<BlueprintFlooringProps> = ({ length, wi
         </g>
 
         {/* Numerical Labels */}
-        <text x={ox + canvasW / 2} y={oy - 25} fill="#1C1C72" fontSize="7" fontWeight="bold" textAnchor="middle">{length} FT</text>
-        <text x={ox + canvasW + 35} y={oy + canvasH / 2} fill="#1C1C72" fontSize="7" fontWeight="bold" textAnchor="middle" transform={`rotate(90 ${ox + canvasW + 35} ${oy + canvasH / 2})`}>{width} FT</text>
+        <text x={ox + canvasW / 2} y={oy - 25} fill="#1C1C72" fontSize="7" fontWeight="bold" textAnchor="middle">{length} {unit}</text>
+        <text x={ox + canvasW + 35} y={oy + canvasH / 2} fill="#1C1C72" fontSize="7" fontWeight="bold" textAnchor="middle" transform={`rotate(90 ${ox + canvasW + 35} ${oy + canvasH / 2})`}>{width} {unit}</text>
 
         {/* Aesthetic Corner Details */}
         <g opacity="0.2">

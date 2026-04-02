@@ -38,6 +38,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           width={parseFloat(data.width || data.w || 0)} 
           thickness={parseFloat(data.thickness || data.t || 0)} 
           preset={data.preset?.toLowerCase() as any}
+          unit={data.unit}
         />
       )}
       
@@ -55,6 +56,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           length={parseFloat(data.length || data.l || 0)} 
           height={parseFloat(data.height || data.h || 0)}
           thickness={parseFloat(data.thickness || data.t || 9)} 
+          unit={data.unit}
         />
       )}
 
@@ -70,10 +72,10 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
       )}
 
       {/* TANK VISUALIZER */}
-      {type === 'TANK' && (data.length || data.l) && (
+      {type === 'TANK' && (data.length || data.l || data.area) && (
         <BlueprintSeptic 
-          length={parseFloat(data.length || data.l || 10)} 
-          width={parseFloat(data.width || data.w || 6)} 
+          length={parseFloat(data.length || data.l || Math.sqrt(data.area || 100))} 
+          width={parseFloat(data.width || data.w || Math.sqrt(data.area || 100))} 
           depth={parseFloat(data.depth || data.d || 8)} 
           chambers={parseInt(data.chambers || 3)}
         />
@@ -91,12 +93,13 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
       )}
 
       {/* FLOOR VISUALIZER */}
-      {type === 'FLOOR' && (data.length || data.l) && (
+      {type === 'FLOOR' && (data.length || data.l || data.area) && (
         <BlueprintFlooring 
-          length={parseFloat(data.length || data.l || 15)} 
-          width={parseFloat(data.width || data.w || 12)} 
+          length={parseFloat(data.length || data.l || Math.sqrt(data.area || 225))} 
+          width={parseFloat(data.width || data.w || Math.sqrt(data.area || 144))} 
           pattern={data.pattern || 'GRID'} 
           tileSize={data.tileSize || 24}
+          unit={data.unit}
         />
       )}
 
@@ -104,7 +107,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
 
       {(type === 'PLOT' || type === 'BUILT_UP' || type === 'FSI' || type === 'ELECTRICAL' || type === 'INTERIOR') && (data.length || data.plotArea || data.carpetArea || data.area) && (
         <BlueprintLayout 
-          length={parseFloat(data.length || data.plotArea || data.carpetArea || data.area || 0)} 
+          length={parseFloat(data.length || (data.plotArea ? Math.sqrt(data.plotArea) : (data.carpetArea ? Math.sqrt(data.carpetArea) : (data.area ? Math.sqrt(data.area) : 0))))} 
           width={parseFloat(data.width || (data.plotArea ? Math.sqrt(data.plotArea) : (data.carpetArea ? Math.sqrt(data.carpetArea) : (data.area ? Math.sqrt(data.area) : 0))))} 
           label={
             type === 'BUILT_UP' ? 'Carpet Area' : 
@@ -120,6 +123,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
             type === 'INTERIOR' ? `Tier: ${data.tier?.toUpperCase()}` :
             undefined
           }
+          unit={data.unit}
         />
       )}
 
@@ -130,6 +134,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           height={Math.sqrt(parseFloat(data.area || data.carpetArea || 100))}
           thickness={0.5}
           label={type === 'PLASTER' ? 'Plaster Surface' : 'Painted Surface'}
+          unit={data.unit}
         />
       )}
 
@@ -140,6 +145,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           width={parseFloat(data.width || data.w || 8)} 
           label="Anti-Termite Treatment Zone"
           subLabel={`Perimeter: ${data.perimeter || 0}m`}
+          unit={data.unit}
         />
       )}
 
@@ -151,6 +157,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           thickness={6}
           preset="strong"
           label="Steel Reinforcement Grid"
+          unit={data.unit}
         />
       )}
 
@@ -161,6 +168,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           width={parseFloat(data.width || data.w || Math.sqrt(data.area || 100))}
           thickness={parseFloat(data.thickness || data.t || 4)}
           label={type === 'PCC' ? 'PCC Layer' : 'Concrete Volume'}
+          unit={data.unit}
         />
       )}
 
