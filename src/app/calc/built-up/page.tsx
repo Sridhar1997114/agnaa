@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { BaseCalculator } from '@/components/calculators/BaseCalculator';
 import { calculateBuiltUpAreas } from '@/lib/calculator-utils';
 import { Maximize } from 'lucide-react';
+import { Odometer } from '@/components/ui/Odometer';
 
 export default function BuiltUpAreaCalculator() {
   const [carpetArea, setCarpetArea] = useState('');
@@ -37,6 +38,8 @@ export default function BuiltUpAreaCalculator() {
       pdfFileName={`AGNAA_Builtup_Area_${fmt(results?.carpetArea || 0)}sqft.pdf`}
       pdfTitle="Built-up Area\nCalculator"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'AREA CALCULATION', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="BUILT_UP"
+      visualizerData={{ carpetArea: results?.carpetArea, builtUpArea: results?.builtUpArea, superBuiltUpArea: results?.superBuiltUpArea }}
       inputsContent={
         <div className="grid grid-cols-1 gap-4">
           <div>
@@ -54,17 +57,17 @@ export default function BuiltUpAreaCalculator() {
           <div className="space-y-6">
             <div>
               <div className="text-sm font-bold text-[#A5B4FC] mb-1">CARPET AREA</div>
-              <div className="text-3xl font-black">{fmt(results?.carpetArea || 0)} <span className="text-sm font-bold text-gray-400">SQFT</span></div>
+              <div className="text-3xl font-black"><Odometer value={results?.carpetArea || 0} /> <span className="text-sm font-bold text-gray-400">SQFT</span></div>
             </div>
             
             <div className="border-t border-white/10 pt-4">
               <div className="text-sm font-bold text-[#A5B4FC] mb-1">BUILT-UP AREA <span className="text-[10px] text-gray-400 ml-2 font-normal">(+ ~12.5% for Walls)</span></div>
-              <div className="text-4xl font-black">{fmt(results?.builtUpArea || 0)} <span className="text-sm font-bold text-gray-400">SQFT</span></div>
+              <div className="text-4xl font-black"><Odometer value={results?.builtUpArea || 0} /> <span className="text-sm font-bold text-gray-400">SQFT</span></div>
             </div>
 
             <div className="border-t border-white/10 pt-4">
               <div className="text-sm font-bold text-[#A5B4FC] mb-1">SUPER BUILT-UP AREA <span className="text-[10px] text-gray-400 ml-2 font-normal">(+ ~25% for Common Areas)</span></div>
-              <div className="text-5xl font-black text-[#7B2DBF] -translate-x-[2px]">{fmt(results?.superBuiltUpArea || 0)} <span className="text-sm font-bold text-gray-400">SQFT</span></div>
+              <div className="text-5xl font-black text-[#7B2DBF] -translate-x-[2px]"><Odometer value={results?.superBuiltUpArea || 0} /> <span className="text-sm font-bold text-gray-400">SQFT</span></div>
             </div>
           </div>
         </div>

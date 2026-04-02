@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { BaseCalculator } from '@/components/calculators/BaseCalculator';
 import { calculateTiles } from '@/lib/calculator-utils';
 import { LayoutGrid } from 'lucide-react';
+import { Odometer } from '@/components/ui/Odometer';
 
 export default function TilesCalculator() {
   const [area, setArea] = useState('');
@@ -101,11 +102,15 @@ export default function TilesCalculator() {
           <div className="space-y-4">
             <div>
               <div className="text-sm font-bold text-[#A5B4FC] mb-1">NUMBER OF TILES</div>
-              <div className="text-5xl font-black text-[#7B2DBF] brightness-125 mb-1">{fmt(results?.noOfTiles || 0)} <span className="text-lg text-gray-300">Tiles</span></div>
+              <div className="text-5xl font-black text-[#7B2DBF] brightness-125 mb-1">
+                <Odometer value={results?.noOfTiles || 0} decimals={0} /> <span className="text-lg text-gray-300">Tiles</span>
+              </div>
             </div>
             <div>
               <div className="text-sm font-bold text-[#A5B4FC] mb-1">AREA COVERED (inc. 5% Wastage)</div>
-              <div className="text-2xl font-black text-[#7B2DBF] brightness-125 mb-1">{fmt(results?.tilesArea || 0)} <span className="text-sm text-gray-300">SQFT</span></div>
+              <div className="text-2xl font-black text-[#7B2DBF] brightness-125 mb-1">
+                <Odometer value={results?.tilesArea || 0} decimals={2} /> <span className="text-sm text-gray-300">SQFT</span>
+              </div>
             </div>
           </div>
         </div>

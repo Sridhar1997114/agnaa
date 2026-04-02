@@ -246,26 +246,24 @@
   gap: 8px;
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(0,0,0,0.05); /* Adjusted for light background */
 }
 
 .optBtn {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: #fff;
-  padding: 8px 16px;
+  background: #EBEBFA; /* Light purple */
+  color: #1C1C72; /* Agnaa blue */
+  padding: 8px 14px;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 13px;
+  font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
+  border: 1px solid rgba(28, 28, 114, 0.1);
 }
 
 .optBtn:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.3);
-  transform: translateY(-1px);
+  background: #1C1C72;
+  color: #fff;
 }
 
 /* ─── Input Bar ─── */
@@ -373,4 +371,91 @@
 
 .msgBold.inUser {
   color: rgba(255, 255, 255, 0.9);
+}
+
+/* ─── Mobile Responsiveness ─── */
+@media (max-width: 640px) {
+  .aiPage {
+    padding-top: 64px; /* Slightly smaller top padding for mobile */
+  }
+
+  .aiIdentityBar {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .aiLogoIcon {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .aiTitleMain {
+    font-size: 14px;
+  }
+
+  .aiTitleSub {
+    font-size: 9px;
+  }
+
+  .chatScroll {
+    padding: 20px 14px;
+    gap: 16px;
+  }
+
+  .bubble {
+    max-width: 88%; /* Wider bubbles on small screens to save vertical space */
+    padding: 11px 15px;
+    font-size: 13.5px;
+  }
+
+  .quickActions {
+    padding: 4px 0 12px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+    margin: 0 -4px;
+    padding-left: 4px;
+  }
+
+  .quickActions::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+  }
+
+  .qaChip {
+    padding: 7px 14px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .inputBar {
+    padding: 12px 14px 20px;
+  }
+
+  .textareaWrap {
+    padding: 9px 12px;
+    border-radius: 12px;
+  }
+
+  .textareaWrap textarea {
+    font-size: 14px; /* Better readability/input on mobile */
+  }
+
+  .sendBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .footerHint {
+    font-size: 9.5px;
+    line-height: 1.4;
+    margin-top: 6px;
+  }
+
+  .msgHeading {
+    font-size: 11.5px;
+    margin: 6px 0 3px;
+  }
 }

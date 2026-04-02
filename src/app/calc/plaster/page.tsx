@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { BaseCalculator } from '@/components/calculators/BaseCalculator';
 import { calculatePlaster } from '@/lib/calculator-utils';
-import { PaintRoller } from 'lucide-react'; // use an appropriate icon
+import { PaintRoller } from 'lucide-react';
+import { Odometer } from '@/components/ui/Odometer';
 
 export default function PlasterCalculator() {
   const [area, setArea] = useState('');
@@ -48,6 +49,8 @@ export default function PlasterCalculator() {
       pdfFileName="AGNAA_Plastering_Report.pdf"
       pdfTitle="PLASTERING ESTIMATION"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'MATERIAL ESTIMATION', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="PLASTER"
+      visualizerData={{ area: results?.a }}
       inputsContent={
         <div className="space-y-6">
           <div>
@@ -59,7 +62,7 @@ export default function PlasterCalculator() {
             <input type="number" value={thickness} onChange={(e) => {setThickness(e.target.value); setIsCalculated(false);}} className="bg-white w-full rounded-xl px-3 py-2 text-base font-black text-[#1C1C72] outline-none border border-gray-200 focus:border-[#7B2DBF] transition-colors" placeholder="e.g. 12 or 15" />
             <p className="text-[10px] text-gray-400 mt-2">12mm for internal walls, 15mm-20mm for external walls.</p>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1">Mix Ratio (Cement)</label>
               <input type="number" value={ratioCement} onChange={(e) => {setRatioCement(e.target.value); setIsCalculated(false);}} className="bg-white w-full rounded-xl px-3 py-2 text-base font-black text-[#1C1C72] outline-none border border-gray-200 focus:border-[#7B2DBF] transition-colors" />
@@ -81,11 +84,11 @@ export default function PlasterCalculator() {
           <div className="space-y-4">
             <div>
               <div className="text-sm font-bold text-[#A5B4FC] mb-1">CEMENT</div>
-              <div className="text-4xl font-black text-[#7B2DBF] brightness-125 mb-1">{fmt(results?.cementBags || 0)} <span className="text-lg text-gray-300">Bags</span></div>
+              <div className="text-4xl font-black text-[#7B2DBF] brightness-125 mb-1"><Odometer value={results?.cementBags || 0} decimals={1} /> <span className="text-lg text-gray-300">Bags</span></div>
             </div>
             <div>
               <div className="text-sm font-bold text-[#A5B4FC] mb-1">SAND</div>
-              <div className="text-4xl font-black text-[#7B2DBF] brightness-125 mb-1">{fmt(results?.sandCFT || 0)} <span className="text-lg text-gray-300">Cu.Ft.</span></div>
+              <div className="text-4xl font-black text-[#7B2DBF] brightness-125 mb-1"><Odometer value={results?.sandCFT || 0} decimals={1} /> <span className="text-lg text-gray-300">Cu.Ft.</span></div>
             </div>
           </div>
         </div>

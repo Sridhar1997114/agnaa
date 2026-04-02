@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { BaseCalculator } from '@/components/calculators/BaseCalculator';
 import { calculateWaterTank } from '@/lib/calculator-utils';
 import { Waves } from 'lucide-react';
+import { Odometer } from '@/components/ui/Odometer';
 
 export default function WaterTankCalculator() {
   const [length, setLength] = useState('');
@@ -19,7 +20,8 @@ export default function WaterTankCalculator() {
     const d = parseFloat(depth) || 0;
     
     if (l > 0 && w > 0 && d > 0) {
-      setResults({ l, w, d, ...calculateWaterTank(l, w, d) });
+      const calcData = calculateWaterTank(l, w, d);
+      setResults({ l, w, d, ...calcData });
       setIsCalculated(true);
     }
   };
@@ -45,9 +47,11 @@ export default function WaterTankCalculator() {
       pdfFileName="AGNAA_WaterTank_Report.pdf"
       pdfTitle="WATER TANK CAPACITY"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'CAPACITY ESTIMATION', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="TANK"
+      visualizerData={{ length, width, depth }}
       inputsContent={
         <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1">Length (Ft)</label>
               <input type="number" value={length} onChange={(e) => {setLength(e.target.value); setIsCalculated(false);}} className="bg-white w-full rounded-xl px-3 py-2 text-base font-black text-[#1C1C72] outline-none border border-gray-200 focus:border-[#7B2DBF] transition-colors" placeholder="e.g. 10" />
@@ -69,14 +73,21 @@ export default function WaterTankCalculator() {
           
           <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-[#A5B4FC] mb-6">Tank Capacity</h3>
           
-          <div className="space-y-4">
-            <div>
-              <div className="text-sm font-bold text-[#A5B4FC] mb-1">TOTAL CAPACITY</div>
-              <div className="text-5xl font-black text-[#7B2DBF] brightness-125 mb-1">{fmt(results?.capacityLiters || 0)} <span className="text-lg text-gray-300">Liters</span></div>
+          <div className="mb-8">
+            <div className="text-sm font-bold text-[#A5B4FC] mb-1">TOTAL CAPACITY</div>
+            <div className="text-6xl font-black text-[#7B2DBF] brightness-125 flex items-baseline gap-2">
+              <Odometer value={results?.capacityLiters || 0} />
+              <span className="text-lg text-gray-400">Liters</span>
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-y-6 border-t border-white/10 pt-6">
             <div>
-              <div className="text-sm font-bold text-[#A5B4FC] mb-1">VOLUME</div>
-              <div className="text-2xl font-black text-[#7B2DBF] brightness-125 mb-1">{fmt(results?.volumeCFT || 0)} <span className="text-sm text-gray-300">Cu.Ft.</span></div>
+              <div className="text-sm font-bold text-[#A5B4FC] mb-1 uppercase tracking-wider">Volume</div>
+              <div className="text-2xl font-black flex items-baseline gap-1">
+                <Odometer value={results?.volumeCFT || 0} />
+                <span className="text-xs text-gray-400">Cu.Ft.</span>
+              </div>
             </div>
           </div>
         </div>

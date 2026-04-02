@@ -79,40 +79,57 @@ export const Header = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="lg:hidden text-[#1C1C72] hover:text-[#7B2DBF] transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        <button className="lg:hidden text-[#1C1C72] hover:text-[#7B2DBF] transition-all p-2 -mr-2 bg-white/50 backdrop-blur-md rounded-full shadow-sm border border-gray-100" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Full Screen Overlay */}
       {isMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-2xl p-6 flex flex-col gap-4 animate-in slide-in-from-top-2">
-          {navLinks.map(link => (
-            <Link 
-              key={link.id} 
-              href={link.href}
-              className={`text-left text-lg py-3 border-b border-gray-100 font-bold ${pathname === link.href ? 'text-[#7B2DBF]' : 'text-gray-500'}`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link 
-            href="/calc"
-            className={`text-left text-lg py-3 border-b border-gray-100 font-bold flex items-center gap-3 ${pathname === '/calc' ? 'text-[#7B2DBF]' : 'text-gray-500'}`}
-          >
-            <Calculator size={20} /> Agnaa Calc
-          </Link>
-          <Link 
-            href="https://ai.agnaa.in"
-            className={`text-left text-lg py-3 border-b border-gray-100 font-bold flex items-center gap-3 ${pathname === '/agnaa-intelligence' || (typeof window !== 'undefined' && window.location.hostname === 'ai.agnaa.in') ? 'text-[#7B2DBF]' : 'text-gray-500'}`}
-          >
-            <Sparkles size={20} /> Agnaa AI <span className="bg-[#7B2DBF] text-white text-[10px] px-2 py-0.5 rounded-full">NEW</span>
-          </Link>
-          <div className="pt-6 flex flex-col gap-4">
-            <a href="https://wa.me/918826214348" className="flex items-center justify-center gap-2 text-lg font-bold bg-[#F5F5F7] py-4 rounded-2xl text-[#1C1C72] border border-gray-200 hover:border-[#7B2DBF]/50 transition-all">
-              <Phone size={20} className="text-[#1C1C72]" /> +91-8826214348
-            </a>
-            <Button href="/start-project" variant="primary" className="w-full py-4 text-lg">Start Project</Button>
+        <div className="lg:hidden fixed inset-0 z-50 bg-white animate-in fade-in duration-300">
+          <div className="flex flex-col h-full">
+            <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
+              <AgnaaLogo className="h-8 w-auto" />
+              <button className="p-2 -mr-2 text-[#1C1C72] bg-[#F5F5F7] rounded-full" onClick={() => setIsMenuOpen(false)}>
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-6">
+              <div className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-2">Navigation Matrix</div>
+              {navLinks.map(link => (
+                <Link 
+                  key={link.id} 
+                  href={link.href}
+                  className={`text-3xl font-black tracking-tighter transition-colors ${pathname === link.href ? 'text-[#7B2DBF]' : 'text-[#1C1C72] hover:text-[#7B2DBF]'}`}
+                >
+                  {link.label.toUpperCase()}
+                </Link>
+              ))}
+              
+              <div className="h-px w-full bg-gray-100 my-4"></div>
+              
+              <div className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-2">Technical Portal</div>
+              <Link 
+                href="/calc"
+                className={`text-2xl font-black tracking-tighter flex items-center gap-3 ${pathname === '/calc' ? 'text-[#7B2DBF]' : 'text-[#1C1C72]'}`}
+              >
+                <Calculator size={24} /> AGNAA CALC
+              </Link>
+              <Link 
+                href="https://ai.agnaa.in"
+                className="text-2xl font-black tracking-tighter flex items-center gap-3 text-[#1C1C72]"
+              >
+                <Sparkles size={24} /> AGNAA AI <span className="bg-[#7B2DBF] text-white text-[10px] px-2 py-0.5 rounded-full font-black tracking-normal">NEW</span>
+              </Link>
+              
+              <div className="mt-auto pt-10 flex flex-col gap-4 pb-8">
+                <a href="https://wa.me/918826214348" className="flex items-center justify-center gap-3 text-lg font-black bg-[#F5F5F7] py-5 rounded-2xl text-[#1C1C72] border border-gray-200">
+                  <Phone size={20} className="text-[#1C1C72]" /> 8826214348
+                </a>
+                <Button href="/start-project" variant="primary" className="w-full py-5 text-lg shadow-[0_10px_30px_rgba(123,45,191,0.3)]">START PROJECT</Button>
+              </div>
+            </div>
           </div>
         </div>
       )}

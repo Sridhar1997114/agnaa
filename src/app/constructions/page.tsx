@@ -18,17 +18,17 @@ export default function ConstructionsPage() {
 
   return (
     <div className="bg-white min-h-screen text-[#1C1C72] pt-24">
-      <section className="py-24 text-center px-4 bg-[#F5F5F7] border-b border-gray-200 relative overflow-hidden">
+      <section className="py-16 md:py-24 text-center px-4 bg-[#F5F5F7] border-b border-gray-200 relative overflow-hidden">
         <div className="absolute bottom-0 w-full h-1 bg-gradient-to-r from-transparent via-[#7B2DBF]/20 to-transparent"></div>
-        <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tighter text-[#1C1C72]">Constructions</h1>
-        <p className="text-xl text-gray-500 font-bold">Full Management | Materials | Manpower | Gachibowli Precision</p>
+        <h1 className="text-4xl md:text-8xl font-black mb-6 tracking-tighter text-[#1C1C72]">Constructions</h1>
+        <p className="text-lg md:text-xl text-gray-500 font-bold">Full Management | Materials | Manpower | Gachibowli Precision</p>
       </section>
 
-      <section className="py-32 bg-white">
+      <section className="py-20 md:py-32 bg-white">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-20 items-center">
-            <div className="space-y-12">
-              <h2 className="text-5xl font-black mb-12 tracking-tight">Flawless Execution</h2>
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div className="space-y-8 md:space-y-12">
+              <h2 className="text-3xl md:text-5xl font-black mb-8 md:mb-12 tracking-tight">Flawless Execution</h2>
               {[
                 { t: 'Project Management', d: 'Site supervision to handover.' },
                 { t: 'Elite Materials', d: 'Quality supply chain without markups.' },
@@ -45,20 +45,20 @@ export default function ConstructionsPage() {
             </div>
             <div className="relative group">
               <img src="https://images.unsplash.com/photo-1541888086903-ee3282eb1113?auto=format&fit=crop&q=80&w=800" alt="Construction" className="rounded-[2.5rem] shadow-[0_20px_60px_rgba(28,28,114,0.08)] grayscale group-hover:grayscale-0 transition-all duration-700 border-4 border-transparent group-hover:border-[#7B2DBF]/20" />
-              <div className="absolute -bottom-8 -left-8 bg-white border border-gray-200 p-8 rounded-3xl shadow-xl group-hover:border-[#7B2DBF]/30 transition-all">
-                <div className="text-5xl font-black text-[#7B2DBF] mb-1">100%</div>
-                <div className="text-sm font-bold text-[#1C1C72] uppercase tracking-widest">Safety Record</div>
+              <div className="mt-8 md:mt-0 md:absolute md:-bottom-8 md:-left-8 bg-white border border-gray-200 p-6 md:p-8 rounded-3xl shadow-xl group-hover:border-[#7B2DBF]/30 transition-all text-center md:text-left inline-block">
+                <div className="text-4xl md:text-5xl font-black text-[#7B2DBF] mb-1">100%</div>
+                <div className="text-xs font-bold text-[#1C1C72] uppercase tracking-widest">Safety Record</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-32 bg-[#F5F5F7] border-t border-gray-200">
+      <section className="py-20 md:py-32 bg-[#F5F5F7] border-t border-gray-200">
         <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="text-5xl font-black mb-16 text-center tracking-tight text-[#1C1C72]">Manpower Calculator</h2>
-          <div className="bg-white p-8 md:p-16 rounded-[3rem] border border-gray-200 shadow-[0_20px_60px_-15px_rgba(28,28,114,0.05)] hover:border-[#7B2DBF]/30 hover:shadow-[0_20px_60px_rgba(123,45,191,0.1)] transition-all duration-700">
-            <div className="grid md:grid-cols-2 gap-16">
+          <h2 className="text-3xl md:text-5xl font-black mb-12 md:mb-16 text-center tracking-tight text-[#1C1C72]">Manpower Calculator</h2>
+          <div className="bg-white p-6 md:p-16 rounded-[2rem] md:rounded-[3rem] border border-gray-200 shadow-[0_20px_60px_-15px_rgba(28,28,114,0.05)] hover:border-[#7B2DBF]/30 hover:shadow-[0_20px_60px_rgba(123,45,191,0.1)] transition-all duration-700">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
               <div className="space-y-12">
                 <div>
                   <div className="flex justify-between mb-4">

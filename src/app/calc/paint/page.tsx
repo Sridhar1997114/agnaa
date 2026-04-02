@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { BaseCalculator } from '@/components/calculators/BaseCalculator';
 import { calculatePaint } from '@/lib/calculator-utils';
 import { Palette } from 'lucide-react';
+import { Odometer } from '@/components/ui/Odometer';
 
 export default function PaintCalculator() {
   const [carpetArea, setCarpetArea] = useState('');
@@ -39,6 +40,8 @@ export default function PaintCalculator() {
       pdfFileName="AGNAA_Paint_Report.pdf"
       pdfTitle="PAINT ESTIMATION"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'MATERIAL ESTIMATION', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="PAINT"
+      visualizerData={{ carpetArea: results?.a }}
       inputsContent={
         <div className="space-y-6">
           <div>
@@ -57,16 +60,16 @@ export default function PaintCalculator() {
           <div className="space-y-4">
             <div>
               <div className="text-sm font-bold text-[#A5B4FC] mb-1">PAINT (Total Liters)</div>
-              <div className="text-4xl font-black text-[#7B2DBF] brightness-125 mb-1">{fmt(results?.paintLiters || 0)} <span className="text-lg text-gray-300">Liters</span></div>
+              <div className="text-4xl font-black text-[#7B2DBF] brightness-125 mb-1"><Odometer value={results?.paintLiters || 0} decimals={1} /> <span className="text-lg text-gray-300">Liters</span></div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <div className="text-xs font-bold text-[#A5B4FC] mb-1">PUTTY</div>
-                <div className="text-2xl font-black text-white">{fmt(results?.puttyKg || 0)} <span className="text-sm text-gray-300">Kg</span></div>
+                <div className="text-2xl font-black text-white"><Odometer value={results?.puttyKg || 0} decimals={1} /> <span className="text-sm text-gray-300">Kg</span></div>
               </div>
               <div>
                 <div className="text-xs font-bold text-[#A5B4FC] mb-1">PRIMER</div>
-                <div className="text-2xl font-black text-white">{fmt(results?.primerLiters || 0)} <span className="text-sm text-gray-300">Liters</span></div>
+                <div className="text-2xl font-black text-white"><Odometer value={results?.primerLiters || 0} decimals={1} /> <span className="text-sm text-gray-300">Liters</span></div>
               </div>
             </div>
           </div>

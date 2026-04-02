@@ -20,16 +20,16 @@ export default function DesignStudioPage() {
 
   return (
     <div className="bg-white min-h-screen text-[#1C1C72] pt-24">
-      <section className="py-24 text-center px-4 bg-[#F5F5F7] border-b border-gray-200 relative overflow-hidden">
+      <section className="py-16 md:py-24 text-center px-4 bg-[#F5F5F7] border-b border-gray-200 relative overflow-hidden">
          <div className="absolute bottom-0 w-full h-1 bg-gradient-to-r from-transparent via-[#7B2DBF]/20 to-transparent"></div>
-        <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tighter text-[#1C1C72]">Design Studio</h1>
-        <p className="text-xl text-gray-500 font-bold">Architecture • Interiors • Graphics | Gachibowli Precision</p>
+        <h1 className="text-4xl md:text-8xl font-black mb-6 tracking-tighter text-[#1C1C72]">Design Studio</h1>
+        <p className="text-lg md:text-xl text-gray-500 font-bold">Architecture • Interiors • Graphics | Gachibowli Precision</p>
       </section>
 
-      <section className="py-32 bg-white">
+      <section className="py-20 md:py-32 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-black mb-20 text-center tracking-tight text-[#1C1C72]">Design Excellence</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <h2 className="text-3xl md:text-5xl font-black mb-12 md:mb-20 text-center tracking-tight text-[#1C1C72]">Design Excellence</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
               {t: 'Architectural Design', d: 'Concept to construction docs', i: Home},
               {t: 'Interior Design', d: 'Spaces that breathe life', i: Building},
@@ -38,7 +38,7 @@ export default function DesignStudioPage() {
               {t: 'UI/UX Design', d: 'Digital spatial experiences', i: UploadCloud},
               {t: 'Consultancy', d: 'Expert blueprint analysis', i: FileText},
             ].map((s, idx) => (
-              <div key={idx} className="bg-[#F5F5F7] p-10 rounded-3xl border border-gray-100 hover:shadow-[0_15px_40px_rgba(123,45,191,0.12)] hover:border-[#7B2DBF]/40 transition-all duration-500 group">
+              <div key={idx} className="bg-[#F5F5F7] p-8 md:p-10 rounded-3xl border border-gray-100 hover:shadow-[0_15px_40px_rgba(123,45,191,0.12)] hover:border-[#7B2DBF]/40 transition-all duration-500 group">
                 <div className="mb-4 text-[#1C1C72] group-hover:text-[#7B2DBF] transition-colors">
                   <s.i size={32} />
                 </div>
@@ -50,11 +50,11 @@ export default function DesignStudioPage() {
         </div>
       </section>
 
-      <section className="py-32 bg-[#F5F5F7] border-t border-gray-200">
+      <section className="py-20 md:py-32 bg-[#F5F5F7] border-t border-gray-200">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-white rounded-[2.5rem] p-8 md:p-16 shadow-[0_20px_60px_-15px_rgba(28,28,114,0.05)] border border-gray-200 hover:border-[#7B2DBF]/30 hover:shadow-[0_20px_60px_rgba(123,45,191,0.1)] transition-all duration-700 relative">
-            <h2 className="text-4xl font-black mb-4 text-center tracking-tight text-[#1C1C72]">Precision Calculator</h2>
-            <p className="text-center text-gray-500 font-bold mb-16">Estimate Your Design Cost – Gachibowli 2026 Rates</p>
+          <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-16 shadow-[0_20px_60px_-15px_rgba(28,28,114,0.05)] border border-gray-200 hover:border-[#7B2DBF]/30 hover:shadow-[0_20px_60px_rgba(123,45,191,0.1)] transition-all duration-700 relative">
+            <h2 className="text-3xl md:text-4xl font-black mb-4 text-center tracking-tight text-[#1C1C72]">Precision Calculator</h2>
+            <p className="text-center text-gray-500 font-bold mb-10 md:mb-16">Estimate Your Design Cost – Gachibowli 2026 Rates</p>
             
             <div className="space-y-12">
               <div>
@@ -84,7 +84,7 @@ export default function DesignStudioPage() {
               </div>
 
               <div className="bg-[#F5F5F7] p-8 rounded-3xl border border-gray-200 space-y-6">
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                   <span className="text-xl font-bold text-gray-500">Estimated Total</span>
                   <span className="font-black text-4xl text-[#1C1C72]">₹{total.toLocaleString()}</span>
                 </div>

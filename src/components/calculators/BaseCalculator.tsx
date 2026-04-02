@@ -3,30 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import Script from 'next/script';
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
-import { ArrowLeft, Download, Calculator, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Download, Calculator, ShieldCheck, Ruler, Maximize2, Info } from 'lucide-react';
 import Link from 'next/link';
+import { CalculationVisualizer } from './CalculationVisualizer';
+import { CalculatorPDFEngine } from './CalculatorPDFEngine';
+import { AgnaaLogo as SharedLogo } from '../AgnaaLogo';
+import { TerminalSearch } from '../layout/TerminalSearch';
 
-// Logo component since importing might cause circular dependency or path issues if not exported correctly.
-// Also ensures we have the exact SVG needed for the PDF export without relying on external layout wrappers.
-const AgnaaLogo = ({ className = "h-8 w-auto", fill = "", width, height }: { className?: string, fill?: string, width?: number|string, height?: number|string }) => (
-  <svg viewBox="0 0 4000 4000" className={className} width={width} height={height} xmlns="http://www.w3.org/2000/svg">
-    {!fill && (
-      <defs>
-        <linearGradient id="lg-shared" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#7B2DBF" />
-          <stop offset="100%" stopColor="#1C1C72" />
-        </linearGradient>
-      </defs>
-    )}
-    <g fill={fill || "url(#lg-shared)"}>
-      <path fillRule="evenodd" d="M104.5,3397.1 L104.5,1340.9 L703.1,1108.1 L703.1,3397.1 L503.5,3397.1 L503.5,2200 L304,2200 L304,3397.1 Z M304,2000.4 L503.5,2000.4 L503.5,1399.8 L304,1477.3 Z"/>
-      <path fillRule="evenodd" d="M902.6,3197.6 L902.6,3397.1 L1501.1,3397.1 L1501.1,797.7 L902.6,1030.5 L902.6,2200 L1301.6,2200 L1301.6,3197.6 Z M1102.1,1167 L1301.6,1089.4 L1301.6,2000.4 L1102.1,2000.4 Z"/>
-      <polygon fillRule="evenodd" points="1700.7,3397.1 1900.2,3397.1 1900.2,856.7 1999.9,817.8 2099.7,856.7 2099.7,3397.1 2299.2,3397.1 2299.2,720.1 1999.9,603.8 1700.7,720.1"/>
-      <path fillRule="evenodd" d="M2498.9,1011.8 L2897.9,1167 L2897.9,2000.4 L2498.9,2000.4 L2498.9,3397.1 L3097.4,3397.1 L3097.4,1030.5 L2498.9,797.7 Z M2698.4,2200 L2897.9,2200 L2897.9,3197.6 L2698.4,3197.6 Z"/>
-      <path fillRule="evenodd" d="M3296.9,1108.1 L3895.5,1340.9 L3895.5,3397.1 L3696,3397.1 L3696,2200 L3496.5,2200 L3496.5,3397.1 L3296.9,3397.1 Z M3496.5,1399.8 L3696,1477.3 L3696,2000.4 L3496.5,2000.4 Z"/>
-    </g>
-  </svg>
-);
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const plusJakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-plus-jakarta' });
@@ -53,6 +36,16 @@ interface BaseCalculatorProps {
   pdfSummaryBox?: React.ReactNode; // Optional bottom summary box in PDF
   pdfTotalValue?: string; // Optional final value string
   pdfTotalSubtitle?: string; // Optional text right below final value
+
+  // Advanced UX
+  visualizerType?: 'PLOT' | 'BUILT_UP' | 'FSI' | 'RCC' | 'EXCAVATION' | 'FOOTING' | 'STAIRCASE' | 'WALL' | 'TANK' | 'ROOF' | 'FLOOR' | 'SHAPE' | 'PLASTER' | 'PAINT' | 'ANTI_TERMITE' | 'STEEL' | 'PCC' | 'SETBACK' | 'G_N_FLOOR' | 'SHUTTERING' | 'SCAFFOLDING';
+
+  visualizerData?: any;
+  presets?: {
+    current: string;
+    onChange: (preset: string) => void;
+    options: Array<{ id: string; label: string; desc: string }>;
+  };
 }
 
 export function BaseCalculator({
@@ -70,18 +63,40 @@ export function BaseCalculator({
   pdfContentTable,
   pdfSummaryBox = null,
   pdfTotalValue,
-  pdfTotalSubtitle
+  pdfTotalSubtitle,
+  visualizerType,
+  visualizerData,
+  presets
 }: BaseCalculatorProps) {
   
   const [loadingPdf, setLoadingPdf] = useState(false);
   const [toast, setToast] = useState<{ msg: string; err?: boolean } | null>(null);
   const [isClient, setIsClient] = useState(false);
   const [today, setToday] = useState('');
+  const [previewScale, setPreviewScale] = useState(1);
+  const previewContainerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsClient(true);
     setToday(new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }));
   }, []);
+
+  useEffect(() => {
+    if (!isCalculated || !previewContainerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const width = entry.contentRect.width;
+        setPreviewScale(width / 794);
+      }
+    });
+    observer.observe(previewContainerRef.current);
+    
+    // Initial
+    const width = previewContainerRef.current.offsetWidth;
+    setPreviewScale(width / 794);
+    
+    return () => observer.disconnect();
+  }, [isCalculated]);
 
   const handleDownloadPdf = async () => {
     if (loadingPdf) return;
@@ -113,21 +128,11 @@ export function BaseCalculator({
           scrollX: 0,
           scrollY: 0
         },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
       };
       
-      const wrapper = document.getElementById('pdf-export-wrapper');
-      if (wrapper) {
-        wrapper.style.top = '0px';
-        wrapper.style.left = '0px';
-      }
-      
       await html2pdf().set(opt).from(el).save();
-      
-      if (wrapper) {
-        wrapper.style.top = '-9999px';
-        wrapper.style.left = '-9999px';
-      }
 
       setToast({ msg: 'Estimate Downloaded Successfully!', err: false });
 
@@ -148,82 +153,7 @@ export function BaseCalculator({
     <div className={`antialiased bg-[#F8FAFC] min-h-screen relative text-[#0F172A] ${inter.variable} ${plusJakarta.variable}`}>
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" strategy="afterInteractive" />
       
-      {/* ─── HIDDEN A4 PDF EXPORT — 794×1123px (A4 @ 96dpi) ─── */}
-      {isClient && (
-        <div id="pdf-export-wrapper" style={{ position:'absolute', top:'-9999px', left:'-9999px', pointerEvents:'none', opacity:0, overflow:'hidden', width:'794px', height:'1123px' }}>
-          <div id="agnaa-pdf-view-hq" style={{ width:'794px', height:'1123px', background:'#fff', position:'relative', fontFamily:'Inter, sans-serif', color:'#0F172A', display:'flex', flexDirection:'column', overflow:'hidden' }}>
-            
-            {/* Subtle Watermark - 5% opacity */}
-            <div style={{ position:'absolute', top:'55%', left:'50%', transform:'translate(-50%,-50%) rotate(-15deg)', width:500, opacity:0.05, zIndex:0, pointerEvents:'none' }}>
-              <AgnaaLogo fill="#1C1C72" width={500} height={500} />
-            </div>
-
-            {/* 1. HEADER */}
-            <div style={{ background:'linear-gradient(135deg, #1C1C72 0%, #2A1B81 100%)', padding:'40px 50px', color:'#fff', display:'flex', justifyContent:'space-between', alignItems:'flex-start', borderBottom:'6px solid #7B2DBF', flexShrink:0 }}>
-              <div>
-                <AgnaaLogo fill="#fff" width={70} height={70} className="mb-4" />
-                <div style={{ height:2, width:60, background:'#7B2DBF', marginBottom:12 }} />
-                <h1 style={{ fontSize:32, fontWeight:900, textTransform:'uppercase', letterSpacing:'-0.02em', margin:0, lineHeight:0.9 }}>
-                  {formattedPdfTitle}
-                </h1>
-              </div>
-              <div style={{ textAlign:'right' }}>
-                <div style={{ fontSize:9, fontWeight:900, textTransform:'uppercase', letterSpacing:'0.2em', color:'#A5B4FC', marginBottom:8 }}>Report Config</div>
-                {Object.entries(pdfProjectInfo).map(([k, v]) => (
-                  <div key={k} style={{ marginBottom: 4 }}>
-                    <div style={{ fontSize:15, fontWeight:700, color:'#fff' }}>{v}</div>
-                    <div style={{ fontSize:9, color:'#94A3B8' }}>{k}</div>
-                  </div>
-                ))}
-                <div style={{ fontSize:11, color:'#94A3B8', marginTop:8 }}>Date: {today}</div>
-              </div>
-            </div>
-
-            {/* 3. BREAKDOWN / CONTENT TABLE */}
-            <div style={{ flex:1, padding:'30px 50px', overflow:'hidden' }}>
-              <div style={{ fontSize:10, fontWeight:900, textTransform:'uppercase', letterSpacing:'0.1em', color:'#1C1C72', marginBottom:15, display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-                <span>{title} Detailed Analysis</span>
-                <span style={{ color:'#7B2DBF' }}>Page 1 of 1</span>
-              </div>
-              {pdfContentTable}
-            </div>
-
-            {/* 4. SUMMARY BOX */}
-            {pdfSummaryBox && (
-              <div style={{ padding:'0 50px 30px', flexShrink:0 }}>
-                {pdfSummaryBox}
-              </div>
-            )}
-
-            {/* 5. FINISHERS */}
-            <div style={{ background:'linear-gradient(to right, #1C1C72, #7B2DBF)', height:80, display:'flex', alignItems:'center', padding:'0 50px', justifyContent:'space-between', flexShrink:0 }}>
-              <div style={{ color:'rgba(255,255,255,0.6)', fontSize:8, fontWeight:600, maxWidth:400 }}>
-                ESTIMATE SUBJECT TO TERMS & CONDITIONS. VALUES ARE INDICATIVE AND PROVIDED BY AGNAA ENGINEERING STANDARDS.
-              </div>
-              {pdfTotalValue && (
-                <div style={{ textAlign:'right' }}>
-                  <div style={{ fontSize:7, color:'#A5B4FC', fontWeight:900, textTransform:'uppercase' }}>Final Computed Value</div>
-                  <div style={{ fontSize:28, fontWeight:900, color:'#fff', fontVariantNumeric:'tabular-nums', lineHeight:1 }}>{pdfTotalValue}</div>
-                  {pdfTotalSubtitle && <div style={{ fontSize:8, color:'#7B2DBF', fontWeight:900, textTransform:'uppercase' }}>{pdfTotalSubtitle}</div>}
-                </div>
-              )}
-            </div>
-
-            {/* 6. LEGAL FOOTER */}
-            <div style={{ borderTop:'1px solid #F1F5F9', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'0 50px', height:'50px', flexShrink:0, background:'#fff' }}>
-              <div style={{ fontSize:7, color:'#94A3B8', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em', maxWidth:350 }}>
-                © 2026 AGNAA DESIGN STUDIO PRIVATE LIMITED • THIS REPORT IS GENERATED BY AGNAA PRECISION ENGINE.
-              </div>
-              <div style={{ display:'flex', gap:10, alignItems:'center' }}>
-                <span style={{ fontSize:9, fontWeight:900, color:'#7B2DBF' }}>+91 8826214348</span>
-                <div style={{ width:1, height:12, background:'#E2E8F0' }} />
-                <span style={{ fontSize:9, fontWeight:900, color:'#1C1C72' }}>WWW.AGNAA.IN</span>
-                <span style={{ fontSize:6, background:'#7B2DBF', color:'#fff', fontWeight:900, padding:'3px 7px', borderRadius:4, textTransform:'uppercase', letterSpacing:'0.1em', marginLeft:5 }}>OFFICIAL</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* PDF is now rendered inline within the results preview portal. */}
 
       {/* ─── TOAST NOTIFICATION ─── */}
       {toast && (
@@ -241,15 +171,18 @@ export function BaseCalculator({
             <ArrowLeft size={18} />
           </Link>
           <div className="flex items-center gap-2">
-            <AgnaaLogo className="h-6 w-auto" />
+            <SharedLogo className="h-6 w-auto" />
             <div className="w-px h-4 bg-gray-300 mx-1"></div>
             <span className="text-xs font-black uppercase tracking-widest text-[#7B2DBF] hidden sm:inline-block">
               {title}
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          {isCalculated && (
+        
+        <div className="flex items-center gap-6">
+          <TerminalSearch />
+          <div className="flex items-center gap-3">
+            {isCalculated && (
             <button
               onClick={handleDownloadPdf}
               disabled={loadingPdf}
@@ -266,6 +199,7 @@ export function BaseCalculator({
           )}
         </div>
       </div>
+    </div>
 
       {/* ─── MAIN CONTENT ─── */}
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
@@ -306,13 +240,108 @@ export function BaseCalculator({
                 )}
               </div>
             </div>
+
+            {/* PRESET SELECTOR (If applicable) */}
+            {presets && (
+              <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 shadow-sm overflow-hidden relative">
+                <div className="absolute top-0 right-0 p-2 opacity-5">
+                  <ShieldCheck size={40} />
+                </div>
+                <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-[#7B2DBF] mb-4">Structural Confidence Profile</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {presets.options.map(opt => (
+                    <button
+                      key={opt.id}
+                      onClick={() => presets.onChange(opt.id)}
+                      className={`text-left p-3 rounded-xl border transition-all ${
+                        presets.current === opt.id 
+                          ? 'border-[#7B2DBF] bg-[#7B2DBF]/5 ring-1 ring-[#7B2DBF]' 
+                          : 'border-gray-100 bg-gray-50 hover:border-gray-300'
+                      }`}
+                    >
+                      <div className={`text-[9px] font-black uppercase tracking-widest mb-1 ${presets.current === opt.id ? 'text-[#7B2DBF]' : 'text-gray-500'}`}>
+                        {opt.label}
+                      </div>
+                      <div className="text-[10px] text-gray-400 leading-tight">{opt.desc}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           
           {/* Results Content */}
           <div className="lg:sticky lg:top-24">
             {isCalculated ? (
-              <div className="animate-in slide-in-from-bottom-4 fade-in duration-500">
+              <div className="animate-in slide-in-from-bottom-4 fade-in duration-500 space-y-6">
                 {resultsContent}
+                
+                {/* ─── LIVE DRAFTING VISUALIZER ─── */}
+                {visualizerType && (
+                  <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-sm">
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-[#7B2DBF]">Live Drafting Port</h3>
+                        <p className="text-xs text-gray-500 mt-1">Algorithmic Spatial Projection</p>
+                      </div>
+                      <div className="flex gap-1">
+                        <div className="w-1 h-1 bg-[#7B2DBF] rounded-full animate-ping"></div>
+                        <div className="text-[8px] font-bold text-[#7B2DBF] uppercase">System Live</div>
+                      </div>
+                    </div>
+                    <CalculationVisualizer type={visualizerType} data={visualizerData} className="aspect-[4/3]" />
+                  </div>
+                )}
+                
+                {/* ─── A4 PREVIEW PORTAL ─── */}
+                <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-sm">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-[#7B2DBF]">Report Preview</h3>
+                      <p className="text-xs text-gray-500 mt-1">A4 format, ready for dispatch</p>
+                    </div>
+                    <button
+                      onClick={handleDownloadPdf}
+                      disabled={loadingPdf}
+                      className="text-[#1C1C72] hover:bg-gray-50 p-2 rounded-lg transition-colors disabled:opacity-50"
+                      title="Download full PDF"
+                    >
+                      {loadingPdf ? (
+                        <div className="w-4 h-4 border-2 border-[#1C1C72]/30 border-t-[#1C1C72] rounded-full animate-spin"></div>
+                      ) : (
+                        <Download size={18} />
+                      )}
+                    </button>
+                  </div>
+
+                    <div 
+                      ref={previewContainerRef} 
+                      className="w-full relative overflow-hidden bg-gray-100 rounded-lg border border-gray-200 shadow-inner"
+                      style={{ height: `${(visualizerType ? 1123 * 2 : 1123) * previewScale}px` }}
+                    >
+                      <div style={{ transform: `scale(${previewScale})`, transformOrigin: 'top left', width: '794px' }}>
+                        <CalculatorPDFEngine
+                          id="agnaa-pdf-view-hq"
+                          title={pdfTitle || title}
+                          subtitle="Precision Engineering Report"
+                          projectInfo={pdfProjectInfo}
+                          contentTable={pdfContentTable}
+                          summaryBox={pdfSummaryBox}
+                          totalValue={pdfTotalValue}
+                          totalSubtitle={pdfTotalSubtitle}
+                          date={today}
+                          logo={<SharedLogo className="h-10 w-auto" />}
+                          watermarkLogo={<SharedLogo className="w-full h-full" />}
+                          visualizer={visualizerType ? (
+                            <div style={{ width: 400, height: 300 }}>
+                              <CalculationVisualizer type={visualizerType} data={visualizerData} />
+                            </div>
+                          ) : undefined}
+                          visualizerLabel={visualizerType ? `Structural Diagram // Ref: ${visualizerType}-01` : undefined}
+                        />
+                      </div>
+                    </div>
+                </div>
               </div>
             ) : (
               <div className="bg-white rounded-2xl border border-dashed border-gray-300 p-8 text-center flex flex-col items-center justify-center h-full min-h-[300px]">

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { BaseCalculator } from '@/components/calculators/BaseCalculator';
 import { calculateFSI, calculateMaxBuiltUpArea } from '@/lib/calculator-utils';
 import { Building2 } from 'lucide-react';
+import { Odometer } from '@/components/ui/Odometer';
 
 export default function FSICalculator() {
   const [plotArea, setPlotArea] = useState('');
@@ -53,6 +54,8 @@ export default function FSICalculator() {
       pdfFileName={`AGNAA_FSI_Report.pdf`}
       pdfTitle="FAR / FSI\nConfiguration"
       pdfProjectInfo={{ 'DOCUMENT TYPE': 'DEVELOPMENT POTENTIAL', 'SOURCE': 'AGNAA PRECISION ENGINE' }}
+      visualizerType="FSI"
+      visualizerData={{ plotArea: results?.pArea, builtUpArea: results?.bArea || results?.maxBuiltUpArea, fsi: results?.fsi || results?.fValue }}
       inputsContent={
         <div className="space-y-6">
           <div className="flex gap-2 p-1 bg-gray-100 rounded-xl">
@@ -99,13 +102,17 @@ export default function FSICalculator() {
           {results?.mode === 'calc-fsi' ? (
             <div>
               <div className="text-sm font-bold text-[#A5B4FC] mb-1">COMPUTED FSI (FAR)</div>
-              <div className="text-6xl font-black text-[#7B2DBF] brightness-125 mb-4">{fmt(results?.fsi || 0)}</div>
+              <div className="text-6xl font-black text-[#7B2DBF] brightness-125 mb-4">
+                <Odometer value={results?.fsi || 0} decimals={2} />
+              </div>
               <p className="text-sm text-gray-300">You are building {fmt(results?.fsi || 0)} times the area of your plot.</p>
             </div>
           ) : (
             <div>
               <div className="text-sm font-bold text-[#A5B4FC] mb-1">MAX. BUILT-UP AREA</div>
-              <div className="text-5xl font-black text-[#7B2DBF] brightness-125 mb-4">{fmt(results?.maxBuiltUpArea || 0)} <span className="text-lg text-gray-300">UNITS</span></div>
+              <div className="text-5xl font-black text-[#7B2DBF] brightness-125 mb-4">
+                <Odometer value={results?.maxBuiltUpArea || 0} decimals={2} /> <span className="text-lg text-gray-300">UNITS</span>
+              </div>
               <p className="text-sm text-gray-300">Based on a plot area of {fmt(results?.pArea || 0)} and an FSI of {fmt(results?.fValue || 0)}.</p>
             </div>
           )}

@@ -22,14 +22,14 @@ export default function PortfolioPage() {
 
   return (
     <div className="bg-white min-h-screen text-[#1C1C72] pt-24">
-      <section className="py-20 text-center px-4">
-        <h1 className="text-6xl md:text-7xl font-black mb-6 tracking-tighter text-[#1C1C72]">Proof: 100+ Masterpieces</h1>
-        <p className="text-xl text-gray-500 font-medium max-w-2xl mx-auto">Filter by Type | Location | Year | Led by Architect Sridhar</p>
+      <section className="py-16 md:py-20 text-center px-4">
+        <h1 className="text-4xl md:text-7xl font-black mb-6 tracking-tighter text-[#1C1C72]">Proof: 100+ Masterpieces</h1>
+        <p className="text-lg md:text-xl text-gray-500 font-medium max-w-2xl mx-auto">Filter by Type | Location | Year | Led by Architect Sridhar</p>
       </section>
 
       <section className="sticky top-[72px] z-30 bg-white/90 backdrop-blur-xl border-y border-gray-200 py-4 shadow-sm">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap md:flex-nowrap gap-2 overflow-x-auto no-scrollbar pb-2 md:pb-0 w-full md:w-auto">
             {filters.map(cat => (
               <button 
                 key={cat} 
@@ -77,8 +77,8 @@ export default function PortfolioPage() {
         )}
       </section>
 
-      <section className="py-32 bg-[#F5F5F7] border-t border-gray-200">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-20 items-center">
+      <section className="py-24 md:py-32 bg-[#F5F5F7] border-t border-gray-200">
+        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           <div>
             <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=800" alt="Architect Sridhar" className="w-full max-w-md mx-auto rounded-full shadow-[0_20px_60px_rgba(28,28,114,0.1)] grayscale hover:grayscale-0 hover:shadow-[0_20px_60px_rgba(123,45,191,0.2)] transition-all duration-700 border-4 border-transparent hover:border-[#7B2DBF]/20" />
           </div>
