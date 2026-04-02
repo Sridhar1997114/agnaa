@@ -9,14 +9,14 @@ import {
   Settings, Bug, Box, Grid, Columns,
   Layout, Square, Droplet, Frame, Scan,
   Paintbrush, Compass, PenTool, Home, 
-  Zap, RefreshCcw, Database, Calculator, Search, ChevronRight
+  Zap, RefreshCcw, Database, Calculator, Search, ChevronRight,
+  ArrowUpRight
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const CATEGORIES = [
   {
     title: 'Architecture & Spatial Planning',
-    color: 'from-[#7B2DBF]/10 to-[#1C1C72]/10',
-    iconColor: 'text-[#1C1C72]',
     items: [
       { id: 'plot-area', name: 'Plot Area Module', desc: 'Compute bounds in SqFt, SqYards, Acres & Guntas.', href: '/calc/plot-area', icon: Map },
       { id: 'setback-envelope', name: 'Setback Envelope', desc: 'Extrapolate buildable rectangle after offset subtractions.', href: '/calc/setback-envelope', icon: Ruler },
@@ -29,8 +29,6 @@ const CATEGORIES = [
   },
   {
     title: 'Core Structural & Earthwork',
-    color: 'from-[#7B2DBF]/10 to-[#1C1C72]/10',
-    iconColor: 'text-[#1C1C72]',
     items: [
       { id: 'excavation-earthwork', name: 'Trench / Excavation', desc: 'Earthwork volume factoring spatial soil bulking expansion.', href: '/calc/excavation-earthwork', icon: Settings },
       { id: 'anti-termite', name: 'Anti-Termite Treatment', desc: 'Chemical emulsion calculation for sub-grade foundation zones.', href: '/calc/anti-termite', icon: Bug },
@@ -43,8 +41,6 @@ const CATEGORIES = [
   },
   {
     title: 'Masonry & Enabling Works',
-    color: 'from-[#7B2DBF]/10 to-[#1C1C72]/10',
-    iconColor: 'text-[#1C1C72]',
     items: [
       { id: 'brick', name: 'Brickwork Massing', desc: 'Unit block counts and mortar batching for partition walls.', href: '/calc/brick', icon: Grid },
       { id: 'aac-blocks', name: 'AAC Block Array', desc: 'Lightweight aerated core elements and thin-bed joining mortar.', href: '/calc/aac-blocks', icon: Grid },
@@ -57,8 +53,6 @@ const CATEGORIES = [
   },
   {
     title: 'Finishes & Interiors',
-    color: 'from-[#7B2DBF]/10 to-[#1C1C72]/10',
-    iconColor: 'text-[#1C1C72]',
     items: [
       { id: 'paint', name: 'Paint Surface Yield', desc: 'Estimate gallons correcting for negative wall openings.', href: '/calc/paint', icon: Paintbrush },
       { id: 'advanced-flooring', name: 'Advanced Tile Topology', desc: 'Stone/tile layouts factoring complex edge cutoff wastage.', href: '/calc/advanced-flooring', icon: Compass },
@@ -68,8 +62,6 @@ const CATEGORIES = [
   },
   {
     title: 'Utilities & Macro Financials',
-    color: 'from-[#7B2DBF]/10 to-[#1C1C72]/10',
-    iconColor: 'text-[#1C1C72]',
     items: [
       { id: 'electrical', name: 'Electrical Hub Loading', desc: 'Wattage threshold and primary lighting/power node arrays.', href: '/calc/electrical', icon: Zap },
       { id: 'septic-tank', name: 'Septic Sludge Digester', desc: 'Sanitary volumetric scaling for residential liquid waste.', href: '/calc/septic-tank', icon: RefreshCcw },
@@ -79,81 +71,165 @@ const CATEGORIES = [
   }
 ];
 
+const CalculatorCard = ({ item, index }: { item: any, index: number }) => {
+  const router = useRouter();
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsClicked(true);
+    // Timing synced with the expansion animation
+    setTimeout(() => {
+      router.push(item.href);
+    }, 600);
+  };
+
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, scale: 0.95 },
+        visible: { opacity: 1, scale: 1 }
+      }}
+      transition={{ delay: index * 0.03, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="relative"
+    >
+      <Link 
+        href={item.href}
+        onClick={handleClick}
+        className={`group block bg-white/70 backdrop-blur-xl rounded-[1.5rem] p-8 hover:shadow-[0_40px_80px_-20px_rgba(28,28,114,0.12)] transition-all duration-700 border border-white/40 hover:border-[#7B2DBF]/20 overflow-hidden active:scale-[0.98] ${isClicked ? 'opacity-0 scale-105 pointer-events-none' : ''}`}
+      >
+        <div className="flex flex-col items-center text-center space-y-6">
+          {/* ROUNDED GRADIENT ICON Container */}
+          <div className="relative">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#1C1C72] to-[#7B2DBF] flex items-center justify-center shadow-[0_12px_24px_-6px_rgba(123,45,191,0.4)] group-hover:shadow-[0_20px_40px_-8px_rgba(123,45,191,0.5)] group-hover:scale-110 group-hover:rotate-[10deg] transition-all duration-700 ease-[0.16, 1, 0.3, 1]">
+              <item.icon className="w-8 h-8 text-white" strokeWidth={1.25} />
+            </div>
+            {/* Pulsing ring */}
+            <div className="absolute inset-0 rounded-full border-2 border-[#7B2DBF]/0 group-hover:border-[#7B2DBF]/20 group-hover:scale-125 transition-all duration-1000"></div>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="text-sm font-black text-[#1C1C72] uppercase tracking-[0.15em] group-hover:text-[#7B2DBF] transition-colors duration-500">
+              {item.name}
+            </h3>
+            <p className="text-xs text-slate-500 font-medium leading-relaxed max-w-[180px] mx-auto opacity-70 group-hover:opacity-100 transition-opacity duration-500">
+              {item.desc}
+            </p>
+          </div>
+        </div>
+
+        {/* Minimal indicator */}
+        <div className="absolute bottom-6 right-6 translate-x-2 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500">
+          <div className="w-8 h-8 rounded-full bg-[#1C1C72]/5 flex items-center justify-center">
+            <ArrowUpRight className="w-4 h-4 text-[#1C1C72]" />
+          </div>
+        </div>
+      </Link>
+
+      {/* Premium Liquid Expansion Reveal */}
+      <AnimatePresence>
+        {isClicked && (
+          <motion.div
+            initial={{ clipPath: 'circle(0% at 50% 50%)', opacity: 0 }}
+            animate={{ clipPath: 'circle(150% at 50% 50%)', opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-[100] bg-gradient-to-br from-[#1C1C72] to-[#7B2DBF] flex items-center justify-center pointer-events-none"
+          >
+             <motion.div
+               initial={{ scale: 0.8, opacity: 0 }}
+               animate={{ scale: 1, opacity: 1 }}
+               transition={{ delay: 0.2, duration: 0.5 }}
+               className="text-white flex flex-col items-center gap-6"
+             >
+               <div className="w-24 h-24 rounded-full border border-white/20 flex items-center justify-center relative overflow-hidden">
+                  <motion.div 
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                  >
+                    <item.icon className="w-10 h-10 text-white" strokeWidth={1} />
+                  </motion.div>
+                  <div className="absolute inset-0 bg-white/5 animate-pulse"></div>
+               </div>
+               <div className="text-center">
+                 <h2 className="text-xl font-black uppercase tracking-[0.4em] mb-2">{item.name}</h2>
+                 <p className="text-white/40 text-[10px] font-bold tracking-[0.2em]">INITIALIZING AGNAA PRECISION ENGINE</p>
+               </div>
+             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
 export default function CalculatorsHub() {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] text-[#0F172A] font-inter selection:bg-[#7B2DBF] selection:text-white pb-32">
+    <div className="min-h-screen bg-slate-50 text-[#0F172A] font-inter selection:bg-[#7B2DBF] selection:text-white pb-32 relative overflow-hidden">
       
-      {/* ELEGANT HEADER */}
-      <div className="relative overflow-hidden bg-white border-b border-gray-100/60 pt-28 pb-20 px-6 lg:px-12">
-        {/* Soft Ambient Gradients */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-full overflow-hidden pointer-events-none opacity-40">
-          <div className="absolute -top-[40%] -left-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-r from-purple-400/20 to-indigo-400/20 blur-[100px]" />
-          <div className="absolute -top-[20%] -right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-r from-pink-400/20 to-rose-400/20 blur-[100px]" />
-        </div>
+      {/* ARCHITECTURAL DOT GRID BACKGROUND */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(#1C1C72 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+      
+      {/* FLOWING GRADIENT ORBS */}
+      <div className="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-gradient-to-br from-[#7B2DBF]/10 to-transparent blur-[120px] pointer-events-none" />
+      <div className="absolute top-[40%] -left-[10%] w-[40%] h-[40%] rounded-full bg-gradient-to-tr from-[#1C1C72]/5 to-transparent blur-[100px] pointer-events-none" />
 
-        <div className="max-w-[1400px] mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16">
-            <div className="max-w-2xl">
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#1C1C72]/5 border border-[#1C1C72]/10 text-[#1C1C72] text-xs font-semibold tracking-wide mb-6"
-              >
-                <span className="w-2 h-2 rounded-full bg-[#7B2DBF] animate-pulse" />
-                AGNAA PRECISION ENGINE
-              </motion.div>
-              <motion.h1 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-6"
-              >
-                Calculation Hub
-              </motion.h1>
-              <motion.p 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-gray-500 leading-relaxed font-light"
-              >
-                A suite of elegant, high-performance tools engineered for architectural validation, precise material estimation, and structural sanity checks.
-              </motion.p>
+      {/* TERMINAL SEARCH - TOP RIGHT */}
+      <div className="fixed top-8 right-8 z-[60]">
+        <TerminalSearch />
+      </div>
+
+      {/* MINIMALIST HEADER */}
+      <div className="relative z-10 pt-40 pb-20 px-6 lg:px-12">
+        <div className="max-w-[1400px] mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#7B2DBF]/30" />
+              <span className="text-[11px] font-black uppercase tracking-[0.5em] text-[#1C1C72]/50">Agnaa Intelligence</span>
+              <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#7B2DBF]/30" />
             </div>
             
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex-shrink-0"
-            >
-               <TerminalSearch />
-            </motion.div>
-          </div>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="group relative max-w-2xl"
-          >
-            <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-              <Search className="w-6 h-6 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+            <h1 className="text-6xl md:text-8xl font-black text-[#1C1C72] tracking-[-0.05em] mb-10 leading-[0.9]">
+              Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C1C72] via-[#7B2DBF] to-[#1C1C72] animate-gradient-x">Engineering</span><br/>Calculators.
+            </h1>
+
+            <div className="max-w-2xl mx-auto space-y-12">
+              <p className="text-lg text-slate-500 font-medium leading-relaxed opacity-80 italic">
+                Validating structural integrity through algorithmic excellence.
+              </p>
+
+              <div className="relative group max-w-xl mx-auto">
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#1C1C72]/10 to-[#7B2DBF]/10 rounded-2xl blur opacity-25 group-focus-within:opacity-100 transition-all duration-1000"></div>
+                <div className="relative flex items-center bg-white rounded-2xl border border-slate-200/60 shadow-[0_20px_40px_-15px_rgba(28,28,114,0.05)] overflow-hidden transition-all duration-500 group-focus-within:shadow-[0_25px_50px_-12px_rgba(123,45,191,0.15)] group-focus-within:border-[#7B2DBF]/30">
+                  <div className="pl-6 pointer-events-none">
+                    <Search className="w-5 h-5 text-slate-400 group-focus-within:text-[#7B2DBF] transition-colors" />
+                  </div>
+                  <input 
+                    type="text" 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search engineering modules..." 
+                    className="w-full bg-transparent outline-none text-base font-bold text-[#1C1C72] placeholder:text-slate-300 placeholder:font-medium px-4 py-6"
+                  />
+                  <div className="pr-6">
+                    <kbd className="hidden md:inline-flex items-center px-2 py-1 bg-slate-50 border border-slate-200 rounded-md text-[10px] font-black text-slate-400">⌘ K</kbd>
+                  </div>
+                </div>
+              </div>
             </div>
-            <input 
-              type="text" 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search estimators and modules..." 
-              className="w-full bg-white/80 backdrop-blur-xl border border-gray-200 rounded-3xl outline-none text-xl md:text-2xl font-medium text-gray-800 placeholder:text-gray-400 pl-16 pr-8 py-5 shadow-sm transform transition-all duration-300 focus:shadow-xl focus:border-[#7B2DBF]/30 focus:ring-4 focus:ring-[#7B2DBF]/10"
-            />
           </motion.div>
         </div>
       </div>
 
       {/* CALCULATORS GRID */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mt-20">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="space-y-24">
           {CATEGORIES.map((cat, catIdx) => {
             const filteredItems = cat.items.filter(item => 
@@ -164,79 +240,38 @@ export default function CalculatorsHub() {
             if (filteredItems.length === 0) return null;
 
             return (
-              <motion.div 
-                key={cat.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5 }}
-              >
-                {/* Category Header */}
-                <div className="flex items-center gap-4 mb-10">
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${cat.color} backdrop-blur-sm shadow-sm border border-white/50`}>
-                     {/* Category Icon */}
-                     {catIdx === 0 && <Compass className={`w-6 h-6 ${cat.iconColor}`} />}
-                     {catIdx === 1 && <Layers className={`w-6 h-6 ${cat.iconColor}`} />}
-                     {catIdx === 2 && <Grid className={`w-6 h-6 ${cat.iconColor}`} />}
-                     {catIdx === 3 && <Paintbrush className={`w-6 h-6 ${cat.iconColor}`} />}
-                     {catIdx === 4 && <Zap className={`w-6 h-6 ${cat.iconColor}`} />}
-                  </div>
-                  <div>
-                    <h2 className="text-2xl font-bold tracking-tight text-gray-900">{cat.title}</h2>
-                    <p className="text-sm font-medium text-gray-400 mt-1">{filteredItems.length} modules available</p>
-                  </div>
-                </div>
+              <div key={cat.title}>
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  className="flex items-center gap-4 mb-10"
+                >
+                  <h2 className="text-xs font-black tracking-[0.2em] uppercase text-[#1C1C72]/60">{cat.title}</h2>
+                  <div className="flex-1 h-[1px] bg-gray-100"></div>
+                  <span className="text-[10px] font-bold text-gray-300 tabular-nums">{filteredItems.length} TOOLS</span>
+                </motion.div>
 
-                {/* Items Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <motion.div 
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"
+                >
                   {filteredItems.map((item, index) => (
-                    <Link 
-                      key={item.id} 
-                      href={item.href}
-                      className="group relative bg-white border border-gray-100 rounded-3xl p-8 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:border-[#1C1C72]/20 transition-all duration-500 overflow-hidden flex flex-col h-[280px]"
-                    >
-                      {/* Background Gradient Hover Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#7B2DBF]/0 to-[#7B2DBF]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      {/* Content */}
-                      <div className="relative z-10 flex-1 flex flex-col">
-                        <div className="flex items-start justify-between mb-8">
-                          <div className={`w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:scale-110 group-hover:bg-[#1C1C72]/5 group-hover:border-[#1C1C72]/20 group-hover:shadow-lg group-hover:shadow-[#1C1C72]/10 transition-all duration-500 ease-out`}>
-                            <item.icon className={`w-7 h-7 text-gray-400 group-hover:${cat.iconColor} transition-colors duration-500`} strokeWidth={1.5} />
-                          </div>
-                          
-                          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 shadow-sm border border-gray-100">
-                             <ChevronRight className="w-4 h-4 text-[#7B2DBF]" />
-                          </div>
-                        </div>
-                        
-                        <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-[#1C1C72] transition-colors">
-                          {item.name}
-                        </h3>
-                        
-                        <p className="text-sm text-gray-500 leading-relaxed font-normal mt-auto">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </Link>
+                    <CalculatorCard key={item.id} item={item} index={index} />
                   ))}
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             );
           })}
           
-          {/* 404 Empty State */}
+          {/* Empty State */}
           {CATEGORIES.every(cat => cat.items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()) || item.desc.toLowerCase().includes(searchQuery.toLowerCase())).length === 0) && (
-            <motion.div 
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              className="py-32 text-center flex flex-col items-center justify-center"
-            >
-              <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-6">
-                 <Search className="w-10 h-10 text-gray-300" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">No modules found</h3>
-              <p className="text-gray-500 max-w-md">We couldn't find anything matching "{searchQuery}". Try adjusting your search terms or browsing the categories.</p>
-            </motion.div>
+            <div className="py-24 text-center">
+              <div className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300 mb-2">No matching systems</div>
+              <div className="text-lg font-medium text-gray-400">Try searching for a different module.</div>
+            </div>
           )}
         </div>
       </div>
