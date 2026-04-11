@@ -5,6 +5,18 @@ export function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') || '';
   const pathname = request.nextUrl.pathname;
 
+  // Check if the request is coming from the 'pro' subdomain
+  if (hostname.startsWith('pro.agnaa.in') || hostname.startsWith('pro.localhost')) {
+    if (pathname === '/') {
+      return NextResponse.rewrite(new URL('/pro', request.url));
+    }
+  }
+
+  // Redirect /pro to pro.agnaa.in if accessed directly
+  if (pathname.startsWith('/pro') && !hostname.startsWith('pro.') && !hostname.includes('localhost')) {
+    return NextResponse.redirect(new URL('https://pro.agnaa.in', request.url));
+  }
+
   // Check if the request is coming from the 'cost' subdomain
   if (hostname.startsWith('cost.agnaa.in')) {
     // If visiting the root of the subdomain, rewrite to the /cost page invisibly

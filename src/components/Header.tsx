@@ -94,11 +94,18 @@ export const Header = () => {
             <Calculator size={20} strokeWidth={2} />
           </Link>
           <Link 
-            href="/commercial/invoice" 
-            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent ${pathname === '/commercial/invoice' ? 'bg-[#7B2DBF] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#1C1C72]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
-            title="Create Service Invoice (Internal)"
+            href="/commercial/quotation" 
+            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent ${pathname === '/commercial/quotation' ? 'bg-[#7B2DBF] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#1C1C72]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
+            title="Create Service Quotation (Internal)"
           >
             <FileText size={20} strokeWidth={2} />
+          </Link>
+          <div className="w-px h-6 bg-gray-200"></div>
+          <Link 
+            href="/clients" 
+            className={`text-sm font-bold transition-colors ${pathname === '/clients' ? 'text-[#7B2DBF]' : 'text-gray-500 hover:text-[#7B2DBF]'}`}
+          >
+            Client Login
           </Link>
           <div className="w-px h-6 bg-gray-200"></div>
           <a href="https://wa.me/918826214348" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#7B2DBF] transition-colors">
@@ -146,10 +153,10 @@ export const Header = () => {
                 <Calculator size={24} /> AGNAA CALC
               </Link>
               <Link 
-                href="/commercial/invoice"
-                className={`text-2xl font-black tracking-tighter flex items-center gap-3 ${pathname === '/commercial/invoice' ? 'text-[#7B2DBF]' : 'text-[#1C1C72]'}`}
+                href="/commercial/quotation"
+                className={`text-2xl font-black tracking-tighter flex items-center gap-3 ${pathname === '/commercial/quotation' ? 'text-[#7B2DBF]' : 'text-[#1C1C72]'}`}
               >
-                <FileText size={24} /> CREATE INVOICE <span className="bg-[#1C1C72] text-white text-[10px] px-2 py-0.5 rounded-full font-black tracking-normal">INTERNAL</span>
+                <FileText size={24} /> CREATE QUOTATION <span className="bg-[#1C1C72] text-white text-[10px] px-2 py-0.5 rounded-full font-black tracking-normal">INTERNAL</span>
               </Link>
               
               <div className="mt-auto pt-10 flex flex-col gap-4 pb-8">

@@ -1,0 +1,77 @@
+{
+  "clientName": "Enthalpy Labs",
+  "projectTitle": "Agnaa Ongoing Works — Enthalpy Labs",
+  "stats": {
+    "deliverables": "170+",
+    "stages": 16,
+    "startDate": "2026-04-08"
+  },
+  "overallProgress": {
+    "completed": 16,
+    "total": 170,
+    "milestones": [
+      { "label": "Advance Paid — Project Live", "status": "completed" },
+      { "label": "Design Approval", "status": "pending" },
+      { "label": "Development Complete", "status": "pending" },
+      { "label": "Final Handover", "status": "pending" }
+    ]
+  },
+  "summary": {
+    "completed": 16,
+    "pipeline": 154,
+    "totalValue": "₹1.25L"
+  },
+  "stages": [
+    {
+      "icon": "🔺",
+      "title": "Logo & Identity System",
+      "count": "6/12",
+      "items": [
+        { "name": "ΔH Tetrahedron logomark — sacred geometry fire symbol", "desc": "Your ΔH = enthalpy heat icon. Unique worldwide.", "status": "done" },
+        { "name": "Logo gradient version with fire facets", "desc": "Amber fire → orange glow depth effect.", "status": "done" },
+        { "name": "Full wordmark SVG — ENTHALPY bold + LABS grey", "desc": "Hierarchy locked. Navy + grey system.", "status": "done" },
+        { "name": "Inline logo — icon replaces 'A' in ENTHALPY", "desc": "FedEx-arrow level cleverness. Iconic.", "status": "done" },
+        { "name": "Standalone icon SVG (favicon-ready)", "desc": "32px–512px perfect clarity.", "status": "done" },
+        { "name": "Logo on white background PNG", "desc": "Print, presentations, email use.", "status": "todo" },
+        { "name": "Logo on dark background PNG", "desc": "Website header, dark slides.", "status": "todo" },
+        { "name": "Logo B&W monotone version", "desc": "Stamp, watermark, legal docs.", "status": "done" },
+        { "name": "Inverted white logo version", "desc": "Dark print, embossing.", "status": "todo" },
+        { "name": "Stacked mobile logo (icon above text)", "desc": "App icon, square formats.", "status": "todo" },
+        { "name": "Logo minimum size rules (32px floor)", "desc": "Brand guideline protection.", "status": "todo" },
+        { "name": "Trademark-ready SVG master file", "desc": "IP protection filing ready.", "status": "todo" }
+      ]
+    },
+    {
+      "icon": "🎨",
+      "title": "Brand Color & Typography System",
+      "count": "5/10",
+      "items": [
+        { "name": "4-color palette locked — Navy, Amber, Grey, Off-White", "desc": "Global industrial trust palette.", "status": "done" },
+        { "name": "Color psychology rationale document", "desc": "Amber=heat, Navy=authority, Grey=precision.", "status": "todo" },
+        { "name": "WCAG AA contrast verified (5.12:1)", "desc": "Accessibility compliance certified.", "status": "done" },
+        { "name": "Dark mode color variants", "desc": "Website dark/light toggle ready.", "status": "todo" },
+        { "name": "Inter variable font system", "desc": "Bold 700 / Regular 400 / Mono locked.", "status": "done" },
+        { "name": "Typography specimen PDF", "desc": "H1 48px → Body 16px → Mono 14px.", "status": "todo" },
+        { "name": "Brand guidelines PDF (dos/don'ts)", "desc": "Permanent usage bible.", "status": "todo" },
+        { "name": "Color hex codes + Tailwind config", "desc": "Developer-ready tokens.", "status": "done" },
+        { "name": "CSS variables export", "desc": "Website + email + print consistent.", "status": "done" },
+        { "name": "Social media color templates", "desc": "LinkedIn, Instagram consistent.", "status": "todo" }
+      ]
+    },
+    {
+      "icon": "🌐",
+      "title": "Website Structure & Core",
+      "count": "3/14",
+      "items": [
+        { "name": "Next.js 15 production build — zero errors", "desc": "Enterprise-grade foundation.", "status": "done" },
+        { "name": "Tailwind config locked to brand system", "desc": "Pixel-perfect brand consistency.", "status": "done" },
+        { "name": "Responsive design (375px to 1440px)", "desc": "Perfect on all screens.", "status": "done" }
+      ]
+    }
+  ],
+  "paymentMilestones": [
+    { "label": "Advance", "val": "✅ Paid", "tag": "Project started", "status": "paid" },
+    { "label": "Design Approval", "val": "⏳ Pending", "tag": "On preview sign-off", "status": "pending" },
+    { "label": "Final Handover", "val": "⏳ Pending", "tag": "On project delivery", "status": "pending" }
+  ]
+}

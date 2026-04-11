@@ -8,6 +8,7 @@ interface ButtonProps {
   onClick?: () => void;
   href?: string;
   type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
 }
 
 export const Button = ({ 
@@ -16,7 +17,8 @@ export const Button = ({
   className = '', 
   onClick, 
   href, 
-  type = 'button' 
+  type = 'button',
+  disabled = false
 }: ButtonProps) => {
   const base = "px-6 py-3 rounded-full font-bold transition-all duration-500 flex items-center justify-center gap-2 relative overflow-hidden text-center";
   
@@ -37,7 +39,7 @@ export const Button = ({
   }
 
   return (
-    <button type={type} onClick={onClick} className={combinedClasses}>
+    <button type={type} onClick={onClick} className={combinedClasses} disabled={disabled}>
       {children}
     </button>
   );
