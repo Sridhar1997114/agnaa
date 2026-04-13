@@ -39,7 +39,7 @@ const CLIENT_DATA = {
     { label: "Completed", val: "17", color: "text-green-400" },
     { label: "In Pipeline", val: "155", color: "text-[#F4B400]" },
     { label: "Total Value", val: "₹1.25L", color: "text-blue-400" },
-    { label: "Days Active", val: "4", color: "text-gray-400" }
+    { label: "Days Running", val: "6", color: "text-gray-400" }
   ],
   stages: [
      {
@@ -74,6 +74,25 @@ const CLIENT_DATA = {
       ]
     },
     {
+      icon: <Layers className="w-5 h-5 text-indigo-400" />,
+      title: "Business Document Templates",
+      count: "0/12 done",
+      items: [
+        { name: "Invoice template — Inter Bold + Navy header", desc: "Professional billing every client.", status: "todo" },
+        { name: "Quotation format PDF template", desc: "Faster deal closing.", status: "todo" },
+        { name: "MOU / Agreement format", desc: "Legal protection on every project.", status: "todo" },
+        { name: "Study report cover page template", desc: "DSC/RC1/TGA reports branded.", status: "todo" },
+        { name: "Payment receipt template", desc: "Instant trust on payment.", status: "todo" },
+        { name: "Client NDA template", desc: "Confidentiality protection.", status: "todo" },
+        { name: "Company letterhead — print + digital", desc: "Govt correspondence ready.", status: "todo" },
+        { name: "Business card design (front + back)", desc: "Amber back, Navy front.", status: "todo" },
+        { name: "Email signature HTML", desc: "Every email = brand impression.", status: "todo" },
+        { name: "Presentation template (10 slides)", desc: "Pitch decks, client proposals.", status: "todo" },
+        { name: "Lab report watermark system", desc: "Secure proprietary reports.", status: "todo" },
+        { name: "Certificate of analysis template", desc: "Official test result delivery.", status: "todo" }
+      ]
+    },
+    {
       icon: <Globe className="w-5 h-5 text-blue-400" />,
       title: "Website Structure & Core",
       count: "3/14 done",
@@ -81,24 +100,24 @@ const CLIENT_DATA = {
         { name: "Next.js 15 production build — zero errors", desc: "Enterprise-grade foundation.", status: "done" },
         { name: "Tailwind config locked to brand system", desc: "Pixel-perfect brand consistency.", status: "done" },
         { name: "Responsive design (375px to 1440px)", desc: "Perfect on all screens.", status: "done" },
-        { name: "Custom domain setup (enthalpylabs.com)", desc: "Your professional address live.", status: "todo" },
-        { name: "Vercel deployment + CDN", desc: "99.99% uptime guaranteed.", status: "todo" },
-        { name: "SSL certificate (HTTPS green lock)", desc: "Security trust signal.", status: "todo" }
+        { "name": "Custom domain setup (enthalpylabs.com)", desc: "Your professional address live.", status: "todo" },
+        { "name": "Vercel deployment + CDN", desc: "99.99% uptime guaranteed.", status: "todo" },
+        { "name": "SSL certificate (HTTPS green lock)", desc: "Security trust signal.", status: "todo" }
       ]
     },
     {
       icon: <Search className="w-5 h-5 text-orange-400" />,
-      title: "SEO & Architecture",
+      title: "SEO Architecture",
       count: "1/11 done",
       items: [
-        { name: "100 'best keyword' meta title system", desc: "Page 1 for 100 searches.", status: "done" },
+        { name: "100 'best [keyword]' meta title system", desc: "Page 1 for 100 searches.", status: "done" },
         { name: "JSON-LD Organization schema", desc: "Google knowledge panel.", status: "todo" },
-        { name: "LocalBusiness schema setup", desc: "Maps + local ranking.", status: "todo" },
-        { name: "FAQ Schema (20 pages)", desc: "Featured snippet capture.", status: "todo" }
+        { name: "JSON-LD LocalBusiness schema", desc: "Maps + local ranking.", status: "todo" },
+        { name: "FAQ schema (20 pages)", desc: "Featured snippet capture.", status: "todo" }
       ]
     },
     {
-      icon: <Lock className="w-5 h-5 text-red-400" />,
+      icon: <ShieldCheck className="w-5 h-5 text-red-400" />,
       title: "Client Portal & Security",
       count: "1/8 done",
       items: [
