@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { CheckCircle, Download } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { Toast } from '@/components/Toast';
+import Image from 'next/image';
 
 export default function ConstructionsPage() {
   const [sqft, setSqft] = useState(2000);
@@ -43,9 +44,9 @@ export default function ConstructionsPage() {
                 </div>
               ))}
             </div>
-            <div className="relative group">
-              <img src="https://images.unsplash.com/photo-1541888086903-ee3282eb1113?auto=format&fit=crop&q=80&w=800" alt="Construction" className="rounded-[2.5rem] shadow-[0_20px_60px_rgba(28,28,114,0.08)] grayscale group-hover:grayscale-0 transition-all duration-700 border-4 border-transparent group-hover:border-[#7B2DBF]/20" />
-              <div className="mt-8 md:mt-0 md:absolute md:-bottom-8 md:-left-8 bg-white border border-gray-200 p-6 md:p-8 rounded-3xl shadow-xl group-hover:border-[#7B2DBF]/30 transition-all text-center md:text-left inline-block">
+            <div className="relative group w-full aspect-video">
+              <Image src="https://images.unsplash.com/photo-1541888086903-ee3282eb1113?auto=format&fit=crop&q=80&w=800" alt="Construction" fill className="rounded-[2.5rem] shadow-[0_20px_60px_rgba(28,28,114,0.08)] grayscale group-hover:grayscale-0 transition-all duration-700 border-4 border-transparent group-hover:border-[#7B2DBF]/20 object-cover" />
+              <div className="mt-8 md:mt-0 md:absolute md:-bottom-8 md:-left-8 bg-white border border-gray-200 p-6 md:p-8 rounded-3xl shadow-xl group-hover:border-[#7B2DBF]/30 transition-all text-center md:text-left inline-block z-10">
                 <div className="text-4xl md:text-5xl font-black text-[#7B2DBF] mb-1">100%</div>
                 <div className="text-xs font-bold text-[#1C1C72] uppercase tracking-widest">Safety Record</div>
               </div>

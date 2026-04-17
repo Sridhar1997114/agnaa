@@ -128,13 +128,13 @@ export default function RCCSlabCalculator() {
                   </div>
                   <div className="text-[9px] text-[#7B2DBF] mt-1 font-black uppercase tracking-widest">Wet Concrete</div>
                </div>
-               <div className="bg-[#7B2DBF]/5 border border-[#7B2DBF]/20 rounded-2xl p-4 shadow-sm flex-1 flex flex-col justify-center">
-                  <div className="text-[8px] font-black uppercase tracking-widest text-[#7B2DBF] mb-1">Configuration</div>
-                  <div className="text-lg font-black text-[#7B2DBF] uppercase tracking-wider leading-none">
-                    {preset === 'strong' ? 'Industrial' : preset === 'safe' ? 'High Output' : 'Economic'}
-                  </div>
-                  <div className="text-[9px] text-[#7B2DBF]/60 mt-1 uppercase font-bold tracking-tighter">Safety Rating Alpha</div>
-               </div>
+                <div className="bg-[#7B2DBF]/5 border border-[#7B2DBF]/20 rounded-2xl p-4 shadow-sm flex-1 flex flex-col justify-center transition-all hover:bg-[#7B2DBF]/10">
+                   <div className="text-[8px] font-black uppercase tracking-widest text-[#7B2DBF] mb-1">Status Report</div>
+                   <div className="text-sm font-black text-[#7B2DBF] uppercase tracking-wider leading-none">
+                     {preset === 'strong' ? 'Grade: Industrial' : preset === 'safe' ? 'Grade: Ultra' : 'Grade: Economic'}
+                   </div>
+                   <div className="text-[9px] text-[#7B2DBF]/60 mt-1 uppercase font-bold tracking-tighter">Verified for Precision</div>
+                </div>
             </div>
           </div>
         </div>

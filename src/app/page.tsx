@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Camera, Hammer, TreePine, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/Button';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HomePage() {
   const [count, setCount] = useState({ fixes: 0, trees: 0, projects: 0 });
@@ -24,7 +25,7 @@ export default function HomePage() {
       {/* HERO */}
       <section className="relative min-h-[80vh] md:h-screen flex items-center justify-center overflow-hidden py-20">
         <div className="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000" alt="Skyline" className="w-full h-full object-cover opacity-10 grayscale" />
+          <Image src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000" alt="Skyline" fill priority className="object-cover opacity-10 grayscale" />
           <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/80 to-white" />
         </div>
         

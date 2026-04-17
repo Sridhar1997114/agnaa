@@ -26,9 +26,10 @@ const config: Config = {
         "brand-gradient": "linear-gradient(180deg, #7B2DBF 0%, #1C1C72 100%)",
       },
       fontFamily: {
-        display: ["var(--font-cormorant)", "serif"],
-        sans: ["var(--font-inter)", "sans-serif"],
+        display: ["var(--font-space)", "sans-serif"],
+        sans: ["var(--font-outfit)", "var(--font-inter)", "sans-serif"],
         accent: ["var(--font-space)", "sans-serif"],
+        quote: ["var(--font-cormorant)", "serif"],
       },
       spacing: {
         grid: "8px",

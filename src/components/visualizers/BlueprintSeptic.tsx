@@ -8,9 +8,10 @@ interface BlueprintSepticProps {
   width: number;
   depth: number;
   chambers?: number;
+  showHuman?: boolean;
 }
 
-export const BlueprintSeptic: React.FC<BlueprintSepticProps> = ({ length, width, depth, chambers = 3 }) => {
+export const BlueprintSeptic: React.FC<BlueprintSepticProps> = ({ length, width, depth, chambers = 3, showHuman = true }) => {
   const s = 12;
   const fL = length * s;
   const fW = width * s;
@@ -37,10 +38,19 @@ export const BlueprintSeptic: React.FC<BlueprintSepticProps> = ({ length, width,
   const b011 = iso(0, fW, fD);
 
   return (
-    <div className="w-full aspect-video bg-[#FDFDFF] rounded-2xl relative overflow-hidden border border-gray-200 shadow-lg group font-sans">
-      {/* Thin branding blue grid */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none" 
-           style={{ backgroundImage: 'linear-gradient(#1C1C72 1px, transparent 1px), linear-gradient(90deg, #1C1C72 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+    <div className="w-full aspect-video bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       
       {/* Title */}
       <div className="absolute top-6 left-6 z-10">
@@ -88,8 +98,10 @@ export const BlueprintSeptic: React.FC<BlueprintSepticProps> = ({ length, width,
            <text x={(b101.x + b111.x)/2 + 42} y={(b101.y + b111.y)/2} transform={`rotate(30 ${(b101.x + b111.x)/2 + 42} ${(b101.y + b111.y)/2})`}>W: {width}'</text>
         </g>
 
-        {/* Human Scale — 3D View */}
-        <HumanScale x={ox - 100} y={oy + 20} scale={0.6} variant="3d" />
+        {/* Human Scale — 3D View (Optional) */}
+        {showHuman && (
+          <HumanScale x={ox - 100} y={oy + 20} scale={0.6} variant="3d" />
+        )}
       </svg>
     </div>
   );

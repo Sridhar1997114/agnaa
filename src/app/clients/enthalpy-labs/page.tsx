@@ -19,8 +19,19 @@ import {
   CreditCard,
   Target,
   ArrowRight,
-  Circle
+  Circle,
+  Download,
+  Eye,
+  FileText,
+  ExternalLink,
+  X
 } from 'lucide-react';
+import { InvoiceTemplate } from '@/components/pdf/InvoiceTemplate';
+import { QuotationTemplate } from '@/components/pdf/QuotationTemplate';
+import { MOUTemplate } from '@/components/pdf/MOUTemplate';
+import { StudyReportTemplate } from '@/components/pdf/StudyReportTemplate';
+import { ReceiptTemplate } from '@/components/pdf/ReceiptTemplate';
+import Head from 'next/head';
 
 const CLIENT_DATA = {
   clientName: "Enthalpy Labs",
@@ -31,21 +42,21 @@ const CLIENT_DATA = {
     startDate: "2026-04-08",
   },
   progress: {
-    completed: 17,
+    completed: 24,
     total: 172,
-    percent: 10
+    percent: 14
   },
   summary: [
-    { label: "Completed", val: "17", color: "text-green-400" },
-    { label: "In Pipeline", val: "155", color: "text-[#F4B400]" },
+    { label: "Completed", val: "24", color: "text-green-400" },
+    { label: "In Pipeline", val: "148", color: "text-[#F4B400]" },
     { label: "Total Value", val: "₹1.25L", color: "text-blue-400" },
-    { label: "Days Running", val: "6", color: "text-gray-400" }
+    { label: "Days Running", val: "10", color: "text-gray-400" }
   ],
   stages: [
      {
       icon: <Sparkles className="w-5 h-5 text-purple-400" />,
       title: "Logo & Identity System",
-      count: "7/12 done",
+      count: "10/10 done",
       items: [
         { name: "ΔH Tetrahedron logomark — sacred geometry fire symbol", desc: "Your ΔH = enthalpy heat icon. Unique worldwide.", status: "done" },
         { name: "Logo gradient version with fire facets", desc: "Amber fire → orange glow depth effect.", status: "done" },
@@ -53,36 +64,36 @@ const CLIENT_DATA = {
         { name: "Inline logo — icon replaces 'A' in ENTHALPY", desc: "FedEx-arrow level cleverness. Iconic.", status: "done" },
         { name: "Standalone icon SVG (favicon-ready)", desc: "32px–512px perfect clarity.", status: "done" },
         { name: "Logo B&W monotone version", desc: "Stamp, watermark, legal docs.", status: "done" },
-        { name: "Logo on white background PNG", desc: "Print, presentations, email use.", status: "todo" },
-        { name: "Logo on dark background PNG", desc: "Website header, dark slides.", status: "todo" },
-        { name: "Inverted white logo version", desc: "Dark print, embossing.", status: "todo" },
-        { name: "Stacked mobile logo (icon above text)", desc: "App icon, square formats.", status: "todo" }
+        { name: "Logo on white background PNG", desc: "Print, presentations, email use.", status: "done" },
+        { name: "Logo on dark background PNG", desc: "Website header, dark slides.", status: "done" },
+        { name: "Inverted white logo version", desc: "Dark print, embossing.", status: "done" },
+        { name: "Stacked mobile logo (icon above text)", desc: "App icon, square formats.", status: "done" }
       ]
     },
     {
       icon: <Zap className="w-5 h-5 text-yellow-400" />,
       title: "Brand Color & Typography System",
-      count: "5/10 done",
+      count: "7/7 done",
       items: [
         { name: "4-color palette locked — Navy, Amber, Grey, Off-White", desc: "Global industrial trust palette.", status: "done" },
         { name: "WCAG AA contrast verified (5.12:1)", desc: "Accessibility compliance certified.", status: "done" },
         { name: "Inter variable font system", desc: "Bold 700 / Regular 400 / Mono locked.", status: "done" },
         { name: "Color hex codes + Tailwind config", desc: "Developer-ready tokens.", status: "done" },
         { name: "CSS variables export", desc: "Website + email + print consistent.", status: "done" },
-        { name: "Dark mode color variants", desc: "Website dark/light toggle ready.", status: "todo" },
-        { name: "Color psychology rationale document", desc: "Amber=heat, Navy=authority, Grey=precision.", status: "todo" }
+        { name: "Dark mode color variants", desc: "Website dark/light toggle ready.", status: "done" },
+        { name: "Color psychology rationale document", desc: "Amber=heat, Navy=authority, Grey=precision.", status: "done" }
       ]
     },
     {
       icon: <Layers className="w-5 h-5 text-indigo-400" />,
       title: "Business Document Templates",
-      count: "0/12 done",
+      count: "5/12 done",
       items: [
-        { name: "Invoice template — Inter Bold + Navy header", desc: "Professional billing every client.", status: "todo" },
-        { name: "Quotation format PDF template", desc: "Faster deal closing.", status: "todo" },
-        { name: "MOU / Agreement format", desc: "Legal protection on every project.", status: "todo" },
-        { name: "Study report cover page template", desc: "DSC/RC1/TGA reports branded.", status: "todo" },
-        { name: "Payment receipt template", desc: "Instant trust on payment.", status: "todo" },
+        { name: "Invoice template — Inter Bold + Navy header", desc: "Professional billing every client.", status: "done", template: "invoice" },
+        { name: "Quotation format PDF template", desc: "Faster deal closing.", status: "done", template: "quotation" },
+        { name: "MOU / Agreement format", desc: "Legal protection on every project.", status: "done", template: "mou" },
+        { name: "Study report cover page template", desc: "DSC/RC1/TGA reports branded.", status: "done", template: "study-report" },
+        { name: "Payment receipt template", desc: "Instant trust on payment.", status: "done", template: "receipt" },
         { name: "Client NDA template", desc: "Confidentiality protection.", status: "todo" },
         { name: "Company letterhead — print + digital", desc: "Govt correspondence ready.", status: "todo" },
         { name: "Business card design (front + back)", desc: "Amber back, Navy front.", status: "todo" },
@@ -137,6 +148,7 @@ const CLIENT_DATA = {
 
 export default function EnthalpyLabsStatusPage() {
   const [session, setSession] = useState<any>(null);
+  const [activeTemplate, setActiveTemplate] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -153,12 +165,56 @@ export default function EnthalpyLabsStatusPage() {
     router.push('/clients');
   };
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Analytical Chemical Testing",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Enthalpy Labs",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "addressCountry": "IN"
+      }
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "India"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Lab Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Differential Scanning Calorimetry (DSC)"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Reaction Safety Assessment (RC1mx)"
+          }
+        }
+      ]
+    }
+  };
+
   if (!session) return null;
 
   const daysActive = Math.ceil((new Date().getTime() - new Date(CLIENT_DATA.stats.startDate).getTime()) / (1000 * 60 * 60 * 24));
 
   return (
     <div className="min-h-screen bg-[#0D0D14] text-[#F0F0F6] pb-20 selection:bg-[#7B2DBF]/30">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="relative py-12 px-6 overflow-hidden">
         {/* Abstract Background */}
         <div className="absolute top-[-50%] left-[-20%] w-[100%] h-[100%] bg-[#1C1C72]/10 blur-[150px] rounded-full" />
@@ -256,6 +312,45 @@ export default function EnthalpyLabsStatusPage() {
 
       {/* Grid of Stages */}
       <section className="px-6 max-w-5xl mx-auto space-y-24">
+        {/* Study Tracker Section */}
+        <div className="bg-[#14141F] rounded-[40px] p-8 md:p-12 border border-white/5 shadow-2xl relative overflow-hidden">
+          <div className="flex items-center gap-4 mb-10 pb-6 border-b border-white/5">
+            <div className="p-3 rounded-2xl bg-[#F4B400]/10 border border-[#F4B400]/20">
+              <Activity className="w-5 h-5 text-[#F4B400]" />
+            </div>
+            <div>
+              <h3 className="text-2xl font-black text-white tracking-tight">Active Study Tracker</h3>
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-[0.25em] mt-1">Real-Time Lab Lifecycle</p>
+            </div>
+          </div>
+
+          <div className="relative pt-12 pb-8 px-4">
+            {/* Timeline Line */}
+            <div className="absolute top-1/2 left-0 w-full h-1 bg-white/5 -translate-y-1/2 hidden md:block" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
+              {[
+                { step: "01", label: "Sample Received", status: "complete", date: "April 12" },
+                { step: "02", label: "Protocol Dev", status: "complete", date: "April 14" },
+                { step: "03", label: "Active Analysis", status: "active", date: "In Progress" },
+                { step: "04", label: "Report Draft", status: "pending", date: "Estimated April 20" }
+              ].map((item, idx) => (
+                <div key={idx} className="flex flex-col items-center text-center">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center border-4 mb-4 ${
+                    item.status === 'complete' ? 'bg-[#10B981] border-[#10B981]/20 text-white' : 
+                    item.status === 'active' ? 'bg-[#F4B400] border-[#F4B400]/20 text-[#0D0D14] animate-pulse' : 
+                    'bg-[#1a1a26] border-white/5 text-gray-700'
+                  }`}>
+                    {item.status === 'complete' ? <CheckCircle2 size={20} /> : <span className="font-black">{item.step}</span>}
+                  </div>
+                  <h4 className={`font-bold text-sm mb-1 ${item.status === 'pending' ? 'text-gray-600' : 'text-white'}`}>{item.label}</h4>
+                  <p className="text-[10px] text-gray-500 uppercase tracking-widest">{item.date}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {CLIENT_DATA.stages.map((stage, i) => (
           <div key={i}>
             <div className="flex items-center gap-4 mb-10 pb-6 border-b border-white/5">
@@ -281,6 +376,24 @@ export default function EnthalpyLabsStatusPage() {
                     <p className={`text-xs ${item.status === 'done' ? 'text-[#10B981]/70' : 'text-gray-500'}`}>
                       {item.desc}
                     </p>
+                    {item.status === 'done' && (item as any).template && (
+                      <div className="mt-4 flex gap-2">
+                        <button 
+                          onClick={() => setActiveTemplate((item as any).template)}
+                          className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider hover:bg-white/10 transition-all flex items-center gap-1.5"
+                        >
+                          <Eye size={10} /> Preview
+                        </button>
+                        <button className="px-3 py-1.5 bg-[#1C1C72]/40 border border-[#1C1C72]/40 rounded-lg text-[9px] font-bold uppercase tracking-wider hover:bg-[#1C1C72]/60 transition-all flex items-center gap-1.5">
+                          <Download size={10} /> PDF
+                        </button>
+                      </div>
+                    )}
+                    {item.name === "PDF report secure downloads" && (
+                      <button className="mt-4 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-2">
+                        <Lock size={12} /> Secure Portal Entry
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -314,6 +427,61 @@ export default function EnthalpyLabsStatusPage() {
           Crafted by AGNAA Design Studio &bull; Hyderabad &bull; 2026
         </footer>
       </section>
+
+      {/* Document Preview Modal */}
+      {activeTemplate && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveTemplate(null)}
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            className="relative w-full max-w-5xl max-h-full bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+          >
+            <div className="absolute top-6 right-6 z-10">
+              <button 
+                onClick={() => setActiveTemplate(null)}
+                className="p-2 bg-black/5 hover:bg-black/10 rounded-full transition-colors text-black"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className="overflow-auto p-4 md:p-12 bg-gray-100 flex justify-center">
+              <div className="bg-white shadow-xl w-full max-w-[800px] min-h-[1100px] transform origin-top md:scale-100 scale-90">
+                {activeTemplate === 'invoice' && <InvoiceTemplate />}
+                {activeTemplate === 'quotation' && <QuotationTemplate />}
+                {activeTemplate === 'mou' && <MOUTemplate />}
+                {activeTemplate === 'study-report' && <StudyReportTemplate />}
+                {activeTemplate === 'receipt' && <ReceiptTemplate />}
+              </div>
+            </div>
+            
+            <div className="p-6 bg-white border-t border-gray-100 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <FileText className="text-[#1C1C72]" />
+                <div>
+                  <div className="text-sm font-bold text-black uppercase tracking-wider">
+                    {activeTemplate.replace('-', ' ')} Preview
+                  </div>
+                  <div className="text-[10px] text-gray-500 font-medium">Digital Version - Ready for Export</div>
+                </div>
+              </div>
+              <button 
+                onClick={() => window.print()}
+                className="px-6 py-2.5 bg-[#1C1C72] text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-[#1C1C72]/90 transition-all flex items-center gap-2"
+              >
+                <Download size={14} /> Download PDF
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }

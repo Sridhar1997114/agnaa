@@ -11,6 +11,7 @@ export default function ExcavationCalculator() {
   const [width, setWidth] = useState('');
   const [depth, setDepth] = useState('');
   const [bulkingFactor, setBulkingFactor] = useState('1.2');
+  const [soilType, setSoilType] = useState('mixed');
   const [isCalculated, setIsCalculated] = useState(false);
   const [results, setResults] = useState<any>(null);
 
@@ -54,6 +55,19 @@ export default function ExcavationCalculator() {
         width: parseFloat(width) * 3.281, 
         depth: parseFloat(depth) * 3.281 
       }}
+      presets={{
+        current: soilType,
+        options: [
+          { id: 'soft', label: 'Soft Soil', desc: '15% Expansion' },
+          { id: 'mixed', label: 'Mixed Ground', desc: '25% Expansion' },
+          { id: 'rock', label: 'Hard Rock', desc: '50% Expansion' }
+        ],
+        onChange: (id) => {
+          setSoilType(id);
+          const factor = id === 'soft' ? '1.15' : id === 'rock' ? '1.50' : '1.25';
+          setBulkingFactor(factor);
+        }
+      }}
       inputsContent={
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -70,7 +84,7 @@ export default function ExcavationCalculator() {
           </div>
           <div>
             <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1">Bulking Factor</label>
-            <input type="number" value={bulkingFactor} onChange={(e) => {setBulkingFactor(e.target.value); setIsCalculated(false);}} className="bg-white w-full rounded-xl px-3 py-2 text-base font-black text-[#1C1C72] outline-none border border-gray-200 focus:border-[#7B2DBF] transition-colors" placeholder="e.g. 1.2" />
+            <input type="number" value={bulkingFactor} onChange={(e) => {setBulkingFactor(e.target.value); setIsCalculated(false);}} className="bg-white w-full rounded-xl px-3 py-2 text-base font-black text-[#1C1C72] outline-none border border-gray-200 focus:border-[#7B2DBF] transition-colors" placeholder="e.g. 1.25" />
           </div>
         </div>
       }

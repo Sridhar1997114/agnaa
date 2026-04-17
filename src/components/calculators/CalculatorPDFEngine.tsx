@@ -177,7 +177,13 @@ export const CalculatorPDFEngine: React.FC<CalculatorPDFEngineProps> = ({
           alignItems: 'center',
           gap: 4
         }}>
-          <ShieldCheck size={10} /> OFFICIAL SEAL
+          <ShieldCheck size={10} /> VERIFIED
+        </div>
+        <div style={{ marginLeft: 10, textAlign: 'center' }}>
+          <div style={{ width: 40, height: 40, border: '1px solid #E2E8F0', padding: 2, borderRadius: 4, background: '#fff' }}>
+            <div style={{ width: '100%', height: '100%', background: '#000', opacity: 0.8, WebkitMask: 'radial-gradient(circle, transparent 20%, black 20%)', mask: 'radial-gradient(circle, transparent 20%, black 20%)' }} />
+          </div>
+          <div style={{ fontSize: 5, color: '#1C1C72', fontWeight: 900, marginTop: 2 }}>TECH VERIFY</div>
         </div>
       </div>
     </div>

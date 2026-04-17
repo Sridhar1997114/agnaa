@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-white text-[#1C1C72] antialiased;
+    @apply bg-[#0D0D14] text-white antialiased font-sans transition-colors duration-300;
   }
 }
 
@@ -32,12 +32,11 @@
 }
 
 :root {
-  --agn-background: #0F172A;
-  --agn-card: #1E293B;
-  --agn-primary: #3B82F6;
-  --agn-text: #F1F5F9;
+  --agn-background: #0D0D14;
+  --agn-card: #14141F;
   --agn-navy: #1C1C72;
   --agn-violet: #7B2DBF;
+  --agn-muted: #8888AA;
 }
 
 .chat-bubble-agn {

@@ -6,9 +6,10 @@ interface BlueprintStairsProps {
   rise: number; // in mm or inches
   tread: number; // in mm or inches
   steps: number;
+  showHuman?: boolean;
 }
 
-export const BlueprintStairs: React.FC<BlueprintStairsProps> = ({ rise, tread, steps }) => {
+export const BlueprintStairs: React.FC<BlueprintStairsProps> = ({ rise, tread, steps, showHuman = true }) => {
   const scale = 150 / (steps * Math.max(rise, tread));
   const s = Math.min(scale, 15); // limit scale
   
@@ -16,9 +17,19 @@ export const BlueprintStairs: React.FC<BlueprintStairsProps> = ({ rise, tread, s
   const startY = 200;
 
   return (
-    <div className="w-full aspect-video bg-[#0F172A] rounded-2xl relative overflow-hidden border-2 border-[#1C1C72] shadow-2xl group">
-      <div className="absolute inset-0 opacity-10" 
-           style={{ backgroundImage: 'radial-gradient(#475569 1px, transparent 1px)', backgroundSize: '15px 15px' }}></div>
+    <div className="w-full aspect-video bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       
       <div className="absolute top-4 left-4 z-10">
         <div className="text-[10px] font-black text-[#7B2DBF] tracking-[0.2em] uppercase mb-1">Staircase Profile</div>
@@ -39,8 +50,10 @@ export const BlueprintStairs: React.FC<BlueprintStairsProps> = ({ rise, tread, s
           strokeWidth="2"
         />
 
-        {/* Human Scale */}
-        <HumanScale x={startX - 30} y={startY} scale={0.65} />
+        {/* Human Scale (Optional) */}
+        {showHuman && (
+          <HumanScale x={startX - 30} y={startY} scale={0.65} variant="section" />
+        )}
 
         {/* Step highlights */}
         {[...Array(steps)].map((_, i) => (

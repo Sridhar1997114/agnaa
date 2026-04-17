@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { MapPin, Calendar, Building } from 'lucide-react';
 import { PROJECTS } from '@/constants';
 import { ProjectModal } from '@/components/ProjectModal';
+import Image from 'next/image';
 
 export default function PortfolioPage() {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -60,7 +61,7 @@ export default function PortfolioPage() {
               onClick={() => setModalProject(project)}
               className="group cursor-pointer relative overflow-hidden rounded-3xl bg-gray-100 aspect-[4/5] shadow-[0_8px_30px_rgba(28,28,114,0.04)] hover:shadow-[0_15px_40px_rgba(123,45,191,0.2)] hover:border hover:border-[#7B2DBF]/50 transition-all duration-500"
             >
-              <img src={project.img} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src={project.img} alt={project.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C72]/90 via-[#1C1C72]/40 to-transparent group-hover:from-[#1C1C72]/95 group-hover:to-[#7B2DBF]/30 flex flex-col justify-end p-8 opacity-90 group-hover:opacity-100 transition-all duration-500">
                 <span className="text-white bg-[#1C1C72]/60 backdrop-blur-md w-fit px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-4 border border-white/10 group-hover:border-[#7B2DBF]/50">{project.type}</span>
                 <h3 className="text-3xl font-bold mb-2 text-white">{project.title}</h3>
@@ -80,7 +81,9 @@ export default function PortfolioPage() {
       <section className="py-24 md:py-32 bg-[#F5F5F7] border-t border-gray-200">
         <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           <div>
-            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=800" alt="Architect Sridhar" className="w-full max-w-md mx-auto rounded-full shadow-[0_20px_60px_rgba(28,28,114,0.1)] grayscale hover:grayscale-0 hover:shadow-[0_20px_60px_rgba(123,45,191,0.2)] transition-all duration-700 border-4 border-transparent hover:border-[#7B2DBF]/20" />
+          <div className="relative aspect-square max-w-md mx-auto">
+            <Image src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=800" alt="Architect Sridhar" fill className="rounded-full shadow-[0_20px_60px_rgba(28,28,114,0.1)] grayscale hover:grayscale-0 hover:shadow-[0_20px_60px_rgba(123,45,191,0.2)] transition-all duration-700 border-4 border-transparent hover:border-[#7B2DBF]/20 object-cover" />
+          </div>
           </div>
           <div>
             <h2 className="text-5xl font-black mb-8 tracking-tighter text-[#1C1C72]">Architect Sridhar <br/> From Leukemia to Legacy</h2>

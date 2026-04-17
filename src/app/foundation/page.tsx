@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { MessageSquare, Phone } from 'lucide-react';
 import { Button } from '@/components/Button';
+import Image from 'next/image';
 
 export default function FoundationPage() {
   const [complaint, setComplaint] = useState('');
@@ -82,7 +83,9 @@ export default function FoundationPage() {
               </div>
             </div>
             <div className="flex-1 w-full">
-              <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800" alt="Tree planting" className="rounded-[2.5rem] shadow-[0_20px_40px_rgba(28,28,114,0.08)] w-full grayscale hover:grayscale-0 transition-all duration-700 border-4 border-transparent hover:border-[#7B2DBF]/20" />
+              <div className="relative aspect-square md:aspect-video rounded-[2.5rem] overflow-hidden shadow-[0_20px_40px_rgba(28,28,114,0.08)] grayscale hover:grayscale-0 transition-all duration-700 border-4 border-transparent hover:border-[#7B2DBF]/20">
+                <Image src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800" alt="Tree planting" fill className="object-cover" />
+              </div>
             </div>
           </div>
         </div>

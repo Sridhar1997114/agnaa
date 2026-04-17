@@ -8,9 +8,10 @@ interface BlueprintPlanProps {
   unit: string;
   label?: string;
   setbacks?: { top: number; bottom: number; left: number; right: number };
+  showHuman?: boolean;
 }
 
-export const BlueprintPlan: React.FC<BlueprintPlanProps> = ({ length, width, unit, label = "Plot Plan", setbacks }) => {
+export const BlueprintPlan: React.FC<BlueprintPlanProps> = ({ length, width, unit, label = "Plot Plan", setbacks, showHuman = true }) => {
   const isSquare = length > 0 && width > 0;
   const ratio = width / length;
   
@@ -28,7 +29,19 @@ export const BlueprintPlan: React.FC<BlueprintPlanProps> = ({ length, width, uni
   const rectH = svgH - padding * 2;
 
   return (
-    <div className="w-full bg-[#FCFDFF] rounded-2xl relative overflow-hidden border border-gray-200 shadow-inner p-6 flex flex-col items-center justify-center min-h-[300px]">
+    <div className="w-full bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 flex flex-col items-center justify-center min-h-[300px] font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       <div className="absolute top-4 left-4">
         <div className="text-[10px] font-black text-gray-400 tracking-[0.2em] uppercase">{label}</div>
         <div className="text-[#1C1C72] font-black text-xl">{length} x {width} <span className="text-xs opacity-50">{unit}</span></div>

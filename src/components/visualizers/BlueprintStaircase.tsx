@@ -9,6 +9,7 @@ interface BlueprintStaircaseProps {
   riserCount: number;
   treadWidth: number;
   riserHeight: number;
+  showHuman?: boolean;
 }
 
 export const BlueprintStaircase: React.FC<BlueprintStaircaseProps> = ({ 
@@ -16,7 +17,8 @@ export const BlueprintStaircase: React.FC<BlueprintStaircaseProps> = ({
   totalRun, 
   riserCount, 
   treadWidth, 
-  riserHeight 
+  riserHeight,
+  showHuman = true 
 }) => {
   const s = 1.0;
   const ox = 50;
@@ -36,10 +38,19 @@ export const BlueprintStaircase: React.FC<BlueprintStaircaseProps> = ({
   const polyPoints = points.map(p => `${ox + p.x * s},${oy + p.y * s}`).join(' ');
 
   return (
-    <div className="w-full aspect-video bg-[#FDFDFF] rounded-2xl relative overflow-hidden border border-gray-200 shadow-lg group font-sans">
-      {/* Thin branding blue grid */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none" 
-           style={{ backgroundImage: 'linear-gradient(#1C1C72 1px, transparent 1px), linear-gradient(90deg, #1C1C72 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+    <div className="w-full aspect-video bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       
       {/* Title */}
       <div className="absolute top-6 left-6 z-10">
@@ -82,8 +93,10 @@ export const BlueprintStaircase: React.FC<BlueprintStaircaseProps> = ({
           <text x="20" y="5" fill="#1C1C72" fontSize="6" fontWeight="bold" opacity="0.6">RISER: {riserHeight.toFixed(1)}"</text>
         </g>
 
-        {/* Human Scale — Section View */}
-        <HumanScale x={ox + totalRun * s - 20} y={oy - totalRise * s} scale={0.7} variant="section" />
+        {/* Human Scale — Section View (Optional) */}
+        {showHuman && (
+          <HumanScale x={ox + totalRun * s - 20} y={oy - totalRise * s} scale={0.7} variant="section" />
+        )}
       </svg>
     </div>
   );

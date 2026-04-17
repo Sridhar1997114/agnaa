@@ -6,6 +6,7 @@ interface VisualizerProps {
   type: 'PLOT' | 'BUILT_UP' | 'FSI' | 'RCC' | 'EXCAVATION' | 'FOOTING' | 'STAIRCASE' | 'WALL' | 'TANK' | 'ROOF' | 'FLOOR' | 'SHAPE' | 'PLASTER' | 'PAINT' | 'ANTI_TERMITE' | 'STEEL' | 'PCC' | 'SETBACK' | 'G_N_FLOOR' | 'SHUTTERING' | 'SCAFFOLDING' | 'ELECTRICAL' | 'INTERIOR';
   data: any;
   className?: string;
+  showHuman?: boolean;
 }
 
 
@@ -19,7 +20,7 @@ import { BlueprintRoofing } from '../visualizers/BlueprintRoofing';
 import { BlueprintFlooring } from '../visualizers/BlueprintFlooring';
 import { BlueprintShape } from '../visualizers/BlueprintShape';
 
-export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, className = "" }) => {
+export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, className = "", showHuman }) => {
   if (!data) return null;
 
 
@@ -27,8 +28,12 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
   return (
     <div className={`relative bg-transparent rounded-xl overflow-hidden ${className}`}>
       {/* SHAPE VISUALIZER */}
-      {type === 'SHAPE' && data.shape && (
-        <BlueprintShape shape={data.shape} data={data} />
+      {type === 'SHAPE' && (
+        <BlueprintShape 
+          shape={data.shape as any || 'cuboid'} 
+          data={data} 
+          showHuman={showHuman} 
+        />
       )}
 
       {/* RCC SLAB VISUALIZER */}
@@ -39,6 +44,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           thickness={parseFloat(data.thickness || data.t || 0)} 
           preset={data.preset?.toLowerCase() as any}
           unit={data.unit}
+          showHuman={showHuman}
         />
       )}
       
@@ -47,6 +53,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           length={parseFloat(data.length || data.l || 0)} 
           width={parseFloat(data.width || data.w || 0)} 
           depth={parseFloat(data.depth || data.d || 0)} 
+          showHuman={showHuman}
         />
       )}
 
@@ -57,6 +64,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           height={parseFloat(data.height || data.h || 0)}
           thickness={parseFloat(data.thickness || data.t || 9)} 
           unit={data.unit}
+          showHuman={showHuman}
         />
       )}
 
@@ -68,6 +76,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           riserCount={parseInt(data.riserCount || data.steps || 18)} 
           treadWidth={parseFloat(data.treadWidth || data.tread || 10)} 
           riserHeight={parseFloat(data.riserHeight || data.riseHeight || 6.5)} 
+          showHuman={showHuman}
         />
       )}
 
@@ -78,6 +87,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           width={parseFloat(data.width || data.w || Math.sqrt(data.area || 100))} 
           depth={parseFloat(data.depth || data.d || 8)} 
           chambers={parseInt(data.chambers || 3)}
+          showHuman={showHuman}
         />
       )}
 
@@ -89,6 +99,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           width={parseFloat(data.width || data.w || 30)} 
           type={data.roofType || 'TILES'} 
           slope={data.slope || 25}
+          showHuman={showHuman}
         />
       )}
 
@@ -99,7 +110,8 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           width={parseFloat(data.width || data.w || Math.sqrt(data.area || 144))} 
           pattern={data.pattern || 'GRID'} 
           tileSize={data.tileSize || 24}
-          unit={data.unit}
+          unit={data.unit as 'FT' | 'M'}
+          showHuman={showHuman}
         />
       )}
 
@@ -124,6 +136,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
             undefined
           }
           unit={data.unit}
+          showHuman={showHuman}
         />
       )}
 
@@ -135,6 +148,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           thickness={0.5}
           label={type === 'PLASTER' ? 'Plaster Surface' : 'Painted Surface'}
           unit={data.unit}
+          showHuman={showHuman}
         />
       )}
 
@@ -146,6 +160,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           label="Anti-Termite Treatment Zone"
           subLabel={`Perimeter: ${data.perimeter || 0}m`}
           unit={data.unit}
+          showHuman={showHuman}
         />
       )}
 
@@ -158,17 +173,19 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           preset="strong"
           label="Steel Reinforcement Grid"
           unit={data.unit}
+          showHuman={showHuman}
         />
       )}
 
       {/* PCC / CONCRETE SLAB VISUALIZER */}
-      {(type === 'PCC' || type === 'SHAPE') && (data.length || data.l || data.area) && (
+      {type === 'PCC' && (data.length || data.l || data.area) && (
         <BlueprintSlab 
           length={parseFloat(data.length || data.l || Math.sqrt(data.area || 100))} 
           width={parseFloat(data.width || data.w || Math.sqrt(data.area || 100))}
           thickness={parseFloat(data.thickness || data.t || 4)}
           label={type === 'PCC' ? 'PCC Layer' : 'Concrete Volume'}
           unit={data.unit}
+          showHuman={showHuman}
         />
       )}
 
@@ -179,6 +196,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           width={parseFloat(data.width)} 
           label="Building Envelope"
           subLabel={`Total Area: ${data.area || 0} sq.ft`}
+          showHuman={showHuman}
         />
       )}
 
@@ -189,6 +207,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           width={Math.sqrt(parseFloat(data.areaPerFloor))}
           thickness={12 * (parseInt(data.floors || 1))}
           label={`Building Mass (${data.floors} Floors)`}
+          showHuman={showHuman}
         />
       )}
 
@@ -200,6 +219,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           thickness={1}
           preset="strong"
           label="Shuttering Board Area"
+          showHuman={showHuman}
         />
       )}
 
@@ -210,6 +230,7 @@ export const CalculationVisualizer: React.FC<VisualizerProps> = ({ type, data, c
           height={parseFloat(data.height) || Math.sqrt(parseFloat(data.area))}
           thickness={2}
           label="Scaffolding Elevation"
+          showHuman={showHuman}
         />
       )}
 

@@ -10,9 +10,10 @@ interface BlueprintWallProps {
   thickness: number; // inches
   label?: string;
   unit?: 'FT' | 'M';
+  showHuman?: boolean;
 }
 
-export const BlueprintWall: React.FC<BlueprintWallProps> = ({ length, height, thickness, label, unit = 'FT' }) => {
+export const BlueprintWall: React.FC<BlueprintWallProps> = ({ length, height, thickness, label, unit = 'FT', showHuman = true }) => {
   const s = 10; 
   const wallL = length * s;
   const wallH = height * s;
@@ -35,9 +36,19 @@ export const BlueprintWall: React.FC<BlueprintWallProps> = ({ length, height, th
   const poly = (pts: any[]) => pts.map(p => `${p.x},${p.y}`).join(' ');
 
   return (
-    <div className="w-full aspect-video bg-[#FDFDFF] rounded-2xl relative overflow-hidden border-2 border-[#1C1C72] shadow-2xl group font-sans">
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'linear-gradient(#1C1C72 1px, transparent 1px), linear-gradient(90deg, #1C1C72 1px, transparent 1px)', backgroundSize: '15px 15px' }}></div>
+    <div className="w-full aspect-video bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       
       <div className="absolute top-6 left-6 z-10">
         <div className="text-[10px] font-black text-[#1C1C72] tracking-[0.3em] uppercase mb-1">
@@ -52,15 +63,20 @@ export const BlueprintWall: React.FC<BlueprintWallProps> = ({ length, height, th
 
       <svg viewBox="0 0 400 250" className="w-full h-full p-8 transition-transform duration-700 group-hover:scale-[1.02]">
         <defs>
-          <pattern id="brickPatternV2" x="0" y="0" width="20" height="10" patternUnits="userSpaceOnUse">
-            <rect width="20" height="10" fill="white" stroke="#1C1C72" strokeWidth="0.2" />
-            <line x1="10" y1="0" x2="10" y2="10" stroke="#1C1C72" strokeWidth="0.2" strokeDasharray="1,1" />
+          <pattern id="brickPatternV2" x="0" y="0" width="30" height="15" patternUnits="userSpaceOnUse">
+             {/* Stretcher bond logic */}
+            <rect width="30" height="15" fill="none" stroke="#1C1C72" strokeWidth="0.2" opacity="0.3" />
+            <line x1="0" y1="7.5" x2="30" y2="7.5" stroke="#1C1C72" strokeWidth="0.2" opacity="0.3" />
+            <line x1="15" y1="0" x2="15" y2="7.5" stroke="#1C1C72" strokeWidth="0.2" opacity="0.3" />
+            <line x1="0" y1="7.5" x2="0" y2="15" stroke="#1C1C72" strokeWidth="0.2" opacity="0.3" />
+            <line x1="30" y1="7.5" x2="30" y2="15" stroke="#1C1C72" strokeWidth="0.2" opacity="0.3" />
+            <circle cx="2" cy="2" r="0.1" fill="#1C1C72" opacity="0.2" />
           </pattern>
         </defs>
 
         {/* Isometric Wall */}
-        <polygon points={poly([p1, p2, t2, t1])} fill="#F1F5F9" stroke="#1C1C72" strokeWidth="1.5" />
-        <polygon points={poly([t0, t1, t2, t3])} fill="#E2E8F0" stroke="#1C1C72" strokeWidth="1.5" />
+        <polygon points={poly([p1, p2, t2, t1])} fill="#F8FAFC" stroke="#1C1C72" strokeWidth="0.8" />
+        <polygon points={poly([t0, t1, t2, t3])} fill="#F1F5F9" stroke="#1C1C72" strokeWidth="0.8" />
         <rect x={p0.x} y={t0.y} width={wallL} height={wallH} fill="white" stroke="#1C1C72" strokeWidth="1.5" />
         
         {/* Pattern overlay */}
@@ -87,8 +103,10 @@ export const BlueprintWall: React.FC<BlueprintWallProps> = ({ length, height, th
         <path d={`M ${p1.x + 10} ${p1.y - 5} L ${p1.x + 40} ${p1.y - 30}`} fill="none" stroke="#7B2DBF" strokeWidth="0.5" strokeDasharray="2,2" />
         <text x={p1.x + 45} y={p1.y - 35} fill="#7B2DBF" fontSize="7" fontWeight="bold">T: {thickness}" THICK</text>
 
-        {/* Human Context — Section/Elevation */}
-        <HumanScale x={p0.x - 60} y={p0.y} scale={0.7} variant="section" />
+        {/* Human Context — Section/Elevation (Optional) */}
+        {showHuman && (
+          <HumanScale x={p0.x - 60} y={p0.y} scale={0.7} variant="section" />
+        )}
         
         {/* Scale indicator */}
         <g transform="translate(20, 230)" opacity="0.4">

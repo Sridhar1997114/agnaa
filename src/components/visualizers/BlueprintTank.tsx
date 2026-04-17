@@ -8,9 +8,10 @@ interface BlueprintTankProps {
   depth: number;
   label?: string;
   isCircular?: boolean;
+  showHuman?: boolean;
 }
 
-export const BlueprintTank: React.FC<BlueprintTankProps> = ({ length, width, depth, label = "Septic Tank", isCircular = false }) => {
+export const BlueprintTank: React.FC<BlueprintTankProps> = ({ length, width, depth, label = "Septic Tank", isCircular = false, showHuman = true }) => {
   // SVG drawing logic for a 3D rectangular or circular tank
   const ox = 150;
   const oy = 180;
@@ -39,9 +40,19 @@ export const BlueprintTank: React.FC<BlueprintTankProps> = ({ length, width, dep
   const t3 = { x: p3.x, y: p3.y - d };
 
   return (
-    <div className="w-full aspect-video bg-[#0F172A] rounded-2xl relative overflow-hidden border-2 border-[#1C1C72] shadow-2xl group">
-      <div className="absolute inset-0 opacity-10" 
-           style={{ backgroundImage: 'radial-gradient(#475569 1px, transparent 1px)', backgroundSize: '15px 15px' }}></div>
+    <div className="w-full aspect-video bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       
       <div className="absolute top-4 left-4 z-10">
         <div className="text-[10px] font-black text-[#7B2DBF] tracking-[0.2em] uppercase mb-1">{label} Draft</div>
@@ -49,8 +60,10 @@ export const BlueprintTank: React.FC<BlueprintTankProps> = ({ length, width, dep
       </div>
 
       <svg viewBox="0 0 400 250" className="w-full h-full p-4 transition-transform duration-700 group-hover:scale-[1.02]">
-        {/* Human Scale */}
-        <HumanScale x={ox - 100} y={oy} scale={0.6} />
+        {/* Human Scale (Optional) */}
+        {showHuman && (
+          <HumanScale x={ox - 100} y={oy} scale={0.6} variant="3d" />
+        )}
 
         {/* Tank Body (Inside) */}
         {!isCircular ? (

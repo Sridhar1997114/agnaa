@@ -7,9 +7,9 @@
     "startDate": "2026-04-08"
   },
   "overallProgress": {
-    "completed": 17,
+    "completed": 24,
     "total": 172,
-    "percent": 10,
+    "percent": 14,
     "milestones": [
       { "label": "Advance Paid — Project Live", "status": "completed" },
       { "label": "Design Approval", "status": "pending" },
@@ -18,15 +18,15 @@
     ]
   },
   "summary": {
-    "completed": 17,
-    "pipeline": 155,
+    "completed": 24,
+    "pipeline": 148,
     "totalValue": "₹1.25L"
   },
   "stages": [
     {
       "icon": "🔺",
       "title": "Logo & Identity System",
-      "count": "7/12 done",
+      "count": "10/10 done",
       "items": [
         { "name": "ΔH Tetrahedron logomark — sacred geometry fire symbol", "desc": "Your ΔH = enthalpy heat icon. Unique worldwide.", "status": "done" },
         { "name": "Logo gradient version with fire facets", "desc": "Amber fire → orange glow depth effect.", "status": "done" },
@@ -34,24 +34,24 @@
         { "name": "Inline logo — icon replaces 'A' in ENTHALPY", "desc": "FedEx-arrow level cleverness. Iconic.", "status": "done" },
         { "name": "Standalone icon SVG (favicon-ready)", "desc": "32px–512px perfect clarity.", "status": "done" },
         { "name": "Logo B&W monotone version", "desc": "Stamp, watermark, legal docs.", "status": "done" },
-        { "name": "Logo on white background PNG", "desc": "Print, presentations, email use.", "status": "todo" },
-        { "name": "Logo on dark background PNG", "desc": "Website header, dark slides.", "status": "todo" },
-        { "name": "Inverted white logo version", "desc": "Dark print, embossing.", "status": "todo" },
-        { "name": "Stacked mobile logo (icon above text)", "desc": "App icon, square formats.", "status": "todo" }
+        { "name": "Logo on white background PNG", "desc": "Print, presentations, email use.", "status": "done" },
+        { "name": "Logo on dark background PNG", "desc": "Website header, dark slides.", "status": "done" },
+        { "name": "Inverted white logo version", "desc": "Dark print, embossing.", "status": "done" },
+        { "name": "Stacked mobile logo (icon above text)", "desc": "App icon, square formats.", "status": "done" }
       ]
     },
     {
       "icon": "🎨",
       "title": "Brand Color & Typography System",
-      "count": "5/10 done",
+      "count": "7/7 done",
       "items": [
         { "name": "4-color palette locked — Navy, Amber, Grey, Off-White", "desc": "Global industrial trust palette.", "status": "done" },
         { "name": "WCAG AA contrast verified (5.12:1)", "desc": "Accessibility compliance certified.", "status": "done" },
         { "name": "Inter variable font system", "desc": "Bold 700 / Regular 400 / Mono locked.", "status": "done" },
         { "name": "Color hex codes + Tailwind config", "desc": "Developer-ready tokens.", "status": "done" },
         { "name": "CSS variables export", "desc": "Website + email + print consistent.", "status": "done" },
-        { "name": "Dark mode color variants", "desc": "Website dark/light toggle ready.", "status": "todo" },
-        { "name": "Color psychology rationale document", "desc": "Amber=heat, Navy=authority, Grey=precision.", "status": "todo" }
+        { "name": "Dark mode color variants", "desc": "Website dark/light toggle ready.", "status": "done" },
+        { "name": "Color psychology rationale document", "desc": "Amber=heat, Navy=authority, Grey=precision.", "status": "done" }
       ]
     },
     {

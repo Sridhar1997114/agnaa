@@ -1,7 +1,8 @@
 import React from 'react';
 
 export const AgnaaLogo = ({ className = "w-auto h-10" }: { className?: string }) => (
-  <svg viewBox="0 0 4000 4000" className={className} xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 4000 4000" className={className} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AGNAA Logo">
+    <title>AGNAA Logo</title>
     <defs>
       <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
         <stop offset="0%" stopColor="#7B2DBF" />

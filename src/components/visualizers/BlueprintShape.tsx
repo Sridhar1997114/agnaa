@@ -4,7 +4,7 @@ import React from 'react';
 import { HumanScale } from './HumanScale';
 
 interface BlueprintShapeProps {
-  shape: 'cylinder' | 'cone' | 'trapezoidal';
+  shape: 'cylinder' | 'cone' | 'trapezoidal' | 'cuboid';
   data: {
     r?: number;
     h?: number;
@@ -12,9 +12,10 @@ interface BlueprintShapeProps {
     a?: number;
     b?: number;
   };
+  showHuman?: boolean;
 }
 
-export const BlueprintShape: React.FC<BlueprintShapeProps> = ({ shape, data }) => {
+export const BlueprintShape: React.FC<BlueprintShapeProps> = ({ shape, data, showHuman = true }) => {
   const { r = 0.5, h = 2, l = 5, a = 1, b = 0.5 } = data;
   const s = 40;
   const ox = 200;
@@ -23,10 +24,19 @@ export const BlueprintShape: React.FC<BlueprintShapeProps> = ({ shape, data }) =
   const poly = (pts: {x: number, y: number}[]) => pts.map(p => `${p.x},${p.y}`).join(' ');
 
   return (
-    <div className="w-full aspect-video bg-[#FDFDFF] rounded-2xl relative overflow-hidden border border-gray-200 shadow-lg group font-sans">
-      {/* Thin branding blue grid (dot pattern for volumetric) */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(#1C1C72 0.5px, transparent 0.5px)', backgroundSize: '15px 15px' }}></div>
+    <div className="w-full aspect-video bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       
       {/* Title */}
       <div className="absolute top-6 left-6 z-10">
@@ -94,7 +104,44 @@ export const BlueprintShape: React.FC<BlueprintShapeProps> = ({ shape, data }) =
           </g>
         )}
 
-        <HumanScale x={ox - 120} y={oy} scale={0.6} variant="3d" />
+        {/* CUBOID / HVAC VOLUME */}
+        {shape === 'cuboid' && (
+          <g>
+            {(() => {
+                const w = data.a || 5; 
+                const d = data.b || 3; 
+                const h = data.h || 2.5; 
+                
+                const b0 = { x: ox - (w * s / 2), y: oy };
+                const b1 = { x: ox + (w * s / 2), y: oy };
+                const b2 = { x: ox + (w * s / 2) + (d * s * 0.4), y: oy - (d * s * 0.3) };
+                const b3 = { x: ox - (w * s / 2) + (d * s * 0.4), y: oy - (d * s * 0.3) };
+
+                const t0 = { x: b0.x, y: b0.y - (h * s) };
+                const t1 = { x: b1.x, y: b1.y - (h * s) };
+                const t2 = { x: b2.x, y: b2.y - (h * s) };
+                const t3 = { x: b3.x, y: b3.y - (h * s) };
+
+                return (
+                    <>
+                        <polygon points={poly([b0, b1, b2, b3])} fill="white" stroke="#1C1C72" strokeWidth="0.5" opacity="0.3" strokeDasharray="2,2" />
+                        <polygon points={poly([b0, b1, t1, t0])} fill="#F8FAFC" stroke="#1C1C72" strokeWidth="1.2" />
+                        <polygon points={poly([b1, b2, t2, t1])} fill="#F1F5F9" stroke="#1C1C72" strokeWidth="0.8" />
+                        <polygon points={poly([t0, t1, t2, t3])} fill="white" stroke="#1C1C72" strokeWidth="1.5" />
+                        
+                        <text x={(t0.x + t1.x)/2} y={t0.y - 10} fill="#7B2DBF" fontSize="7" fontWeight="900" textAnchor="middle">W: {w}M</text>
+                        <text x={t1.x + 15} y={(t1.y + t2.y)/2} fill="#1C1C72" fontSize="7" fontWeight="900" transform={`rotate(-15 ${t1.x + 15} ${(t1.y + t2.y)/2})`}>D: {d}M</text>
+                        <text x={t0.x - 10} y={(t0.y + b0.y)/2} fill="#1C1C72" fontSize="7" fontWeight="900" textAnchor="end">H: {h}M</text>
+                    </>
+                );
+            })()}
+          </g>
+        )}
+
+        {/* Human Scale — 3D View (Optional) */}
+        {showHuman && (
+          <HumanScale x={ox - 120} y={oy} scale={0.6} variant="3d" />
+        )}
       </svg>
     </div>
   );

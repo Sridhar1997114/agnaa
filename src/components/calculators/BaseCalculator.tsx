@@ -308,8 +308,33 @@ export function BaseCalculator({
 
               <div className="relative z-10 space-y-12">
                 {/* Results Data Grid */}
-                <div className="max-w-4xl mx-auto">
+                <div className="max-w-4xl mx-auto space-y-8">
                   {resultsContent}
+                  
+                  {/* LIVE PRESET TOGGLER (Architectural Tier Switching) */}
+                  {presets && (
+                    <div className="bg-[#1C1C72]/5 rounded-[2rem] p-6 border border-[#1C1C72]/10 flex flex-col md:flex-row items-center gap-6 animate-in fade-in zoom-in duration-500">
+                      <div className="flex-1">
+                        <div className="text-[10px] font-black text-[#7B2DBF] uppercase tracking-[0.2em] mb-1">Structural Configuration</div>
+                        <p className="text-xs text-[#1C1C72]/60 font-medium">Switch between engineering tiers to see live material impact.</p>
+                      </div>
+                      <div className="flex gap-2 bg-white/50 p-1.5 rounded-2xl border border-white">
+                        {presets.options.map(opt => (
+                          <button
+                            key={opt.id}
+                            onClick={() => presets.onChange(opt.id)}
+                            className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                              presets.current === opt.id 
+                                ? 'bg-[#1C1C72] text-white shadow-lg' 
+                                : 'text-[#1C1C72]/40 hover:text-[#1C1C72] hover:bg-white'
+                            }`}
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
                 
                 {/* ─── EXPANDED CINEMATIC VISUALIZER ─── */}

@@ -103,8 +103,10 @@ export default function HVACCalculator() {
       pdfTotalSubtitle="AC CAPACITY"
       visualizerType="SHAPE"
       visualizerData={results ? {
-        area: parseFloat(area) * 10.764,
-        thickness: parseFloat(height) * 3.281, // Room height in FT
+        shape: 'cuboid',
+        a: Math.sqrt(parseFloat(area)), // Approximate width
+        b: Math.sqrt(parseFloat(area)), // Approximate depth
+        h: parseFloat(height),
         label: 'HVAC Cooling Volume'
       } : undefined}
     />

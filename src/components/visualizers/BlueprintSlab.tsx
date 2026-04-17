@@ -10,9 +10,10 @@ interface BlueprintSlabProps {
   preset?: 'economy' | 'safe' | 'strong';
   label?: string;
   unit?: 'FT' | 'M';
+  showHuman?: boolean;
 }
 
-export const BlueprintSlab: React.FC<BlueprintSlabProps> = ({ length, width, thickness, preset = 'safe', label = "RCC Structural Section", unit = 'FT' }) => {
+export const BlueprintSlab: React.FC<BlueprintSlabProps> = ({ length, width, thickness, preset = 'safe', label = "RCC Structural Section", unit = 'FT', showHuman = true }) => {
   const s = 15;
   const slabL = Math.min(length, 20) * s;
   const slabH = (thickness / 12) * s * 2;
@@ -27,10 +28,19 @@ export const BlueprintSlab: React.FC<BlueprintSlabProps> = ({ length, width, thi
   }
 
   return (
-    <div className="w-full aspect-video bg-[#FDFDFF] rounded-2xl relative overflow-hidden border border-gray-200 shadow-lg group font-sans">
-      {/* Thin branding blue grid */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none" 
-           style={{ backgroundImage: 'linear-gradient(#1C1C72 1px, transparent 1px), linear-gradient(90deg, #1C1C72 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+    <div className="w-full aspect-video bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       
       {/* Title */}
       <div className="absolute top-6 left-6 z-10">
@@ -43,6 +53,15 @@ export const BlueprintSlab: React.FC<BlueprintSlabProps> = ({ length, width, thi
       </div>
 
       <svg viewBox="0 0 400 250" className="w-full h-full p-8 transition-transform duration-700 group-hover:scale-[1.02]">
+        <defs>
+          <pattern id="concreteHatch" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="0.5" fill="#1C1C72" opacity="0.4" />
+            <circle cx="12" cy="8" r="0.3" fill="#1C1C72" opacity="0.3" />
+            <circle cx="6" cy="15" r="0.7" fill="#1C1C72" opacity="0.5" />
+            <path d="M 15 5 L 17 7 M 5 15 L 7 17" stroke="#1C1C72" strokeWidth="0.2" opacity="0.3" />
+          </pattern>
+        </defs>
+
         {/* Ground Line */}
         <line x1={0} y1={oy} x2={400} y2={oy} stroke="#1C1C72" strokeWidth="0.5" strokeDasharray="4,3" opacity="0.15" />
 
@@ -53,7 +72,10 @@ export const BlueprintSlab: React.FC<BlueprintSlabProps> = ({ length, width, thi
         <rect x={ox} y={oy - slabH} width={slabL} height={slabH} fill="white" stroke="#1C1C72" strokeWidth="1.5" rx="1" />
         
         {/* Concrete hatch pattern */}
-        <rect x={ox} y={oy - slabH} width={slabL} height={slabH} fill="#1C1C72" opacity="0.02" />
+        <rect x={ox} y={oy - slabH} width={slabL} height={slabH} fill="url(#concreteHatch)" opacity="0.6" />
+        
+        {/* Material Texture Overlay */}
+        <rect x={ox} y={oy - slabH} width={slabL} height={slabH} fill="#1C1C72" opacity="0.03" />
 
         {/* Clear Cover */}
         <g opacity="0.3">
@@ -84,8 +106,10 @@ export const BlueprintSlab: React.FC<BlueprintSlabProps> = ({ length, width, thi
           <text y="9" fill="#1C1C72" fontSize="5" fontWeight="bold" opacity="0.35">TMT FE500 GRADE</text>
         </g>
 
-        {/* Human Scale — Section View */}
-        <HumanScale x={ox - 40} y={oy} scale={0.7} variant="section" />
+        {/* Human Scale — Section View (Optional) */}
+        {showHuman && (
+          <HumanScale x={ox - 40} y={oy} scale={0.7} variant="section" />
+        )}
 
         {/* Dimension Lines */}
         <g opacity="0.5">

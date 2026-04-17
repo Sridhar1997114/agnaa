@@ -1,15 +1,25 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { MapPin, Phone } from 'lucide-react';
 import { AgnaaLogo } from './AgnaaLogo';
 
 export const Footer = () => {
+  const pathname = usePathname();
+  const isPortal = pathname?.startsWith('/app') || pathname?.startsWith('/admin') || pathname?.startsWith('/login') || pathname?.startsWith('/shop');
+
+  if (isPortal) return null;
+
   return (
     <footer className="bg-[#F5F5F7] border-t border-gray-200 pt-16 md:pt-20 pb-10 text-gray-500 font-medium">
       <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 mb-16">
         <div className="col-span-1 sm:col-span-2 space-y-6">
           <div className="flex items-center mb-6">
-            <AgnaaLogo className="w-auto h-8 md:h-10 grayscale hover:grayscale-0 transition-all duration-500" />
+            <Link href="/" aria-label="Go to homepage">
+              <AgnaaLogo className="w-auto h-8 md:h-10 grayscale hover:grayscale-0 transition-all duration-500" />
+            </Link>
           </div>
           <p className="max-w-md text-base md:text-lg font-bold text-[#1C1C72]">Design. Build. Soul. Architecture and execution that outlives generations.</p>
           <div className="flex flex-wrap gap-4 md:gap-6 pt-4 font-black text-xs uppercase tracking-widest">

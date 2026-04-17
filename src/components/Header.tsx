@@ -56,6 +56,10 @@ export const Header = () => {
 
   const currentId = getActiveLink(navLinks, pathname || '/');
 
+  const isPortal = pathname?.startsWith('/app') || pathname?.startsWith('/admin') || pathname?.startsWith('/login') || pathname?.startsWith('/shop');
+
+  if (isPortal) return null;
+
   return (
     <header className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-xl py-4 shadow-sm border-b border-gray-200' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
@@ -90,6 +94,7 @@ export const Header = () => {
             href="/calc" 
             className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent ${pathname === '/calc' ? 'bg-[#1C1C72] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#7B2DBF]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
             title="Agnaa Calc"
+            aria-label="Agnaa Calc"
           >
             <Calculator size={20} strokeWidth={2} />
           </Link>
@@ -97,12 +102,13 @@ export const Header = () => {
             href="/commercial/quotation" 
             className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent ${pathname === '/commercial/quotation' ? 'bg-[#7B2DBF] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#1C1C72]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
             title="Create Service Quotation (Internal)"
+            aria-label="Create Service Quotation"
           >
             <FileText size={20} strokeWidth={2} />
           </Link>
           <div className="w-px h-6 bg-gray-200"></div>
           <Link 
-            href="/clients" 
+            href={`${baseURL}/clients`} 
             className={`text-sm font-bold transition-colors ${pathname === '/clients' ? 'text-[#7B2DBF]' : 'text-gray-500 hover:text-[#7B2DBF]'}`}
           >
             Client Login
@@ -115,7 +121,7 @@ export const Header = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="lg:hidden text-[#1C1C72] hover:text-[#7B2DBF] transition-all p-2 -mr-2 bg-white/50 backdrop-blur-md rounded-full shadow-sm border border-gray-100" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button aria-label="Toggle menu" className="lg:hidden text-[#1C1C72] hover:text-[#7B2DBF] transition-all p-2 -mr-2 bg-white/50 backdrop-blur-md rounded-full shadow-sm border border-gray-100" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -126,7 +132,7 @@ export const Header = () => {
           <div className="flex flex-col h-full">
             <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
               <AgnaaLogo className="h-8 w-auto" />
-              <button className="p-2 -mr-2 text-[#1C1C72] bg-[#F5F5F7] rounded-full" onClick={() => setIsMenuOpen(false)}>
+              <button aria-label="Close menu" className="p-2 -mr-2 text-[#1C1C72] bg-[#F5F5F7] rounded-full" onClick={() => setIsMenuOpen(false)}>
                 <X size={24} />
               </button>
             </div>

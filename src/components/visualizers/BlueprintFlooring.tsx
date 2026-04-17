@@ -8,9 +8,10 @@ interface BlueprintFlooringProps {
   pattern: 'GRID' | 'DIAGONAL' | 'STAGGERED' | 'HERRINGBONE';
   tileSize: number; // inches
   unit?: 'FT' | 'M';
+  showHuman?: boolean;
 }
 
-export const BlueprintFlooring: React.FC<BlueprintFlooringProps> = ({ length, width, pattern, tileSize, unit = 'FT' }) => {
+export const BlueprintFlooring: React.FC<BlueprintFlooringProps> = ({ length, width, pattern, tileSize, unit = 'FT', showHuman = true }) => {
   const s = 10;
   const canvasW = Math.min(300, length * s);
   const canvasH = Math.min(200, width * s);
@@ -19,9 +20,19 @@ export const BlueprintFlooring: React.FC<BlueprintFlooringProps> = ({ length, wi
   const oy = (250 - canvasH) / 2;
 
   return (
-    <div className="w-full aspect-video bg-[#FDFDFF] rounded-2xl relative overflow-hidden border-2 border-[#1C1C72] shadow-2xl group font-sans">
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'linear-gradient(#1C1C72 1px, transparent 1px), linear-gradient(90deg, #1C1C72 1px, transparent 1px)', backgroundSize: '15px 15px' }}></div>
+    <div className="w-full aspect-video bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       
       <div className="absolute top-6 left-6 z-10">
         <div className="text-[10px] font-black text-[#1C1C72] tracking-[0.3em] uppercase mb-1">Flooring Layout // Pattern Study</div>

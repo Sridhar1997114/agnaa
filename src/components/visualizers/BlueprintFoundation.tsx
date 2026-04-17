@@ -7,9 +7,10 @@ interface BlueprintFoundationProps {
   length: number;
   width: number;
   depth: number;
+  showHuman?: boolean;
 }
 
-export const BlueprintFoundation: React.FC<BlueprintFoundationProps> = ({ length, width, depth }) => {
+export const BlueprintFoundation: React.FC<BlueprintFoundationProps> = ({ length, width, depth, showHuman = true }) => {
   const s = 12;
   const fL = length * s;
   const fW = width * s;
@@ -36,10 +37,19 @@ export const BlueprintFoundation: React.FC<BlueprintFoundationProps> = ({ length
   const b011 = iso(0, fW, fD);
 
   return (
-    <div className="w-full aspect-video bg-[#FDFDFF] rounded-2xl relative overflow-hidden border border-gray-200 shadow-lg group font-sans">
-      {/* Thin branding blue grid */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none" 
-           style={{ backgroundImage: 'linear-gradient(#1C1C72 1px, transparent 1px), linear-gradient(90deg, #1C1C72 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+    <div className="w-full aspect-video bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       
       {/* Title */}
       <div className="absolute top-6 left-6 z-10">
@@ -48,6 +58,15 @@ export const BlueprintFoundation: React.FC<BlueprintFoundationProps> = ({ length
       </div>
 
       <svg viewBox="0 0 400 250" className="w-full h-full p-8 transition-transform duration-700 group-hover:scale-[1.02]">
+        <defs>
+          <pattern id="concreteHatch" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="0.5" fill="#1C1C72" opacity="0.4" />
+            <circle cx="12" cy="8" r="0.3" fill="#1C1C72" opacity="0.3" />
+            <circle cx="6" cy="15" r="0.7" fill="#1C1C72" opacity="0.5" />
+            <path d="M 15 5 L 17 7 M 5 15 L 7 17" stroke="#1C1C72" strokeWidth="0.2" opacity="0.3" />
+          </pattern>
+        </defs>
+        
         {/* Ground Level */}
         <line x1="0" y1="200" x2="400" y2="200" stroke="#1C1C72" strokeWidth="0.5" opacity="0.1" />
 
@@ -70,10 +89,12 @@ export const BlueprintFoundation: React.FC<BlueprintFoundationProps> = ({ length
 
         {/* Side faces */}
         <polygon points={poly([b000, b100, b101, b001])} fill="#F8FAFC" stroke="#1C1C72" strokeWidth="0.8" />
+        <rect x={iso(0,0,fD).x} y={iso(0,0,fD).y} width={fL} height={fD} fill="url(#concreteHatch)" opacity="0.3" transform={`skewY(30)`} pointerEvents="none" />
         <polygon points={poly([b100, b110, b111, b101])} fill="#F1F5F9" stroke="#1C1C72" strokeWidth="0.8" />
         
         {/* Top Face */}
         <polygon points={poly([b001, b101, b111, b011])} fill="white" stroke="#1C1C72" strokeWidth="1.2" />
+        <polygon points={poly([b001, b101, b111, b011])} fill="url(#concreteHatch)" opacity="0.4" />
 
         {/* Column Starter Bars */}
         <g stroke="#7B2DBF" strokeWidth="1.5" strokeLinecap="round" opacity="0.5">
@@ -97,8 +118,10 @@ export const BlueprintFoundation: React.FC<BlueprintFoundationProps> = ({ length
            <text x={b111.x + 38} y={(b110.y + b111.y)/2} transform={`rotate(-90 ${b111.x + 38} ${(b110.y + b111.y)/2})`}>D: {depth}'</text>
         </g>
 
-        {/* Human Scale — 3D View */}
-        <HumanScale x={ox - 100} y={oy + 20} scale={0.6} variant="3d" />
+        {/* Human Scale — 3D View (Optional) */}
+        {showHuman && (
+          <HumanScale x={ox - 100} y={oy + 20} scale={0.6} variant="3d" />
+        )}
       </svg>
     </div>
   );

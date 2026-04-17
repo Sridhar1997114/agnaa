@@ -11,6 +11,7 @@ export default function FoundationCalculator() {
   const [width, setWidth] = useState('1.2');
   const [depth, setDepth] = useState('0.4');
   const [count, setCount] = useState('8');
+  const [preset, setPreset] = useState<'economy' | 'safe' | 'strong'>('safe');
   const [isCalculated, setIsCalculated] = useState(false);
   const [results, setResults] = useState<any>(null);
 
@@ -28,7 +29,7 @@ export default function FoundationCalculator() {
 
   useEffect(() => {
     handleCalculate();
-  }, [length, width, depth, count]);
+  }, [length, width, depth, count, preset]);
 
   const handleReset = () => {
     setLength('1.2');
@@ -76,6 +77,15 @@ export default function FoundationCalculator() {
           </div>
         </div>
       }
+      presets={{
+        current: preset as any,
+        options: [
+          { id: 'economy', label: 'Economy', desc: 'Optimized for lighter loads.' },
+          { id: 'safe', label: 'Standard', desc: 'IS 456 compliant safety.' },
+          { id: 'strong', label: 'Heavy Duty', desc: 'Maximum structural stability.' }
+        ],
+        onChange: (id) => setPreset(id as any)
+      }}
       resultsContent={
         <div className="space-y-4">
           <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
@@ -84,12 +94,12 @@ export default function FoundationCalculator() {
               <Odometer value={results?.singleVolume || 0} decimals={2} /> <span className="text-xs">m³</span>
             </div>
           </div>
-          <div className="bg-[#7B2DBF]/5 border border-[#7B2DBF]/20 rounded-2xl p-4">
-            <div className="text-[8px] font-black uppercase tracking-widest text-[#7B2DBF] mb-1">Total Concrete Requirement</div>
+          <div className="bg-[#7B2DBF]/5 border border-[#7B2DBF]/20 rounded-2xl p-4 shadow-sm flex flex-col justify-center transition-all hover:bg-[#7B2DBF]/10">
+            <div className="text-[8px] font-black uppercase tracking-widest text-[#7B2DBF] mb-1">Final Result</div>
             <div className="text-4xl font-black text-[#7B2DBF]">
               <Odometer value={results?.totalVolume || 0} decimals={2} /> <span className="text-sm">m³</span>
             </div>
-            <div className="text-[10px] text-[#7B2DBF]/60 font-bold mt-1 uppercase tracking-tight">For {count} Optimized Isolated Footings</div>
+            <div className="text-[10px] text-[#7B2DBF]/60 font-bold mt-1 uppercase tracking-tight">For {count} {preset.toUpperCase()} Footings</div>
           </div>
         </div>
       }

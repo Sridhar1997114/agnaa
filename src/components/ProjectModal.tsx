@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, MapPin, Calendar, Building, Box } from 'lucide-react';
 import { Button } from './Button';
+import Image from 'next/image';
 
 interface Project {
   id: number;
@@ -30,7 +31,9 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
           >
             <X size={24} />
           </button>
-          <img src={project.img} alt={project.title} className="w-full h-64 md:h-96 object-cover rounded-t-3xl" />
+          <div className="relative w-full h-64 md:h-96">
+            <Image src={project.img} alt={project.title} fill className="object-cover rounded-t-3xl" />
+          </div>
         </div>
         <div className="p-8 md:p-12">
           <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[#1C1C72] mb-4">{project.title}</h2>

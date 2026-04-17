@@ -7,9 +7,10 @@ interface BlueprintRoofingProps {
   length: number; // feet
   width: number;  // feet
   type: 'TILES' | 'SHEETS' | 'RCC';
+  showHuman?: boolean;
 }
 
-export const BlueprintRoofing: React.FC<BlueprintRoofingProps> = ({ slope = 25, length, width, type }) => {
+export const BlueprintRoofing: React.FC<BlueprintRoofingProps> = ({ slope = 25, length, width, type, showHuman = true }) => {
   const s = 10;
   const roofL = length * s;
   const roofW = width * s;
@@ -35,9 +36,19 @@ export const BlueprintRoofing: React.FC<BlueprintRoofingProps> = ({ slope = 25, 
   const poly = (pts: any[]) => pts.map(p => `${p.x},${p.y}`).join(' ');
 
   return (
-    <div className="w-full aspect-video bg-[#FDFDFF] rounded-2xl relative overflow-hidden border-2 border-[#1C1C72] shadow-2xl group font-sans">
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'linear-gradient(#1C1C72 1px, transparent 1px), linear-gradient(90deg, #1C1C72 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+    <div className="w-full aspect-video bg-white rounded-2xl relative overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group font-sans">
+      {/* Blurred Thin Grid System */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.2]">
+        <defs>
+          <filter id="gridBlur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
+          </filter>
+          <pattern id="whitePortalGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#E2E8F0" strokeWidth="0.5" filter="url(#gridBlur)" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whitePortalGrid)" />
+      </svg>
       
       <div className="absolute top-6 left-6 z-10">
         <div className="text-[10px] font-black text-[#1C1C72] tracking-[0.3em] uppercase mb-1">Roofing System // Technical Section</div>

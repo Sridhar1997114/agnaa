@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { updateSession } from './lib/supabase/middleware';
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') || '';
   const pathname = request.nextUrl.pathname;
 
@@ -10,6 +11,30 @@ export function middleware(request: NextRequest) {
     if (pathname === '/') {
       return NextResponse.rewrite(new URL('/pro', request.url));
     }
+  }
+
+  // Auth Protection for /app and /admin routes
+  if (pathname.startsWith('/app') || pathname.startsWith('/admin') || pathname.startsWith('/pro')) {
+    const { response, user } = await updateSession(request);
+    
+    // Allow login page access
+    if (pathname === '/login' || pathname === '/pro/login') {
+      if (user) {
+        // Redirect based on role if logged in
+        const supabase = await updateSession(request); // Refresh user state
+        // In a real scenario, we might want to check the profile role here,
+        // but for middleware, just redirecting to /app or /admin is enough if logged in.
+        return NextResponse.redirect(new URL('/app', request.url));
+      }
+      return response;
+    }
+
+    // Protect all other secured routes
+    if (!user) {
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
+    
+    return response;
   }
 
   // Redirect /pro to pro.agnaa.in if accessed directly
@@ -57,6 +82,20 @@ export function middleware(request: NextRequest) {
 
   if (pathname === '/construction') {
     return NextResponse.redirect(new URL('/constructions', request.url));
+  }
+
+  // Check if the request is coming from the 'brand' subdomain
+  if (hostname.startsWith('brand.enthalpylabs.com') || hostname.startsWith('brand.localhost')) {
+    if (pathname === '/') {
+      return NextResponse.rewrite(new URL('/brand', request.url));
+    }
+  }
+
+  // Check if the request is coming from the 'client' subdomain
+  if (hostname.startsWith('client.agnaa.in') || hostname.startsWith('client.localhost') || hostname.startsWith('clients.agnaa.in')) {
+    if (pathname === '/') {
+      return NextResponse.rewrite(new URL('/clients', request.url));
+    }
   }
 
   return NextResponse.next();

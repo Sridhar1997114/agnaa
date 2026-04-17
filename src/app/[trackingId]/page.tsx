@@ -14,24 +14,28 @@ export default function TrackingPage({ params }: { params: { trackingId: string 
 
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    const savedSession = localStorage.getItem(`auth_${trackingId}`);
+    if (savedSession === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, [trackingId]);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     const cleanId = loginId.trim().toUpperCase();
     const cleanTrackingId = trackingId.toUpperCase();
+    const cleanPass = password.trim();
 
-    if (cleanId === 'AGN-001' && password.trim() === 'entlabs') {
+    const isEnthalpyCreds = (cleanId === 'AGN-001' && cleanPass === 'entlabs') || 
+                            (cleanId === 'AGN080426-001' && (cleanPass === 'entlabs' || cleanPass === 'enthalpy@agnaa'));
+
+    if (isEnthalpyCreds || (cleanTrackingId === 'AGN080426-001' && cleanPass === 'entlabs')) {
       setIsAuthenticated(true);
-    } else if (cleanId === 'AGN080426-001' || cleanId === 'AGN080426-1001' || cleanTrackingId === 'AGN080426-001' || cleanTrackingId === 'AGN080426-1001') {
-      // Auto-authenticate for these specific tracking IDs if any password is provided
-      // or if they are the login id
-      if (password.trim() === 'entlabs' || password.trim() === 'enthalpy@agnaa') {
-        setIsAuthenticated(true);
-      }
+      localStorage.setItem(`auth_${trackingId}`, 'true');
     } else if (loginId && password) {
-      // Mock for standard demo
+      // Any other ID for demo purposes
       setIsAuthenticated(true);
+      localStorage.setItem(`auth_${trackingId}`, 'true');
     }
   };
 
