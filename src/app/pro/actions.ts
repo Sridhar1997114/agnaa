@@ -196,5 +196,19 @@ export async function getClients() {
     .eq("role", "client")
     .order("created_at", { ascending: false });
 
+
+  export async function getVaultFiles() {
+      const supabase = await createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return { data: [], error: "Not authenticated" };
+
+      const { data, error } = await supabase
+        .from("documents")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      return { data: data as any[], error };
+  }
+  
   return { data, error };
 }
