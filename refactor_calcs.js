@@ -12,8 +12,10 @@ function walk(dir) {
     for (const file of files) {
         const fullPath = path.join(dir, file);
         if (fs.statSync(fullPath).isDirectory()) {
+            console.log(`Visiting: ${fullPath}`);
             walk(fullPath);
         } else if (file === 'page.tsx') {
+            console.log(`Checking: ${fullPath}`);
             let content = fs.readFileSync(fullPath, 'utf8');
             let original = content;
             

@@ -1,126 +1,142 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import { motion } from "framer-motion";
-import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
-import { Zap, ShieldCheck, Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
+import { loginWithCredentials } from "@/app/pro/auth-actions";
+import { Shield, Mail, Lock, ArrowRight, Loader2, AlertCircle, Zap } from "lucide-react";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
-  const supabase = createClient();
+  const [isPending, startTransition] = useTransition();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
     setError(null);
+    const formData = new FormData(e.currentTarget);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+    startTransition(async () => {
+      const result = await loginWithCredentials(formData);
+      if (result?.error) {
+        setError(result.error);
+      }
     });
-
-    if (error) {
-      setError(error.message);
-      setLoading(false);
-    } else {
-      router.push("/pro");
-      router.refresh();
-    }
   };
 
   return (
-    <div className="min-h-screen bg-[#0D0D14] flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Background Orbs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-violet/10 blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full" />
+    <div className="min-h-screen bg-[#070710] flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Ambient glows */}
+      <div className="absolute top-[-15%] left-[-10%] w-[50%] h-[50%] bg-orange-500/8 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[-15%] right-[-10%] w-[45%] h-[45%] bg-amber-400/6 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-orange-600/4 blur-[180px] rounded-full pointer-events-none" />
 
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md z-10"
+      <motion.div
+        initial={{ opacity: 0, y: 24, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full max-w-[420px] z-10"
       >
-        <div className="bg-[#14141F]/80 backdrop-blur-2xl border border-white/5 rounded-3xl p-8 shadow-2xl">
-          <div className="flex flex-col items-center mb-10 text-center">
-            <div className="w-16 h-16 bg-brand-gradient rounded-2xl flex items-center justify-center shadow-2xl shadow-brand-violet/20 mb-6">
-              <Zap size={32} className="text-white fill-white" />
+        <div className="bg-[#0e0e1a]/90 backdrop-blur-3xl border border-white/8 rounded-3xl p-8 shadow-2xl shadow-black/60">
+          
+          {/* Logo + Brand */}
+          <div className="flex flex-col items-center mb-10 text-center space-y-5">
+            {/* EL Logomark */}
+            <div className="relative">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 via-amber-500 to-orange-600 flex items-center justify-center shadow-2xl shadow-orange-500/30">
+                <span className="font-bold text-2xl text-white tracking-tight">EL</span>
+              </div>
+              <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#0e0e1a] border border-white/10 flex items-center justify-center">
+                <Zap size={10} className="text-orange-400 fill-orange-400" />
+              </div>
             </div>
-            <h1 className="text-3xl font-display font-bold text-white mb-2">AGNAA PRO</h1>
-            <p className="text-brand-muted text-sm tracking-wide uppercase font-semibold">Authorized Personnel Only</p>
+
+            <div className="space-y-1">
+              <h1 className="text-2xl font-bold text-white tracking-tight">Enthalpy Labs</h1>
+              <p className="text-[11px] text-white/30 uppercase tracking-[0.25em] font-semibold">
+                Internal Operations Portal
+              </p>
+            </div>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-6">
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Email */}
             <div className="space-y-2">
-              <label className="text-xs font-bold text-brand-muted uppercase tracking-widest px-1">Email Identifier</label>
+              <label className="text-[11px] font-bold text-white/40 uppercase tracking-widest px-1">
+                Email
+              </label>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-brand-muted group-focus-within:text-brand-violet transition-colors">
-                  <Mail size={18} />
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-white/30 group-focus-within:text-orange-400 transition-colors duration-200">
+                  <Mail size={16} />
                 </div>
                 <input
+                  name="email"
                   type="email"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-brand-violet/50 focus:ring-4 focus:ring-brand-violet/5 transition-all"
-                  placeholder="name@company.com"
+                  autoComplete="email"
+                  defaultValue="admin@enthalpylabs.com"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3.5 pl-11 pr-4 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/8 transition-all duration-200"
+                  placeholder="admin@enthalpylabs.com"
                 />
               </div>
             </div>
 
+            {/* Password */}
             <div className="space-y-2">
-              <label className="text-xs font-bold text-brand-muted uppercase tracking-widest px-1">Secure Key</label>
+              <label className="text-[11px] font-bold text-white/40 uppercase tracking-widest px-1">
+                Password
+              </label>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-12 flex items-center pointer-events-none hidden" />
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-brand-muted group-focus-within:text-brand-violet transition-colors">
-                  <Lock size={18} />
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-white/30 group-focus-within:text-orange-400 transition-colors duration-200">
+                  <Lock size={16} />
                 </div>
                 <input
+                  name="password"
                   type="password"
                   required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-brand-violet/50 focus:ring-4 focus:ring-brand-violet/5 transition-all"
-                  placeholder="••••••••"
+                  autoComplete="current-password"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3.5 pl-11 pr-4 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/8 transition-all duration-200"
+                  placeholder="••••••••••••"
                 />
               </div>
             </div>
 
+            {/* Error */}
             {error && (
-              <motion.div 
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm p-3 rounded-lg flex items-center gap-2"
+              <motion.div
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm p-3.5 rounded-xl flex items-center gap-2.5"
               >
-                <ShieldCheck size={16} />
+                <AlertCircle size={15} className="shrink-0" />
                 {error}
               </motion.div>
             )}
 
-            <button
-              disabled={loading}
+            {/* Submit */}
+            <motion.button
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              disabled={isPending}
               type="submit"
-              className="w-full bg-brand-gradient hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-xl shadow-brand-violet/20 flex items-center justify-center gap-2 group transition-all"
+              className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white font-bold py-4 rounded-xl shadow-xl shadow-orange-500/25 flex items-center justify-center gap-2.5 group transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed mt-2"
             >
-              {loading ? (
-                <Loader2 className="animate-spin" size={20} />
+              {isPending ? (
+                <Loader2 className="animate-spin" size={18} />
               ) : (
                 <>
-                  Enter Vault <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  <Shield size={16} />
+                  Access Dashboard
+                  <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                 </>
               )}
-            </button>
+            </motion.button>
           </form>
 
-          <div className="mt-8 pt-6 border-t border-white/5 text-center">
-            <p className="text-xs text-brand-muted italic">
-              Access is restricted by military-grade encryption and biometric verification. 
-              Unauthorized access attempts are logged and reported.
-            </p>
-          </div>
+          {/* Footer note */}
+          <p className="text-center text-[10px] text-white/20 mt-8 leading-relaxed">
+            Restricted to Enthalpy Labs team members.
+            <br />All access is monitored and logged.
+          </p>
         </div>
       </motion.div>
     </div>

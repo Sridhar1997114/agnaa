@@ -104,7 +104,7 @@ export const ENTHALPY_HTML = `
 
 <div class="header">
   <div class="logo-wrap">
-    <svg class="logo-mark" viewBox="0 0 200 200" aria-label="Enthalpy Labs">
+    <svg class="logo-mark" viewBox="0 0 200 200" aria-label="Agnaa">
       <defs>
         <linearGradient id="hf" x1="50%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FFE066"/><stop offset="45%" stop-color="#F4B400"/><stop offset="100%" stop-color="#C2410C"/></linearGradient>
         <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4B5563"/><stop offset="100%" stop-color="#09090B"/></linearGradient>
@@ -114,9 +114,9 @@ export const ENTHALPY_HTML = `
       <polygon fill="url(#hg)" points="100,18.76 100,131.62 178.19,154.19"/>
       <polygon fill="url(#hn)" points="100,131.62 21.81,154.19 178.19,154.19"/>
     </svg>
-    <div class="brand">ENTHALPY <span>LABS</span></div>
+    <div class="brand">AGNAA</div>
   </div>
-  <h1>Agnaa Ongoing Works — Enthalpy Labs</h1>
+  <h1>Agnaa Ongoing Works</h1>
   <p>170+ live deliverables tracked in real time. Every task documented. Every milestone clear. Updated daily.</p>
   <div class="stats-row">
     <div class="stat"><div class="stat-val">170+</div><div class="stat-label">Deliverables</div></div>

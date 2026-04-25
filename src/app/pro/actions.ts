@@ -64,6 +64,10 @@ export async function getDocuments(projectId?: string) {
   return { data: data as Document[], error };
 }
 
+export async function getVaultFiles(projectId?: string) {
+  return getDocuments(projectId);
+}
+
 export async function getDeliverables(projectId?: string) {
   const supabase = await createClient();
   let query = supabase.from("documents").select("*").eq("category", "deliverable");

@@ -90,7 +90,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {/* Navigation */}
         <nav className="flex-1 px-4 space-y-1 overflow-y-auto no-scrollbar">
           {SIDEBAR_LINKS.map((link) => {
-            const isActive = pathname === link.href || (link.href !== "/app" && pathname.startsWith(link.href));
+            const currentPath = pathname ?? "";
+            const isActive = currentPath === link.href || (link.href !== "/app" && currentPath.startsWith(link.href));
             const Icon = link.icon;
             
             return (

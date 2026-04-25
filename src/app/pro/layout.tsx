@@ -3,106 +3,86 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  Map, 
-  FileText, 
-  CreditCard, 
-  Settings, 
-  History,
+import {
+  LayoutDashboard,
+  Boxes,
+  AlignLeft,
   ChevronRight,
   LogOut,
-  User,
-  Zap
+  Zap,
+  ExternalLink,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { logout } from "@/app/pro/auth-actions";
 
-const SIDEBAR_LINKS = [
+const NAV_LINKS = [
   { href: "/pro", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/pro/projects", label: "My Projects", icon: Map },
-  { href: "/pro/vault", label: "Document Vault", icon: FileText },
-  { href: "/pro/finance", label: "Financials", icon: CreditCard },
-  { href: "/pro/activity", label: "Activity Log", icon: History },
+  { href: "/pro/microservices", label: "Microservices", icon: Boxes },
+  { href: "/pro/activity", label: "Activity Log", icon: AlignLeft },
 ];
 
 export default function ProLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#0D0D14] text-white font-sans selection:bg-brand-violet/30">
+    <div className="flex min-h-screen bg-[#070710] text-white font-sans">
       {/* Sidebar */}
-      <aside 
-        className={`fixed left-0 top-0 h-full z-50 transition-all duration-300 border-r border-white/5 bg-[#14141F]/80 backdrop-blur-xl flex flex-col ${
-          isCollapsed ? "w-20" : "w-72"
+      <aside
+        className={`fixed left-0 top-0 h-full z-50 flex flex-col border-r border-white/6 bg-[#0d0d1a]/95 backdrop-blur-2xl transition-all duration-300 ${
+          collapsed ? "w-[72px]" : "w-[260px]"
         }`}
       >
-        {/* Logo Section */}
-        <div className="p-6 flex items-center gap-4">
-          <div className="w-10 h-10 bg-brand-gradient rounded-lg flex items-center justify-center shadow-lg shadow-brand-violet/20 flex-shrink-0">
-            <span className="font-display font-bold text-xl">A</span>
+        {/* Logo */}
+        <div className="flex items-center gap-3 p-5 border-b border-white/6">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/25 shrink-0">
+            <span className="font-bold text-sm text-white">EL</span>
           </div>
-          {!isCollapsed && (
-            <div className="overflow-hidden whitespace-nowrap">
-              <h1 className="font-display font-bold text-lg tracking-wider text-white">AGNAA</h1>
-              <p className="text-[10px] text-brand-muted uppercase tracking-[0.2em]">Private Portal</p>
+          {!collapsed && (
+            <div className="overflow-hidden">
+              <p className="font-bold text-[15px] text-white tracking-tight leading-none">Enthalpy Labs</p>
+              <p className="text-[10px] text-white/30 uppercase tracking-[0.18em] mt-0.5 font-medium">Ops Portal</p>
             </div>
           )}
         </div>
 
-        {/* Client Profile Card */}
-        <div className={`mx-4 mb-8 p-4 rounded-xl bg-white/5 border border-white/5 transition-all ${
-          isCollapsed ? "opacity-0 invisible h-0 mb-0" : "opacity-100 visible"
-        }`}>
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center border border-white/10 ring-2 ring-brand-violet/20">
-              <User size={20} className="text-white/60" />
+        {/* Status Pill */}
+        {!collapsed && (
+          <div className="mx-4 mt-5 mb-3 px-4 py-3 rounded-xl bg-orange-500/8 border border-orange-500/15">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
+              <span className="text-[11px] font-semibold text-orange-300 uppercase tracking-wider">Live Operations</span>
             </div>
-            <div>
-              <p className="text-xs text-brand-muted">Welcome back,</p>
-              <p className="text-sm font-semibold truncate w-32">Premium Client</p>
-            </div>
+            <p className="text-[10px] text-white/30 mt-1 ml-4">All systems active</p>
           </div>
-          
-          {/* Sridhar-Score Indicator */}
-          <div className="space-y-1.5">
-            <div className="flex justify-between text-[10px] items-center">
-              <span className="text-brand-muted font-medium uppercase tracking-tight">Sridhar-Score</span>
-              <span className="text-brand-violet font-bold flex items-center gap-0.5"><Zap size={10} fill="currentColor" /> 88/100</span>
-            </div>
-            <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-              <motion.div 
-                initial={{ width: 0 }}
-                animate={{ width: "88%" }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                className="h-full bg-brand-gradient" 
-              />
-            </div>
-          </div>
-        </div>
+        )}
 
-        {/* Navigation */}
-        <nav className="flex-1 px-4 space-y-2">
-          {SIDEBAR_LINKS.map((link) => {
-            const isActive = pathname === link.href;
+        {/* Nav */}
+        <nav className="flex-1 px-3 mt-2 space-y-1">
+          {NAV_LINKS.map((link) => {
+            const isActive = pathname === link.href || (link.href !== "/pro" && pathname.startsWith(link.href));
             const Icon = link.icon;
-            
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-3 p-3 rounded-lg transition-all group relative ${
-                  isActive 
-                    ? "bg-brand-violet/10 text-white shadow-sm ring-1 ring-brand-violet/20" 
-                    : "text-brand-muted hover:text-white hover:bg-white/5"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 group relative ${
+                  isActive
+                    ? "bg-orange-500/12 text-white ring-1 ring-orange-500/20"
+                    : "text-white/40 hover:text-white/80 hover:bg-white/5"
                 }`}
               >
-                <Icon size={20} className={isActive ? "text-brand-violet" : "group-hover:text-brand-violet transition-colors"} />
-                {!isCollapsed && <span className="text-sm font-medium tracking-wide">{link.label}</span>}
-                {isActive && !isCollapsed && (
-                  <motion.div 
-                    layoutId="active-nav"
-                    className="absolute left-0 w-1 h-6 bg-brand-violet rounded-r-full" 
+                <Icon
+                  size={18}
+                  className={`shrink-0 ${isActive ? "text-orange-400" : "group-hover:text-orange-400 transition-colors"}`}
+                />
+                {!collapsed && (
+                  <span className="text-[13px] font-medium">{link.label}</span>
+                )}
+                {isActive && !collapsed && (
+                  <motion.div
+                    layoutId="active-indicator"
+                    className="absolute left-0 w-0.5 h-5 bg-orange-400 rounded-r-full"
                   />
                 )}
               </Link>
@@ -110,29 +90,42 @@ export default function ProLayout({ children }: { children: React.ReactNode }) {
           })}
         </nav>
 
-        {/* Bottom Actions */}
-        <div className="p-4 border-t border-white/5 space-y-1">
-          <button className="flex items-center gap-3 w-full p-3 rounded-lg text-brand-muted hover:text-white hover:bg-white/5 transition-colors">
-            <Settings size={20} />
-            {!isCollapsed && <span className="text-sm font-medium">Settings</span>}
-          </button>
-          <button className="flex items-center gap-3 w-full p-3 rounded-lg text-red-400 hover:text-red-300 hover:bg-red-400/5 transition-colors">
-            <LogOut size={20} />
-            {!isCollapsed && <span className="text-sm font-medium">Logout</span>}
+        {/* Bottom */}
+        <div className="p-3 border-t border-white/6 space-y-1">
+          {!collapsed && (
+            <a
+              href="https://agnaa.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/30 hover:text-white/70 hover:bg-white/5 transition-all text-[13px] font-medium"
+            >
+              <ExternalLink size={16} />
+              agnaa.in
+            </a>
+          )}
+          <button
+            onClick={() => logout()}
+            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-red-400/70 hover:text-red-300 hover:bg-red-500/8 transition-all"
+          >
+            <LogOut size={18} className="shrink-0" />
+            {!collapsed && <span className="text-[13px] font-medium">Sign Out</span>}
           </button>
         </div>
 
         {/* Collapse Toggle */}
-        <button 
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute -right-3 top-10 w-6 h-6 bg-[#14141F] border border-white/10 rounded-full flex items-center justify-center text-brand-muted hover:text-white shadow-xl"
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="absolute -right-3.5 top-[72px] w-7 h-7 bg-[#0d0d1a] border border-white/10 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:border-orange-500/30 shadow-xl transition-all"
         >
-          <ChevronRight size={14} className={`transition-transform duration-300 ${isCollapsed ? "" : "rotate-180"}`} />
+          <ChevronRight
+            size={13}
+            className={`transition-transform duration-300 ${collapsed ? "" : "rotate-180"}`}
+          />
         </button>
       </aside>
 
-      {/* Main Content Area */}
-      <main className={`flex-1 transition-all duration-300 ${isCollapsed ? "pl-20" : "pl-72"}`}>
+      {/* Main Content */}
+      <main className={`flex-1 transition-all duration-300 ${collapsed ? "pl-[72px]" : "pl-[260px]"}`}>
         <div className="p-8 max-w-7xl mx-auto min-h-screen">
           {children}
         </div>

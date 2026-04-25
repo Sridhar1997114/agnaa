@@ -5,8 +5,8 @@ import { AgnaaLogo } from '@/components/AgnaaLogo';
 import { ENTHALPY_HTML, ENTHALPY_STYLES } from './enthalpyContent';
 // import { EnthalpyLogo } from '@/components/EnthalpyLogo'; // we will find or create this
 
-export default function TrackingPage({ params }: { params: { trackingId: string } }) {
-  const { trackingId } = params;
+export default function TrackingPage({ params }: { params: Promise<{ trackingId: string }> }) {
+  const { trackingId } = React.use(params);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
@@ -113,8 +113,8 @@ export default function TrackingPage({ params }: { params: { trackingId: string 
   if (isEnthalpyId) {
     // Inject the specific advance payment requested
     const customizedHtml = ENTHALPY_HTML.replace(
-      'Advance Paid — Project Live', 
-      'Advance Paid (₹25k / ₹1.25L) — Project Live'
+      'Advance Paid', 
+      'Advance Paid (₹25k / ₹1.25L)'
     );
 
     return (
@@ -162,8 +162,8 @@ export default function TrackingPage({ params }: { params: { trackingId: string 
                 <div className="text-xl md:text-2xl font-light text-brand-muted hidden sm:block">✕</div>
                 {/* Placeholder Enthalpy Logo */}
                 <div className="flex items-center gap-2">
-                   <div className="w-8 h-8 md:w-10 md:h-10 bg-brand-violet/10 rounded-lg flex items-center justify-center text-brand-violet font-bold text-lg md:text-xl">E</div>
-                   <span className="font-display font-semibold text-lg md:text-xl text-brand-navy">Enthalpy Labs</span>
+                   <div className="w-8 h-8 md:w-10 md:h-10 bg-brand-violet/10 rounded-lg flex items-center justify-center text-brand-violet font-bold text-lg md:text-xl">A</div>
+                   <span className="font-display font-semibold text-lg md:text-xl text-brand-navy">Agnaa Studio</span>
                 </div>
               </div>
               <h2 className="text-2xl md:text-3xl font-display font-bold text-brand-navy mt-4">Work Progress & Invoice</h2>
@@ -181,8 +181,8 @@ export default function TrackingPage({ params }: { params: { trackingId: string 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-8">
               <div className="bg-brand-navy/5 p-4 rounded-xl border border-brand-navy/10">
                 <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brand-muted mb-2">Prepared For</h3>
-                <p className="font-semibold text-brand-navy text-sm md:text-base">Enthalpy Labs Inc.</p>
-                <p className="text-xs sm:text-sm text-brand-navy/70 mt-1">Research & Development Division<br/>Phase 1 Rollout</p>
+                <p className="font-semibold text-brand-navy text-sm md:text-base">Agnaa Client</p>
+                <p className="text-xs sm:text-sm text-brand-navy/70 mt-1">Project Milestone Tracking<br/>Phase 1 Rollout</p>
               </div>
               <div className="bg-brand-navy/5 p-4 rounded-xl border border-brand-navy/10">
                 <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brand-muted mb-2">Project Status</h3>

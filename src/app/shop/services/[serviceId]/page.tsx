@@ -10,8 +10,8 @@ import { Button } from '@/components/Button';
 
 export default function ServicePage() {
   const params = useParams();
-  const serviceId = params.serviceId as string;
-  const service = shopServices[serviceId];
+  const serviceId = params?.serviceId as string;
+  const service = serviceId ? shopServices[serviceId] : null;
 
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 

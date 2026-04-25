@@ -108,8 +108,8 @@ export const Header = () => {
           </Link>
           <div className="w-px h-6 bg-gray-200"></div>
           <Link 
-            href={`${baseURL}/clients`} 
-            className={`text-sm font-bold transition-colors ${pathname === '/clients' ? 'text-[#7B2DBF]' : 'text-gray-500 hover:text-[#7B2DBF]'}`}
+            href={`${baseURL}/client`} 
+            className={`text-sm font-bold transition-colors ${pathname === '/client' ? 'text-[#7B2DBF]' : 'text-gray-500 hover:text-[#7B2DBF]'}`}
           >
             Client Login
           </Link>

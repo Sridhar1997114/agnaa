@@ -6,6 +6,7 @@ import { AgnaaLogo } from '@/components/AgnaaLogo';
 import { Button } from '@/components/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Key, User, Info, Loader2 } from 'lucide-react';
+import { clientLogin } from './actions';
 
 export default function ClientLoginPage() {
   const [loginNumber, setLoginNumber] = useState('');
@@ -20,21 +21,16 @@ export default function ClientLoginPage() {
     setLoading(true);
     setError('');
 
-    // Mock authentication for Enthalpy Labs
-    // In a real app, this would be an API call to Firebase/DB
-    setTimeout(() => {
-      if (loginNumber === 'AGN080426-1001' && password === 'enthalpy@agnaa') {
-        localStorage.setItem('client_session', JSON.stringify({
-          client: 'Enthalpy Labs',
-          id: 'AGN080426-1001',
-          lastLogin: new Date().toISOString()
-        }));
-        router.push('/client/enthalpy-labs');
-      } else {
-        setError('Invalid login number or password. Please try again.');
-        setLoading(false);
-      }
-    }, 1200);
+    const formData = new FormData();
+    formData.append('email', loginNumber); // We're using loginNumber field for email/ID
+    formData.append('password', password);
+
+    const result = await clientLogin(formData);
+
+    if (result?.error) {
+      setError(result.error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -59,12 +55,12 @@ export default function ClientLoginPage() {
         <div className="bg-[#14141F] border border-white/5 rounded-3xl p-8 shadow-2xl backdrop-blur-xl">
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2 ml-1">Login Number</label>
+              <label className="block text-sm font-medium text-gray-400 mb-2 ml-1">Client Email / Login ID</label>
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
                 <input 
-                  type="text"
-                  placeholder="e.g. AGN080426-1001"
+                   type="text"
+                  placeholder="e.g. client@example.com"
                   className="w-full bg-black/40 border border-white/10 rounded-2xl py-4 pl-12 pr-4 focus:border-[#7B2DBF] focus:ring-1 focus:ring-[#7B2DBF] outline-none transition-all placeholder:text-gray-600"
                   value={loginNumber}
                   onChange={(e) => setLoginNumber(e.target.value)}

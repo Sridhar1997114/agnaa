@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Check, Zap, Star } from 'lucide-react';
+import { useRouter, useParams } from 'next/navigation';
 
 export type PricingTier = 'Starter' | 'Professional' | 'Premium';
 
@@ -22,6 +23,8 @@ export const PricingCard = ({
   isHighlighted = false,
   onSelect
 }: PricingCardProps) => {
+  const params = useParams();
+  const serviceId = params?.serviceId as string;
   const isProfessional = tier === 'Professional';
   const isPremium = tier === 'Premium';
 

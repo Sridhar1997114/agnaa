@@ -82,9 +82,16 @@ export default function FoundationPage() {
                  <Button onClick={() => alert('Initiating Stripe Checkout...')} variant="primary" className="py-4 px-12 text-lg">Assign My Plot</Button>
               </div>
             </div>
-            <div className="flex-1 w-full">
-              <div className="relative aspect-square md:aspect-video rounded-[2.5rem] overflow-hidden shadow-[0_20px_40px_rgba(28,28,114,0.08)] grayscale hover:grayscale-0 transition-all duration-700 border-4 border-transparent hover:border-[#7B2DBF]/20">
-                <Image src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800" alt="Tree planting" fill className="object-cover" />
+            <div className="flex-1 w-full relative">
+              <div className="absolute -inset-4 bg-brand-gradient opacity-10 blur-3xl rounded-full" />
+              <div className="relative aspect-square md:aspect-video rounded-[3rem] overflow-hidden shadow-[0_30px_60px_rgba(28,28,114,0.1)] grayscale group-hover:grayscale-0 transition-all duration-1000 border border-gray-100 hover:border-[#7B2DBF]/30">
+                <Image 
+                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1200" 
+                  alt="Tree planting economy" 
+                  fill 
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C72]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </div>

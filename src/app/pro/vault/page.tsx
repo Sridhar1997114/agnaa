@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { getVaultFiles } from "@/app/pro/actions";
+import { getVaultFiles } from "../actions";
 
 const CATEGORIES = ["All", "Blueprints", "Contracts", "Permits", "Invoices", "Site Photos"];
 

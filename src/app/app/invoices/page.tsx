@@ -9,5 +9,5 @@ export default async function InvoicesPage() {
     console.error("Error fetching invoices:", error);
   }
 
-  return <InvoicesView invoices={invoices || []} />;
+  return <InvoicesView initialInvoices={invoices || []} />;
 }

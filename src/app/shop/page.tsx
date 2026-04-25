@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { ShoppingBag, ArrowRight, ShieldCheck, Clock, Zap, FileText } from 'lucide-react';
+import { ShoppingBag, ArrowRight, ShieldCheck, Clock, Zap, FileText, Check } from 'lucide-react';
 import { Button } from '@/components/Button';
+import Image from 'next/image';
 
 export default function ShopHomePage() {
   const trustPoints = [
@@ -16,20 +17,20 @@ export default function ShopHomePage() {
       title: 'Business + Digital Core',
       description: 'Growth-focused design for brands and founders.',
       services: [
-        { name: 'Logo Starter Pack', price: '₹8,000+', href: '/shop/services/logo-starter-pack' },
-        { name: 'Business Card + Stationery', price: '₹2,000+', href: '/shop/services/business-card' },
-        { name: 'Social Media Template Pack', price: '₹4,000+', href: '/shop/services/social-templates' },
-        { name: 'Company Profile / Brochure', price: '₹8,000+', href: '/shop/services/brochure' },
-        { name: 'Presentation Deck Design', price: '₹8,000+', href: '/shop/services/presentation-deck' },
-        { name: 'Landing Page Design', price: '₹16,000+', href: '/shop/services/landing-page' },
+        { name: 'Logo Starter Pack', price: '₹8,000+', href: '/shop/services/logo-starter-pack', img: 'https://images.unsplash.com/photo-1572044162444-ad60f128bde2?auto=format&fit=crop&q=80&w=800' },
+        { name: 'Business Card + Stationery', price: '₹2,000+', href: '/shop/services/business-card', img: 'https://images.unsplash.com/photo-1616628188506-4ad99d65add2?auto=format&fit=crop&q=80&w=800' },
+        { name: 'Social Media Template Pack', price: '₹4,000+', href: '/shop/services/social-templates', img: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800' },
+        { name: 'Company Profile / Brochure', price: '₹8,000+', href: '/shop/services/brochure', img: 'https://images.unsplash.com/photo-1544650030-3c698e79e626?auto=format&fit=crop&q=80&w=800' },
+        { name: 'Presentation Deck Design', price: '₹8,000+', href: '/shop/services/presentation-deck', img: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800' },
+        { name: 'Landing Page Design', price: '₹16,000+', href: '/shop/services/landing-page', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800' },
       ]
     },
     {
       title: 'Emotional + Event Edge',
       description: 'Beautifully crafted designs for life\'s big moments.',
       services: [
-        { name: 'Wedding Invitation Design', price: '₹2,000+', href: '/shop/services/wedding-invite' },
-        { name: 'Memorial Photo Restoration', price: '₹1,200+', href: '/shop/services/photo-restoration' },
+        { name: 'Wedding Invitation Design', price: '₹2,000+', href: '/shop/services/wedding-invite', img: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&q=80&w=800' },
+        { name: 'Memorial Photo Restoration', price: '₹1,200+', href: '/shop/services/photo-restoration', img: 'https://images.unsplash.com/photo-1510333300264-df0cb9ca4621?auto=format&fit=crop&q=80&w=800' },
       ]
     }
   ];
@@ -121,27 +122,38 @@ export default function ShopHomePage() {
                   <Link 
                     key={service.name} 
                     href={service.href}
-                    className="group relative flex flex-col p-8 rounded-[2rem] bg-brand-card/50 border border-brand-card hover:border-brand-violet/50 transition-all duration-500 overflow-hidden"
+                    className="group relative flex flex-col min-h-[400px] rounded-[2rem] bg-brand-card/50 border border-brand-card hover:border-brand-violet/50 transition-all duration-500 overflow-hidden"
                   >
-                    {/* Hover effect background */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-brand-violet/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    
-                    <div className="flex justify-between items-start mb-8">
-                      <div className="p-3 bg-brand-dark rounded-2xl group-hover:bg-brand-violet transition-colors">
-                        <ShoppingBag className="text-brand-muted group-hover:text-white transition-colors" size={24} />
-                      </div>
-                      <span className="text-xs font-black uppercase tracking-widest text-brand-muted bg-brand-dark px-3 py-1.5 rounded-full border border-brand-card">
-                        Starts {service.price}
-                      </span>
+                    <div className="absolute inset-0 z-0">
+                      <Image 
+                        src={service.img} 
+                        alt={service.name} 
+                        fill 
+                        className="object-cover opacity-30 grayscale group-hover:opacity-60 group-hover:grayscale-0 transition-all duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent" />
                     </div>
 
-                    <h4 className="text-2xl font-bold text-white tracking-tight mb-4 group-hover:text-brand-violet transition-colors">
-                      {service.name}
-                    </h4>
-                    
-                    <div className="mt-auto flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted transition-all">
-                      VIEW PACKAGES
-                      <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+                    <div className="relative z-10 p-8 flex flex-col h-full">
+                      <div className="flex justify-between items-start mb-8">
+                        <div className="p-3 bg-brand-dark/80 backdrop-blur-md rounded-2xl group-hover:bg-brand-violet transition-colors">
+                          <ShoppingBag className="text-brand-muted group-hover:text-white transition-colors" size={24} />
+                        </div>
+                        <span className="text-xs font-black uppercase tracking-widest text-white bg-brand-violet/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-brand-violet/20">
+                          Starts {service.price}
+                        </span>
+                      </div>
+
+                      <div className="mt-auto">
+                        <h4 className="text-2xl font-bold text-white tracking-tight mb-4 group-hover:text-brand-violet transition-colors">
+                          {service.name}
+                        </h4>
+                        
+                        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted transition-all">
+                          VIEW PACKAGES
+                          <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 ))}

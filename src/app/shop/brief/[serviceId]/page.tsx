@@ -1,7 +1,8 @@
 "use client";
 
 import React from 'react';
-import { useParams, useSearchParams, notFound, Link } from 'next/navigation';
+import Link from 'next/link';
+import { useParams, useSearchParams, notFound, useRouter } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { shopServices } from '@/data/shop-services';
 import { BriefForm } from '@/components/shop/BriefForm';
@@ -9,9 +10,10 @@ import { BriefForm } from '@/components/shop/BriefForm';
 export default function BriefPage() {
   const params = useParams();
   const searchParams = useSearchParams();
-  const serviceId = params.serviceId as string;
-  const tier = (searchParams.get('tier') || 'Professional') as any;
-  const service = shopServices[serviceId];
+  const router = useRouter();
+  const serviceId = params?.serviceId as string;
+  const tier = (searchParams?.get('tier') || 'Professional') as any;
+  const service = serviceId ? shopServices[serviceId] : null;
 
   if (!service) {
     notFound();

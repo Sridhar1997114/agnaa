@@ -1,82 +1,57 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { updateSession } from './lib/supabase/middleware';
+
+const SESSION_COOKIE = "el-pro-session";
 
 export async function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') || '';
   const pathname = request.nextUrl.pathname;
 
-  // Check if the request is coming from the 'pro' subdomain
+  // ─── PRO Subdomain Routing ─────────────────────────────────────────────────
   if (hostname.startsWith('pro.agnaa.in') || hostname.startsWith('pro.localhost')) {
     if (pathname === '/') {
       return NextResponse.rewrite(new URL('/pro', request.url));
     }
   }
 
-  // Auth Protection for /app and /admin routes
-  if (pathname.startsWith('/app') || pathname.startsWith('/admin') || pathname.startsWith('/pro')) {
-    const { response, user } = await updateSession(request);
-    
-    // Allow login page access
-    if (pathname === '/login' || pathname === '/pro/login') {
-      if (user) {
-        // Redirect based on role if logged in
-        const supabase = await updateSession(request); // Refresh user state
-        // In a real scenario, we might want to check the profile role here,
-        // but for middleware, just redirecting to /app or /admin is enough if logged in.
-        return NextResponse.redirect(new URL('/app', request.url));
+  // ─── PRO Auth Protection (cookie-based, no Supabase) ──────────────────────
+  if (pathname.startsWith('/pro')) {
+    const session = request.cookies.get(SESSION_COOKIE);
+    const isLoginPage = pathname === '/pro/login';
+
+    if (isLoginPage) {
+      // If already logged in, redirect to dashboard
+      if (session?.value) {
+        return NextResponse.redirect(new URL('/pro', request.url));
       }
-      return response;
+      return NextResponse.next();
     }
 
-    // Protect all other secured routes
-    if (!user) {
-      return NextResponse.redirect(new URL('/login', request.url));
+    // All other /pro/* routes require a valid session
+    if (!session?.value) {
+      return NextResponse.redirect(new URL('/pro/login', request.url));
     }
-    
-    return response;
+
+    return NextResponse.next();
   }
 
-  // Redirect /pro to pro.agnaa.in if accessed directly
-  if (pathname.startsWith('/pro') && !hostname.startsWith('pro.') && !hostname.includes('localhost')) {
-    return NextResponse.redirect(new URL('https://pro.agnaa.in', request.url));
-  }
-
-  // Check if the request is coming from the 'cost' subdomain
-  if (hostname.startsWith('cost.agnaa.in')) {
-    // If visiting the root of the subdomain, rewrite to the /cost page invisibly
+  // ─── Shop Subdomain ────────────────────────────────────────────────────────
+  if (hostname.startsWith('shop.agnaa.in') || hostname.startsWith('shop.localhost')) {
     if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/cost', request.url));
+      return NextResponse.rewrite(new URL('/shop', request.url));
     }
   }
 
-  // 1. Strict Subdomain Enforcement for Agnaa Intelligence
-  if (pathname.startsWith('/agnaa-intelligence')) {
-    // If on main domain, redirect to the AI subdomain
-    if (!hostname.startsWith('ai.')) {
-      return NextResponse.redirect(new URL('https://ai.agnaa.in', request.url));
-    }
-    // If on the AI subdomain but using the internal path, redirect to root for a clean URL
-    if (pathname === '/agnaa-intelligence') {
-      return NextResponse.redirect(new URL('/', request.url));
-    }
+  if (pathname.startsWith('/shop') && !hostname.startsWith('shop.') && !hostname.includes('localhost')) {
+    return NextResponse.redirect(new URL('https://shop.agnaa.in', request.url));
   }
 
-  // 2. Rewrite root of AI subdomain to internal page
-  if (hostname.startsWith('ai.agnaa.in') || hostname.startsWith('ai.localhost')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/agnaa-intelligence', request.url));
-    }
-  }
-
-  // Handle redirects for broken/legacy links
+  // ─── Legacy Redirects ──────────────────────────────────────────────────────
   if (pathname === '/construction-cost' || pathname === '/calculators') {
     return NextResponse.redirect(new URL('/calc', request.url));
   }
-  
+
   if (pathname === '/cost' && !hostname.startsWith('cost.agnaa.in')) {
-    // Optionally redirect /cost to /calc if calc is the primary tool
-    // For now, let's just fix the 404s the user saw.
     return NextResponse.redirect(new URL('/calc', request.url));
   }
 
@@ -84,17 +59,40 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/constructions', request.url));
   }
 
-  // Check if the request is coming from the 'brand' subdomain
+  // ─── Cost Subdomain ────────────────────────────────────────────────────────
+  if (hostname.startsWith('cost.agnaa.in')) {
+    if (pathname === '/') {
+      return NextResponse.rewrite(new URL('/cost', request.url));
+    }
+  }
+
+  // ─── Agnaa Intelligence / AI Subdomain ────────────────────────────────────
+  if (pathname.startsWith('/agnaa-intelligence')) {
+    if (!hostname.startsWith('ai.')) {
+      return NextResponse.redirect(new URL('https://ai.agnaa.in', request.url));
+    }
+    if (pathname === '/agnaa-intelligence') {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+  }
+
+  if (hostname.startsWith('ai.agnaa.in') || hostname.startsWith('ai.localhost')) {
+    if (pathname === '/') {
+      return NextResponse.rewrite(new URL('/agnaa-intelligence', request.url));
+    }
+  }
+
+  // ─── Brand Subdomain ──────────────────────────────────────────────────────
   if (hostname.startsWith('brand.enthalpylabs.com') || hostname.startsWith('brand.localhost')) {
     if (pathname === '/') {
       return NextResponse.rewrite(new URL('/brand', request.url));
     }
   }
 
-  // Check if the request is coming from the 'client' subdomain
+  // ─── Client Subdomain ─────────────────────────────────────────────────────
   if (hostname.startsWith('client.agnaa.in') || hostname.startsWith('client.localhost') || hostname.startsWith('clients.agnaa.in')) {
     if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/clients', request.url));
+      return NextResponse.rewrite(new URL('/client', request.url));
     }
   }
 
@@ -103,14 +101,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - any other static assets in public folder
-     */
     '/((?!api|_next/static|_next/image|favicon.ico|.*\\.png|.*\\.jpg|.*\\.svg).*)',
   ],
 };

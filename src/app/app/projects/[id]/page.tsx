@@ -3,7 +3,7 @@ import { getProjectById } from "@/app/pro/actions";
 import ProjectDetailsView from "./project-details-view";
 import { notFound } from "next/navigation";
 
-export default async function ProjectDetailsPage({ params }: { params: { id: string } }) {
+export default async function ProjectDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { data: project, error } = await getProjectById(id);
 

@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { getProjectById, getVaultFiles } from "@/app/pro/actions";
+import { getProjectById, getVaultFiles } from "../../actions";
 
 const TIMELINE_STEPS = [
   { id: 1, title: "Discovery & Brief", status: "completed", date: "Jan 12, 2024" },

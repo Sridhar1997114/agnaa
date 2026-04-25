@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Camera, Home, Building, Leaf, UploadCloud, FileText, Download } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { Toast } from '@/components/Toast';
+import Image from 'next/image';
 
 export default function DesignStudioPage() {
   const [sqft, setSqft] = useState(1500);
@@ -31,19 +32,25 @@ export default function DesignStudioPage() {
           <h2 className="text-3xl md:text-5xl font-black mb-12 md:mb-20 text-center tracking-tight text-[#1C1C72]">Design Excellence</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
-              {t: 'Architectural Design', d: 'Concept to construction docs', i: Home},
-              {t: 'Interior Design', d: 'Spaces that breathe life', i: Building},
-              {t: '3D Renders', d: 'Visualize before you build', i: Camera},
-              {t: 'Landscape Architecture', d: 'Harmonious exterior spaces', i: Leaf},
-              {t: 'UI/UX Design', d: 'Digital spatial experiences', i: UploadCloud},
-              {t: 'Consultancy', d: 'Expert blueprint analysis', i: FileText},
+              {t: 'Architectural Design', d: 'Concept to construction docs', i: Home, img: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800'},
+              {t: 'Interior Design', d: 'Spaces that breathe life', i: Building, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaa6a?auto=format&fit=crop&q=80&w=800'},
+              {t: '3D Renders', d: 'Visualize before you build', i: Camera, img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800'},
+              {t: 'Landscape Architecture', d: 'Harmonious exterior spaces', i: Leaf, img: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&q=80&w=800'},
+              {t: 'UI/UX Design', d: 'Digital spatial experiences', i: UploadCloud, img: 'https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=800'},
+              {t: 'Consultancy', d: 'Expert blueprint analysis', i: FileText, img: 'https://images.unsplash.com/photo-1454165833767-027ff33027ef?auto=format&fit=crop&q=80&w=800'},
             ].map((s, idx) => (
-              <div key={idx} className="bg-[#F5F5F7] p-8 md:p-10 rounded-3xl border border-gray-100 hover:shadow-[0_15px_40px_rgba(123,45,191,0.12)] hover:border-[#7B2DBF]/40 transition-all duration-500 group">
-                <div className="mb-4 text-[#1C1C72] group-hover:text-[#7B2DBF] transition-colors">
-                  <s.i size={32} />
+              <div key={idx} className="relative group overflow-hidden rounded-[2.5rem] bg-white border border-gray-100 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(28,28,114,0.1)]">
+                <div className="aspect-[4/3] relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+                  <Image src={s.img} alt={s.t} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
                 </div>
-                <h3 className="text-2xl font-bold mb-3 text-[#1C1C72] group-hover:text-[#7B2DBF] transition-colors">{s.t}</h3>
-                <p className="text-gray-500 font-medium">{s.d}</p>
+                <div className="p-8 md:p-10 relative mt-[-40px] bg-white rounded-t-[2.5rem]">
+                  <div className="mb-6 w-12 h-12 bg-[#F5F5F7] rounded-xl flex items-center justify-center text-[#1C1C72] group-hover:bg-[#7B2DBF] group-hover:text-white transition-all duration-500 shadow-sm">
+                    <s.i size={24} strokeWidth={2.5} />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3 text-[#1C1C72] tracking-tight group-hover:text-[#7B2DBF] transition-colors">{s.t}</h3>
+                  <p className="text-gray-500 font-medium leading-relaxed">{s.d}</p>
+                </div>
               </div>
             ))}
           </div>
