@@ -40,6 +40,7 @@ export const Header = () => {
     { id: 'portfolio', label: 'Portfolio', href: `${baseURL}/portfolio` },
     { id: 'design-studio', label: 'Design Studio', href: `${baseURL}/design-studio` },
     { id: 'constructions', label: 'Constructions', href: `${baseURL}/constructions` },
+    { id: 'voice', label: 'AGNAA Voice', href: `${baseURL}/voice` },
     { id: 'foundation', label: 'Foundation', href: `${baseURL}/foundation` }
   ];
 
@@ -98,14 +99,6 @@ export const Header = () => {
           >
             <Calculator size={20} strokeWidth={2} />
           </Link>
-          <Link 
-            href="/commercial/quotation" 
-            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent ${pathname === '/commercial/quotation' ? 'bg-[#7B2DBF] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#1C1C72]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
-            title="Create Service Quotation (Internal)"
-            aria-label="Create Service Quotation"
-          >
-            <FileText size={20} strokeWidth={2} />
-          </Link>
           <div className="w-px h-6 bg-gray-200"></div>
           <Link 
             href={`${baseURL}/client`} 
@@ -157,12 +150,6 @@ export const Header = () => {
                 className={`text-2xl font-black tracking-tighter flex items-center gap-3 ${pathname === '/calc' ? 'text-[#7B2DBF]' : 'text-[#1C1C72]'}`}
               >
                 <Calculator size={24} /> AGNAA CALC
-              </Link>
-              <Link 
-                href="/commercial/quotation"
-                className={`text-2xl font-black tracking-tighter flex items-center gap-3 ${pathname === '/commercial/quotation' ? 'text-[#7B2DBF]' : 'text-[#1C1C72]'}`}
-              >
-                <FileText size={24} /> CREATE QUOTATION <span className="bg-[#1C1C72] text-white text-[10px] px-2 py-0.5 rounded-full font-black tracking-normal">INTERNAL</span>
               </Link>
               
               <div className="mt-auto pt-10 flex flex-col gap-4 pb-8">

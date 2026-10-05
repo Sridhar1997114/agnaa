@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MapPin, Phone } from 'lucide-react';
+import { MapPin, Phone, Facebook, Twitter, Instagram, Youtube, Linkedin } from 'lucide-react';
 import { AgnaaLogo } from './AgnaaLogo';
 
 export const Footer = () => {
@@ -22,10 +22,54 @@ export const Footer = () => {
             </Link>
           </div>
           <p className="max-w-md text-base md:text-lg font-bold text-[#1C1C72]">Design. Build. Soul. Architecture and execution that outlives generations.</p>
-          <div className="flex flex-wrap gap-4 md:gap-6 pt-4 font-black text-xs uppercase tracking-widest">
-            {['@agnaadesign', '@agnaasol', '@agnaaarchive'].map(ig => (
-              <a key={ig} href="#" className="text-[#1C1C72] hover:text-[#7B2DBF] transition-all">{ig}</a>
-            ))}
+          
+          {/* SOCIAL PROFILES (LINKEDIN, X, INSTAGRAM, FACEBOOK, YOUTUBE) */}
+          <div className="flex flex-wrap items-center gap-4 pt-2 font-black text-xs">
+            <a
+              href="https://www.facebook.com/agnaadesignstudio"
+              target="_blank"
+              rel="noopener noreferrer me"
+              aria-label="Facebook Profile"
+              className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-full text-[#1C1C72] hover:text-[#7B2DBF] hover:border-[#7B2DBF] transition-all shadow-sm"
+            >
+              <Facebook size={14} /> Facebook
+            </a>
+            <a
+              href="https://x.com/agnaastudio"
+              target="_blank"
+              rel="noopener noreferrer me"
+              aria-label="X Twitter Profile"
+              className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-full text-[#1C1C72] hover:text-[#7B2DBF] hover:border-[#7B2DBF] transition-all shadow-sm"
+            >
+              <Twitter size={14} /> X
+            </a>
+            <a
+              href="https://www.instagram.com/agnaa.in"
+              target="_blank"
+              rel="noopener noreferrer me"
+              aria-label="Instagram Profile"
+              className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-full text-[#1C1C72] hover:text-[#7B2DBF] hover:border-[#7B2DBF] transition-all shadow-sm"
+            >
+              <Instagram size={14} /> Instagram
+            </a>
+            <a
+              href="https://www.youtube.com/@agnaadesignstudio"
+              target="_blank"
+              rel="noopener noreferrer me"
+              aria-label="YouTube Channel"
+              className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-full text-[#1C1C72] hover:text-[#7B2DBF] hover:border-[#7B2DBF] transition-all shadow-sm"
+            >
+              <Youtube size={14} /> YouTube
+            </a>
+            <a
+              href="https://www.linkedin.com/company/agnaa"
+              target="_blank"
+              rel="noopener noreferrer me"
+              aria-label="LinkedIn Company Profile"
+              className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-full text-[#1C1C72] hover:text-[#7B2DBF] hover:border-[#7B2DBF] transition-all shadow-sm"
+            >
+              <Linkedin size={14} /> LinkedIn
+            </a>
           </div>
         </div>
         <div>
@@ -34,6 +78,8 @@ export const Footer = () => {
             <li><Link href="/portfolio" className="hover:text-[#7B2DBF] transition-colors">Portfolio</Link></li>
             <li><Link href="/design-studio" className="hover:text-[#7B2DBF] transition-colors">Design Studio</Link></li>
             <li><Link href="/constructions" className="hover:text-[#7B2DBF] transition-colors">Constructions</Link></li>
+            <li><Link href="/voice" className="hover:text-[#7B2DBF] text-[#7B2DBF] transition-colors flex items-center gap-1.5 font-black">AGNAA Voice <span className="bg-[#7B2DBF]/10 text-[#7B2DBF] text-[10px] px-1.5 py-0.5 rounded-full border border-[#7B2DBF]/30">New</span></Link></li>
+            <li><Link href="/blog" className="hover:text-[#7B2DBF] transition-colors">GEO Journal (50 Articles)</Link></li>
             <li><Link href="/foundation" className="hover:text-[#7B2DBF] transition-colors">Foundation</Link></li>
           </ul>
         </div>
@@ -50,14 +96,14 @@ export const Footer = () => {
             </li>
             <li className="pt-2">
               <Link href="/calc" className="text-xs font-black uppercase tracking-widest text-[#1C1C72] border-b-2 border-[#1C1C72] pb-1 hover:text-[#7B2DBF] hover:border-[#7B2DBF] transition-all">
-                Access Free Calc
+                Access Free Calculators
               </Link>
             </li>
           </ul>
         </div>
       </div>
       <div className="container mx-auto px-4 text-sm border-t border-gray-300 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 font-bold text-gray-400">
-        <p>© 2026 AGNAA Architects. All rights reserved.</p>
+        <p>© 2026 AGNAA Design Studio. All rights reserved.</p>
         <div className="flex gap-6">
           <a href="#" className="hover:text-[#7B2DBF] transition-colors">Privacy Policy</a>
           <a href="#" className="hover:text-[#7B2DBF] transition-colors">Terms of Service</a>
