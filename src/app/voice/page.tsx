@@ -113,24 +113,27 @@ export default function VoicePage() {
           <div className="bg-[#12121C] rounded-2xl p-6 md:p-8 border border-[#242436] text-left shadow-2xl">
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#202030] mb-6">
               <span className="text-xs font-bold uppercase tracking-widest text-[#A78BFA]">Interactive Mode Simulator</span>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => handleSimulate('cad')}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${activeTab === 'cad' ? 'bg-[#7B2DBF] text-white shadow-md' : 'bg-[#1A1A28] text-gray-400 hover:text-white'}`}
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${activeTab === 'cad' ? 'bg-[#7B2DBF] text-white shadow-md' : 'bg-[#1A1A28] text-gray-400 hover:text-white'}`}
                 >
-                  📐 CAD / Architect Mode
+                  <Layers size={14} />
+                  <span>CAD / Architecture</span>
                 </button>
                 <button
                   onClick={() => handleSimulate('natural')}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${activeTab === 'natural' ? 'bg-[#7B2DBF] text-white shadow-md' : 'bg-[#1A1A28] text-gray-400 hover:text-white'}`}
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${activeTab === 'natural' ? 'bg-[#7B2DBF] text-white shadow-md' : 'bg-[#1A1A28] text-gray-400 hover:text-white'}`}
                 >
-                  ⚡ Natural Dictation
+                  <Zap size={14} />
+                  <span>Natural Dictation</span>
                 </button>
                 <button
                   onClick={() => handleSimulate('translate')}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${activeTab === 'translate' ? 'bg-[#7B2DBF] text-white shadow-md' : 'bg-[#1A1A28] text-gray-400 hover:text-white'}`}
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${activeTab === 'translate' ? 'bg-[#7B2DBF] text-white shadow-md' : 'bg-[#1A1A28] text-gray-400 hover:text-white'}`}
                 >
-                  🌐 Vernacular Translation
+                  <Globe size={14} />
+                  <span>Speech Translation</span>
                 </button>
               </div>
             </div>
