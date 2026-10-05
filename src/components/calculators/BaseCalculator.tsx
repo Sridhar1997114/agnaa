@@ -99,17 +99,33 @@ export function BaseCalculator({
     return () => observer.disconnect();
   }, [isCalculated]);
 
+  const triggerWhatsAppLead = (actionType: string) => {
+    const summaryText = `Hi AGNAA Team! 🏛️\n\nI just calculated my project details on *agnaa.in (${title})*:\n• *Module:* ${title}\n• *Date:* ${today}\n${whatsappNumber ? `• *My Contact:* ${whatsappNumber}\n` : ''}\nI'd like to get an official detailed architectural quotation & consultation from your team!`;
+    const encodedMsg = encodeURIComponent(summaryText);
+    const whatsappUrl = `https://wa.me/918826214348?text=${encodedMsg}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+const loadHtml2Pdf = (): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    if (typeof window !== 'undefined' && (window as any).html2pdf) {
+      resolve((window as any).html2pdf);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    script.onload = () => resolve((window as any).html2pdf);
+    script.onerror = () => reject(new Error('Failed to load html2pdf script'));
+    document.head.appendChild(script);
+  });
+};
+
   const handleDownloadPdf = async () => {
     if (loadingPdf) return;
     setLoadingPdf(true);
     
     try {
-      const html2pdf = (window as any).html2pdf;
-      if (!html2pdf) {
-        setToast({ msg: 'PDF Library still loading...', err: true });
-        setLoadingPdf(false);
-        return;
-      }
+      const html2pdf = await loadHtml2Pdf();
 
       const el = document.getElementById('agnaa-pdf-view-hq');
       if (!el) throw new Error('PDF container not found');
@@ -134,7 +150,11 @@ export function BaseCalculator({
       };
       
       await html2pdf().set(opt).from(el).save();
-      setToast({ msg: 'Estimate Downloaded Successfully!', err: false });
+      setToast({ msg: 'Report Downloaded! Opening AGNAA WhatsApp...', err: false });
+      
+      // Auto trigger WhatsApp lead
+      setTimeout(() => triggerWhatsAppLead('Download'), 1200);
+
     } catch (err: any) {
       console.error('PDF Generation Error:', err);
       setToast({ msg: 'PDF Export Failed', err: true });
@@ -146,25 +166,17 @@ export function BaseCalculator({
 
   const handleWhatsAppRequest = async () => {
     if (!whatsappNumber || whatsappNumber.length < 10) {
-      setToast({ msg: 'Please enter a valid WhatsApp number', err: true });
+      setToast({ msg: 'Please enter a valid 10-digit WhatsApp number', err: true });
       return;
     }
 
     setLoadingPdf(true);
-    
-    // Construct calculation summary for WhatsApp
-    // We try to extract some text from results or use the title
-    const summaryText = `Hi AGNAA, I just generated a ${title} report using the Agnaa Calculator. \n\nI'd like to receive the official A4 PDF report on this number: ${whatsappNumber}.\n\nReference: ${title} / ${today}`;
-    const encodedMsg = encodeURIComponent(summaryText);
-    const whatsappUrl = `https://wa.me/918826214348?text=${encodedMsg}`;
-
-    // Show success toast
-    setToast({ msg: 'Requesting on WhatsApp...', err: false });
+    setToast({ msg: 'Connecting to AGNAA WhatsApp...', err: false });
     
     setTimeout(() => {
-      window.open(whatsappUrl, '_blank');
+      triggerWhatsAppLead('WhatsApp Request');
       setLoadingPdf(false);
-    }, 1500);
+    }, 1000);
   };
 
   const formattedPdfTitle = pdfTitle.includes('\n') 
@@ -362,31 +374,32 @@ export function BaseCalculator({
                         />
                       </div>
 
-                      {/* Hidden A4 Portal (Still needed for PDF logic) */}
-                      <div className="hidden">
-                        <CalculatorPDFEngine
-                          id="agnaa-pdf-view-hq"
-                          title={pdfTitle || title}
-                          subtitle="Precision Engineering Report"
-                          projectInfo={pdfProjectInfo}
-                          contentTable={pdfContentTable}
-                          summaryBox={pdfSummaryBox}
-                          totalValue={pdfTotalValue}
-                          totalSubtitle={pdfTotalSubtitle}
-                          date={today}
-                          logo={<SharedLogo className="h-10 w-auto" />}
-                          watermarkLogo={<SharedLogo className="w-full h-full" />}
-                          visualizer={visualizerType ? (
-                            <div style={{ width: 400, height: 300 }}>
-                              <CalculationVisualizer type={visualizerType} data={visualizerData} />
-                            </div>
-                          ) : undefined}
-                          visualizerLabel={visualizerType ? `Structural Diagram // Ref: ${visualizerType}-01` : undefined}
-                        />
-                      </div>
                     </div>
                   </div>
                 )}
+
+                {/* ─── OFFSCREEN A4 PDF CONTAINER (Guaranteed 794px width, visible to html2canvas) ─── */}
+                <div style={{ position: 'fixed', left: '-9999px', top: 0, width: '794px', zIndex: -999, pointerEvents: 'none', background: '#ffffff', opacity: 1, visibility: 'visible' }}>
+                  <CalculatorPDFEngine
+                    id="agnaa-pdf-view-hq"
+                    title={pdfTitle || title}
+                    subtitle="Precision Engineering Report"
+                    projectInfo={pdfProjectInfo}
+                    contentTable={pdfContentTable}
+                    summaryBox={pdfSummaryBox}
+                    totalValue={pdfTotalValue}
+                    totalSubtitle={pdfTotalSubtitle}
+                    date={today}
+                    logo={<SharedLogo className="h-10 w-auto" />}
+                    watermarkLogo={<SharedLogo className="w-full h-full" />}
+                    visualizer={visualizerType ? (
+                      <div style={{ width: 400, height: 300 }}>
+                        <CalculationVisualizer type={visualizerType} data={visualizerData} />
+                      </div>
+                    ) : undefined}
+                    visualizerLabel={visualizerType ? `Structural Diagram // Ref: ${visualizerType}-01` : undefined}
+                  />
+                </div>
 
                 {/* ─── REFINED GLOBAL CALL TO ACTION ─── */}
                 <div className="max-w-md mx-auto pt-8">
