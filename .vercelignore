@@ -1,0 +1,16 @@
+.git
+node_modules
+.next
+"Architectural Books"
+"Pricing Standards"
+"Clients"
+"Ai chatbot"
+"Arc-editor"
+"Cambridgegroupofschools.com"
+"JARVIS"
+"earth-agnaa"
+"pro.agnaa.in"
+*.pdf
+*.epub
+*.zip
+*.tar.gz

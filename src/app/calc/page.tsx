@@ -1,192 +1,105 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TerminalSearch } from '@/components/layout/TerminalSearch';
 import { 
-  Search, ArrowUpRight, Layers, Layout, Grid, Box, 
-  Settings, Zap, ShieldAlert, Cpu, CheckCircle
+  Search, ArrowUpRight, Grid, Box, 
+  Sparkles, CheckCircle, Cpu, ChevronDown, ChevronUp, Layers, Wrench
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { calculators, CalculatorMeta } from '@/lib/calculators';
 
 const CATEGORIES = [
-  { id: 'all', label: 'All Modules' },
-  { id: 'Structure', label: 'Core Structure' },
-  { id: 'Interior', label: 'Finishes & Interior' },
-  { id: 'Site', label: 'Site & Landscaping' },
-  { id: 'MEP', label: 'MEP Utilities' },
-  { id: 'Financial', label: 'Financial & Area' },
-  { id: 'Tools', label: 'Helpers & Tools' }
+  { id: 'all', label: 'All 8 Core Modules' },
+  { id: 'Structure', label: 'Construction & Setbacks' },
+  { id: 'Interior', label: 'Interiors & Finishes' },
+  { id: 'Financial', label: 'Approvals & ROI' },
+  { id: 'Tools', label: 'Vastu & Plot Tools' }
 ];
 
-const CATEGORY_COLORS: Record<string, string> = {
-  'Structure': 'from-blue-500/10 to-indigo-500/10 border-blue-500/20 text-blue-600',
-  'Interior': 'from-pink-500/10 to-rose-500/10 border-pink-500/20 text-pink-600',
-  'Site': 'from-emerald-500/10 to-teal-500/10 border-emerald-500/20 text-emerald-600',
-  'MEP': 'from-amber-500/10 to-orange-500/10 border-amber-500/20 text-amber-600',
-  'Financial': 'from-purple-500/10 to-violet-500/10 border-purple-500/20 text-purple-600',
-  'Tools': 'from-slate-500/10 to-zinc-500/10 border-slate-500/20 text-slate-600'
-};
-
-const CalculatorBentoCard = ({ 
-  item, 
-  index, 
-  onClick 
-}: { 
-  item: CalculatorMeta; 
-  index: number;
-  onClick: (e: React.MouseEvent, path: string) => void;
-}) => {
-  const Icon = item.icon || Grid;
-  
-  // Decide Bento Cell dimensions based on popular flag and index pattern
-  let spanClass = 'col-span-1 row-span-1 h-full';
-  let layoutType: 'large' | 'wide' | 'tall' | 'standard' = 'standard';
-  
-  if (item.popular) {
-    spanClass = 'md:col-span-2 md:row-span-2 h-full';
-    layoutType = 'large';
-  } else {
-    const pattern = index % 6;
-    if (pattern === 1) {
-      spanClass = 'md:col-span-2 md:row-span-1 h-full';
-      layoutType = 'wide';
-    } else if (pattern === 4) {
-      spanClass = 'md:col-span-1 md:row-span-2 h-full';
-      layoutType = 'tall';
-    }
+// Custom Bento Layout Spans for 12 Items (4 columns grid)
+const BENTO_LAYOUTS: Record<string, { colSpan: string; rowSpan: string; theme: string; tag?: string }> = {
+  'gn-floor': { 
+    colSpan: 'col-span-1 md:col-span-2 lg:col-span-2', 
+    rowSpan: 'row-span-2', 
+    theme: 'gradient-hero',
+    tag: 'Flagship Estimator'
+  },
+  'interior': { 
+    colSpan: 'col-span-1 md:col-span-2 lg:col-span-2', 
+    rowSpan: 'row-span-2', 
+    theme: 'gradient-violet',
+    tag: 'Luxury Interior'
+  },
+  'rcc': {
+    colSpan: 'col-span-1 md:col-span-1 lg:col-span-1',
+    rowSpan: 'row-span-1',
+    theme: 'glass-dark',
+    tag: 'Steel & Concrete'
+  },
+  'fsi': { 
+    colSpan: 'col-span-1 md:col-span-1 lg:col-span-1', 
+    rowSpan: 'row-span-1', 
+    theme: 'glass-dark',
+    tag: 'GHMC / HMDA'
+  },
+  'paint': {
+    colSpan: 'col-span-1 md:col-span-1 lg:col-span-1',
+    rowSpan: 'row-span-1',
+    theme: 'glass-compact',
+    tag: 'Finishes'
+  },
+  'vastu': { 
+    colSpan: 'col-span-1 md:col-span-1 lg:col-span-1', 
+    rowSpan: 'row-span-1', 
+    theme: 'glass-gold',
+    tag: 'Ayadi Math'
+  },
+  'envelope': { 
+    colSpan: 'col-span-1 md:col-span-2 lg:col-span-2', 
+    rowSpan: 'row-span-1', 
+    theme: 'glass-wide',
+    tag: 'Approval Norms'
+  },
+  'tiles': {
+    colSpan: 'col-span-1 md:col-span-2 lg:col-span-2',
+    rowSpan: 'row-span-1',
+    theme: 'glass-wide',
+    tag: 'Flooring'
+  },
+  'aac-blocks': {
+    colSpan: 'col-span-1 md:col-span-1 lg:col-span-1',
+    rowSpan: 'row-span-1',
+    theme: 'glass-compact',
+    tag: 'Masonry'
+  },
+  'efficiency': { 
+    colSpan: 'col-span-1 md:col-span-1 lg:col-span-1', 
+    rowSpan: 'row-span-1', 
+    theme: 'glass-compact',
+    tag: 'Carpet Area'
+  },
+  'roi': { 
+    colSpan: 'col-span-1 md:col-span-1 lg:col-span-1', 
+    rowSpan: 'row-span-1', 
+    theme: 'glass-compact',
+    tag: 'Yield'
+  },
+  'plot-area': { 
+    colSpan: 'col-span-1 md:col-span-1 lg:col-span-1', 
+    rowSpan: 'row-span-1', 
+    theme: 'glass-compact',
+    tag: 'Land'
   }
-
-  const baseCardStyle = "group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-white/60 bg-white/50 p-6 backdrop-blur-xl shadow-sm transition-all duration-700 hover:border-[#7B2DBF]/40 hover:bg-white/80 hover:shadow-[0_30px_60px_-15px_rgba(123,45,191,0.08)]";
-
-  if (layoutType === 'large') {
-    return (
-      <Link href={item.path} onClick={(e) => onClick(e, item.path)} className={`${spanClass} ${baseCardStyle} min-h-[340px]`}>
-        {/* Glow effect */}
-        <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br from-[#7B2DBF]/10 to-indigo-500/0 blur-2xl transition-all duration-700 group-hover:scale-125" />
-        
-        <div className="flex justify-between items-start">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1C1C72] to-[#7B2DBF] text-white shadow-md transition-all duration-700 group-hover:scale-110 group-hover:rotate-6">
-            <Icon className="h-8 w-8" strokeWidth={1.5} />
-          </div>
-          <span className={`rounded-full border px-3 py-1 text-[9px] font-black uppercase tracking-widest ${CATEGORY_COLORS[item.category] || 'bg-slate-100 text-slate-600'}`}>
-            {item.category}
-          </span>
-        </div>
-
-        <div className="mt-8 space-y-3">
-          <span className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-[#7B2DBF]">
-            <Cpu size={10} className="animate-spin-slow" /> Premium Module
-          </span>
-          <h3 className="text-2xl font-black leading-tight text-[#1C1C72] uppercase tracking-[0.02em] group-hover:text-[#7B2DBF] transition-colors">
-            {item.name}
-          </h3>
-          <p className="text-xs font-semibold leading-relaxed text-slate-500/80">
-            {item.description}
-          </p>
-        </div>
-
-        <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-4 text-[10px] font-black uppercase tracking-[0.2em] text-[#1C1C72]/40 group-hover:text-[#7B2DBF] transition-colors">
-          <span>Initialize Engine</span>
-          <ArrowUpRight size={14} className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
-        </div>
-      </Link>
-    );
-  }
-
-  if (layoutType === 'wide') {
-    return (
-      <Link href={item.path} onClick={(e) => onClick(e, item.path)} className={`${spanClass} ${baseCardStyle} min-h-[160px] flex-row items-center gap-6`}>
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#1C1C72]/10 to-[#7B2DBF]/10 text-[#1C1C72] transition-all duration-700 group-hover:bg-gradient-to-br group-hover:from-[#1C1C72] group-hover:to-[#7B2DBF] group-hover:text-white group-hover:scale-110">
-          <Icon className="h-6 w-6" strokeWidth={1.5} />
-        </div>
-
-        <div className="flex-1 space-y-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <span className="text-[8px] font-black uppercase tracking-widest text-slate-400">
-              {item.category}
-            </span>
-          </div>
-          <h3 className="text-base font-black text-[#1C1C72] uppercase tracking-[0.02em] truncate group-hover:text-[#7B2DBF] transition-colors">
-            {item.name}
-          </h3>
-          <p className="text-xs text-slate-400 font-semibold line-clamp-1">
-            {item.description}
-          </p>
-        </div>
-
-        <ArrowUpRight size={16} className="text-slate-300 transition-all duration-500 group-hover:text-[#7B2DBF] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-      </Link>
-    );
-  }
-
-  if (layoutType === 'tall') {
-    return (
-      <Link href={item.path} onClick={(e) => onClick(e, item.path)} className={`${spanClass} ${baseCardStyle} min-h-[340px]`}>
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#1C1C72]/10 to-[#7B2DBF]/10 text-[#1C1C72] transition-all duration-700 group-hover:bg-gradient-to-br group-hover:from-[#1C1C72] group-hover:to-[#7B2DBF] group-hover:text-white group-hover:scale-110">
-          <Icon className="h-6 w-6" strokeWidth={1.5} />
-        </div>
-
-        <div className="mt-auto space-y-2">
-          <span className="text-[8px] font-black uppercase tracking-widest text-slate-400">
-            {item.category}
-          </span>
-          <h3 className="text-lg font-black text-[#1C1C72] uppercase tracking-[0.02em] leading-tight group-hover:text-[#7B2DBF] transition-colors">
-            {item.name}
-          </h3>
-          <p className="text-xs text-slate-500/80 font-semibold leading-relaxed">
-            {item.description}
-          </p>
-        </div>
-
-        <div className="mt-6 flex items-center justify-between border-t border-slate-100/50 pt-3 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover:text-[#7B2DBF] transition-colors">
-          <span>Open</span>
-          <ArrowUpRight size={12} />
-        </div>
-      </Link>
-    );
-  }
-
-  // Standard Compact Bento Cell
-  return (
-    <Link href={item.path} onClick={(e) => onClick(e, item.path)} className={`${spanClass} ${baseCardStyle} min-h-[160px]`}>
-      <div className="flex justify-between items-start">
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#1C1C72]/5 to-[#7B2DBF]/5 border border-[#1C1C72]/5 text-[#1C1C72] transition-all duration-700 group-hover:bg-gradient-to-br group-hover:from-[#1C1C72] group-hover:to-[#7B2DBF] group-hover:text-white group-hover:scale-110">
-          <Icon className="h-5 w-5" strokeWidth={1.5} />
-        </div>
-        <ArrowUpRight size={14} className="text-slate-300 transition-transform duration-500 group-hover:text-[#7B2DBF] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-      </div>
-
-      <div className="space-y-1 mt-4">
-        <span className="text-[8px] font-black uppercase tracking-widest text-slate-400">
-          {item.category}
-        </span>
-        <h3 className="text-sm font-black text-[#1C1C72] uppercase tracking-[0.02em] leading-snug truncate group-hover:text-[#7B2DBF] transition-colors">
-          {item.name}
-        </h3>
-      </div>
-    </Link>
-  );
 };
 
 export default function CalculatorsHub() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
-  const [transitioningItem, setTransitioningItem] = useState<CalculatorMeta | null>(null);
-
-  const handleCardClick = (e: React.MouseEvent, path: string) => {
-    e.preventDefault();
-    const item = calculators.find(c => c.path === path);
-    if (item) {
-      setTransitioningItem(item);
-      setTimeout(() => {
-        router.push(path);
-      }, 600);
-    }
-  };
+  const [showExtra, setShowExtra] = useState(false);
 
   const filteredCalculators = calculators.filter(item => {
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -195,73 +108,169 @@ export default function CalculatorsHub() {
     return matchesSearch && matchesCategory;
   });
 
+  const importantCalculators = filteredCalculators.filter(item => item.isImportant);
+  const extraCalculators = filteredCalculators.filter(item => !item.isImportant);
+
+  const isExpanded = showExtra || searchQuery.trim() !== '' || activeCategory !== 'all';
+
+  const renderCalculatorCard = (item: CalculatorMeta) => {
+    const layout = BENTO_LAYOUTS[item.id] || { colSpan: 'col-span-1', rowSpan: 'row-span-1', theme: 'glass-compact' };
+    const Icon = item.icon || Grid;
+    const isHero = layout.rowSpan === 'row-span-2';
+
+    return (
+      <motion.div
+        key={item.id}
+        layout
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className={`${layout.colSpan} ${layout.rowSpan}`}
+      >
+        <Link
+          href={item.path}
+          className={`group relative h-full w-full flex flex-col justify-between overflow-hidden rounded-[2.2rem] p-7 transition-all duration-500 
+            ${isHero 
+              ? 'bg-gradient-to-br from-[#1C1C72] via-[#2A1B81] to-[#7B2DBF] text-white shadow-xl shadow-[#1C1C72]/15 hover:shadow-2xl hover:shadow-[#7B2DBF]/25 hover:scale-[1.01]' 
+              : 'bg-white/80 hover:bg-white backdrop-blur-xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:shadow-[#1C1C72]/5 hover:border-[#7B2DBF]/40 hover:scale-[1.01]'
+            }`}
+        >
+          {/* Background Ambient Glow */}
+          {isHero ? (
+            <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/10 blur-3xl transition-all duration-700 group-hover:scale-150" />
+          ) : (
+            <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-gradient-to-br from-[#7B2DBF]/5 to-transparent blur-xl transition-all duration-700 group-hover:scale-125" />
+          )}
+
+          {/* CARD TOP */}
+          <div className="flex items-start justify-between relative z-10">
+            <div className={`flex items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110 
+              ${isHero 
+                ? 'h-14 w-14 bg-white/15 backdrop-blur-md text-white border border-white/20' 
+                : 'h-12 w-12 bg-[#1C1C72]/5 text-[#1C1C72] border border-[#1C1C72]/10 group-hover:bg-[#1C1C72] group-hover:text-white'
+              }`}
+            >
+              <Icon className={isHero ? "h-7 w-7" : "h-6 w-6"} strokeWidth={1.5} />
+            </div>
+
+            <div className="flex items-center gap-2">
+              {layout.tag && (
+                <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                  isHero ? 'bg-white/15 text-white/90 border border-white/20' : 'bg-[#7B2DBF]/10 text-[#7B2DBF]'
+                }`}>
+                  {layout.tag}
+                </span>
+              )}
+              <div className={`p-2 rounded-full transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 ${
+                isHero ? 'bg-white/10 text-white' : 'text-slate-400 group-hover:text-[#7B2DBF]'
+              }`}>
+                <ArrowUpRight size={18} />
+              </div>
+            </div>
+          </div>
+
+          {/* CARD BOTTOM / CONTENT */}
+          <div className="relative z-10 mt-auto pt-4 space-y-2">
+            {isHero && (
+              <div className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-[#7B2DBF] bg-white/90 w-fit px-2.5 py-0.5 rounded-full shadow-sm">
+                <Cpu size={10} /> Premium Engine
+              </div>
+            )}
+
+            <h3 className={`font-black uppercase tracking-[0.02em] leading-tight transition-colors 
+              ${isHero ? 'text-2xl sm:text-3xl text-white' : 'text-lg text-[#1C1C72] group-hover:text-[#7B2DBF]'}`}
+            >
+              {item.name}
+            </h3>
+
+            <p className={`text-xs font-semibold leading-relaxed line-clamp-2 ${
+              isHero ? 'text-white/80' : 'text-slate-500'
+            }`}>
+              {item.description}
+            </p>
+
+            <div className={`pt-3 border-t flex items-center justify-between text-[9px] font-black uppercase tracking-[0.2em] ${
+              isHero ? 'border-white/15 text-white/60 group-hover:text-white' : 'border-slate-100 text-slate-400 group-hover:text-[#7B2DBF]'
+            }`}>
+              <span>Initialize Engine</span>
+              <span className="text-[11px]">→</span>
+            </div>
+          </div>
+        </Link>
+      </motion.div>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-slate-50 text-[#0F172A] font-inter selection:bg-[#7B2DBF] selection:text-white pb-32 relative overflow-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] font-inter selection:bg-[#7B2DBF] selection:text-white pb-32 relative overflow-hidden">
       
-      {/* BACKGROUND GRID ELEMENTS */}
+      {/* BACKGROUND GRADIENT GLOWS */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
            style={{ backgroundImage: 'radial-gradient(#1C1C72 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
-      <div className="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-gradient-to-br from-[#7B2DBF]/10 to-transparent blur-[120px] pointer-events-none" />
-      <div className="absolute top-[40%] -left-[10%] w-[50%] h-[50%] rounded-full bg-gradient-to-br from-indigo-500/5 to-transparent blur-[120px] pointer-events-none" />
+      <div className="absolute -top-[15%] -right-[10%] w-[50%] h-[50%] rounded-full bg-gradient-to-br from-[#7B2DBF]/15 via-purple-500/5 to-transparent blur-[140px] pointer-events-none" />
+      <div className="absolute top-[35%] -left-[10%] w-[45%] h-[45%] rounded-full bg-gradient-to-br from-indigo-500/10 to-transparent blur-[140px] pointer-events-none" />
 
-      <div className="fixed top-8 right-8 z-[60]">
+      <div className="fixed top-6 right-8 z-[60]">
         <TerminalSearch />
       </div>
 
-      <div className="relative z-10 pt-32 pb-16 px-6 lg:px-12">
+      <div className="relative z-10 pt-28 pb-16 px-4 sm:px-6 lg:px-12">
         <div className="max-w-[1400px] mx-auto">
           
           {/* HEADER */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center mb-16"
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center mb-14"
           >
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#7B2DBF]/30" />
-              <span className="text-[11px] font-black uppercase tracking-[0.5em] text-[#1C1C72]/50">Agnaa Precision Suite</span>
-              <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#7B2DBF]/30" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-slate-200/80 shadow-sm backdrop-blur-md mb-6">
+              <Sparkles size={14} className="text-[#7B2DBF]" />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1C1C72]">AGNAA DESIGN STUDIO ENGINE</span>
             </div>
             
-            <h1 className="text-6xl md:text-8xl font-black text-[#1C1C72] tracking-[-0.05em] mb-6 leading-[0.9]">
-              Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C1C72] via-[#7B2DBF] to-[#1C1C72] animate-gradient-x">Engineering</span><br/>Calculators.
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-[#1C1C72] tracking-[-0.04em] mb-4 leading-[0.95]">
+              Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C1C72] via-[#7B2DBF] to-[#1C1C72]">Calculators</span>
             </h1>
             
-            <div className="flex items-center justify-center gap-2 text-xs font-bold text-slate-400 mt-6">
+            <p className="text-slate-500 text-sm sm:text-base font-semibold max-w-xl mx-auto mb-6">
+              Official architectural & structural estimation suite for plot owners, luxury villa builders & commercial investors.
+            </p>
+
+            <div className="flex items-center justify-center gap-2 text-xs font-bold text-slate-400">
               <CheckCircle size={14} className="text-emerald-500" />
-              <span>All <span className="text-[#1C1C72] font-black">{calculators.length} Modules</span> compiling & operating perfectly</span>
+              <span>8 Core Important Calculators + Extra Modules Available</span>
             </div>
           </motion.div>
 
-          {/* SEARCH & FILTER CONTROLS */}
-          <div className="max-w-4xl mx-auto mb-16 space-y-8">
+          {/* SEARCH & CATEGORY CONTROLS */}
+          <div className="max-w-3xl mx-auto mb-12 space-y-6">
             <div className="relative group">
-              <div className="absolute -inset-4 bg-gradient-to-r from-[#1C1C72]/5 to-[#7B2DBF]/5 rounded-[2.5rem] blur-xl opacity-0 group-focus-within:opacity-100 transition-all duration-1000"></div>
-              <div className="relative flex items-center bg-white/70 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-xl overflow-hidden transition-all duration-500 group-focus-within:border-[#7B2DBF]/30">
-                <div className="pl-6 pointer-events-none">
+              <div className="relative flex items-center bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200/90 shadow-lg overflow-hidden transition-all duration-300 group-focus-within:border-[#7B2DBF]/50 group-focus-within:shadow-[0_10px_30px_rgba(123,45,191,0.1)]">
+                <div className="pl-5 pointer-events-none">
                   <Search className="w-5 h-5 text-slate-400 group-focus-within:text-[#7B2DBF] transition-colors" />
                 </div>
                 <input 
                   type="text" 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search all 43 engineering calculators..." 
-                  className="w-full bg-transparent outline-none text-base font-bold text-[#1C1C72] placeholder:text-slate-300 px-4 py-5"
+                  placeholder="Search FSI, RCC, Steel, AAC Blocks, Paint, Tiles, Vastu..." 
+                  className="w-full bg-transparent outline-none text-sm font-bold text-[#1C1C72] placeholder:text-slate-300 px-4 py-4"
                 />
               </div>
             </div>
 
-            {/* Category tabs */}
+            {/* Category Filter Pills */}
             <div className="flex flex-wrap justify-center gap-2">
               {CATEGORIES.map(category => (
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-500 ${
+                  className={`px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-wider transition-all duration-300 ${
                     activeCategory === category.id 
-                    ? 'bg-gradient-to-r from-[#1C1C72] to-[#7B2DBF] text-white shadow-md' 
-                    : 'bg-white/60 hover:bg-white border border-slate-200/40 hover:border-slate-300/60 text-slate-500 hover:text-[#1C1C72]'
+                    ? 'bg-[#1C1C72] text-white shadow-md shadow-[#1C1C72]/20' 
+                    : 'bg-white/70 hover:bg-white border border-slate-200/70 text-slate-500 hover:text-[#1C1C72]'
                   }`}
                 >
                   {category.label}
@@ -270,34 +279,97 @@ export default function CalculatorsHub() {
             </div>
           </div>
 
-          {/* BENTO GRID */}
-          <motion.div 
-            layout 
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[160px]"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredCalculators.map((item, idx) => (
-                <motion.div
-                  key={item.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          {/* ─── 8 IMPORTANT CALCULATORS (PRIMARY BENTO GRID) ─── */}
+          {importantCalculators.length > 0 && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between px-2">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
+                  <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#1C1C72]">
+                    Core Precision Engines ({importantCalculators.length})
+                  </span>
+                </div>
+              </div>
+
+              <motion.div 
+                layout 
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-[210px]"
+              >
+                <AnimatePresence mode="popLayout">
+                  {importantCalculators.map((item) => renderCalculatorCard(item))}
+                </AnimatePresence>
+              </motion.div>
+            </div>
+          )}
+
+          {/* ─── EXTRA CALCULATORS TOGGLE BUTTON ─── */}
+          {extraCalculators.length > 0 && searchQuery.trim() === '' && activeCategory === 'all' && (
+            <div className="mt-14 text-center flex flex-col items-center">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setShowExtra(!showExtra)}
+                className="inline-flex items-center gap-4 px-8 py-4 rounded-2xl bg-white/90 hover:bg-white border border-slate-200/90 shadow-md hover:shadow-xl hover:border-[#7B2DBF]/50 transition-all duration-300 group cursor-pointer"
+              >
+                <div className="p-2.5 rounded-xl bg-[#7B2DBF]/10 text-[#7B2DBF] group-hover:bg-[#7B2DBF] group-hover:text-white transition-colors shadow-sm">
+                  {showExtra ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                </div>
+                <div className="text-left">
+                  <div className="text-sm font-black uppercase tracking-wider text-[#1C1C72] group-hover:text-[#7B2DBF] transition-colors flex items-center gap-2">
+                    {showExtra ? 'Hide Extra Calculators' : 'View Extra Calculators'}
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-[#1C1C72] text-white">
+                      {extraCalculators.length} Extra Tools
+                    </span>
+                  </div>
+                  <div className="text-[11px] font-semibold text-slate-400 mt-0.5">
+                    {showExtra 
+                      ? 'Click to collapse secondary estimation tools' 
+                      : 'AAC Blocks, Carpet Area Efficiency, Commercial ROI & Plot Converter'}
+                  </div>
+                </div>
+              </motion.button>
+            </div>
+          )}
+
+          {/* ─── EXTRA CALCULATORS GRID (SHOWN ON BUTTON CLICK OR SEARCH/FILTER) ─── */}
+          <AnimatePresence>
+            {extraCalculators.length > 0 && isExpanded && (
+              <motion.div
+                initial={{ opacity: 0, height: 0, y: 25 }}
+                animate={{ opacity: 1, height: 'auto', y: 0 }}
+                exit={{ opacity: 0, height: 0, y: 25 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="mt-14 pt-10 border-t border-slate-200/80 space-y-6"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100/80 text-[#7B2DBF] text-[10px] font-black uppercase tracking-widest mb-2">
+                      <Sparkles size={12} /> Extra Module Suite
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-black text-[#1C1C72] tracking-tight">
+                      Extra & Specialized Calculators
+                    </h2>
+                  </div>
+                  <p className="text-xs font-semibold text-slate-400 max-w-md">
+                    Additional architectural estimation tools for AAC block masonry, carpet efficiency ratios, commercial ROI, and plot area unit conversions.
+                  </p>
+                </div>
+
+                <motion.div 
+                  layout 
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-[210px]"
                 >
-                  <CalculatorBentoCard 
-                    item={item} 
-                    index={idx}
-                    onClick={handleCardClick}
-                  />
+                  <AnimatePresence mode="popLayout">
+                    {extraCalculators.map((item) => renderCalculatorCard(item))}
+                  </AnimatePresence>
                 </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* EMPTY STATE */}
           {filteredCalculators.length === 0 && (
-            <div className="w-full text-center py-20 bg-white/30 backdrop-blur-xl border border-dashed border-slate-200 rounded-[2rem]">
+            <div className="w-full text-center py-20 bg-white/60 backdrop-blur-xl border border-dashed border-slate-200 rounded-[2.5rem]">
               <div className="text-slate-300 text-5xl mb-4">🔍</div>
               <h3 className="text-lg font-black text-[#1C1C72] uppercase tracking-widest">No Calculators Found</h3>
               <p className="text-xs text-slate-400 font-semibold mt-2">Try adjusting your search query or switching categories</p>
@@ -306,33 +378,7 @@ export default function CalculatorsHub() {
 
         </div>
       </div>
-
-      {/* FULLSCREEN ROUTE INITIALIZATION TRANSITION */}
-      <AnimatePresence>
-        {transitioningItem && (
-          <motion.div
-            initial={{ clipPath: 'circle(0% at 50% 50%)', opacity: 0 }}
-            animate={{ clipPath: 'circle(150% at 50% 50%)', opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-[100] bg-gradient-to-br from-[#1C1C72] to-[#7B2DBF] flex items-center justify-center pointer-events-none"
-          >
-             <div className="flex flex-col items-center gap-6">
-               <div className="w-24 h-24 rounded-full border border-white/20 flex items-center justify-center relative overflow-hidden">
-                  <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
-                    {React.createElement(transitioningItem.icon || Grid, { className: "w-10 h-10 text-white", strokeWidth: 1 })}
-                  </motion.div>
-                  <div className="absolute inset-0 bg-white/5 animate-pulse"></div>
-               </div>
-               <div className="text-center text-white">
-                 <h2 className="text-xl font-black uppercase tracking-[0.4em] mb-2">{transitioningItem.name}</h2>
-                 <p className="text-white/40 text-[10px] font-bold tracking-[0.2em]">INITIALIZING AGNAA PRECISION ENGINE</p>
-               </div>
-             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
     </div>
   );
 }
+

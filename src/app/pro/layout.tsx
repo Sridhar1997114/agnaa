@@ -60,7 +60,7 @@ export default function ProLayout({ children }: { children: React.ReactNode }) {
         {/* Nav */}
         <nav className="flex-1 px-3 mt-2 space-y-1">
           {NAV_LINKS.map((link) => {
-            const isActive = pathname === link.href || (link.href !== "/pro" && pathname.startsWith(link.href));
+            const isActive = pathname === link.href || (link.href !== "/pro" && Boolean(pathname?.startsWith(link.href)));
             const Icon = link.icon;
             return (
               <Link

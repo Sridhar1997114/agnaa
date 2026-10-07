@@ -13,8 +13,8 @@ interface Props {
 export default function QuotationPreview({ data }: Props) {
   const downloadPDF = () => {
     const element = document.getElementById('quotation-content');
-    if (typeof window !== 'undefined' && window.html2pdf) {
-      window.html2pdf()
+    if (typeof window !== 'undefined' && (window as any).html2pdf) {
+      (window as any).html2pdf()
         .set({
           margin: 10,
           filename: `${data.quotationNumber}_AGNAA_PROTOCOL.pdf`,

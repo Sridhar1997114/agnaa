@@ -24,7 +24,7 @@ const SIDEBAR_LINKS = [
   { href: "/admin/projects", label: "Projects", icon: Map },
   { href: "/admin/documents", label: "Documents", icon: FileText },
   { href: "/admin/invoices", label: "Invoices", icon: Receipt },
-  { href: "/admin/payments", label: "Payments", icon: Wallet },
+  { href: "/commercial/quotation", label: "Create Quotation", icon: FileText },
   { href: "/admin/templates", label: "Templates", icon: FileCode },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];

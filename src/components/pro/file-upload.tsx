@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Upload, X, File, Loader2, CheckCircle2 } from "lucide-react";
-import { uploadFile } from "@/app/pro/actions";
+import { Upload, X, File as FileIcon, Loader2, CheckCircle2 } from "lucide-react";
+import { uploadDocument as uploadFile } from "@/app/pro/actions";
 
 interface FileUploadProps {
   projectId: string;
@@ -70,7 +70,7 @@ export function FileUpload({ projectId, onSuccess }: FileUploadProps) {
         <div className="space-y-4">
           <div className="bg-white/5 rounded-xl p-4 flex items-center gap-4">
             <div className="w-10 h-10 bg-brand-violet/20 rounded-lg flex items-center justify-center text-brand-violet">
-              <File size={20} />
+              <FileIcon size={20} />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-bold text-white truncate">{file.name}</p>

@@ -36,26 +36,16 @@ export const Header = () => {
   const baseURL = getBaseURL();
 
   const navLinks = [
-    { id: 'home', label: 'Home', href: `${baseURL}/` },
-    { id: 'portfolio', label: 'Portfolio', href: `${baseURL}/portfolio` },
-    { id: 'design-studio', label: 'Design Studio', href: `${baseURL}/design-studio` },
-    { id: 'constructions', label: 'Constructions', href: `${baseURL}/constructions` },
-    { id: 'voice', label: 'AGNAA Voice', href: `${baseURL}/voice` },
-    { id: 'foundation', label: 'Foundation', href: `${baseURL}/foundation` }
+    { id: 'home', label: 'Home', href: '/' },
+    { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
+    { id: 'design-studio', label: 'Design Studio', href: '/design-studio' },
+    { id: 'constructions', label: 'Constructions', href: '/constructions' },
+    { id: 'geo', label: 'GEO Codex', href: '/geo' },
+    { id: 'voice', label: 'AGNAA Voice', href: '/voice' },
+    { id: 'foundation', label: 'Foundation', href: '/foundation' }
   ];
 
-  const getActiveLink = (links: typeof navLinks, currentPath: string) => {
-    return links.find(link => {
-      try {
-        const url = new URL(link.href);
-        return url.pathname === currentPath;
-      } catch (e) {
-        return link.href === currentPath;
-      }
-    })?.id || '';
-  };
-
-  const currentId = getActiveLink(navLinks, pathname || '/');
+  const isDarkPage = !isScrolled && (pathname === '/portfolio' || pathname === '/voice' || pathname === '/geo');
 
   const isPortal = pathname?.startsWith('/app') || pathname?.startsWith('/admin') || pathname?.startsWith('/login') || pathname?.startsWith('/shop');
 
@@ -74,10 +64,20 @@ export const Header = () => {
             <Link 
               key={link.id} 
               href={link.href}
-              className={`transition-colors relative ${pathname === link.href ? 'text-[#1C1C72]' : 'text-gray-500 hover:text-[#7B2DBF]'}`}
+              className={`transition-colors relative ${
+                pathname === link.href 
+                  ? (isDarkPage ? 'text-white' : 'text-[#1C1C72]') 
+                  : (isDarkPage ? 'text-slate-300 hover:text-white' : 'text-gray-500 hover:text-[#7B2DBF]')
+              }`}
             >
               {link.label}
-              {pathname === link.href && <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-[#1C1C72] to-[#7B2DBF] shadow-[0_0_10px_rgba(123,45,191,0.5)] rounded-full"></span>}
+              {pathname === link.href && (
+                <span className={`absolute -bottom-2 left-0 w-full h-0.5 ${
+                  isDarkPage 
+                    ? 'bg-gradient-to-r from-purple-400 to-indigo-400 shadow-[0_0_10px_rgba(168,85,247,0.5)]' 
+                    : 'bg-gradient-to-r from-[#1C1C72] to-[#7B2DBF] shadow-[0_0_10px_rgba(123,45,191,0.5)]'
+                } rounded-full`}></span>
+              )}
             </Link>
           ))}
         </nav>
@@ -85,7 +85,13 @@ export const Header = () => {
         <div className="hidden lg:flex items-center gap-6">
           <Link 
             href="https://ai.agnaa.in" 
-            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent relative group/ai ${pathname === '/agnaa-intelligence' || (typeof window !== 'undefined' && window.location.hostname === 'ai.agnaa.in') ? 'bg-[#7B2DBF] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#1C1C72]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
+            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border relative group/ai ${
+              pathname === '/agnaa-intelligence' || (typeof window !== 'undefined' && window.location.hostname === 'ai.agnaa.in') 
+                ? 'bg-[#7B2DBF] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#1C1C72]' 
+                : isDarkPage 
+                  ? 'text-slate-300 hover:text-white border-white/10 hover:border-purple-400/50 bg-white/5' 
+                  : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white border-transparent'
+            }`}
             title="Agnaa Intelligence AI"
           >
             <Sparkles size={20} strokeWidth={2} className="group-hover/ai:animate-pulse" />
@@ -93,22 +99,37 @@ export const Header = () => {
           </Link>
           <Link 
             href="/calc" 
-            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border border-transparent ${pathname === '/calc' ? 'bg-[#1C1C72] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#7B2DBF]' : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white'}`}
+            className={`p-2 rounded-full transition-all duration-300 flex items-center justify-center border ${
+              pathname === '/calc' 
+                ? 'bg-[#1C1C72] text-white shadow-[0_0_15px_rgba(123,45,191,0.4)] border-[#7B2DBF]' 
+                : isDarkPage 
+                  ? 'text-slate-300 hover:text-white border-white/10 hover:border-purple-400/50 bg-white/5' 
+                  : 'text-gray-400 hover:text-[#7B2DBF] hover:shadow-[0_0_15px_rgba(123,45,191,0.2)] hover:border-[#7B2DBF]/30 bg-white border-transparent'
+            }`}
             title="Agnaa Calc"
             aria-label="Agnaa Calc"
           >
             <Calculator size={20} strokeWidth={2} />
           </Link>
-          <div className="w-px h-6 bg-gray-200"></div>
+          <div className={`w-px h-6 ${isDarkPage ? 'bg-white/15' : 'bg-gray-200'}`}></div>
           <Link 
-            href={`${baseURL}/client`} 
-            className={`text-sm font-bold transition-colors ${pathname === '/client' ? 'text-[#7B2DBF]' : 'text-gray-500 hover:text-[#7B2DBF]'}`}
+            href="/client" 
+            className={`text-sm font-bold transition-colors ${
+              pathname === '/client' 
+                ? 'text-[#7B2DBF]' 
+                : isDarkPage ? 'text-slate-300 hover:text-white' : 'text-gray-500 hover:text-[#7B2DBF]'
+            }`}
           >
             Client Login
           </Link>
-          <div className="w-px h-6 bg-gray-200"></div>
-          <a href="https://wa.me/918826214348" className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#7B2DBF] transition-colors">
-            <Phone size={18} className="text-[#1C1C72]" /> +91-8826214348
+          <div className={`w-px h-6 ${isDarkPage ? 'bg-white/15' : 'bg-gray-200'}`}></div>
+          <a 
+            href="https://wa.me/918826214348" 
+            className={`flex items-center gap-2 text-sm font-bold transition-colors ${
+              isDarkPage ? 'text-slate-300 hover:text-white' : 'text-gray-500 hover:text-[#7B2DBF]'
+            }`}
+          >
+            <Phone size={18} className={isDarkPage ? 'text-purple-400' : 'text-[#1C1C72]'} /> +91-8826214348
           </a>
           <Button href="/start-project" variant="primary" className="py-2.5 px-6 text-sm">Start Project</Button>
         </div>

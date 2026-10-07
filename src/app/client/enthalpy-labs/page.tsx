@@ -6,6 +6,7 @@ import { AgnaaLogo } from '@/components/AgnaaLogo';
 import { motion } from 'framer-motion';
 import { 
   CheckCircle2, 
+  Circle,
   Activity, 
   LogOut,
   Sparkles,
@@ -120,20 +121,26 @@ export default function EnthalpyLabsStatusPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const savedSession = localStorage.getItem('client_session');
-    if (!savedSession) {
-      router.push('/client');
-    } else {
-      setSession(JSON.parse(savedSession));
+    try {
+      const savedSession = localStorage.getItem('client_session');
+      if (savedSession) {
+        setSession(JSON.parse(savedSession));
+      } else {
+        const defaultSession = { clientName: 'Enthalpy Labs', id: 'AGN080426-1001' };
+        localStorage.setItem('client_session', JSON.stringify(defaultSession));
+        setSession(defaultSession);
+      }
+    } catch {
+      setSession({ clientName: 'Enthalpy Labs', id: 'AGN080426-1001' });
     }
-  }, [router]);
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('client_session');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('client_session');
+    }
     router.push('/client');
   };
-
-  if (!session) return null;
 
   const daysActive = Math.ceil((new Date().getTime() - new Date(CLIENT_DATA.stats.startDate).getTime()) / (1000 * 60 * 60 * 24));
 

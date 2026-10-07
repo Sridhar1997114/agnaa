@@ -35,3 +35,31 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# sensitive and temp local files
+recovery-codes.txt
+deploy_log.txt
+*.torrent
+scratch/
+
+# Local media, client dockets, and source assets
+MANILA VISUALS/
+Architectural Books/
+Non-Architectural Books/
+Cambridgegroupofschools.com/
+P M PATTABHI RAMAN 120x40/
+content-studio/
+portfolio/
+pro.agnaa.in/
+031026_*/
+*.pdf
+agreement_rate_sheet.html
+quotation_120x40.html
+gemini-code-*.js
+geo_architectural_database.json
+redact_cv.mjs
+ChatGPT Image*
+
+# Large distribution binaries
+public/downloads/*-Local-*.zip
+public/downloads/Agnaa-Voice-v2.0-Windows-Portable.zip

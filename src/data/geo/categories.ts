@@ -1,0 +1,68 @@
+import { GeoCategory } from './types';
+
+export const GEO_CATEGORIES: GeoCategory[] = [
+  {
+    id: 'nbc-part3-general',
+    slug: 'nbc-general-building-requirements',
+    name: 'NBC 2026: General Building & Setbacks',
+    codeSource: 'National Building Code of India 2026 (Vol 1, Part 3) / Book 1',
+    description: 'Statutory minimum room dimensions, ceiling heights, light & ventilation, open spaces, basements, and setbacks.',
+    iconName: 'Building2',
+  },
+  {
+    id: 'nbc-part4-fire',
+    slug: 'nbc-fire-and-life-safety',
+    name: 'NBC 2026 & Studio Companion: Fire & Life Safety',
+    codeSource: 'NBC 2026 (Vol 1, Part 4 & Part D) & The Architect\'s Studio Companion (Book 10)',
+    description: 'Means of egress, exit doorway widths, travel distances, fire staircases, compartmentation, and refuge zones.',
+    iconName: 'Flame',
+  },
+  {
+    id: 'nbc-structural-services',
+    slug: 'nbc-structural-and-services',
+    name: 'NBC 2026: Structural RCC & MEP Services',
+    codeSource: 'NBC 2026 (Part C Structural, Part E Services, Part F Plumbing) / IS 456 / IS 13920',
+    description: 'RCC cover depths, seismic ductile detailing, 135 LPCD water demand, drainage slopes, and acoustic isolation.',
+    iconName: 'Wrench',
+  },
+  {
+    id: 'neufert-ergonomics',
+    slug: 'neufert-architects-data-ergonomics',
+    name: 'Neufert: Anthropometrics & Ergonomics',
+    codeSource: 'Ernst Neufert Architects\' Data (Fourth Edition / Book 2)',
+    description: 'Anthropometric human scales, circulation corridor widths, kitchen work triangles, bedroom clearances, and car parking bays.',
+    iconName: 'Maximize2',
+  },
+  {
+    id: 'ching-spatial-order',
+    slug: 'ching-form-space-order-and-construction',
+    name: 'Francis D.K. Ching: Form, Space & Order',
+    codeSource: 'Architecture: Form, Space, and Order & Building Construction Illustrated (Books 3, 5, 7)',
+    description: 'Ordering principles, axis, symmetry, hierarchy, datum, rhythm, transformation, and structural envelope tectonics.',
+    iconName: 'Box',
+  },
+  {
+    id: 'architectural-classics-phenomenology',
+    slug: 'architectural-theory-and-classics',
+    name: 'Theory & Detailing: Pallasmaa, Allen & Time-Saver',
+    codeSource: 'The Eyes of the Skin (Book 11), Architectural Detailing (Books 8, 9), Time-Saver Standards (Book 4)',
+    description: 'Sensory phenomenology, material honesty, thermal envelope joints, watertight detailing, and interior spatial planning.',
+    iconName: 'BookOpen',
+  },
+  {
+    id: 'ghmc-hyderabad-byelaws',
+    slug: 'ghmc-hyderabad-building-byelaws',
+    name: 'GHMC & TG-bPASS: Hyderabad Master Byelaws',
+    codeSource: 'G.O. Ms. No. 168 (AP/Telangana Unified Building Rules) & TG-bPASS 2026',
+    description: 'Hyderabad plot setback slabs (under 100 to 1000+ sq yd), road widening, stilt parking heights, and TG-bPASS sanction rules.',
+    iconName: 'MapPin',
+  },
+  {
+    id: 'agnaa-hyderabad-execution',
+    slug: 'agnaa-construction-and-materials',
+    name: 'AGNAA Execution, Rates & Deccan Engineering',
+    codeSource: 'AGNAA Engineering Standards & Hyderabad Field Rate Sheet (Ar. Sridhar, SPA Delhi)',
+    description: 'Turnkey construction rates (₹1,750–₹3,000+/sqft), RCC slab steel consumption, cement-sand ratios, and Deccan soil foundation protocols.',
+    iconName: 'ShieldCheck',
+  },
+];

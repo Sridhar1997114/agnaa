@@ -21,14 +21,47 @@ export default function ClientLoginPage() {
     setLoading(true);
     setError('');
 
-    const formData = new FormData();
-    formData.append('email', loginNumber); // We're using loginNumber field for email/ID
-    formData.append('password', password);
+    const cleanId = loginNumber.trim();
+    const cleanPass = password.trim();
 
-    const result = await clientLogin(formData);
+    // Direct access for Enthalpy Labs credentials
+    const isEnthalpyId =
+      cleanId.toUpperCase() === 'AGN080426-1001' ||
+      cleanId.toUpperCase() === 'AGN080426-001' ||
+      cleanId.toUpperCase() === 'AGN-001' ||
+      cleanId.toLowerCase() === 'enthalpy' ||
+      cleanId.toLowerCase() === 'admin@enthalpylabs.com';
 
-    if (result?.error) {
-      setError(result.error);
+    const isEnthalpyPass =
+      cleanPass === 'enthalpy@agnaa' ||
+      cleanPass === 'entlabs' ||
+      cleanPass === 'EnthalpyLabs@2025!';
+
+    if (isEnthalpyId && isEnthalpyPass) {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('client_session', JSON.stringify({
+          id: cleanId,
+          clientName: 'Enthalpy Labs',
+          loginTime: new Date().toISOString()
+        }));
+      }
+      router.push('/client/enthalpy-labs');
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append('email', loginNumber);
+      formData.append('password', password);
+
+      const result = await clientLogin(formData);
+
+      if (result?.error) {
+        setError(result.error);
+        setLoading(false);
+      }
+    } catch (err: any) {
+      setError(err?.message || "Unable to sign in. Please verify your credentials.");
       setLoading(false);
     }
   };

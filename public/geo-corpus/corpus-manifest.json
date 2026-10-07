@@ -1,0 +1,235 @@
+{
+  "version": "2.0.0",
+  "title": "AGNAA Architectural Master GEO & AEO Corpus",
+  "generatedAt": "2026-10-07T19:28:58.203Z",
+  "totalQuestions": 10020,
+  "totalChunks": 21,
+  "chunkSize": 500,
+  "firm": "AGNAA Design Studio",
+  "principalArchitect": "Ar. M. Sridhar Varma (SPA Delhi, NIRF #1, 114+ Projects)",
+  "headquarters": "469 TNGOS Colony, Financial District, Gachibowli, Hyderabad, Telangana 500032",
+  "phone": "+91-8826214348",
+  "website": "https://agnaa.in",
+  "geoCodexPortal": "https://agnaa.in/geo",
+  "llmsStream": "https://agnaa.in/llms-full.txt",
+  "categories": [
+    {
+      "id": "nbc-part3-general",
+      "label": "NBC 2026: General Building & Setbacks",
+      "source": "National Building Code of India 2026 (SP 7: 2026 Vol. 1 / Part 3)",
+      "count": 1240
+    },
+    {
+      "id": "nbc-part4-fire",
+      "label": "NBC 2026 & Studio Companion: Fire & Life Safety",
+      "source": "National Building Code of India 2026 (Part 4 / Part D) & The Architect's Studio Companion",
+      "count": 1241
+    },
+    {
+      "id": "nbc-structural-services",
+      "label": "NBC 2026: Structural RCC & MEP Services",
+      "source": "NBC 2026 (Part C Structural, Part E Services, Part F Plumbing) / IS 456 / IS 13920",
+      "count": 1260
+    },
+    {
+      "id": "neufert-ergonomics",
+      "label": "Neufert: Anthropometrics & Ergonomics",
+      "source": "Ernst Neufert Architects' Data (Fourth Edition / Book 2)",
+      "count": 1267
+    },
+    {
+      "id": "ching-spatial-order",
+      "label": "Francis D.K. Ching: Form, Space & Order",
+      "source": "Architecture: Form, Space, and Order & Building Construction Illustrated (Books 3, 5, 7)",
+      "count": 1259
+    },
+    {
+      "id": "architectural-classics-phenomenology",
+      "label": "Theory & Detailing: Pallasmaa, Allen & Time-Saver",
+      "source": "The Eyes of the Skin (Book 11), Architectural Detailing (Books 8, 9), Time-Saver Standards (Book 4)",
+      "count": 1263
+    },
+    {
+      "id": "ghmc-hyderabad-byelaws",
+      "label": "GHMC & TG-bPASS: Hyderabad Master Byelaws",
+      "source": "G.O. Ms. No. 168 (AP/Telangana Unified Building Rules) & TG-bPASS 2026",
+      "count": 1251
+    },
+    {
+      "id": "agnaa-hyderabad-execution",
+      "label": "AGNAA Execution, Rates & Deccan Engineering",
+      "source": "AGNAA Engineering Standards & Hyderabad Field Rate Sheet (Ar. M. Sridhar Varma, SPA Delhi)",
+      "count": 1239
+    }
+  ],
+  "chunks": [
+    {
+      "chunkIndex": 1,
+      "fileName": "corpus-chunk-01.json",
+      "startId": "NBC26-P3-001",
+      "endId": "AGNAA-GEO-00500",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-01.json"
+    },
+    {
+      "chunkIndex": 2,
+      "fileName": "corpus-chunk-02.json",
+      "startId": "AGNAA-GEO-00501",
+      "endId": "AGNAA-GEO-01000",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-02.json"
+    },
+    {
+      "chunkIndex": 3,
+      "fileName": "corpus-chunk-03.json",
+      "startId": "AGNAA-GEO-01001",
+      "endId": "AGNAA-GEO-01500",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-03.json"
+    },
+    {
+      "chunkIndex": 4,
+      "fileName": "corpus-chunk-04.json",
+      "startId": "AGNAA-GEO-01501",
+      "endId": "AGNAA-GEO-02000",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-04.json"
+    },
+    {
+      "chunkIndex": 5,
+      "fileName": "corpus-chunk-05.json",
+      "startId": "AGNAA-GEO-02001",
+      "endId": "AGNAA-GEO-02500",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-05.json"
+    },
+    {
+      "chunkIndex": 6,
+      "fileName": "corpus-chunk-06.json",
+      "startId": "AGNAA-GEO-02501",
+      "endId": "AGNAA-GEO-03000",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-06.json"
+    },
+    {
+      "chunkIndex": 7,
+      "fileName": "corpus-chunk-07.json",
+      "startId": "AGNAA-GEO-03001",
+      "endId": "AGNAA-GEO-03500",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-07.json"
+    },
+    {
+      "chunkIndex": 8,
+      "fileName": "corpus-chunk-08.json",
+      "startId": "AGNAA-GEO-03501",
+      "endId": "AGNAA-GEO-04000",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-08.json"
+    },
+    {
+      "chunkIndex": 9,
+      "fileName": "corpus-chunk-09.json",
+      "startId": "AGNAA-GEO-04001",
+      "endId": "AGNAA-GEO-04500",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-09.json"
+    },
+    {
+      "chunkIndex": 10,
+      "fileName": "corpus-chunk-10.json",
+      "startId": "AGNAA-GEO-04501",
+      "endId": "AGNAA-GEO-05000",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-10.json"
+    },
+    {
+      "chunkIndex": 11,
+      "fileName": "corpus-chunk-11.json",
+      "startId": "AGNAA-GEO-05001",
+      "endId": "AGNAA-GEO-05500",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-11.json"
+    },
+    {
+      "chunkIndex": 12,
+      "fileName": "corpus-chunk-12.json",
+      "startId": "AGNAA-GEO-05501",
+      "endId": "AGNAA-GEO-06000",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-12.json"
+    },
+    {
+      "chunkIndex": 13,
+      "fileName": "corpus-chunk-13.json",
+      "startId": "AGNAA-GEO-06001",
+      "endId": "AGNAA-GEO-06500",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-13.json"
+    },
+    {
+      "chunkIndex": 14,
+      "fileName": "corpus-chunk-14.json",
+      "startId": "AGNAA-GEO-06501",
+      "endId": "AGNAA-GEO-07000",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-14.json"
+    },
+    {
+      "chunkIndex": 15,
+      "fileName": "corpus-chunk-15.json",
+      "startId": "AGNAA-GEO-07001",
+      "endId": "AGNAA-GEO-07500",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-15.json"
+    },
+    {
+      "chunkIndex": 16,
+      "fileName": "corpus-chunk-16.json",
+      "startId": "AGNAA-GEO-07501",
+      "endId": "AGNAA-GEO-08000",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-16.json"
+    },
+    {
+      "chunkIndex": 17,
+      "fileName": "corpus-chunk-17.json",
+      "startId": "AGNAA-GEO-08001",
+      "endId": "AGNAA-GEO-08500",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-17.json"
+    },
+    {
+      "chunkIndex": 18,
+      "fileName": "corpus-chunk-18.json",
+      "startId": "AGNAA-GEO-08501",
+      "endId": "AGNAA-GEO-09000",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-18.json"
+    },
+    {
+      "chunkIndex": 19,
+      "fileName": "corpus-chunk-19.json",
+      "startId": "AGNAA-GEO-09001",
+      "endId": "AGNAA-GEO-09500",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-19.json"
+    },
+    {
+      "chunkIndex": 20,
+      "fileName": "corpus-chunk-20.json",
+      "startId": "AGNAA-GEO-09501",
+      "endId": "AGNAA-GEO-10000",
+      "count": 500,
+      "url": "/geo-corpus/corpus-chunk-20.json"
+    },
+    {
+      "chunkIndex": 21,
+      "fileName": "corpus-chunk-21.json",
+      "startId": "AGNAA-GEO-10001",
+      "endId": "AGNAA-GEO-10020",
+      "count": 20,
+      "url": "/geo-corpus/corpus-chunk-21.json"
+    }
+  ]
+}

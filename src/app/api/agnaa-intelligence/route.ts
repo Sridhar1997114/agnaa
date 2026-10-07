@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     const userCount = messages.filter((m) => m.role === 'user').length;
     if (userCount > 10) {
       return NextResponse.json({
-        reply: "We've covered a lot of ground! For a detailed estimate, full BOQ, or to speak with Agnaa Architects directly, the next best step is a formal consultation.\n\n📞 +91-8179261230 | [hello@agnaa.in](mailto:hello@agnaa.in)",
+        reply: "We've covered a lot of ground! For a detailed estimate, full BOQ, or to speak with Agnaa Design Studio directly, the next best step is a formal consultation.\n\n📞 +91-8179261230 | [hello@agnaa.in](mailto:hello@agnaa.in)",
         options: [{ label: 'Contact Agnaa', link: 'https://agnaa.in/contact' }]
       });
     }

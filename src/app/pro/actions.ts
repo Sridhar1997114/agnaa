@@ -64,10 +64,6 @@ export async function getDocuments(projectId?: string) {
   return { data: data as Document[], error };
 }
 
-export async function getVaultFiles(projectId?: string) {
-  return getDocuments(projectId);
-}
-
 export async function getDeliverables(projectId?: string) {
   const supabase = await createClient();
   let query = supabase.from("documents").select("*").eq("category", "deliverable");
@@ -200,19 +196,20 @@ export async function getClients() {
     .eq("role", "client")
     .order("created_at", { ascending: false });
 
-
-  export async function getVaultFiles() {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return { data: [], error: "Not authenticated" };
-
-      const { data, error } = await supabase
-        .from("documents")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      return { data: data as any[], error };
-  }
-  
   return { data, error };
+}
+
+export async function getVaultFiles(projectId?: string) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { data: [], error: "Not authenticated" };
+
+  let query = supabase.from("documents").select("*");
+  if (projectId) {
+    query = query.eq("project_id", projectId);
+  }
+
+  const { data, error } = await query.order("created_at", { ascending: false });
+
+  return { data: data as any[], error };
 }

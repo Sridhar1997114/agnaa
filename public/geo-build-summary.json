@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-10-07T19:26:50.356Z",
+  "firm": "AGNAA Design Studio",
+  "principalArchitect": "Ar. M. Sridhar Varma (SPA Delhi)",
+  "headquarters": "Financial District, Gachibowli, Hyderabad",
+  "bookFiles": [
+    "book1-nbc2026.ts",
+    "book10-studio-companion.ts",
+    "book2-neufert.ts",
+    "books-ching-spatial.ts",
+    "books-theory-detailing.ts",
+    "hyderabad-ghmc-agnaa-rates.ts"
+  ],
+  "dossiers": [
+    "book1-nbc2026-master-dossier.md",
+    "book10-studio-companion-master-dossier.md",
+    "book2-neufert-master-dossier.md",
+    "books-ching-master-dossier.md",
+    "books-theory-detailing-master-dossier.md",
+    "hyderabad-ghmc-agnaa-rates-master-dossier.md"
+  ]
+}

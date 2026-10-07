@@ -22,7 +22,7 @@ KNOWLEDGE BASE:
   - 10% Pond: 4,356 sqft rainwater tank (1.3M L) AquaShare Rs.55k/yr. Water First approach.
 - Real Estate & G+5: Pre-Launch EOI Rs.25k refundable. G+5 Rules: <21m height, 2-3m setbacks, Fire NOC. TDR available.
 - Construction Platform (Uber-for-Labour): Elite Mason Rs.1,040/day, Standard Rs.800. Agnaa Pro salaried Rs.25-30k/mo. Voice MVP in Telugu/Hindi.
-- Ecosystem: AGNAA ARCHITECTS (Design) > ASSEMBLY (Construction) > ATLAS (Commerce) > ATMAN (Soul).`;
+- Ecosystem: AGNAA DESIGN STUDIO (Design) > ASSEMBLY (Construction) > ATLAS (Commerce) > ATMAN (Soul).`;
 
 interface ChatMessage {
   role: 'user' | 'assistant';

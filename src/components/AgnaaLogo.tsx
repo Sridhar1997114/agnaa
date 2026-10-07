@@ -1,25 +1,53 @@
 import React from 'react';
 
-export const AgnaaLogo = ({ className = "w-auto h-10" }: { className?: string }) => (
-  <svg viewBox="0 0 4000 4000" className={className} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AGNAA Logo">
-    <title>AGNAA Logo</title>
-    <defs>
-      <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stopColor="#7B2DBF" />
-        <stop offset="100%" stopColor="#1C1C72" />
-      </linearGradient>
-    </defs>
-    <g fill="url(#logo-gradient)">
-      {/* LEFT COLUMN WITH CUTOUT */}
-      <path fillRule="evenodd" d="M104.5,3397.1 L104.5,1340.9 L703.1,1108.1 L703.1,3397.1 L503.5,3397.1 L503.5,2200 L304,2200 L304,3397.1 Z M304,2000.4 L503.5,2000.4 L503.5,1399.8 L304,1477.3 Z" />
-      {/* SECOND COLUMN */}
-      <path fillRule="evenodd" d="M902.6,3197.6 L902.6,3397.1 L1501.1,3397.1 L1501.1,797.7 L902.6,1030.5 L902.6,2200 L1301.6,2200 L1301.6,3197.6 Z M1102.1,1167 L1301.6,1089.4 L1301.6,2000.4 L1102.1,2000.4 Z" />
-      {/* CENTER TRI STRUCTURE */}
-      <polygon fillRule="evenodd" points="1700.7,3397.1 1900.2,3397.1 1900.2,856.7 1999.9,817.8 2099.7,856.7 2099.7,3397.1 2299.2,3397.1 2299.2,720.1 1999.9,603.8 1700.7,720.1" />
-      {/* RIGHT BLOCK */}
-      <path fillRule="evenodd" d="M2498.9,1011.8 L2897.9,1167 L2897.9,2000.4 L2498.9,2000.4 L2498.9,3397.1 L3097.4,3397.1 L3097.4,1030.5 L2498.9,797.7 Z M2698.4,2200 L2897.9,2200 L2897.9,3197.6 L2698.4,3197.6 Z" />
-      {/* RIGHT COLUMN WITH CUTOUT */}
-      <path fillRule="evenodd" d="M3296.9,1108.1 L3895.5,1340.9 L3895.5,3397.1 L3696,3397.1 L3696,2200 L3496.5,2200 L3496.5,3397.1 L3296.9,3397.1 Z M3496.5,1399.8 L3696,1477.3 L3696,2000.4 L3496.5,2000.4 Z" />
-    </g>
-  </svg>
-);
+// Unique ID counter to avoid SVG ID collisions when multiple logos render on one page
+let _agnaaLogoIdCounter = 0;
+
+export const AgnaaLogo = ({ className = "w-auto h-10" }: { className?: string }) => {
+  const uid = React.useMemo(() => `agl${++_agnaaLogoIdCounter}`, []);
+
+  return (
+    <svg viewBox="0 0 4000 4000" className={className} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AGNAA Logo">
+      <title>AGNAA Logo</title>
+      <defs>
+        <filter id={`${uid}-glow`} x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="50" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        <linearGradient id={`${uid}-grad`} x1="32%" y1="97%" x2="68%" y2="3%">
+          <stop offset="50%" stopColor="#1C1C72" />
+          <stop offset="75%" stopColor="#4A259C" />
+          <stop offset="100%" stopColor="#7B2DBF" />
+        </linearGradient>
+
+        {/* SVG Vector Mask (Unified clipping path mapping) */}
+        <mask id={`${uid}-mask`}>
+          {/* Opaque white paths let gradient show, black blocks transparency */}
+          <rect width="4000" height="4000" fill="black" />
+
+          {/* Base letter geometries in white */}
+          <polygon fill="white" points="104.5,3397.1 104.5,1340.9 703.1,1108.1 703.1,3397.1 503.5,3397.1 503.5,2200 304,2200 304,3397.1" />
+          <polygon fill="white" points="902.6,3197.6 902.6,3397.1 1501.1,3397.1 1501.1,797.7 902.6,1030.5 902.6,2200 1301.6,2200 1301.6,3197.6" />
+          <polygon fill="white" points="1700.7,3397.1 1900.2,3397.1 1900.2,856.7 1999.9,817.8 2099.7,856.7 2099.7,3397.1 2299.2,3397.1 2299.2,720.1 1999.9,603.8 1700.7,720.1" />
+          <polygon fill="white" points="2498.9,1011.8 2897.9,1167 2897.9,2000.4 2498.9,2000.4 2498.9,3397.1 3097.4,3397.1 3097.4,1030.5 2498.9,797.7" />
+          <polygon fill="white" points="3296.9,1108.1 3895.5,1340.9 3895.5,3397.1 3696,3397.1 3696,2200 3496.5,2200 3496.5,3397.1 3296.9,3397.1" />
+
+          {/* High contrast geometric cutouts subtracted via black fill */}
+          <polygon fill="black" points="304,2000.4 503.5,2000.4 503.5,1399.8 304,1477.3" />
+          <polygon fill="black" points="3496.5,1399.8 3696,1477.3 3696,2000.4 3496.5,2000.4" />
+          <rect x="2698.4" y="2200" fill="black" width="199.5" height="997.6" />
+          <polygon fill="black" points="1102.1,1167 1301.6,1089.4 1301.6,2000.4 1102.1,2000.4" />
+        </mask>
+      </defs>
+
+      {/* Ambient Underlay Shadow Layer */}
+      <rect width="4000" height="4000" fill={`url(#${uid}-grad)`} mask={`url(#${uid}-mask)`} opacity="0.36" filter={`url(#${uid}-glow)`} />
+
+      {/* Main High Definition Gradient Lettering */}
+      <rect width="4000" height="4000" fill={`url(#${uid}-grad)`} mask={`url(#${uid}-mask)`} />
+    </svg>
+  );
+};

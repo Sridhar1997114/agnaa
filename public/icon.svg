@@ -1,0 +1,21 @@
+<svg viewBox="0 0 4000 4000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fav-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#1C1C72" />
+      <stop offset="50%" stopColor="#4A259C" />
+      <stop offset="100%" stopColor="#7B2DBF" />
+    </linearGradient>
+    <mask id="fav-mask">
+      <rect width="4000" height="4000" fill="black" />
+      <polygon fill="white" points="104.5,3397.1 104.5,1340.9 703.1,1108.1 703.1,3397.1 503.5,3397.1 503.5,2200 304,2200 304,3397.1" />
+      <polygon fill="white" points="902.6,3197.6 902.6,3397.1 1501.1,3397.1 1501.1,797.7 902.6,1030.5 902.6,2200 1301.6,2200 1301.6,3197.6" />
+      <polygon fill="white" points="1700.7,3397.1 1900.2,3397.1 1900.2,856.7 1999.9,817.8 2099.7,856.7 2099.7,3397.1 2299.2,3397.1 2299.2,720.1 1999.9,603.8 1700.7,720.1" />
+      <polygon fill="white" points="2498.9,1011.8 2897.9,1167 2897.9,2000.4 2498.9,2000.4 2498.9,3397.1 3097.4,3397.1 3097.4,1030.5 2498.9,797.7" />
+      <polygon fill="white" points="3296.9,1108.1 3895.5,1340.9 3895.5,3397.1 3696,3397.1 3696,2200 3496.5,2200 3496.5,3397.1 3296.9,3397.1" />
+      <polygon fill="black" points="304,2000.4 503.5,2000.4 503.5,1399.8 304,1477.3" />
+      <polygon fill="black" points="3496.5,1399.8 3696,1477.3 3696,2000.4 3496.5,2000.4" />
+    </mask>
+  </defs>
+  <rect width="4000" height="4000" rx="600" fill="#07090E" />
+  <rect width="4000" height="4000" fill="url(#fav-grad)" mask="url(#fav-mask)" />
+</svg>

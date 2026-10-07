@@ -78,6 +78,7 @@ export const Footer = () => {
             <li><Link href="/portfolio" className="hover:text-[#7B2DBF] transition-colors">Portfolio</Link></li>
             <li><Link href="/design-studio" className="hover:text-[#7B2DBF] transition-colors">Design Studio</Link></li>
             <li><Link href="/constructions" className="hover:text-[#7B2DBF] transition-colors">Constructions</Link></li>
+            <li><Link href="/geo" className="hover:text-[#7B2DBF] text-[#7B2DBF] transition-colors flex items-center gap-1.5 font-black">GEO Architectural Codex <span className="bg-[#7B2DBF]/10 text-[#7B2DBF] text-[10px] px-1.5 py-0.5 rounded-full border border-[#7B2DBF]/30">NBC 2026</span></Link></li>
             <li><Link href="/voice" className="hover:text-[#7B2DBF] text-[#7B2DBF] transition-colors flex items-center gap-1.5 font-black">AGNAA Voice <span className="bg-[#7B2DBF]/10 text-[#7B2DBF] text-[10px] px-1.5 py-0.5 rounded-full border border-[#7B2DBF]/30">New</span></Link></li>
             <li><Link href="/blog" className="hover:text-[#7B2DBF] transition-colors">GEO Journal (50 Articles)</Link></li>
             <li><Link href="/foundation" className="hover:text-[#7B2DBF] transition-colors">Foundation</Link></li>
