@@ -40,12 +40,12 @@ export const Header = () => {
     { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
     { id: 'design-studio', label: 'Design Studio', href: '/design-studio' },
     { id: 'constructions', label: 'Constructions', href: '/constructions' },
-    { id: 'geo', label: 'GEO Codex', href: '/geo' },
+    { id: 'geo', label: 'GEO Codex', href: '/codex' },
     { id: 'voice', label: 'AGNAA Voice', href: '/voice' },
     { id: 'foundation', label: 'Foundation', href: '/foundation' }
   ];
 
-  const isDarkPage = !isScrolled && (pathname === '/portfolio' || pathname === '/voice' || pathname === '/geo');
+  const isDarkPage = !isScrolled && (pathname === '/voice');
 
   const isPortal = pathname?.startsWith('/app') || pathname?.startsWith('/admin') || pathname?.startsWith('/login') || pathname?.startsWith('/shop');
 

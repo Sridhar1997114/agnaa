@@ -849,13 +849,13 @@ export default function SleekAppleBentoPortfolioPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#000000] text-[#f5f5f7] font-sans selection:bg-white selection:text-black pb-32 relative overflow-hidden">
+    <div className="min-h-screen bg-white text-[#1C1C72] font-sans selection:bg-[#7B2DBF] selection:text-white pb-32 relative overflow-hidden">
       
-      {/* ── APPLE RADIAL TOP LUMINANCE ── */}
+      {/* ── TOP RADIAL LUMINOUS AMBIENT GLOW ── */}
       <div 
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1400px] h-[550px] pointer-events-none opacity-30 z-0"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1400px] h-[600px] pointer-events-none opacity-40 z-0"
         style={{
-          background: 'radial-gradient(ellipse 65% 50% at 50% 0%, rgba(255, 255, 255, 0.16), transparent 75%)'
+          background: 'radial-gradient(ellipse 70% 55% at 50% 0%, rgba(123, 45, 191, 0.14), rgba(37, 99, 235, 0.08), transparent 75%)'
         }}
       />
 
@@ -863,113 +863,121 @@ export default function SleekAppleBentoPortfolioPage() {
         
         {/* ── 1. APPLE EDITORIAL HEADER ── */}
         <header className="space-y-6 text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.1] text-[10px] font-mono tracking-[0.22em] text-neutral-300 uppercase shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span>AGNAA Architectural Ledger • 2015–2026</span>
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-slate-200/90 text-[10px] sm:text-[11px] font-black tracking-[0.25em] text-[#1C1C72] uppercase shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#2563EB] animate-pulse" />
+            <Sparkles size={13} className="text-[#7B2DBF]" />
+            <span>AGNAA ARCHITECTURAL ARCHIVE • 2015–2026</span>
           </div>
 
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-light tracking-[-0.04em] text-white">
-            PORTFOLIO <span className="text-neutral-500 font-extralight">& ARCHIVE</span>
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter pb-2 leading-[1.08]">
+            <span className="bg-clip-text text-transparent bg-gradient-to-br from-[#1C1C72] via-[#1C1C72] to-[#2563EB]">PORTFOLIO</span>{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#2563EB] to-[#7B2DBF] font-black">& ARCHIVE</span>
           </h1>
 
-          <p className="text-neutral-400 text-base sm:text-lg font-normal max-w-2xl mx-auto leading-relaxed">
-            International UNESCO museum exhibits, chief ministerial urban corridors, and spatial visualization partnerships with Manila Visuals.
+          <p className="text-slate-600 text-base sm:text-xl font-bold max-w-2xl mx-auto leading-relaxed">
+            International UNESCO heritage exhibits, chief ministerial urban corridors, and luxury residential & commercial landmarks.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
             <button 
               onClick={directGeneralWhatsApp}
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white text-black text-xs font-semibold hover:bg-neutral-200 transition-all cursor-pointer shadow-lg"
+              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-[#1C1C72] via-[#2563EB] to-[#7B2DBF] text-white text-xs sm:text-sm font-black hover:opacity-95 transition-all shadow-[0_10px_30px_rgba(28,28,114,0.18)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
             >
-              <MessageCircle size={14} />
+              <MessageCircle size={16} />
               <span>Direct WhatsApp: Ar. Sridhar</span>
-              <ArrowUpRight size={13} />
+              <ArrowUpRight size={15} />
             </button>
 
-            <span className="px-3.5 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-neutral-400">
-              {ARCHIVE_REGISTRY.length}+ Verified Commissions
-            </span>
+            <div className="inline-flex items-center gap-2 px-5 py-4 rounded-full bg-[#F5F5F7] border border-slate-200 text-xs font-black uppercase tracking-wider text-[#1C1C72] shadow-sm">
+              <CheckCircle2 size={16} className="text-[#2563EB]" />
+              <span>{ARCHIVE_REGISTRY.length}+ Verified Commissions</span>
+            </div>
           </div>
         </header>
 
         {/* ── 2. SLEEK APPLE BENTO GRID (THE VISUAL VITRINE) ── */}
         <section className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/[0.08] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-5">
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-400 flex items-center gap-2">
-                <Sparkles size={12} className="text-neutral-300" /> Visual Proof Vitrine
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100/80 text-[#7B2DBF] text-[10px] font-black uppercase tracking-widest mb-2 border border-purple-200/60">
+                <Sparkles size={12} /> Apple Pro Visual Proof
               </span>
-              <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-white mt-1">
+              <h2 className="text-3xl sm:text-5xl font-black text-[#1C1C72] tracking-tight">
                 Selected Works Bento
               </h2>
             </div>
-            <span className="text-xs font-mono text-neutral-500">
-              Ultra-Light WebP • Tap any card to connect on WhatsApp
+            <span className="text-xs font-bold text-slate-500">
+              Retina WebP renders • Click any showcase to connect directly on WhatsApp
             </span>
           </div>
 
-          {/* Apple Asymmetric Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[280px] sm:auto-rows-[320px]">
+          {/* Apple Asymmetric Bento Grid (Double-Bezel Hardware Machined Aesthetic) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px] sm:auto-rows-[340px]">
             {BENTO_WORKS.map((card, idx) => (
               <motion.div
                 key={card.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.05 }}
                 onClick={() => connectOnWhatsApp(card)}
-                className={`group relative rounded-[28px] sm:rounded-[32px] overflow-hidden bg-[#08080a] border border-white/[0.08] hover:border-white/[0.25] transition-all duration-500 flex flex-col justify-end p-6 sm:p-8 cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.9)] ${card.bentoSpan || 'col-span-1 row-span-1'}`}
+                className={`group relative rounded-[32px] sm:rounded-[36px] bg-[#F5F5F7] p-2 sm:p-2.5 border border-slate-200/90 hover:border-[#7B2DBF]/50 shadow-[0_10px_30px_rgba(28,28,114,0.06)] hover:shadow-[0_25px_60px_rgba(123,45,191,0.16)] transition-all duration-500 flex flex-col justify-end cursor-pointer ${card.bentoSpan || 'col-span-1 row-span-1'}`}
               >
-                {/* Background WebP Image */}
-                {card.image && (
-                  <div className="absolute inset-0 z-0 bg-black overflow-hidden">
-                    <img 
-                      src={card.image} 
-                      alt={card.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
-                    />
-                    {/* Apple Multi-Stop Vignette */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-80 transition-opacity" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent opacity-70" />
-                  </div>
-                )}
+                {/* Inner Shell with Image & Multi-Stop Scrim for Maximum Contrast */}
+                <div className="relative w-full h-full rounded-[calc(32px-8px)] sm:rounded-[calc(36px-10px)] overflow-hidden bg-slate-950 flex flex-col justify-end p-6 sm:p-8">
+                  {card.image && (
+                    <div className="absolute inset-0 z-0 overflow-hidden bg-slate-950">
+                      <img 
+                        src={card.image} 
+                        alt={card.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700 ease-out"
+                      />
+                      {/* Apple Multi-Stop Scrim for High Contrast */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 via-45% to-transparent opacity-95 group-hover:opacity-90 transition-opacity" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-transparent opacity-60" />
+                    </div>
+                  )}
 
-                {/* Top Badges */}
-                <div className="absolute top-5 left-5 right-5 z-10 flex items-center justify-between text-[10px] font-mono pointer-events-none">
-                  <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-white font-medium tracking-wider">
-                    {card.tag || card.type}
-                  </span>
-
-                  <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-xl text-neutral-300 border border-white/5">
-                    {card.year}
-                  </span>
-                </div>
-
-                {/* Bottom Card Content */}
-                <div className="relative z-10 space-y-2 mt-auto">
-                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-neutral-400">
-                    {card.clientOrContext} • {card.location}
-                  </div>
-
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-light text-white tracking-tight group-hover:text-neutral-200 transition-colors leading-tight">
-                    {card.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed line-clamp-2 max-w-xl">
-                    {card.scope}
-                  </p>
-
-                  {/* Hover Quick Action Pill */}
-                  <div className="pt-2 flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-neutral-400">
-                      {card.bentoHighlight}
+                  {/* Top Glass Badges */}
+                  <div className="absolute top-5 left-5 right-5 z-10 flex items-center justify-between text-[11px] pointer-events-none">
+                    <span className="px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-white/60 text-[#1C1C72] font-black uppercase tracking-wider shadow-sm flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#7B2DBF]" />
+                      <span>{card.tag || card.type}</span>
                     </span>
 
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-black text-xs font-semibold opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all shadow-md">
-                      <span>WhatsApp Ar. Sridhar</span>
-                      <ArrowUpRight size={12} />
+                    <span className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[#1C1C72] font-bold text-[10px] border border-white/60 shadow-sm">
+                      {card.year}
                     </span>
+                  </div>
+
+                  {/* Bottom Typography & WhatsApp Island CTA */}
+                  <div className="relative z-10 space-y-2 mt-auto">
+                    <div className="text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-blue-200 drop-shadow-sm">
+                      {card.clientOrContext} • {card.location}
+                    </div>
+
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight group-hover:text-blue-100 transition-colors leading-tight drop-shadow-md">
+                      {card.title}
+                    </h3>
+
+                    <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed line-clamp-2 max-w-xl drop-shadow-sm">
+                      {card.scope}
+                    </p>
+
+                    {/* Island Action Bar */}
+                    <div className="pt-2 flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-bold text-purple-200 truncate hidden sm:inline">
+                        {card.bentoHighlight}
+                      </span>
+
+                      <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#1C1C72] text-xs font-black shadow-lg group-hover:bg-[#7B2DBF] group-hover:text-white transition-all transform group-hover:translate-x-1 shrink-0 ml-auto">
+                        <MessageCircle size={13} className="text-[#2563EB] group-hover:text-white" />
+                        <span>WhatsApp Ar. Sridhar</span>
+                        <ArrowUpRight size={13} />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -977,87 +985,87 @@ export default function SleekAppleBentoPortfolioPage() {
           </div>
         </section>
 
-        {/* ── 3. MASTER ARCHITECTURAL LEDGER (MINIMAL TEXT REGISTRY) ── */}
-        <section className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/[0.08] pb-4">
+        {/* ── 3. MASTER ARCHITECTURAL LEDGER (PRISTINE HIGH-CONTRAST LIGHT SUITE) ── */}
+        <section className="space-y-6 pt-4">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-5">
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-400">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#2563EB] text-[10px] font-black uppercase tracking-widest mb-2 border border-blue-100">
                 Complete Studio Index
               </span>
-              <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-white mt-1">
-                The Master Architectural Ledger
+              <h2 className="text-3xl sm:text-4xl font-black text-[#1C1C72] tracking-tight">
+                Master Architectural Ledger
               </h2>
             </div>
-            <span className="text-xs font-mono text-neutral-500">
-              Basic text archive of all 42+ verified commissions & video edits
+            <span className="text-xs font-bold text-slate-500">
+              Verified archive of all 42+ commissions, statutory drawings & video walkthroughs
             </span>
           </div>
 
           {/* Controls: Filter Pills & Search */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-2.5 rounded-2xl bg-[#08080a] border border-white/[0.08]">
-            <div className="flex flex-wrap items-center gap-1">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-3 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+            <div className="flex flex-wrap items-center gap-1.5">
               {typesList.map(type => (
                 <button
                   key={type.value}
                   onClick={() => setFilterType(type.value)}
-                  className={`px-3 py-1.5 rounded-xl text-xs transition-all cursor-pointer flex items-center gap-1.5 ${
+                  className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
                     filterType === type.value
-                      ? 'bg-white text-black font-semibold shadow-sm'
-                      : 'text-neutral-400 hover:text-white hover:bg-white/[0.04]'
+                      ? 'bg-gradient-to-r from-[#1C1C72] via-[#2563EB] to-[#7B2DBF] text-white shadow-md shadow-[#2563EB]/20'
+                      : 'bg-[#F5F5F7] text-slate-600 hover:text-[#1C1C72] hover:bg-slate-200/60'
                   }`}
                 >
                   <span>{type.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-md ${filterType === type.value ? 'bg-black/10 text-black' : 'bg-white/[0.06] text-neutral-400'}`}>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-black ${filterType === type.value ? 'bg-white/20 text-white' : 'bg-white text-slate-500 border border-slate-200'}`}>
                     {type.count}
                   </span>
                 </button>
               ))}
             </div>
 
-            {/* Instant Search */}
+            {/* Instant Search with Electric Focus Ring */}
             <div className="relative max-w-xs w-full">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-500" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                placeholder="Search archive or video..."
-                className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl pl-9 pr-3 py-1.5 text-xs text-white placeholder:text-neutral-500 outline-none focus:border-white/30 transition-colors font-mono"
+                placeholder="Search archive, client, location..."
+                className="w-full bg-[#F5F5F7] border border-slate-200 rounded-xl pl-10 pr-3 py-2 text-xs font-semibold text-[#1C1C72] placeholder:text-slate-400 outline-none focus:bg-white focus:border-[#7B2DBF] focus:ring-2 focus:ring-[#7B2DBF]/20 transition-all"
               />
             </div>
           </div>
 
-          {/* Minimalist Text Ledger Table */}
-          <div className="rounded-2xl border border-white/[0.08] bg-[#050507] overflow-hidden shadow-2xl">
+          {/* Pristine Light Ledger Table */}
+          <div className="rounded-3xl border border-slate-200/90 bg-white overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-white/[0.08] text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400 bg-white/[0.015]">
-                    <th className="py-3.5 px-5 w-28">Timeline</th>
-                    <th className="py-3.5 px-5">Work / Commission</th>
-                    <th className="py-3.5 px-5">Client / Context</th>
-                    <th className="py-3.5 px-5 hidden md:table-cell">Location</th>
-                    <th className="py-3.5 px-5 hidden sm:table-cell">Typology</th>
-                    <th className="py-3.5 px-5 text-right">Direct Inquiry</th>
+                  <tr className="border-b border-slate-200 text-[10px] font-black uppercase tracking-[0.2em] text-[#1C1C72] bg-[#F5F5F7]">
+                    <th className="py-4 px-6 w-32">Timeline</th>
+                    <th className="py-4 px-6">Work / Commission</th>
+                    <th className="py-4 px-6">Client / Context</th>
+                    <th className="py-4 px-6 hidden md:table-cell">Location</th>
+                    <th className="py-4 px-6 hidden sm:table-cell">Typology</th>
+                    <th className="py-4 px-6 text-right">Direct WhatsApp</th>
                   </tr>
                 </thead>
 
-                <tbody className="divide-y divide-white/[0.04] text-xs">
+                <tbody className="divide-y divide-slate-100 text-xs">
                   {filteredItems.map(item => (
                     <tr 
                       key={item.id}
                       onClick={() => connectOnWhatsApp(item)}
-                      className="hover:bg-white/[0.03] transition-colors group cursor-pointer"
+                      className="hover:bg-purple-50/30 transition-colors group cursor-pointer"
                     >
                       {/* Timeline */}
-                      <td className="py-3.5 px-5 font-mono text-[11px] text-neutral-400 whitespace-nowrap">
+                      <td className="py-4 px-6 font-mono text-[11px] text-slate-500 font-bold whitespace-nowrap">
                         {item.year}
                       </td>
 
                       {/* Work Title & Scope */}
-                      <td className="py-3.5 px-5">
+                      <td className="py-4 px-6">
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-white group-hover:text-neutral-200 transition-colors">
+                          <span className="font-bold text-[#1C1C72] group-hover:text-[#2563EB] transition-colors text-sm">
                             {item.title}
                           </span>
                           {item.image && (
@@ -1066,45 +1074,53 @@ export default function SleekAppleBentoPortfolioPage() {
                                 e.stopPropagation();
                                 setPreviewImage({ src: item.image!, title: item.title });
                               }}
-                              className="text-neutral-500 hover:text-white p-1 rounded transition-colors"
+                              className="text-slate-400 hover:text-[#7B2DBF] p-1 rounded-md hover:bg-purple-50 transition-colors"
                               title="Preview 4K Render"
                             >
-                              <Eye size={12} />
+                              <Eye size={14} />
                             </button>
                           )}
                           {item.isConfidential && (
-                            <span className="px-1.5 py-0.5 rounded text-[8px] font-mono tracking-widest uppercase bg-white/[0.06] text-neutral-400 border border-white/5">
+                            <span className="px-2 py-0.5 rounded text-[8px] font-mono tracking-widest uppercase bg-slate-100 text-slate-600 border border-slate-200 font-bold">
                               Protected
                             </span>
                           )}
                         </div>
-                        <div className="text-[11px] text-neutral-500 mt-0.5 font-normal line-clamp-1">
+                        <div className="text-[11px] text-slate-500 mt-1 font-medium line-clamp-1">
                           {item.scope}
                         </div>
                       </td>
 
                       {/* Client / Context */}
-                      <td className="py-3.5 px-5 text-neutral-300 font-normal">
+                      <td className="py-4 px-6 text-slate-700 font-semibold">
                         {item.clientOrContext}
                       </td>
 
                       {/* Location */}
-                      <td className="py-3.5 px-5 text-neutral-400 font-mono text-[11px] whitespace-nowrap hidden md:table-cell">
+                      <td className="py-4 px-6 text-slate-500 font-medium text-[11px] whitespace-nowrap hidden md:table-cell">
                         {item.location}
                       </td>
 
-                      {/* Typology */}
-                      <td className="py-3.5 px-5 hidden sm:table-cell">
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-white/[0.03] border border-white/[0.06] text-neutral-300 whitespace-nowrap">
+                      {/* Typology Badge */}
+                      <td className="py-4 px-6 hidden sm:table-cell">
+                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold whitespace-nowrap border ${
+                          item.type === '3D Cinema & Video' ? 'bg-purple-50 text-[#7B2DBF] border-purple-200' :
+                          item.type === 'Architectural Design' ? 'bg-blue-50 text-[#2563EB] border-blue-200' :
+                          item.type === 'Built Execution' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                          item.type === 'Urban Masterplan' ? 'bg-amber-50 text-amber-700 border-amber-200' :
+                          item.type === 'Turnkey Interior' ? 'bg-rose-50 text-rose-700 border-rose-200' :
+                          'bg-indigo-50 text-indigo-700 border-indigo-200'
+                        }`}>
                           {item.type}
                         </span>
                       </td>
 
                       {/* Direct WhatsApp Action */}
-                      <td className="py-3.5 px-5 text-right whitespace-nowrap">
-                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-neutral-300 group-hover:text-white group-hover:underline transition-colors">
-                          <span>Inquire on WhatsApp</span>
-                          <ArrowUpRight size={11} />
+                      <td className="py-4 px-6 text-right whitespace-nowrap">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-black text-[#1C1C72] group-hover:text-[#7B2DBF] group-hover:translate-x-0.5 transition-all">
+                          <MessageCircle size={13} className="text-[#2563EB]" />
+                          <span>Inquire WhatsApp</span>
+                          <ArrowUpRight size={13} />
                         </span>
                       </td>
                     </tr>
@@ -1114,15 +1130,43 @@ export default function SleekAppleBentoPortfolioPage() {
             </div>
 
             {filteredItems.length === 0 && (
-              <div className="py-12 text-center text-xs font-mono text-neutral-500">
-                No matching projects or video files found.
+              <div className="py-16 text-center text-sm font-semibold text-slate-400">
+                No matching projects or video files found in the archive.
               </div>
             )}
           </div>
         </section>
 
-        {/* ── 4. FOOTER ── */}
-        <footer className="pt-10 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-neutral-500">
+        {/* ── 4. STATUTORY ACCREDITATION & ARCHITECTURAL CREDENTIALS ── */}
+        <section className="rounded-3xl border border-slate-200/90 bg-gradient-to-r from-slate-50 via-white to-slate-50 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#1C1C72] to-[#7B2DBF] text-white flex items-center justify-center font-black text-lg shadow-md shrink-0">
+              CA
+            </div>
+            <div>
+              <h4 className="text-base font-black text-[#1C1C72]">
+                Ar. Sridhar Chauhan <span className="text-xs font-mono font-normal text-slate-500">(CA/2023/161405)</span>
+              </h4>
+              <p className="text-xs text-slate-500 font-semibold">
+                Council of Architecture Registered Architect • School of Planning & Architecture (SPA Delhi, NIRF Rank #1)
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 shrink-0">
+            <button 
+              onClick={directGeneralWhatsApp}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1C1C72] text-white text-xs font-black hover:bg-[#7B2DBF] transition-all shadow-sm cursor-pointer"
+            >
+              <MessageCircle size={14} />
+              <span>Direct WhatsApp Consultation</span>
+              <ArrowUpRight size={13} />
+            </button>
+          </div>
+        </section>
+
+        {/* ── 5. CLEAN FOOTER NOTICE ── */}
+        <footer className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-slate-500">
           <div>
             AGNAA Architectural Archive • Directed by Ar. Sridhar Chauhan (CA/2023/161405)
           </div>
@@ -1130,7 +1174,7 @@ export default function SleekAppleBentoPortfolioPage() {
           <div className="flex items-center gap-4">
             <button 
               onClick={directGeneralWhatsApp}
-              className="text-neutral-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1"
+              className="text-slate-600 hover:text-[#7B2DBF] transition-colors cursor-pointer flex items-center gap-1 font-bold"
             >
               <span>WhatsApp Direct: +91 88262 14348</span>
               <ArrowUpRight size={12} />
@@ -1140,32 +1184,32 @@ export default function SleekAppleBentoPortfolioPage() {
 
       </div>
 
-      {/* ── 5. QUICK IMAGE PREVIEW LIGHTBOX ── */}
+      {/* ── 6. QUICK IMAGE PREVIEW LIGHTBOX (APPLE PRO MODAL) ── */}
       <AnimatePresence>
         {previewImage && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setPreviewImage(null)}
-              className="fixed inset-0 bg-black/90 backdrop-blur-md"
+              className="fixed inset-0 bg-[#0D0D14]/75 backdrop-blur-md"
             />
 
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative max-w-4xl w-full bg-[#0a0a0c] border border-white/10 rounded-3xl overflow-hidden shadow-2xl z-10"
+              className="relative max-w-4xl w-full bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-2xl z-10"
             >
               <button 
                 onClick={() => setPreviewImage(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-black/60 text-neutral-300 hover:text-white transition-colors z-20 cursor-pointer"
+                className="absolute top-4 right-4 p-2 rounded-full bg-slate-900/60 text-white hover:bg-slate-900 transition-colors z-20 cursor-pointer"
               >
                 <X size={16} />
               </button>
 
-              <div className="aspect-[16/10] bg-black">
+              <div className="aspect-[16/10] bg-slate-950 relative">
                 <img 
                   src={previewImage.src} 
                   alt={previewImage.title}
@@ -1173,8 +1217,8 @@ export default function SleekAppleBentoPortfolioPage() {
                 />
               </div>
 
-              <div className="p-5 bg-[#08080a] flex items-center justify-between border-t border-white/10">
-                <span className="text-sm font-medium text-white truncate mr-4">
+              <div className="p-5 sm:p-6 bg-slate-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-slate-200">
+                <span className="text-sm sm:text-base font-black text-[#1C1C72] truncate max-w-lg">
                   {previewImage.title}
                 </span>
                 <button
@@ -1183,11 +1227,11 @@ export default function SleekAppleBentoPortfolioPage() {
                     if (found) connectOnWhatsApp(found);
                     setPreviewImage(null);
                   }}
-                  className="px-4 py-2 rounded-full bg-white text-black text-xs font-semibold hover:bg-neutral-200 transition-colors cursor-pointer shrink-0 flex items-center gap-1"
+                  className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#1C1C72] via-[#2563EB] to-[#7B2DBF] text-white text-xs font-black hover:opacity-95 transition-all cursor-pointer shrink-0 flex items-center gap-2 shadow-md"
                 >
-                  <MessageCircle size={13} />
+                  <MessageCircle size={14} />
                   <span>WhatsApp Ar. Sridhar</span>
-                  <ArrowUpRight size={12} />
+                  <ArrowUpRight size={13} />
                 </button>
               </div>
             </motion.div>
