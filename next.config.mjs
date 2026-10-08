@@ -37,6 +37,17 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.agnaa.in',
+          },
+        ],
+        destination: 'https://agnaa.in/:path*',
+        permanent: true,
+      },
+      {
         source: '/geo',
         destination: '/codex',
         permanent: true,

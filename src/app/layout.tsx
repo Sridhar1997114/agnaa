@@ -15,9 +15,18 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "AGNAA Design Studio | Premier Architects & Turnkey Villa Constructions Hyderabad",
-  description: "Founded by Ar. M. Sridhar Chauhan (SPA Delhi, India Rank #1). 114+ delivered masterworks across luxury villas, state civic corridors, and turnkey constructions in Financial District, Kokapet, and Jubilee Hills, Hyderabad.",
+  title: "AGNAA | Architects & Turnkey Villa Construction Hyderabad",
+  description: "Led by Ar. M. Sridhar Chauhan (SPA Delhi). 114+ luxury villas & turnkey constructions in Financial District, Kokapet & Jubilee Hills, Hyderabad.",
   metadataBase: new URL('https://agnaa.in'),
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   keywords: [
     "Architects in Hyderabad",
     "Luxury Villa Architects Hyderabad",
@@ -35,16 +44,16 @@ export const metadata: Metadata = {
     canonical: 'https://agnaa.in',
   },
   openGraph: {
-    title: 'AGNAA Design Studio | Ar. M. Sridhar Chauhan (SPA Delhi)',
-    description: 'Premier architectural firm & turnkey villa construction engine based in Financial District, Gachibowli, Hyderabad. 114+ delivered landmark projects.',
+    title: 'AGNAA | Architects & Turnkey Villa Construction Hyderabad',
+    description: 'Led by Ar. M. Sridhar Chauhan (SPA Delhi). 114+ delivered luxury villas & turnkey constructions in Financial District, Kokapet & Jubilee Hills, Hyderabad.',
     url: 'https://agnaa.in',
     siteName: 'AGNAA Design Studio',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AGNAA Design Studio | Luxury Architects Hyderabad',
-    description: 'Founded by Ar. M. Sridhar Chauhan (SPA Delhi). 114+ delivered projects across civic landmarks & private villas.',
+    title: 'AGNAA | Architects & Turnkey Villa Construction Hyderabad',
+    description: 'Led by Ar. M. Sridhar Chauhan (SPA Delhi). 114+ delivered luxury villas & turnkey constructions across Hyderabad.',
   },
   other: {
     'geo.region': 'IN-TG',

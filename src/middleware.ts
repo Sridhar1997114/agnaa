@@ -7,6 +7,13 @@ export async function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') || '';
   const pathname = request.nextUrl.pathname;
 
+  // ─── 0. Canonical WWW to Non-WWW 301 Permanent Redirect ─────────────
+  if (hostname === 'www.agnaa.in' || hostname.startsWith('www.')) {
+    const canonicalHost = hostname.replace(/^www\./, '');
+    const search = request.nextUrl.search || '';
+    return NextResponse.redirect(new URL(`https://${canonicalHost}${pathname}${search}`), 301);
+  }
+
   // ─── ADMIN Subdomain ────────────────────────────────────────────────
   if (hostname.startsWith('admin.agnaa.in') || hostname.startsWith('admin.localhost')) {
     if (pathname === '/') {

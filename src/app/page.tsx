@@ -54,13 +54,16 @@ export default function HomePage() {
           </div>
 
           {/* Monumental Headline */}
-          <h1 className="text-5xl sm:text-7xl lg:text-[88px] font-bold tracking-[-0.035em] text-[#1C1C72] leading-[1.04]">
+          <h1 className="text-5xl sm:text-7xl lg:text-[84px] font-bold tracking-[-0.035em] text-[#1C1C72] leading-[1.04]">
             From Code to Concrete.
+            <span className="block text-xl sm:text-3xl lg:text-[34px] font-semibold text-[#7B2DBF] mt-3 tracking-normal">
+              Architects & Turnkey Villa Construction in Hyderabad
+            </span>
           </h1>
 
           {/* Apple Slate Subtitle */}
-          <p className="text-xl sm:text-2xl font-normal text-[#86868B] tracking-[-0.015em] max-w-[760px] mx-auto leading-relaxed">
-            We dissolve the artificial boundaries between spatial architecture, software systems, bespoke furniture, and digital intelligence.
+          <p className="text-lg sm:text-xl font-normal text-[#86868B] tracking-[-0.015em] max-w-[800px] mx-auto leading-relaxed">
+            Led by Ar. M. Sridhar Chauhan (SPA Delhi). We dissolve the artificial boundaries between spatial luxury villa architecture, turnkey construction, bespoke furniture, and digital engineering.
           </p>
 
           {/* Apple Dual CTAs */}
@@ -73,7 +76,7 @@ export default function HomePage() {
               <span>Consult Ar. Sridhar</span>
             </button>
             <Link 
-              href="/portfolio" 
+              href="/design-studio" 
               className="text-[#0071E3] hover:underline inline-flex items-center gap-1 font-normal"
             >
               <span>Explore 42+ Masterworks</span>
@@ -143,8 +146,8 @@ export default function HomePage() {
                   Delivered landmarks for the Aga Khan Trust for Culture, state ministerial corridors, and ultra-luxury turnkey residences in Financial District, Hyderabad.
                 </p>
                 <div className="pt-1">
-                  <Link href="/portfolio" className="text-[#0071E3] hover:underline inline-flex items-center gap-1 text-sm font-medium">
-                    <span>View Architectural Archive</span>
+                  <Link href="/design-studio" className="text-[#0071E3] hover:underline inline-flex items-center gap-1 text-sm font-medium">
+                    <span>Explore Architectural Works & Heritage</span>
                     <ChevronRight size={15} />
                   </Link>
                 </div>
@@ -216,7 +219,7 @@ export default function HomePage() {
                 </p>
                 <div className="pt-1">
                   <Link href="/design-studio" className="text-[#0071E3] hover:underline inline-flex items-center gap-1 text-sm font-medium">
-                    <span>Explore Design Studio Crafts</span>
+                    <span>Explore Bespoke Furniture Joinery</span>
                     <ChevronRight size={15} />
                   </Link>
                 </div>
@@ -245,8 +248,8 @@ export default function HomePage() {
                   Procedural parametric modeling, daylight physics simulations, and cinematic architectural films crafted in-house for visionary developers.
                 </p>
                 <div className="pt-1">
-                  <Link href="/portfolio" className="text-[#0071E3] hover:underline inline-flex items-center gap-1 text-sm font-medium">
-                    <span>Watch Walkthrough Cinematics</span>
+                  <Link href="/design-studio" className="text-[#0071E3] hover:underline inline-flex items-center gap-1 text-sm font-medium">
+                    <span>View Computational 3D Films</span>
                     <ChevronRight size={15} />
                   </Link>
                 </div>
@@ -359,7 +362,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="pt-6 mt-6 border-t border-slate-200/60 flex items-center justify-between text-xs font-bold text-[#1C1C72] group-hover:text-[#7B2DBF]">
-                  <span>Read Full Technical Guide</span>
+                  <span>Read {post.category} Paper</span>
                   <ArrowUpRight size={14} />
                 </div>
               </Link>
