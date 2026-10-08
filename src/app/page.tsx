@@ -1,230 +1,433 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { Camera, Hammer, TreePine, ArrowRight, Calculator, Sparkles, CheckCircle, ShieldCheck, Box, Layers, Percent } from 'lucide-react';
-import { Button } from '@/components/Button';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { 
+  ArrowRight, 
+  MessageCircle, 
+  ArrowUpRight, 
+  ShieldCheck, 
+  Compass, 
+  Layers, 
+  Cpu, 
+  Sparkles, 
+  ChevronRight, 
+  CheckCircle2, 
+  Sliders, 
+  Calculator,
+  BookOpen
+} from 'lucide-react';
+import { BLOG_POSTS } from '@/app/blog/data';
 
 export default function HomePage() {
-  const [count, setCount] = useState({ fixes: 0, trees: 0, projects: 0 });
+  const [activeDiscipline, setActiveDiscipline] = useState<'all' | 'architecture' | 'software' | 'furniture' | 'cinema'>('all');
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount(prev => ({
-        fixes: prev.fixes < 127 ? prev.fixes + 1 : 127,
-        trees: prev.trees < 50 ? prev.trees + 1 : 50,
-        projects: prev.projects < 100 ? prev.projects + 1 : 100
-      }));
-    }, 20);
-    return () => clearInterval(interval);
-  }, []);
+  const directWhatsApp = (subject: string = 'General Inquiry') => {
+    const text = `Hi Ar. Sridhar, I am reviewing the AGNAA Interdisciplinary Design Studio website and would like to consult with you directly regarding: ${subject}.`;
+    window.open(`https://wa.me/918826214348?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  // Top 3 authoritative journal articles with backlinks
+  const featuredArticles = BLOG_POSTS.slice(0, 3);
 
   return (
-    <div className="bg-white min-h-screen text-[#1C1C72] selection:bg-[#7B2DBF] selection:text-white">
-      
-      {/* HERO SECTION */}
-      <section className="relative min-h-[85vh] md:h-screen flex items-center justify-center overflow-hidden py-24">
-        <div className="absolute inset-0 z-0">
-          <Image src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000" alt="Skyline" fill priority className="object-cover opacity-10 grayscale" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/80 to-white" />
-        </div>
+    <div className="bg-white min-h-screen text-[#1D1D1F] font-sans selection:bg-[#0071E3] selection:text-white pb-32">
+
+      {/* ── 1. MONUMENTAL APPLE HERO SECTION ── */}
+      <section className="pt-28 sm:pt-36 pb-16 text-center bg-white relative overflow-hidden">
         
-        <div className="container mx-auto px-4 z-10 text-center max-w-5xl">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 border border-slate-200 shadow-sm backdrop-blur-md mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
-            <Sparkles size={14} className="text-[#7B2DBF]" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1C1C72]">HYDERABAD'S PREMIER ARCHITECTURAL & CONSTRUCTION ENGINE</span>
+        {/* Apple Ambient Luminous Light */}
+        <div 
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1400px] h-[550px] pointer-events-none opacity-40 z-0"
+          style={{
+            background: 'radial-gradient(ellipse 70% 55% at 50% 0%, rgba(123, 45, 191, 0.12), rgba(37, 99, 235, 0.08), transparent 75%)'
+          }}
+        />
+
+        <div className="max-w-[1024px] mx-auto px-5 relative z-10 space-y-4">
+          
+          {/* Apple Monospaced Eyebrow */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] border border-black/[0.06] text-[11px] font-semibold tracking-[0.2em] text-[#86868B] uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-pulse" />
+            <span>Interdisciplinary Practice • Ar. Sridhar Chauhan (SPA Delhi)</span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-4 pb-4 bg-clip-text text-transparent bg-gradient-to-br from-[#1C1C72] via-[#1C1C72] to-[#7B2DBF] leading-[1.1]">
-            Design. Build. Soul.
+          {/* Monumental Headline */}
+          <h1 className="text-5xl sm:text-7xl lg:text-[88px] font-bold tracking-[-0.035em] text-[#1C1C72] leading-[1.04]">
+            From Code to Concrete.
           </h1>
 
-          <p className="text-lg md:text-2xl text-slate-500 mb-10 max-w-3xl mx-auto font-bold tracking-wide px-4 leading-relaxed">
-            Architect, Financial District, Gachibowli HYD | 114+ Projects Delivered
+          {/* Apple Slate Subtitle */}
+          <p className="text-xl sm:text-2xl font-normal text-[#86868B] tracking-[-0.015em] max-w-[760px] mx-auto leading-relaxed">
+            We dissolve the artificial boundaries between spatial architecture, software systems, bespoke furniture, and digital intelligence.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center px-6">
-            <Button href="/start-project" variant="primary" className="text-base md:text-lg px-8 md:px-10 py-4 shadow-[0_10px_30px_rgba(28,28,114,0.15)] flex items-center justify-center gap-2">
-              <span>Start 4-Step Feasibility Wizard</span>
-              <ArrowRight size={18} />
-            </Button>
-            <Button href="/calc" variant="outline" className="text-base md:text-lg px-8 md:px-10 py-4 flex items-center justify-center gap-2">
-              <Calculator size={18} className="text-[#7B2DBF]" />
-              <span>Explore 8 Core Calculators</span>
-            </Button>
+          {/* Apple Dual CTAs */}
+          <div className="flex flex-wrap items-center justify-center gap-5 pt-3 text-[16px]">
+            <button 
+              onClick={() => directWhatsApp('Total Design Project')}
+              className="px-7 py-3 rounded-full bg-[#1C1C72] hover:bg-[#2563EB] text-white font-medium transition-all shadow-[0_10px_30px_rgba(28,28,114,0.18)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer flex items-center gap-2"
+            >
+              <MessageCircle size={17} />
+              <span>Consult Ar. Sridhar</span>
+            </button>
+            <Link 
+              href="/portfolio" 
+              className="text-[#0071E3] hover:underline inline-flex items-center gap-1 font-normal"
+            >
+              <span>Explore 42+ Masterworks</span>
+              <ChevronRight size={17} />
+            </Link>
           </div>
+
+          {/* Cinematic Architectural Hero Visual Anchor */}
+          <div className="pt-10">
+            <div className="relative w-full aspect-[16/9] max-w-[1080px] mx-auto rounded-[32px] overflow-hidden shadow-[0_40px_100px_rgba(28,28,114,0.10)] border border-black/[0.05] group">
+              <Image 
+                src="/projects/manila/sunder-nursery-garden-house.webp" 
+                alt="Sunder Nursery Garden House by AGNAA" 
+                fill
+                priority
+                className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D1A]/80 via-transparent to-transparent flex items-end p-8 sm:p-14 text-left">
+                <div className="space-y-1">
+                  <span className="text-[11px] font-mono tracking-widest text-purple-300 uppercase font-bold">
+                    Flagship Spatial Commission • New Delhi / Hyderabad
+                  </span>
+                  <h2 className="text-white text-2xl sm:text-4xl font-bold tracking-tight">
+                    Sunder Nursery Garden House
+                  </h2>
+                  <p className="text-white/80 text-xs sm:text-sm font-medium max-w-xl">
+                    Passive solar orientation, sculpted stone masonry, and high-performance climate envelope. Designed and executed by AGNAA.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* STATS BAR */}
-      <section className="py-10 md:py-16 bg-[#F5F5F7] border-y border-gray-100 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#7B2DBF]/20 to-transparent"></div>
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
-            <div className="py-6 sm:py-4">
-              <div className="text-4xl md:text-6xl font-black text-[#1C1C72] mb-2 tracking-tighter">114+</div>
-              <div className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-black">Projects Delivered</div>
+      {/* ── 2. APPLE 2×2 DUO SHOWCASE (THE 4 DISCIPLINES) ── */}
+      <section className="py-20 bg-white">
+        <div className="max-w-[1080px] mx-auto px-5 space-y-10">
+          
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-black/[0.06] pb-6">
+            <div>
+              <span className="text-[11px] font-mono tracking-widest text-[#86868B] uppercase font-bold">
+                Interdisciplinary Matrix
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.025em] text-[#1C1C72] mt-1">
+                Four Domains. One Standard of Rigor.
+              </h2>
             </div>
-            <div className="py-6 sm:py-4">
-              <div className="text-4xl md:text-6xl font-black text-[#1C1C72] mb-2 tracking-tighter">SPA Delhi</div>
-              <div className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-black">India Rank #1 Pedigree</div>
-            </div>
-            <div className="py-6 sm:py-4">
-              <div className="text-4xl md:text-6xl font-black text-[#1C1C72] mb-2 tracking-tighter">100%</div>
-              <div className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-black">BIM & Vastu Compliant</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* HIGH-CONVERTING CALCULATORS FEATURED SECTION */}
-      <section className="py-24 bg-gradient-to-b from-white via-slate-50/50 to-white border-b border-gray-100">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100/80 text-[#7B2DBF] text-[10px] font-black uppercase tracking-widest mb-4">
-              <Calculator size={12} /> Instant Estimation Suite
-            </div>
-            <h2 className="text-3xl md:text-5xl font-black text-[#1C1C72] tracking-tight">
-              8 Core Architectural Calculators
-            </h2>
-            <p className="text-slate-500 text-sm sm:text-base font-semibold max-w-xl mx-auto mt-3">
-              Calculate construction costs, RCC steel weight, GHMC setbacks, FSI permissions, and turnkey interior budgets in seconds.
+            <p className="text-xs sm:text-sm text-[#86868B] font-medium max-w-md">
+              A sovereign design practice where software engineers and structural architects work under a single creative direction.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <Link href="/calc/g-n-floor-estimator" className="group bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-[#7B2DBF]/40 transition-all duration-300 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#1C1C72]/5 text-[#1C1C72] group-hover:bg-[#1C1C72] group-hover:text-white flex items-center justify-center mb-6 transition-all">
-                  <Layers size={22} />
-                </div>
-                <h3 className="text-xl font-black text-[#1C1C72] group-hover:text-[#7B2DBF] transition-colors mb-2">
-                  Total G+N Construction
+            {/* ── CARD 1: SPATIAL ARCHITECTURE ── */}
+            <div className="rounded-[32px] bg-[#F5F5F7] p-8 sm:p-10 flex flex-col justify-between border border-black/[0.04] hover:shadow-[0_30px_60px_rgba(0,0,0,0.06)] transition-all duration-500 group">
+              <div className="space-y-3">
+                <span className="text-[11px] font-mono tracking-widest text-[#86868B] uppercase font-bold">
+                  01 / Spatial Architecture
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1C1C72]">
+                  Private Villas & State Corridors.
                 </h3>
-                <p className="text-xs text-slate-500 font-semibold leading-relaxed">
-                  Complete floor-by-floor construction cost & material estimation for luxury villas and apartments.
+                <p className="text-sm text-[#86868B] leading-relaxed">
+                  Delivered landmarks for the Aga Khan Trust for Culture, state ministerial corridors, and ultra-luxury turnkey residences in Financial District, Hyderabad.
                 </p>
+                <div className="pt-1">
+                  <Link href="/portfolio" className="text-[#0071E3] hover:underline inline-flex items-center gap-1 text-sm font-medium">
+                    <span>View Architectural Archive</span>
+                    <ChevronRight size={15} />
+                  </Link>
+                </div>
               </div>
-              <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-[#7B2DBF]">
-                <span>Calculate Cost</span>
-                <span>→</span>
-              </div>
-            </Link>
 
-            <Link href="/calc/interior-cost" className="group bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-[#7B2DBF]/40 transition-all duration-300 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#1C1C72]/5 text-[#1C1C72] group-hover:bg-[#1C1C72] group-hover:text-white flex items-center justify-center mb-6 transition-all">
-                  <Camera size={22} />
-                </div>
-                <h3 className="text-xl font-black text-[#1C1C72] group-hover:text-[#7B2DBF] transition-colors mb-2">
-                  Turnkey Interior Budget
-                </h3>
-                <p className="text-xs text-slate-500 font-semibold leading-relaxed">
-                  Luxury residential & commercial interior design budgeting with modular carpentry & lighting.
-                </p>
+              <div className="mt-8 rounded-2xl overflow-hidden aspect-[4/3] relative shadow-sm border border-black/[0.05]">
+                <Image 
+                  src="/projects/manila/balinese-luxury-resort-villa-exterior.webp" 
+                  alt="Balinese Luxury Villa Architecture" 
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
               </div>
-              <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-[#7B2DBF]">
-                <span>Calculate Interior</span>
-                <span>→</span>
-              </div>
-            </Link>
+            </div>
 
-            <Link href="/calc/fsi" className="group bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-[#7B2DBF]/40 transition-all duration-300 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#1C1C72]/5 text-[#1C1C72] group-hover:bg-[#1C1C72] group-hover:text-white flex items-center justify-center mb-6 transition-all">
-                  <Percent size={22} />
-                </div>
-                <h3 className="text-xl font-black text-[#1C1C72] group-hover:text-[#7B2DBF] transition-colors mb-2">
-                  GHMC / HMDA FSI Rules
+            {/* ── CARD 2: SOFTWARE & UI/UX SYSTEMS ── */}
+            <div className="rounded-[32px] bg-[#0A0D1A] text-white p-8 sm:p-10 flex flex-col justify-between border border-white/10 hover:shadow-[0_30px_60px_rgba(123,45,191,0.15)] transition-all duration-500 group">
+              <div className="space-y-3">
+                <span className="text-[11px] font-mono tracking-widest text-purple-400 uppercase font-bold">
+                  02 / Software Systems & UI/UX
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                  Agnaa Voice AI & Engineering Suites.
                 </h3>
-                <p className="text-xs text-slate-500 font-semibold leading-relaxed">
-                  Permissible buildable area, coverage ratio, and height limits based on road width.
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Native zero-latency voice software, interactive GHMC setback calculators, and custom milestone escrow dashboards engineered with tactile Swiss precision.
                 </p>
+                <div className="pt-1">
+                  <Link href="/calc" className="text-purple-400 hover:text-purple-300 inline-flex items-center gap-1 text-sm font-medium">
+                    <span>Launch 8 Precision Calculators</span>
+                    <ChevronRight size={15} />
+                  </Link>
+                </div>
               </div>
-              <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-[#7B2DBF]">
-                <span>Check Permissions</span>
-                <span>→</span>
-              </div>
-            </Link>
 
-            <Link href="/calc/rcc" className="group bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-[#7B2DBF]/40 transition-all duration-300 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#1C1C72]/5 text-[#1C1C72] group-hover:bg-[#1C1C72] group-hover:text-white flex items-center justify-center mb-6 transition-all">
-                  <Box size={22} />
+              {/* Tactile Dark Hardware UI Preview */}
+              <div className="mt-8 rounded-2xl bg-white/[0.04] border border-white/10 p-6 space-y-4 backdrop-blur-md">
+                <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
+                  <span>AGNAA VOICE v2.0 • PORTABLE DESKTOP ENGINE</span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 </div>
-                <h3 className="text-xl font-black text-[#1C1C72] group-hover:text-[#7B2DBF] transition-colors mb-2">
-                  RCC Slab & Steel Weight
+                
+                {/* Audio Waveform Visualization */}
+                <div className="h-16 flex items-center justify-center gap-2">
+                  <div className="w-1.5 h-6 bg-gradient-to-t from-purple-500 to-blue-400 rounded-full animate-pulse" />
+                  <div className="w-1.5 h-12 bg-gradient-to-t from-purple-500 to-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.1s' }} />
+                  <div className="w-1.5 h-8 bg-gradient-to-t from-purple-500 to-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
+                  <div className="w-1.5 h-14 bg-gradient-to-t from-purple-500 to-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }} />
+                  <div className="w-1.5 h-10 bg-gradient-to-t from-purple-500 to-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+                  <div className="w-1.5 h-5 bg-gradient-to-t from-purple-500 to-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
+                </div>
+                <div className="text-center text-[11px] text-slate-400 font-mono">
+                  Local Speech-to-Design Engine • Windows Portable Build
+                </div>
+              </div>
+            </div>
+
+            {/* ── CARD 3: BESPOKE FURNITURE & JOINERY ── */}
+            <div className="rounded-[32px] bg-[#F5F5F7] p-8 sm:p-10 flex flex-col justify-between border border-black/[0.04] hover:shadow-[0_30px_60px_rgba(0,0,0,0.06)] transition-all duration-500 group">
+              <div className="space-y-3">
+                <span className="text-[11px] font-mono tracking-widest text-[#86868B] uppercase font-bold">
+                  03 / Furniture & Objects
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1C1C72]">
+                  Micro-Architecture & Custom Joinery.
                 </h3>
-                <p className="text-xs text-slate-500 font-semibold leading-relaxed">
-                  Cement bags, sand, aggregate volume & Fe550D TMT rebar steel weight breakdown.
+                <p className="text-sm text-[#86868B] leading-relaxed">
+                  Solid Burma teak dining tables, custom brass lighting fixtures, and ergonomic architectural millwork tailored to exact room proportions.
                 </p>
+                <div className="pt-1">
+                  <Link href="/design-studio" className="text-[#0071E3] hover:underline inline-flex items-center gap-1 text-sm font-medium">
+                    <span>Explore Design Studio Crafts</span>
+                    <ChevronRight size={15} />
+                  </Link>
+                </div>
               </div>
-              <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-[#7B2DBF]">
-                <span>Calculate Steel & Concrete</span>
-                <span>→</span>
+
+              <div className="mt-8 rounded-2xl overflow-hidden aspect-[4/3] relative shadow-sm border border-black/[0.05]">
+                <Image 
+                  src="/projects/manila/curated-luxury-residence-living-interior.webp" 
+                  alt="Bespoke Luxury Interior & Furniture Joinery" 
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
               </div>
-            </Link>
+            </div>
+
+            {/* ── CARD 4: 3D CINEMA & COMPUTATION ── */}
+            <div className="rounded-[32px] bg-[#F5F5F7] p-8 sm:p-10 flex flex-col justify-between border border-black/[0.04] hover:shadow-[0_30px_60px_rgba(0,0,0,0.06)] transition-all duration-500 group">
+              <div className="space-y-3">
+                <span className="text-[11px] font-mono tracking-widest text-[#86868B] uppercase font-bold">
+                  04 / Computational Design
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1C1C72]">
+                  Algorithmic Form & 4K Cinema.
+                </h3>
+                <p className="text-sm text-[#86868B] leading-relaxed">
+                  Procedural parametric modeling, daylight physics simulations, and cinematic architectural films crafted in-house for visionary developers.
+                </p>
+                <div className="pt-1">
+                  <Link href="/portfolio" className="text-[#0071E3] hover:underline inline-flex items-center gap-1 text-sm font-medium">
+                    <span>Watch Walkthrough Cinematics</span>
+                    <ChevronRight size={15} />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="mt-8 rounded-2xl overflow-hidden aspect-[4/3] relative shadow-sm border border-black/[0.05]">
+                <Image 
+                  src="/projects/manila/double-height-sculptural-atrium-lobby.webp" 
+                  alt="Sculptural Atrium Lobby by AGNAA" 
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+              </div>
+            </div>
 
           </div>
 
-          <div className="mt-12 text-center">
-            <Link href="/calc" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#1C1C72] text-white font-black text-xs uppercase tracking-widest hover:bg-[#7B2DBF] transition-all shadow-md">
-              <span>View All 8 Core + 4 Extra Calculators</span>
-              <ArrowRight size={16} />
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* ECOSYSTEM */}
-      <section className="py-24 md:py-32 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-black mb-16 md:mb-20 text-center tracking-tight text-[#1C1C72]">The AGNAA Ecosystem</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            <Link href="/design-studio" className="group cursor-pointer bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgba(28,28,114,0.03)] hover:shadow-[0_15px_40px_rgba(123,45,191,0.15)] hover:border-[#7B2DBF]/50 transition-all duration-500 hover:-translate-y-2">
-              <div className="bg-[#F5F5F7] w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-6 md:mb-8 text-[#1C1C72] group-hover:bg-gradient-to-br group-hover:from-[#1C1C72] group-hover:to-[#7B2DBF] group-hover:text-white group-hover:shadow-[0_0_20px_rgba(123,45,191,0.4)] group-hover:scale-110 transition-all duration-500">
-                <Camera className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2.5} />
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-4 text-[#1C1C72] tracking-tight group-hover:text-[#7B2DBF] transition-colors">Design Studio</h3>
-              <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed font-medium mt-auto group-hover:text-gray-500 transition-colors">Ideas → Renders → Reality. Turning visionary concepts into actionable construction documents.</p>
-              <span className="text-xs md:text-sm font-black uppercase tracking-widest text-[#1C1C72] flex items-center gap-2 group-hover:text-[#7B2DBF] transition-colors">Explore Studio <ArrowRight size={14}/></span>
-            </Link>
+      {/* ── 3. APPLE HARDWARE BENTO: TECHNICAL PRECISION & STATS ── */}
+      <section className="py-20 bg-[#F5F5F7] border-y border-black/[0.06]">
+        <div className="max-w-[1080px] mx-auto px-5">
+          
+          <div className="text-center space-y-2 mb-12">
+            <span className="text-[11px] font-mono tracking-widest text-[#86868B] uppercase font-bold">
+              Pedigree & Technical Rigor
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1C1C72]">
+              Engineered with Mathematical Integrity.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <Link href="/constructions" className="group cursor-pointer bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgba(28,28,114,0.03)] hover:shadow-[0_15px_40px_rgba(123,45,191,0.15)] hover:border-[#7B2DBF]/50 transition-all duration-500 hover:-translate-y-2">
-              <div className="bg-[#F5F5F7] w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-6 md:mb-8 text-[#1C1C72] group-hover:bg-gradient-to-br group-hover:from-[#1C1C72] group-hover:to-[#7B2DBF] group-hover:text-white group-hover:shadow-[0_0_20px_rgba(123,45,191,0.4)] group-hover:scale-110 transition-all duration-500">
-                <Hammer className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2.5} />
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-4 text-[#1C1C72] tracking-tight group-hover:text-[#7B2DBF] transition-colors">Constructions</h3>
-              <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed font-medium mt-auto group-hover:text-gray-500 transition-colors">Execution You Trust. Full project management, verified manpower, and elite materials.</p>
-              <span className="text-xs md:text-sm font-black uppercase tracking-widest text-[#1C1C72] flex items-center gap-2 group-hover:text-[#7B2DBF] transition-colors">Build with Us <ArrowRight size={14}/></span>
-            </Link>
+            <div className="bg-white rounded-3xl p-7 border border-black/[0.06] shadow-sm space-y-2 hover:border-[#7B2DBF]/40 transition-colors">
+              <div className="text-4xl sm:text-5xl font-bold tracking-tight text-[#1C1C72]">114+</div>
+              <div className="text-sm font-bold text-[#1C1C72]">Delivered Works</div>
+              <p className="text-xs text-[#86868B] leading-relaxed">
+                State heritage exhibits, CM urban corridors, and private luxury villas across India.
+              </p>
+            </div>
 
-            <Link href="/foundation" className="group cursor-pointer bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgba(28,28,114,0.03)] hover:shadow-[0_15px_40px_rgba(123,45,191,0.15)] hover:border-[#7B2DBF]/50 transition-all duration-500 hover:-translate-y-2">
-              <div className="bg-[#F5F5F7] w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-6 md:mb-8 text-[#1C1C72] group-hover:bg-gradient-to-br group-hover:from-[#1C1C72] group-hover:to-[#7B2DBF] group-hover:text-white group-hover:shadow-[0_0_20px_rgba(123,45,191,0.4)] group-hover:scale-110 transition-all duration-500">
-                <TreePine className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2.5} />
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-4 text-[#1C1C72] tracking-tight group-hover:text-[#7B2DBF] transition-colors">Foundation</h3>
-              <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed font-medium mt-auto group-hover:text-gray-500 transition-colors">Voice. Fix. Plant. Use AI to fix city infrastructure and rent trees for a greener tomorrow.</p>
-              <span className="text-xs md:text-sm font-black uppercase tracking-widest text-[#1C1C72] flex items-center gap-2 group-hover:text-[#7B2DBF] transition-colors">Join Movement <ArrowRight size={14}/></span>
+            <div className="bg-white rounded-3xl p-7 border border-black/[0.06] shadow-sm space-y-2 hover:border-[#7B2DBF]/40 transition-colors">
+              <div className="text-4xl sm:text-5xl font-bold tracking-tight text-[#1C1C72]">SPA Delhi</div>
+              <div className="text-sm font-bold text-[#1C1C72]">India Rank #1 Pedigree</div>
+              <p className="text-xs text-[#86868B] leading-relaxed">
+                School of Planning & Architecture, New Delhi. Grounded in spatial tectonics and first principles.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-3xl p-7 border border-black/[0.06] shadow-sm space-y-2 hover:border-[#7B2DBF]/40 transition-colors">
+              <div className="text-4xl sm:text-5xl font-bold tracking-tight text-[#1C1C72]">CA/2023</div>
+              <div className="text-sm font-bold text-[#1C1C72]">Registered Architect</div>
+              <p className="text-xs text-[#86868B] leading-relaxed">
+                Council of Architecture CA/2023/161405. Statutory legal accreditation for civil sanctions.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-3xl p-7 border border-black/[0.06] shadow-sm space-y-2 hover:border-[#7B2DBF]/40 transition-colors">
+              <div className="text-4xl sm:text-5xl font-bold tracking-tight text-[#1C1C72]">NBC 2026</div>
+              <div className="text-sm font-bold text-[#1C1C72]">Byelaw Precision</div>
+              <p className="text-xs text-[#86868B] leading-relaxed">
+                Strict adherence to GHMC G.O. 168, TG-bPASS, and IS 456 structural code standards.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── 4. GEO RESEARCH JOURNAL & BACKLINKS ── */}
+      <section className="py-24 bg-white">
+        <div className="max-w-[1080px] mx-auto px-5 space-y-12">
+          
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-black/[0.06] pb-6">
+            <div>
+              <span className="text-[11px] font-mono tracking-widest text-[#2563EB] uppercase font-bold">
+                Generative Engine Optimization • Architectural Codex
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1C1C72] mt-1">
+                AGNAA Research Journal (50 Articles)
+              </h2>
+            </div>
+            <Link href="/blog" className="text-[#0071E3] hover:underline inline-flex items-center gap-1 text-sm font-medium">
+              <span>View All 50 Research Papers</span>
+              <ChevronRight size={15} />
             </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredArticles.map((post) => (
+              <Link 
+                key={post.slug}
+                href={`https://blog.agnaa.in/post/${post.slug}`}
+                className="rounded-3xl border border-slate-200/90 bg-[#F5F5F7] p-7 flex flex-col justify-between hover:bg-white hover:border-[#7B2DBF]/40 hover:shadow-lg transition-all duration-300 group"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
+                    <span className="font-bold text-[#7B2DBF]">{post.category}</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-[#1C1C72] group-hover:text-[#2563EB] transition-colors leading-snug">
+                    {post.title}
+                  </h3>
+                  <p className="text-xs text-[#86868B] font-medium line-clamp-3 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-slate-200/60 flex items-center justify-between text-xs font-bold text-[#1C1C72] group-hover:text-[#7B2DBF]">
+                  <span>Read Full Technical Guide</span>
+                  <ArrowUpRight size={14} />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Quick Backlink Hub to Free Calculators */}
+          <div className="rounded-3xl bg-gradient-to-r from-slate-50 via-white to-slate-50 border border-slate-200 p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+            <div className="space-y-1 text-center md:text-left">
+              <h4 className="text-base font-bold text-[#1C1C72]">
+                Instant Building & Financial Estimation Suite
+              </h4>
+              <p className="text-xs text-[#86868B] font-medium">
+                Calculate GHMC Setbacks, FAR/FSI Permissible Area, RCC Slab Concrete, and Turnkey Interior Cost free online.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <Link href="/calc/setback-envelope" className="px-4 py-2 rounded-full bg-white border border-slate-300 text-xs font-bold text-[#1C1C72] hover:border-[#7B2DBF] transition-colors shadow-sm">
+                Setback Calculator
+              </Link>
+              <Link href="/calc/rcc" className="px-4 py-2 rounded-full bg-white border border-slate-300 text-xs font-bold text-[#1C1C72] hover:border-[#7B2DBF] transition-colors shadow-sm">
+                RCC Steel Calculator
+              </Link>
+              <Link href="/estimate" className="px-4 py-2 rounded-full bg-[#1C1C72] text-white text-xs font-bold hover:bg-[#2563EB] transition-colors shadow-sm">
+                Cost Estimator ↗
+              </Link>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── 5. EXECUTIVE CONCIERGE TO AR. SRIDHAR ── */}
+      <section className="py-24 bg-[#F5F5F7] text-center border-t border-black/[0.06]">
+        <div className="max-w-[760px] mx-auto px-5 space-y-6">
+          <span className="text-[11px] font-mono tracking-widest text-[#86868B] uppercase font-bold">
+            Executive Consultation
+          </span>
+          <h2 className="text-4xl sm:text-6xl font-bold tracking-tight text-[#1C1C72] leading-tight">
+            Have a complex design challenge?
+          </h2>
+          <p className="text-base sm:text-lg text-[#86868B] leading-relaxed max-w-xl mx-auto">
+            Whether you are commissioning an ultra-luxury private residence, architecting digital software systems, or designing custom furniture, connect directly with Ar. Sridhar Chauhan.
+          </p>
+
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+            <button
+              onClick={() => directWhatsApp('Executive Architecture & Turnkey Consultation')}
+              className="px-8 py-3.5 rounded-full bg-[#1C1C72] hover:bg-[#2563EB] text-white text-sm font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer"
+            >
+              <MessageCircle size={16} />
+              <span>Connect on WhatsApp: +91 8826214348</span>
+              <ArrowUpRight size={14} />
+            </button>
+            <a 
+              href="mailto:sridhar.ar@agnaa.in" 
+              className="px-7 py-3.5 rounded-full bg-white border border-slate-300 hover:border-slate-400 text-[#1C1C72] text-sm font-bold transition-all shadow-sm"
+            >
+              sridhar.ar@agnaa.in
+            </a>
+          </div>
+
+          <div className="pt-4 text-xs font-mono text-slate-400">
+            AGNAA Design Studio • Financial District, Gachibowli, Hyderabad 500032
           </div>
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section className="py-24 md:py-32 bg-[#F5F5F7] relative border-t border-gray-100">
-        <div className="absolute bottom-0 w-full h-1 bg-gradient-to-r from-transparent via-[#7B2DBF]/20 to-transparent"></div>
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-6xl font-black mb-10 tracking-tight text-[#1C1C72] leading-tight">Ready for Your AGNAA Journey?</h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center px-6">
-            <Button href="/start-project" variant="primary" className="text-base md:text-lg px-10 md:px-12 py-4 shadow-lg shadow-purple-500/20">Start Project Wizard</Button>
-            <Button href="/calc" variant="outline" className="text-base md:text-lg px-10 md:px-12 py-4">Explore Calculators</Button>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
-
