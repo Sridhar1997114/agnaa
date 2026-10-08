@@ -34,6 +34,15 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/geo',
+        destination: '/codex',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
