@@ -2,7 +2,6 @@
 
 import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Inter, Space_Grotesk } from 'next/font/google';
 import {
   CheckCircle2, MapPin, Hammer, Package, LayoutGrid, Hexagon, Waves, 
   AppWindow, Grid as GridIcon, DoorClosed, Zap, Paintbrush, Droplets, Utensils, Ruler, 
@@ -11,9 +10,6 @@ import {
   Sliders, RotateCcw, Plus, Minus, Edit3, Eye, Printer, Calendar, Clock
 } from 'lucide-react';
 import { generateEstimatePdf } from '@/lib/pdf/generateEstimatePdf';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', weight: ['400', '500', '600', '700', '800', '900'] });
-const space = Space_Grotesk({ subsets: ['latin'], variable: '--font-space', weight: ['400', '500', '600', '700'] });
 
 // ─── AGNAA LOGO (Perfect Vector Mask) ───────────────────────────────────────
 const AgnaaLogo = ({ className = "h-8 w-auto", fill = "", width, height }: { className?: string, fill?: string, width?: number|string, height?: number|string }) => (
@@ -368,7 +364,7 @@ function EstimateContent() {
   const QUICK_AREAS = [1000, 1500, 2000, 2500, 3000, 4000];
 
   return (
-    <div className={`antialiased bg-[#FBFBFE] text-[#0F172A] min-h-screen relative flex flex-col items-center py-12 px-4 sm:px-6 ${inter.variable} ${space.variable}`}>
+    <div className="antialiased bg-[#FBFBFE] text-[#0F172A] min-h-screen relative flex flex-col items-center py-12 px-4 sm:px-6">
       {/* ─── APPLE STYLE AMBIENT BACKDROP ─── */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#7B2DBF]/10 via-[#1C1C72]/5 to-transparent blur-[120px]" />
