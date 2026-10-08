@@ -63,3 +63,4 @@ ChatGPT Image*
 # Large distribution binaries
 public/downloads/*-Local-*.zip
 public/downloads/Agnaa-Voice-v2.0-Windows-Portable.zip
+.env*

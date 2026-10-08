@@ -40,8 +40,6 @@ export const Header = () => {
     { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
     { id: 'design-studio', label: 'Design Studio', href: '/design-studio' },
     { id: 'constructions', label: 'Constructions', href: '/constructions' },
-    { id: 'geo', label: 'GEO Codex', href: '/codex' },
-    { id: 'voice', label: 'AGNAA Voice', href: '/voice' },
     { id: 'foundation', label: 'Foundation', href: '/foundation' }
   ];
 

@@ -812,7 +812,7 @@ export default function SleekAppleBentoPortfolioPage() {
   const connectOnWhatsApp = (item: LedgerItem) => {
     const text = `Hi Ar. Sridhar, I am reviewing the AGNAA Architectural Archive.\n\n` +
       `• Reference: ${item.title}\n` +
-      `• Typology: ${item.type} (${item.category})\n` +
+      `• Project Scope: ${item.type} (${item.category})\n` +
       `• Context / Location: ${item.location}\n` +
       `• Year / Timeline: ${item.year}\n\n` +
       `Could you please share the project drawings, video walkthrough, and details personally?`;
@@ -1045,7 +1045,6 @@ export default function SleekAppleBentoPortfolioPage() {
                     <th className="py-4 px-6">Work / Commission</th>
                     <th className="py-4 px-6">Client / Context</th>
                     <th className="py-4 px-6 hidden md:table-cell">Location</th>
-                    <th className="py-4 px-6 hidden sm:table-cell">Typology</th>
                     <th className="py-4 px-6 text-right">Direct WhatsApp</th>
                   </tr>
                 </thead>
@@ -1099,20 +1098,6 @@ export default function SleekAppleBentoPortfolioPage() {
                       {/* Location */}
                       <td className="py-4 px-6 text-slate-500 font-medium text-[11px] whitespace-nowrap hidden md:table-cell">
                         {item.location}
-                      </td>
-
-                      {/* Typology Badge */}
-                      <td className="py-4 px-6 hidden sm:table-cell">
-                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold whitespace-nowrap border ${
-                          item.type === '3D Cinema & Video' ? 'bg-purple-50 text-[#7B2DBF] border-purple-200' :
-                          item.type === 'Architectural Design' ? 'bg-blue-50 text-[#2563EB] border-blue-200' :
-                          item.type === 'Built Execution' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                          item.type === 'Urban Masterplan' ? 'bg-amber-50 text-amber-700 border-amber-200' :
-                          item.type === 'Turnkey Interior' ? 'bg-rose-50 text-rose-700 border-rose-200' :
-                          'bg-indigo-50 text-indigo-700 border-indigo-200'
-                        }`}>
-                          {item.type}
-                        </span>
                       </td>
 
                       {/* Direct WhatsApp Action */}

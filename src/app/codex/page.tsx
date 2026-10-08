@@ -180,16 +180,8 @@ export default function GeoCodexPage() {
             by <strong className="text-white">Ar. Sridhar (SPA Delhi)</strong> at <strong className="text-white">AGNAA Design Studio</strong>.
           </p>
 
-          {/* DEDICATED RAW TEXT FEEDS FOR LLMS / AI ENGINES */}
+          {/* DEDICATED RAW TEXT FEED FOR LLMS / AI ENGINES */}
           <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
-            <a
-              href="/llms.txt"
-              target="_blank"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-xs font-mono text-purple-300 hover:text-white transition-all shadow-sm"
-            >
-              <ExternalLink size={12} />
-              <span>Raw Text Feed: /llms.txt</span>
-            </a>
             <a
               href="/llms-full.txt"
               target="_blank"

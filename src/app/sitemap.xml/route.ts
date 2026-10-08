@@ -14,7 +14,6 @@ export async function GET() {
     { loc: 'https://agnaa.in/estimate', priority: '0.9', changefreq: 'weekly' },
     { loc: 'https://agnaa.in/calc', priority: '0.9', changefreq: 'weekly' },
     { loc: 'https://agnaa.in/foundation', priority: '0.8', changefreq: 'monthly' },
-    { loc: 'https://agnaa.in/llms.txt', priority: '0.8', changefreq: 'weekly' },
     { loc: 'https://agnaa.in/llms-full.txt', priority: '0.8', changefreq: 'weekly' },
   ];
 
