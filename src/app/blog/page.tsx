@@ -4,8 +4,11 @@ import { BLOG_POSTS } from './data';
 import { ArrowRight, BookOpen, Clock, Tag } from 'lucide-react';
 
 export const metadata = {
-  title: 'AGNAA Design Studio Blog | Architecture, Engineering & Spatial Intelligence',
-  description: 'First-principles architectural insights, structural engineering masterclasses, and design philosophy by AGNAA Design Studio.',
+  title: 'Architectural Research Journal | AGNAA Hyderabad',
+  description: 'First-principles architectural insights, structural engineering masterclasses, and design philosophy by Ar. M. Sridhar Chauhan (SPA Delhi).',
+  alternates: {
+    canonical: 'https://agnaa.in/blog',
+  },
 };
 
 export default function BlogListingPage() {
