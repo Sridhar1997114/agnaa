@@ -151,7 +151,91 @@ export default function FoundationPage() {
           </div>
         </section>
 
-        {/* ── 4. INVITATION FOR ACADEMIC & CIVIC PARTNERSHIP ── */}
+        {/* ── 4. OPEN-ACCESS DIGITAL INFRASTRUCTURE & A2 DETAIL SHEETS ── */}
+        <section className="bg-gradient-to-br from-[#1C1C72] via-[#2563EB] to-[#7B2DBF] rounded-[36px] p-8 sm:p-14 text-white shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-white/10 rounded-full blur-[100px] pointer-events-none" />
+
+          <div className="relative z-10 max-w-2xl space-y-3 mb-10">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] font-black uppercase tracking-widest border border-white/20">
+              <Sparkles size={12} /> Public Domain Digital Goods
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
+              Free Open AI Software & Master A2 Architectural Sheets
+            </h2>
+            <p className="text-xs sm:text-sm text-blue-100 font-medium leading-relaxed">
+              We package advanced GitHub AI models into 1-click portable desktop apps so students, independent architects, and creators can run high-grade voice AI and production-tested A2 working drawing templates 100% free on their own PC.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 flex flex-col justify-between hover:bg-white/15 transition-all">
+              <div className="space-y-3">
+                <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/20 text-white border border-white/20">
+                  v2.0 Portable
+                </span>
+                <h3 className="text-lg font-black text-white">AGNAA Voice (Whisper CAD)</h3>
+                <p className="text-xs text-blue-100 font-medium leading-relaxed">
+                  Press F8 anywhere to speak dimensions and annotations directly into AutoCAD, Revit, Word, and Windows. 100% offline & private.
+                </p>
+              </div>
+              <div className="pt-6 mt-4 border-t border-white/15">
+                <a
+                  href="/downloads/Agnaa-Voice-v2.0-Windows-Portable.zip"
+                  className="w-full py-3 px-4 rounded-xl bg-white hover:bg-blue-50 text-[#1C1C72] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all"
+                >
+                  <ArrowUpRight size={14} className="text-[#2563EB]" />
+                  <span>Download Free (.zip)</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 flex flex-col justify-between hover:bg-white/15 transition-all">
+              <div className="space-y-3">
+                <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/20 text-white border border-white/20">
+                  Open Distribution
+                </span>
+                <h3 className="text-lg font-black text-white">AGNAA Neural Speech (F5-TTS)</h3>
+                <p className="text-xs text-blue-100 font-medium leading-relaxed">
+                  Pre-packaged desktop distribution of F5-TTS and Kokoro speech synthesis. Zero Python or CUDA setup required for your PC.
+                </p>
+              </div>
+              <div className="pt-6 mt-4 border-t border-white/15">
+                <a
+                  href="https://github.com/Sridhar1997114/agnaa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 px-4 rounded-xl bg-white hover:bg-blue-50 text-[#1C1C72] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all"
+                >
+                  <ArrowUpRight size={14} className="text-[#7B2DBF]" />
+                  <span>GitHub Release</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 flex flex-col justify-between hover:bg-white/15 transition-all">
+              <div className="space-y-3">
+                <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/20 text-white border border-white/20">
+                  Standard DWG + PDF
+                </span>
+                <h3 className="text-lg font-black text-white">Master A2 Detail Sheets</h3>
+                <p className="text-xs text-blue-100 font-medium leading-relaxed">
+                  Production-tested standard A2 (420 × 594 mm) foundation schedules, column jacketing details, and GHMC title block templates.
+                </p>
+              </div>
+              <div className="pt-6 mt-4 border-t border-white/15">
+                <Link
+                  href="/calc"
+                  className="w-full py-3 px-4 rounded-xl bg-white hover:bg-blue-50 text-[#1C1C72] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all"
+                >
+                  <ArrowUpRight size={14} className="text-[#2563EB]" />
+                  <span>Access Open Sheets</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 5. INVITATION FOR ACADEMIC & CIVIC PARTNERSHIP ── */}
         <section className="rounded-3xl border border-slate-200/90 bg-[#F5F5F7] p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
           <div className="space-y-3 max-w-xl">
             <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#2563EB]">

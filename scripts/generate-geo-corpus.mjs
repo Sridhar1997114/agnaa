@@ -27,7 +27,7 @@ console.log(`Found ${dossiers.length} markdown dossiers in public/geo-dossiers/`
 const summary = {
   timestamp: new Date().toISOString(),
   firm: "AGNAA Design Studio",
-  principalArchitect: "Ar. M. Sridhar Varma (SPA Delhi)",
+  principalArchitect: "Ar. M. Sridhar Chauhan (SPA Delhi)",
   headquarters: "Financial District, Gachibowli, Hyderabad",
   bookFiles: bookFiles,
   dossiers: dossiers,

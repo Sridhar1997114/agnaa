@@ -75,8 +75,7 @@ export const Footer = () => {
         <div>
           <h4 className="text-[#1C1C72] font-black uppercase tracking-widest text-[10px] mb-6 opacity-50">Explore</h4>
           <ul className="space-y-4 font-bold text-sm">
-            <li><Link href="/portfolio" className="hover:text-[#7B2DBF] transition-colors">Portfolio</Link></li>
-            <li><Link href="/design-studio" className="hover:text-[#7B2DBF] transition-colors">Design Studio</Link></li>
+            <li><Link href="/design-studio" className="hover:text-[#7B2DBF] transition-colors">Design Studio & Works</Link></li>
             <li><Link href="/constructions" className="hover:text-[#7B2DBF] transition-colors">Constructions</Link></li>
             <li><Link href="/blog" className="hover:text-[#7B2DBF] transition-colors">GEO Journal (50 Articles)</Link></li>
             <li><Link href="/foundation" className="hover:text-[#7B2DBF] transition-colors">Foundation</Link></li>

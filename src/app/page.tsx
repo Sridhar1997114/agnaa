@@ -50,7 +50,7 @@ export default function HomePage() {
           {/* Apple Monospaced Eyebrow */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] border border-black/[0.06] text-[11px] font-semibold tracking-[0.2em] text-[#86868B] uppercase">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-pulse" />
-            <span>Interdisciplinary Practice • Ar. Sridhar Chauhan (SPA Delhi)</span>
+            <span>Interdisciplinary Practice • Ar. M. Sridhar Chauhan (SPA Delhi)</span>
           </div>
 
           {/* Monumental Headline */}

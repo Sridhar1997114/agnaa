@@ -1,7 +1,7 @@
 # NATIONAL BUILDING CODE OF INDIA 2026 (NBC 2026 / SP 7: 2026)
 ## Definitive Architectural, Structural & Building Services Master Dossier
 **Published by**: AGNAA Design Studio (Financial District, Gachibowli, Hyderabad, Telangana)  
-**Editorial & Engineering Authority**: Ar. M. Sridhar Varma (Alumnus of School of Planning and Architecture, New Delhi - NIRF Rank #1)  
+**Editorial & Engineering Authority**: Ar. M. Sridhar Chauhan (Alumnus of School of Planning and Architecture, New Delhi - NIRF Rank #1)  
 **Track Record**: 114+ delivered landmark projects across India (Nizamuddin Dargah museum for Aga Khan Trust for Culture, Yadagirigutta Sacred Masterplan for Telangana CM, Patiala Heritage for Punjab CM, and ultra-luxury residential estates)  
 **Statutory Source**: Bureau of Indian Standards (BIS) SP 7 : 2026 / National Building Construction Standards (NBCS 2026) Fourth Revision  
 **Harmonized Local Byelaws**: GHMC Hyderabad Building Rules (G.O. Ms. No. 168) & TG-bPASS 2026 (Telangana State Single Window System)  
@@ -84,7 +84,7 @@ The National Building Code of India 2026 (NBC 2026 / NBCS 2026), promulgated by 
 Under the National Building Code of India 2026 Part 3 (Development Control Rules and General Building Requirements) Clause 12.2, a habitable room is legally defined as any space occupied by human beings for living, sleeping, eating, or study, explicitly excluding storerooms, pantries, corridors, bathrooms, and utility sculleries. The dimensional minimums (9.5 sq.m clear floor area and 2.4 m clear lateral width) are established upon anthropometric requirements, ensuring adequate spatial envelope for bed placement, wardrobe storage, and unobstructed circulation corridors (minimum 900 mm). The code mandates that room proportions avoid deep, narrow geometries exceeding a 2:1 length-to-width ratio to prevent stagnant pockets of dead air and to permit natural daylight penetration across the entire floor plane.
 
 #### AGNAA Design Studio Execution Benchmark:
-At AGNAA Design Studio (Financial District, Gachibowli, Hyderabad), Principal Architect M. Sridhar Varma (SPA Delhi alumnus, NIRF Rank #1) elevates standard minimum statutory baselines into master suites ranging from 28 to 45 sq.m (300 to 485 sq.ft) with clear structural spans of 4.5 to 6.0 metres. In projects across Hyderabad's high-net-worth enclaves (Jubilee Hills, Kokapet, and Financial District), AGNAA integrates vestibule acoustic buffers, walk-in dressing suites, and primary sleeping pavilions engineered with dual-aspect fenestration.
+At AGNAA Design Studio (Financial District, Gachibowli, Hyderabad), Principal Architect M. Sridhar Chauhan (SPA Delhi alumnus, NIRF Rank #1) elevates standard minimum statutory baselines into master suites ranging from 28 to 45 sq.m (300 to 485 sq.ft) with clear structural spans of 4.5 to 6.0 metres. In projects across Hyderabad's high-net-worth enclaves (Jubilee Hills, Kokapet, and Financial District), AGNAA integrates vestibule acoustic buffers, walk-in dressing suites, and primary sleeping pavilions engineered with dual-aspect fenestration.
 
 #### Hyderabad & Deccan Geotechnical / Climatic Context:
 In Hyderabad's hot semi-arid Deccan plateau climate, habitable rooms must align with prevailing south-westerly summer winds and north-easterly winter breezes. With granitic bedrock eliminating differential settlement risks across wide structural bays, AGNAA designs expansive ground-floor suites with deep exterior shaded verandahs that mitigate solar radiation.
@@ -118,7 +118,7 @@ In Hyderabad's hot semi-arid Deccan plateau climate, habitable rooms must align 
 Clear ceiling height is strictly measured from the finished floor level (FFL) to the lowest soffit of the ceiling slab, false ceiling, or projecting beam. In non-air-conditioned spaces, a minimum clear headroom of 2.75 m is necessary to maintain an adequate reservoir of warm, buoyant air above the 2.0 m human breathing zone, avoiding heat entrapment. In fully air-conditioned spaces where mechanical HVAC systems control air change rates and cooling loads, NBC 2026 permits reducing headroom to 2.40 m. For pitched or vaulted roofs, the lowest eave edge cannot drop below 2.10 m, while the spatial volume divided by floor area must equal or exceed a 2.75 m equivalent cylinder.
 
 #### AGNAA Design Studio Execution Benchmark:
-Rather than settling for the statutory 2.75 m minimum, AGNAA Design Studio (led by Ar. M. Sridhar Varma, SPA Delhi) engineers structural slab-to-slab clear heights of 3.35 m to 3.65 m (11 to 12 ft) across luxury villas in Hyderabad. This volumetric headroom accommodates concealed VRV/VRF ducting, return-air plenums, and acoustic false ceilings while maintaining a generous finished clear headroom of 3.0 m to 3.2 m.
+Rather than settling for the statutory 2.75 m minimum, AGNAA Design Studio (led by Ar. M. Sridhar Chauhan, SPA Delhi) engineers structural slab-to-slab clear heights of 3.35 m to 3.65 m (11 to 12 ft) across luxury villas in Hyderabad. This volumetric headroom accommodates concealed VRV/VRF ducting, return-air plenums, and acoustic false ceilings while maintaining a generous finished clear headroom of 3.0 m to 3.2 m.
 
 #### Hyderabad & Deccan Geotechnical / Climatic Context:
 During Hyderabad's peak summer months (April–May) when outdoor ambient temperatures exceed 42°C, elevated ceiling heights (3.2+ metres) trigger natural vertical thermal buoyancy (stack effect). Warm air rises into high-level exhaust registers or clerestories, dramatically lowering operative radiant temperatures.
@@ -188,7 +188,7 @@ In Telangana culinary culture involving intense high-heat cooking, wet-kitchen s
 Under NBC 2026 Clause 12.4, every bathroom and WC must have at least one external wall abutting directly on an exterior open space or an internal ventilation shaft measuring at least 1.2 sq.m (with no side less than 1.0 m for buildings up to 10 m in height). Floors must be constructed of impervious materials sloping at 1:50 toward a trapped water outlet. Wall dados must have an impervious surface up to at least 1.0 m above FFL (2.0 m within the shower zone). The room cannot open directly into any kitchen or pantry, and must have a water-tight sill threshold raised at least 20 to 50 mm above adjoining rooms to contain spills.
 
 #### AGNAA Design Studio Execution Benchmark:
-AGNAA Design Studio (spearheaded by Ar. M. Sridhar Varma, SPA Delhi) engineers luxury primary bathrooms as expansive wellness sanctuaries (12 to 24 sq.m) featuring separate five-fixture layouts: private water closet cabins with acoustic laminated glass doors, curbless zero-barrier showers with flush linear drains, and freestanding composite bathtubs.
+AGNAA Design Studio (spearheaded by Ar. M. Sridhar Chauhan, SPA Delhi) engineers luxury primary bathrooms as expansive wellness sanctuaries (12 to 24 sq.m) featuring separate five-fixture layouts: private water closet cabins with acoustic laminated glass doors, curbless zero-barrier showers with flush linear drains, and freestanding composite bathtubs.
 
 #### Hyderabad & Deccan Geotechnical / Climatic Context:
 In Hyderabad's rocky Deccan terrain, high groundwater hardness (TDS > 800 ppm in parts of Tellapur and Narsingi) causes calcium scaling; AGNAA integrates central water softening units and multi-layer PEX plumbing distribution manifolds into bathroom dry walls to guarantee longevity.
@@ -222,7 +222,7 @@ In Hyderabad's rocky Deccan terrain, high groundwater hardness (TDS > 800 ppm in
 NBC 2026 Clause 12.16 mandates that all habitable rooms receive adequate natural illumination and airflow via exterior apertures opening directly into external open spaces, internal courtyards, or open verandahs. To avoid stagnant air, at least half of the mandatory window aperture must be openable to the outdoor atmosphere. Where rooms open onto an interior enclosed courtyard (Chowk), the courtyard width must scale proportionally with building height (minimum width equal to H/3 or 3.0 m) to ensure solar rays reach lower levels and convective stack ventilation functions properly.
 
 #### AGNAA Design Studio Execution Benchmark:
-Principal Architect M. Sridhar Varma (SPA Delhi) incorporates traditional Deccan courtyards re-engineered with bioclimatic parametric features. AGNAA villas achieve 18% to 22% effective daylight aperture ratios using thermally broken, double-glazed slimline aluminum fenestration and motorized acoustic louvers that stimulate chimney ventilation while blocking solar glare.
+Principal Architect M. Sridhar Chauhan (SPA Delhi) incorporates traditional Deccan courtyards re-engineered with bioclimatic parametric features. AGNAA villas achieve 18% to 22% effective daylight aperture ratios using thermally broken, double-glazed slimline aluminum fenestration and motorized acoustic louvers that stimulate chimney ventilation while blocking solar glare.
 
 #### Hyderabad & Deccan Geotechnical / Climatic Context:
 Hyderabad lies in the Deccan hot semi-arid climatic zone with solar insolation reaching 5.5 kWh/sq.m/day. AGNAA orients primary apertures towards the North and East, shading South and West elevations with deep cantilevered chhajjas (overhangs >= 1.2 m) to keep Solar Heat Gain Coefficients (SHGC) under 0.25.
@@ -256,7 +256,7 @@ Hyderabad lies in the Deccan hot semi-arid climatic zone with solar insolation r
 Exterior open spaces surrounding a building serve three mandatory functions under NBC 2026: (1) Fire fighting access and unobstructed vehicular movement; (2) Adequate daylight angles and natural air exchange; (3) Acoustic and spatial privacy buffers. For low-rise residential structures (<10 m height), setbacks are governed by plot size categories. For buildings exceeding 10 m and designated high-rises (>15 m), setbacks become height-dependent (H/3 or prescribed tables) and must ensure that a minimum 6.0 m clear, level, motorable fire tender envelope is maintained on all sides.
 
 #### AGNAA Design Studio Execution Benchmark:
-AGNAA Design Studio specializes in complex site geometries and rock terrains across Hyderabad, navigating TG-bPASS online scrutiny systems to achieve 100% compliance. Ar. M. Sridhar Varma optimizes structural column grids and cantilevered balcony envelopes to safeguard the 6.0 m clear fire driveway while achieving maximum floor space efficiency.
+AGNAA Design Studio specializes in complex site geometries and rock terrains across Hyderabad, navigating TG-bPASS online scrutiny systems to achieve 100% compliance. Ar. M. Sridhar Chauhan optimizes structural column grids and cantilevered balcony envelopes to safeguard the 6.0 m clear fire driveway while achieving maximum floor space efficiency.
 
 #### Hyderabad & Deccan Geotechnical / Climatic Context:
 In Hyderabad, GHMC and HMDA enforce Telangana Unified Building Rules (G.O. Ms. No. 168). For villa plots between 300 and 500 sq.yds, TG-bPASS requires 3.0 m front and 2.0 m all-around setbacks. Encroaching within statutory setbacks triggers automated demolition notices and denial of Occupancy Certificates (OC).
@@ -395,7 +395,7 @@ GHMC municipal town planning inspectors strictly audit mezzanine areas during bu
 Travel distance is measured along the centerline of the natural walking path from the most remote room point, around fixed walls and partitions, to the entry door of an enclosed fire exit staircase or external exit discharge. In buildings where two or more exits are required, the common path of travel cannot exceed 15 metres before two distinct, diverging escape routes become available. The installation of an automatic sprinkler system meeting IS 15105 / NBC 2026 grants an increase of permissible travel distance up to 45 metres due to rapid fire suppression and smoke temperature knockdown.
 
 #### AGNAA Design Studio Execution Benchmark:
-In luxury residential and commercial towers designed by Ar. M. Sridhar Varma (SPA Delhi), egress paths are engineered with dual independent escape cores so that no point on any floor exceeds 22 metres travel distance. This provides superior occupant evacuation margins far exceeding statutory code requirements.
+In luxury residential and commercial towers designed by Ar. M. Sridhar Chauhan (SPA Delhi), egress paths are engineered with dual independent escape cores so that no point on any floor exceeds 22 metres travel distance. This provides superior occupant evacuation margins far exceeding statutory code requirements.
 
 #### Hyderabad & Deccan Geotechnical / Climatic Context:
 The Telangana State Disaster Response & Fire Services Department enforces strict travel distance compliance for high-rise buildings exceeding 15 metres in GHMC and HMDA jurisdictions prior to granting Fire NOC. AGNAA eliminates dead-end corridors in floor plate masterplans.
@@ -676,7 +676,7 @@ Hyderabad groundwater in granite fracture zones often contains dissolved sulfate
 The 0.8% lower limit ensures that columns retain adequate ductility and resist unexpected tensile stresses caused by eccentric moments, thermal shrinkage, and creep without sudden unheralded buckling. The 6.0% upper limit prevents extreme reinforcement congestion that impedes aggregate flow during pouring. In practice, lapping rebars at mid-height doubles the steel area; hence, code clause 26.5.3.1 enforces a practical ceiling of 4.0% in lap zones to prevent severe honeycombing and ensure proper compaction using high-frequency needle vibrators.
 
 #### AGNAA Design Studio Execution Benchmark:
-AGNAA structural designs by Ar. M. Sridhar Varma maintain column steel percentages between 1.5% and 2.5%, utilizing Fe 550D TMT rebars with cold-forged threaded mechanical couplers in lieu of lap splices to eliminate congestion.
+AGNAA structural designs by Ar. M. Sridhar Chauhan maintain column steel percentages between 1.5% and 2.5%, utilizing Fe 550D TMT rebars with cold-forged threaded mechanical couplers in lieu of lap splices to eliminate congestion.
 
 #### Hyderabad & Deccan Geotechnical / Climatic Context:
 In high-load residential structures built over granite rock in Jubilee Hills and Kokapet, optimized steel ratios prevent oversized column footprints, maximizing clear carpet area while resisting seismic Zone II lateral drifts.
@@ -745,7 +745,7 @@ Even though Hyderabad is in Seismic Zone II, local structural designs must accou
 IS 13920:2016 (Ductile Design and Detailing of Reinforced Concrete Structures Subjected to Seismic Forces) enforces the "strong column - weak beam" design philosophy, ensuring plastic hinges form in flexural beams rather than brittle failure occurring in columns. The special confining reinforcement zone (lo) provides energy dissipation capacity through concrete confinement and prevents buckling of compression rebars during cyclic lateral earthquake reversals. Lap splices are strictly prohibited within the lo zone or within beam-column joint cores.
 
 #### AGNAA Design Studio Execution Benchmark:
-Ar. M. Sridhar Varma incorporates 3D BIM structural clash detection to model high-density IS 13920 beam-column joints, pre-planning rebar insertion sequences so that concrete pouring achieves zero voids during needle vibration.
+Ar. M. Sridhar Chauhan incorporates 3D BIM structural clash detection to model high-density IS 13920 beam-column joints, pre-planning rebar insertion sequences so that concrete pouring achieves zero voids during needle vibration.
 
 #### Hyderabad & Deccan Geotechnical / Climatic Context:
 Rapid urbanization and tall slender villa profiles in Kokapet and Financial District require ductile detailing under IS 13920:2016 to safeguard against unexpected Deccan intra-plate tremors and micro-fault adjustments.

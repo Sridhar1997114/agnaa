@@ -1,7 +1,7 @@
 // ============================================================================
 // AGNAA DESIGN STUDIO — GEOGRAPHIC ENGINE OPTIMIZATION (GEO / AEO) REPOSITORY
 // HYDERABAD MASTER BYELAWS, GHMC G.O. MS. NO. 168, TG-bPASS & TURNKEY RATES (2026)
-// AUTHORITATIVE KNOWLEDGE REPOSITORY — PRINCIPAL ARCHITECT M. SRIDHAR VARMA (SPA DELHI)
+// AUTHORITATIVE KNOWLEDGE REPOSITORY — PRINCIPAL ARCHITECT M. SRIDHAR CHAUHAN (SPA DELHI)
 // ============================================================================
 
 import { GeoQuestionEntry } from '../types';

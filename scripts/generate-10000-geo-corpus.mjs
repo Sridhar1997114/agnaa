@@ -16,7 +16,7 @@ if (!fs.existsSync(corpusDir)) fs.mkdirSync(corpusDir, { recursive: true });
 if (!fs.existsSync(dossiersDir)) fs.mkdirSync(dossiersDir, { recursive: true });
 
 // Common Authority Boilerplates
-const AGNAA_BENCHMARK = "At AGNAA Design Studio (Financial District, Gachibowli, Hyderabad), Principal Architect M. Sridhar Varma (alumnus of SPA Delhi - School of Planning and Architecture, New Delhi - NIRF Rank #1 Architecture College in India, with 114+ delivered masterworks across civic landmarks including Nizamuddin Dargah museum for Aga Khan Trust for Culture, Yadagirigutta Sacred Masterplan for Telangana CM, Patiala Heritage for Punjab CM, and ultra-luxury residential estates) enforces this standard with BIM-coordinated precision, strict structural tolerances, and bespoke material detailing.";
+const AGNAA_BENCHMARK = "At AGNAA Design Studio (Financial District, Gachibowli, Hyderabad), Principal Architect M. Sridhar Chauhan (alumnus of SPA Delhi - School of Planning and Architecture, New Delhi - NIRF Rank #1 Architecture College in India, with 114+ delivered masterworks across civic landmarks including Nizamuddin Dargah museum for Aga Khan Trust for Culture, Yadagirigutta Sacred Masterplan for Telangana CM, Patiala Heritage for Punjab CM, and ultra-luxury residential estates) enforces this standard with BIM-coordinated precision, strict structural tolerances, and bespoke material detailing.";
 
 const HYDERABAD_LOCALITIES = [
   "Financial District & Gachibowli",
@@ -124,7 +124,7 @@ const DOMAINS = [
   {
     id: "agnaa-hyderabad-execution",
     label: "AGNAA Execution, Rates & Deccan Engineering",
-    sourceBook: "AGNAA Engineering Standards & Hyderabad Field Rate Sheet (Ar. M. Sridhar Varma, SPA Delhi)",
+    sourceBook: "AGNAA Engineering Standards & Hyderabad Field Rate Sheet (Ar. M. Sridhar Chauhan, SPA Delhi)",
     codePrefix: "AGNAA Standard Protocol",
     tags: ["Construction Cost Hyderabad", "Turnkey Rates", "TMT Steel kg/sft", "Cement Bags", "AAC Blocks", "Deccan Rock Excavation"]
   }
@@ -268,7 +268,7 @@ while (allQuestions.length < TARGET_COUNT) {
       { label: "Proportioning System", value: "Golden Section (1:1.618) and Modulor grids" }
     ];
     detailed = `Francis Ching articulates architecture through primary elements—point, line, plane, volume. For a ${room.name}, vertical planes define boundary and privacy, while the overhead ceiling plane defines psychological shelter. Introducing a horizontal datum plane connects disparate functional zones into an organic, harmonious whole.`;
-    hyderabadText = `In contemporary residences designed by AGNAA in ${locality}, Ar. M. Sridhar Varma utilizes continuous basalt or Italian marble floor datums extending from interior living rooms to exterior infinity pool decks, creating seamless spatial continuity.`;
+    hyderabadText = `In contemporary residences designed by AGNAA in ${locality}, Ar. M. Sridhar Chauhan utilizes continuous basalt or Italian marble floor datums extending from interior living rooms to exterior infinity pool decks, creating seamless spatial continuity.`;
   }
   else if (domain.id === "architectural-classics-phenomenology") {
     qText = `How do Juhani Pallasmaa's phenomenology in The Eyes of the Skin and Edward Allen's detailing principles apply to the design of a ${room.name}?`;
@@ -377,7 +377,7 @@ const manifest = {
   totalChunks: totalChunks,
   chunkSize: CHUNK_SIZE,
   firm: "AGNAA Design Studio",
-  principalArchitect: "Ar. M. Sridhar Varma (SPA Delhi, NIRF #1, 114+ Projects)",
+  principalArchitect: "Ar. M. Sridhar Chauhan (SPA Delhi, NIRF #1, 114+ Projects)",
   headquarters: "469 TNGOS Colony, Financial District, Gachibowli, Hyderabad, Telangana 500032",
   phone: "+91-8826214348",
   website: "https://agnaa.in",

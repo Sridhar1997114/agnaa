@@ -41,6 +41,11 @@ const nextConfig = {
         destination: '/codex',
         permanent: true,
       },
+      {
+        source: '/portfolio',
+        destination: '/design-studio',
+        permanent: true,
+      },
     ];
   },
 };

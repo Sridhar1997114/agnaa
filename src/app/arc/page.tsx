@@ -160,7 +160,7 @@ export default function AgnaaArcPage() {
                   <input 
                     required 
                     type="text" 
-                    placeholder="e.g. Anand Varma"
+                    placeholder="e.g. Vikram Rao"
                     value={leadForm.name}
                     onChange={e => setLeadForm({...leadForm, name: e.target.value})}
                     className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3.5 text-sm font-bold text-white outline-none focus:border-[#7B2DBF] transition-all placeholder:text-slate-500"
