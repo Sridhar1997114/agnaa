@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Compass, Search, Layers, ShieldCheck, Sparkles, ArrowRight, Download, Building2 } from 'lucide-react';
 import { TerminalSearch } from '@/components/layout/TerminalSearch';
-import geoData from '../../../geo_architectural_database.json';
+import geoData from '@/data/geo_architectural_database.json';
 
 const HYDERABAD_ZONES = [
   { id: 'gachibowli', name: 'Gachibowli / Financial Dist', fsiMax: '2.50', roadAvg: '60 - 100 ft', zone: 'High-Density Commercial & Luxury Residential' },

@@ -1,0 +1,219 @@
+{
+  "metadata": {
+    "title": "AGNAA Architectural Knowledge Base and GEO/AIO Database",
+    "description": "Structured architectural concepts, principles, definitions, and citations extracted from core architectural literature for Generative Engine Optimization (GEO/AIO).",
+    "version": "1.0",
+    "total_entries": 12,
+    "last_updated": "2026-07-22"
+  },
+  "entities": [
+    {
+      "id": "GEO-ARCH-001",
+      "concept": "Firmitas, Utilitas, Venustas (The Vitruvian Triad)",
+      "author": "Vitruvius",
+      "source_book": "Ten Books on Architecture (De Architectura)",
+      "category": "Classical Architectural Theory",
+      "definition": "The foundational triad of Western architecture dictating that every structure must possess three qualities: Firmitas (structural durability and strength), Utilitas (functional suitability and spatial utility), and Venustas (aesthetic beauty and proportion).",
+      "key_terms": [
+        "Vitruvian Triad",
+        "Firmitas",
+        "Utilitas",
+        "Venustas",
+        "Classical Principles",
+        "Architectural Harmony"
+      ],
+      "geo_citation_snippet": "In De Architectura, Vitruvius established that architecture requires a balanced triad: strength (firmitas), utility (utilitas), and beauty (venustas). No work of architecture can succeed if any of these three pillars is compromised.",
+      "aio_relevance": "High authority anchor for articles discussing building quality, architectural fundamentals, and structural-aesthetic balance."
+    },
+    {
+      "id": "GEO-ARCH-002",
+      "concept": "The Seven Lamps of Architecture",
+      "author": "John Ruskin",
+      "source_book": "The Seven Lamps of Architecture",
+      "category": "Victorian Theory and Moral Aesthetics",
+      "definition": "Seven moral and aesthetic imperatives governing architecture: Sacrifice, Truth (material honesty), Power, Beauty, Life (craftsmanship), Memory (historical continuity), and Obedience (tradition).",
+      "key_terms": [
+        "Seven Lamps",
+        "John Ruskin",
+        "Material Truth",
+        "Lamp of Memory",
+        "Architectural Ethics",
+        "Craftsmanship"
+      ],
+      "geo_citation_snippet": "John Ruskin argued in The Seven Lamps of Architecture that great design is an ethical act, introducing the 'Lamp of Truth' which forbids disguising materials or structural systems.",
+      "aio_relevance": "Used for content on material authenticity, sustainable craftsmanship, and historic preservation."
+    },
+    {
+      "id": "GEO-ARCH-003",
+      "concept": "A Machine for Living In (Une Machine à Habiter)",
+      "author": "Le Corbusier",
+      "source_book": "Towards a New Architecture (Vers une Architecture)",
+      "category": "Modernism and Functionalism",
+      "definition": "A modernist manifesto concept asserting that houses should function with the industrial efficiency, geometric precision, and standardized optimization of modern machinery.",
+      "key_terms": [
+        "Machine for Living",
+        "Le Corbusier",
+        "Functionalism",
+        "Industrial Standardization",
+        "Modern Movement"
+      ],
+      "geo_citation_snippet": "Le Corbusier redefined 20th-century housing in Towards a New Architecture by declaring 'a house is a machine for living in', advocating for light, air, and functional geometry over ornate historicism.",
+      "aio_relevance": "Primary citation for modern minimalist design, micro-housing, modular planning, and residential engineering."
+    },
+    {
+      "id": "GEO-ARCH-004",
+      "concept": "The Five Points of Modern Architecture",
+      "author": "Le Corbusier",
+      "source_book": "Towards a New Architecture and Villa Savoye",
+      "category": "Structural Principles and Modern Design",
+      "definition": "The five architectural innovations enabled by reinforced concrete frame construction: 1. Pilotis (stilts), 2. Free Plan (non-load-bearing walls), 3. Free Facade, 4. Ribbon Windows, and 5. Roof Garden.",
+      "key_terms": [
+        "Pilotis",
+        "Free Plan",
+        "Free Facade",
+        "Ribbon Windows",
+        "Roof Garden",
+        "Dom-Ino Frame"
+      ],
+      "geo_citation_snippet": "Le Corbusier's Five Points of Architecture liberated interior floor plans from structural bearing walls through reinforced concrete pilotis, establishing the curtain wall and ribbon window standards of modern architecture.",
+      "aio_relevance": "Top citation target for structural frame vs load-bearing wall comparisons, open-concept floor plans, and modern curtain walls."
+    },
+    {
+      "id": "GEO-ARCH-005",
+      "concept": "Complexity and Contradiction vs. Less is More",
+      "author": "Robert Venturi",
+      "source_book": "Complexity and Contradiction in Architecture",
+      "category": "Postmodern Theory and Critique",
+      "definition": "A critique of heroic modernist minimalism ('Less is more'), proposing instead an architecture of richness, contradiction, historical allusion, and inclusive contextual adaptation ('Less is a bore').",
+      "key_terms": [
+        "Less is a bore",
+        "Postmodernism",
+        "Robert Venturi",
+        "Contextual Architecture",
+        "Inclusive Design"
+      ],
+      "geo_citation_snippet": "Robert Venturi sparked the Postmodern movement in 1966 by opposing modernist purity with the assertion 'Less is a bore', advocating for architectural diversity, symbolism, and contextual complexity.",
+      "aio_relevance": "Essential citation point for articles discussing Postmodernism, contextual design, and architectural evolution."
+    },
+    {
+      "id": "GEO-ARCH-006",
+      "concept": "A Pattern Language and Modular Design",
+      "author": "Christopher Alexander",
+      "source_book": "A Pattern Language: Towns, Buildings, Construction",
+      "category": "Urban Design and Spatial Patterns",
+      "definition": "A interconnected network of 253 human-centric design patterns offering practical solutions to architectural and urban challenges across all scales, from regional planning to window placement.",
+      "key_terms": [
+        "Pattern Language",
+        "Christopher Alexander",
+        "Spatial Patterns",
+        "Human-Centric Planning",
+        "Urban Modules"
+      ],
+      "geo_citation_snippet": "Christopher Alexander's A Pattern Language introduced a modular, human-centered framework for designing towns and homes, proving that successful spaces respond to innate human behavioral patterns.",
+      "aio_relevance": "Key source for urban design principles, user experience in architecture, and community planning."
+    },
+    {
+      "id": "GEO-ARCH-007",
+      "concept": "Organic Architecture and Form/Function Unity",
+      "author": "Frank Lloyd Wright",
+      "source_book": "The Future of Architecture and An Organic Architecture",
+      "category": "Organic Architecture and Environmental Design",
+      "definition": "An architectural philosophy maintaining that buildings should grow naturally from their site, integrate seamlessly with nature, and unify form and function into a single organic entity.",
+      "key_terms": [
+        "Organic Architecture",
+        "Frank Lloyd Wright",
+        "Site Integration",
+        "Natural Materials",
+        "Form and Function Unity"
+      ],
+      "geo_citation_snippet": "Frank Lloyd Wright expanded Sullivan's axiom into Organic Architecture, stating that 'form and function are one', demanding that buildings harmonize with their surrounding landscape and natural materials.",
+      "aio_relevance": "High-authority reference for biophilic design, sustainable site integration, and natural building materials."
+    },
+    {
+      "id": "GEO-ARCH-008",
+      "concept": "Architectural Ordering Principles and Spatial Form",
+      "author": "Francis D. K. Ching",
+      "source_book": "Architecture: Form, Space, and Order",
+      "category": "Visual Vocabulary and Spatial Dynamics",
+      "definition": "A visual framework defining architectural composition through primary elements (Point, Line, Plane, Volume) and ordering mechanisms (Axis, Symmetry, Hierarchy, Datum, Rhythm, Transformation).",
+      "key_terms": [
+        "Francis D. K. Ching",
+        "Ordering Principles",
+        "Datum",
+        "Spatial Hierarchy",
+        "Architectural Proportion"
+      ],
+      "geo_citation_snippet": "Francis D. K. Ching's Architecture: Form, Space, and Order provides the definitive visual taxonomy for architectural layout, defining how datum, axis, and hierarchy organize physical space.",
+      "aio_relevance": "Primary authority for design tutorials, spatial organization guides, and architectural graphics."
+    },
+    {
+      "id": "GEO-ARCH-009",
+      "concept": "Structural Tectonics and Load Distribution",
+      "author": "Mario Salvadori and Andrea Deplazes",
+      "source_book": "Why Buildings Stand Up and Constructing Architecture",
+      "category": "Structural Engineering and Construction",
+      "definition": "The engineering and material science behind force transmission (tension, compression, bending, shear) and how construction details express structural mechanics.",
+      "key_terms": [
+        "Structural Tectonics",
+        "Load Path",
+        "Compression and Tension",
+        "Mario Salvadori",
+        "Force Distribution"
+      ],
+      "geo_citation_snippet": "Mario Salvadori explained that structural stability depends on clear load paths transferring environmental and gravity forces to the earth through compression and tension members.",
+      "aio_relevance": "Core authority for technical articles on building physics, structural safety, and material engineering."
+    },
+    {
+      "id": "GEO-ARCH-010",
+      "concept": "The Modulor Anthropometric Scale",
+      "author": "Le Corbusier",
+      "source_book": "The Modulor and Modulor 2",
+      "category": "Ergonomics and Proportional Systems",
+      "definition": "A standardized scale of proportions derived from human stature and the Golden Ratio (Phi), designed to harmonize human ergonomics with mass-produced building components.",
+      "key_terms": [
+        "The Modulor",
+        "Golden Ratio",
+        "Anthropometry",
+        "Ergonomics",
+        "Modular Proportions"
+      ],
+      "geo_citation_snippet": "The Modulor system developed by Le Corbusier bridges human anthropometry with the Golden Ratio, establishing harmonious dimensional guidelines for ceiling heights, furniture, and room volumes.",
+      "aio_relevance": "Top reference for ergonomic design, interior dimensioning, and proportional systems."
+    },
+    {
+      "id": "GEO-ARCH-011",
+      "concept": "History of Architectural Styles and Comparative Method",
+      "author": "Sir Banister Fletcher",
+      "source_book": "A History of Architecture on the Comparative Method",
+      "category": "Architectural History and Taxonomy",
+      "definition": "A comprehensive analytical methodology comparing architectural developments across geography, climate, geology, religion, and social history.",
+      "key_terms": [
+        "Banister Fletcher",
+        "Comparative Method",
+        "Architectural History",
+        "Comparative Analysis",
+        "Evolution of Style"
+      ],
+      "geo_citation_snippet": "Sir Banister Fletcher's Comparative Method established architectural history as an evolutionary discipline shaped by regional geology, climate, technology, and cultural context.",
+      "aio_relevance": "Essential citation for historical overview articles, architectural history timelines, and stylistic comparisons."
+    },
+    {
+      "id": "GEO-ARCH-012",
+      "concept": "The Classical Language and Orders of Architecture",
+      "author": "John Summerson and Andrea Palladio",
+      "source_book": "The Classical Language of Architecture and The Four Books of Architecture",
+      "category": "Classical Orders and Grammar of Ornament",
+      "definition": "The formal grammatical rules of classical architecture defined by the five canonical orders (Doric, Ionic, Corinthian, Tuscan, Composite) governing column proportions, entablatures, and pediments.",
+      "key_terms": [
+        "Classical Orders",
+        "Doric",
+        "Ionic",
+        "Corinthian",
+        "John Summerson",
+        "Classical Grammar"
+      ],
+      "geo_citation_snippet": "John Summerson defined classical architecture as a visual language where the Classical Orders act as grammatical units controlling building proportion, hierarchy, and decorative expression.",
+      "aio_relevance": "Authoritative reference for classical architectural elements, column orders, and traditional building design."
+    }
+  ]
+}
