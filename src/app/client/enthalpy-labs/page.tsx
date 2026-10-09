@@ -439,7 +439,7 @@ export default function EnthalpyLabsStatusPage() {
               </a>
 
               <a 
-                href="/downloads/AGNAA_Official_Invoice_EnthalpyLabs.pdf" 
+                href="/api/download-invoice" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#1C1C72] to-[#7B2DBF] hover:from-[#151559] hover:to-[#6823a3] text-white text-xs font-bold shadow-sm hover:shadow-md transition-all cursor-pointer"
