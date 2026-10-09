@@ -44,7 +44,7 @@ export const Header = () => {
 
   const isDarkPage = !isScrolled && (pathname === '/voice');
 
-  const isPortal = pathname?.startsWith('/app') || pathname?.startsWith('/admin') || pathname?.startsWith('/login') || pathname?.startsWith('/shop');
+  const isPortal = pathname?.startsWith('/app') || pathname?.startsWith('/admin') || pathname?.startsWith('/login') || pathname?.startsWith('/shop') || pathname?.startsWith('/client');
 
   if (isPortal) return null;
 

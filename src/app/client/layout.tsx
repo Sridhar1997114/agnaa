@@ -6,7 +6,7 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#0D0D14] text-[#F0F0F6] font-sans">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] font-sans antialiased">
       <main>
         {children}
       </main>

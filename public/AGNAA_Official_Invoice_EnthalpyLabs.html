@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AGNAA DESIGN STUDIO — Official Tax Invoice & Statement of Account</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+      background-color: #FFFFFF;
+      color: #09090B;
+      font-size: 9.5px;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      max-height: 297mm;
+      padding: 12mm 16mm 11mm 16mm;
+      background: #FFFFFF;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+    }
+
+    /* Minimalist Top Accent */
+    .top-accent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #18181B 0%, #312E81 50%, #4338CA 100%);
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    /* Steve Jobs Pure Vector Brand Lockup */
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+    .brand-icon {
+      height: 36px;
+      width: auto;
+      color: #312E81;
+      display: block;
+    }
+    .brand-divider {
+      width: 1px;
+      height: 28px;
+      background: #E2E8F0;
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .brand-name {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 4.5px;
+      color: #09090B;
+      line-height: 1;
+    }
+    .brand-sub {
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: 2.8px;
+      color: #64748B;
+      text-transform: uppercase;
+      margin-top: 3.5px;
+    }
+
+    /* Meta Column */
+    .meta-col {
+      text-align: right;
+    }
+    .doc-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 7px;
+      margin-bottom: 4px;
+    }
+    .doc-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #09090B;
+    }
+    .status-badge {
+      font-size: 6.8px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FDE68A;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: auto auto;
+      column-gap: 10px;
+      row-gap: 1.5px;
+      font-size: 8px;
+      text-align: right;
+    }
+    .meta-lbl {
+      color: #71717A;
+      font-weight: 500;
+    }
+    .meta-val {
+      color: #09090B;
+      font-weight: 700;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", monospace;
+    }
+
+    /* Editorial Executive Quote Banner (Quiet Confidence) */
+    .quote-banner {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: 3.5px solid #312E81;
+      border-radius: 6px;
+      padding: 9px 13px;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .quote-title {
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #312E81;
+    }
+    .quote-body {
+      font-size: 8.5px;
+      color: #334155;
+      line-height: 1.45;
+    }
+
+    /* Package & Negotiation Header */
+    .pkg-container {
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      background: #FFFFFF;
+      margin-top: 10px;
+      padding: 11px 14px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+    .pkg-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 9px;
+      border-bottom: 1px solid #F1F5F9;
+    }
+    .pkg-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .pkg-badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: #EEF2FF;
+      color: #3730A3;
+      font-size: 6.8px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-bottom: 3px;
+    }
+    .pkg-name {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #09090B;
+      letter-spacing: -0.2px;
+    }
+    .pkg-desc {
+      font-size: 8px;
+      color: #64748B;
+    }
+    .pkg-pricing {
+      text-align: right;
+    }
+    .price-was {
+      font-size: 8.5px;
+      color: #94A3B8;
+      text-decoration: line-through;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .price-now {
+      font-size: 18px;
+      font-weight: 900;
+      color: #0F172A;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: -0.5px;
+    }
+    .price-tag {
+      font-size: 7px;
+      font-weight: 700;
+      color: #15803D;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* 2 Columns: Core Scope vs Bonus Extra Works */
+    .scope-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.08fr;
+      gap: 12px;
+      padding-top: 10px;
+    }
+    .scope-card {
+      background: #FAFAFA;
+      border: 1px solid #F1F5F9;
+      border-radius: 6px;
+      padding: 9px 11px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .scope-card.bonus {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+    }
+    .scope-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .scope-title {
+      font-size: 7.8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #18181B;
+    }
+    .scope-card.bonus .scope-title {
+      color: #312E81;
+    }
+    .badge-scope {
+      font-size: 6.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 1.5px 6px;
+      border-radius: 3px;
+      letter-spacing: 0.5px;
+    }
+    .badge-scope.core {
+      background: #E4E4E7;
+      color: #27272A;
+    }
+    .badge-scope.bonus {
+      background: #312E81;
+      color: #FFFFFF;
+    }
+
+    .check-list {
+      list-style: none;
+      font-size: 7.8px;
+      color: #334155;
+      line-height: 1.42;
+    }
+    .check-list li {
+      position: relative;
+      padding-left: 15px;
+      margin-bottom: 2.5px;
+    }
+    .check-mark {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 900;
+      font-size: 9px;
+    }
+    .check-list.core .check-mark {
+      color: #10B981;
+    }
+    .check-list.bonus .check-mark {
+      color: #4338CA;
+    }
+    .check-list strong {
+      color: #09090B;
+      font-weight: 700;
+    }
+
+    .card-footer-pill {
+      margin-top: 6px;
+      padding: 3.5px 8px;
+      border-radius: 4px;
+      font-size: 7.2px;
+      font-weight: 700;
+    }
+    .pill-core {
+      background: #F0FDF4;
+      color: #15803D;
+      border: 1px solid #DCFCE7;
+    }
+    .pill-bonus {
+      background: #EEF2FF;
+      color: #3730A3;
+      border: 1px solid #E0E7FF;
+    }
+
+    /* Section Bar */
+    .section-label {
+      font-size: 7.8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #64748B;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #F1F5F9;
+    }
+
+    /* Payment Ledger Box */
+    .ledger-container {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .ledger-top {
+      background: #F8FAFC;
+      padding: 6px 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .ledger-headline {
+      font-size: 7.8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #18181B;
+    }
+    table.ledger-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8px;
+    }
+    table.ledger-tbl th {
+      background: #FFFFFF;
+      color: #64748B;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 7px;
+      padding: 5px 11px;
+      text-align: left;
+      border-bottom: 1px solid #F1F5F9;
+    }
+    table.ledger-tbl td {
+      padding: 5px 11px;
+      border-bottom: 1px solid #F8FAFC;
+      color: #334155;
+    }
+    .pill-paid {
+      background: #ECFDF5;
+      color: #065F46;
+      font-weight: 800;
+      font-size: 6.8px;
+      padding: 1.5px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      display: inline-block;
+      border: 1px solid #A7F3D0;
+    }
+    .pill-due {
+      background: #FFFBEB;
+      color: #92400E;
+      font-weight: 800;
+      font-size: 6.8px;
+      padding: 1.5px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      display: inline-block;
+      border: 1px solid #FDE68A;
+    }
+    .summary-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #09090B;
+      color: #FFFFFF;
+      padding: 7px 14px;
+    }
+    .s-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .s-caption {
+      font-size: 6.8px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #A1A1AA;
+      font-weight: 700;
+    }
+    .s-number {
+      font-size: 13px;
+      font-weight: 900;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .s-number.green { color: #4ADE80; }
+    .s-number.gold { color: #FBBF24; }
+
+    /* Bottom 2 Boxes */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .b-box {
+      background: #FAFAFA;
+      border: 1px solid #F1F5F9;
+      border-radius: 6px;
+      padding: 8px 11px;
+    }
+    .b-head {
+      font-size: 7.2px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #52525B;
+      margin-bottom: 5px;
+    }
+    .b-list {
+      list-style: none;
+      font-size: 7.5px;
+      color: #52525B;
+      line-height: 1.38;
+    }
+    .b-list li {
+      position: relative;
+      padding-left: 9px;
+      margin-bottom: 1.5px;
+    }
+    .b-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #A1A1AA;
+      font-weight: 800;
+    }
+
+    .terms-flex {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .term-card {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1px solid #E4E4E7;
+      border-radius: 5px;
+      padding: 4px 6px;
+      text-align: center;
+    }
+    .term-val {
+      font-size: 11px;
+      font-weight: 900;
+      color: #18181B;
+    }
+    .term-desc {
+      font-size: 6.5px;
+      color: #71717A;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    /* Remittance Coordinates — Clean & Minimalist */
+    .remittance-bar {
+      background: #FAFAFB;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 7px 14px;
+      margin-top: 9px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .rem-group {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+    .rem-item {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+    .rem-lbl {
+      font-size: 6.2px;
+      color: #64748B;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .rem-val {
+      font-size: 8.5px;
+      color: #0F172A;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif;
+    }
+
+    /* Footer */
+    .footer {
+      padding-top: 8px;
+      border-top: 1px solid #F1F5F9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.5px;
+      color: #71717A;
+    }
+    .footer strong {
+      color: #09090B;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+    <div class="top-accent"></div>
+
+    <!-- MAIN BODY -->
+    <div>
+      <!-- 1. HEADER WITH PURE STEVE JOBS VECTOR LOCKUP -->
+      <div class="header">
+        <div class="brand-lockup">
+          <svg class="brand-icon" viewBox="100 600 3800 2800">
+            <path fill="currentColor" fill-rule="evenodd" d="M104.5,3397.1 L104.5,1340.9 L703.1,1108.1 L703.1,3397.1 L503.5,3397.1 L503.5,2200 L304,2200 L304,3397.1 Z M304,2000.4 L503.5,2000.4 L503.5,1399.8 L304,1477.3 Z"/>
+            <path fill="currentColor" fill-rule="evenodd" d="M902.6,3197.6 L902.6,3397.1 L1501.1,3397.1 L1501.1,797.7 L902.6,1030.5 L902.6,2200 L1301.6,2200 L1301.6,3197.6 Z M1102.1,1167 L1301.6,1089.4 L1301.6,2000.4 L1102.1,2000.4 Z"/>
+            <polygon fill="currentColor" fill-rule="evenodd" points="1700.7,3397.1 1900.2,3397.1 1900.2,856.7 1999.9,817.8 2099.7,856.7 2099.7,3397.1 2299.2,3397.1 2299.2,720.1 1999.9,603.8 1700.7,720.1"/>
+            <path fill="currentColor" fill-rule="evenodd" d="M2498.9,1011.8 L2897.9,1167 L2897.9,2000.4 L2498.9,2000.4 L2498.9,3397.1 L3097.4,3397.1 L3097.4,1030.5 L2498.9,797.7 Z M2698.4,2200 L2897.9,2200 L2897.9,3197.6 L2698.4,3197.6 Z"/>
+            <path fill="currentColor" fill-rule="evenodd" d="M3296.9,1108.1 L3895.5,1340.9 L3895.5,3397.1 L3696,3397.1 L3696,2200 L3496.5,2200 L3496.5,3397.1 L3296.9,3397.1 Z M3496.5,1399.8 L3696,1477.3 L3696,2000.4 L3496.5,2000.4 Z"/>
+          </svg>
+          <div class="brand-divider"></div>
+          <div class="brand-text">
+            <div class="brand-name">AGNAA</div>
+            <div class="brand-sub">DESIGN STUDIO</div>
+          </div>
+        </div>
+
+        <div class="meta-col">
+          <div class="doc-badge-row">
+            <span class="doc-title">Tax Invoice</span>
+            <span class="status-badge">Partially Paid · Balance Due</span>
+          </div>
+          <div class="meta-grid">
+            <div class="meta-lbl">Client Entity:</div>
+            <div class="meta-val">Enthalpy Labs Pvt. Ltd.</div>
+
+            <div class="meta-lbl">Invoice Reference:</div>
+            <div class="meta-val">AGNAA-INV-2026-002</div>
+
+            <div class="meta-lbl">Quotation Reference:</div>
+            <div class="meta-val">AGNAA-DIG-2026-001 (Rev 1)</div>
+
+            <div class="meta-lbl">Invoice Date:</div>
+            <div class="meta-val">08 October 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. EDITORIAL STRATEGIC CONTEXT BANNER -->
+      <div class="quote-banner">
+        <div class="quote-title">Digital Presence Quotation &amp; Comprehensive Brand Ecosystem</div>
+        <div class="quote-body">
+          Enthalpy Labs operates in a market where trust precedes enquiry. This agreement unites the core Digital Authority web system with an extensive complimentary executive branding suite—delivering a unified, industrial-grade authority presence across every digital and corporate touchpoint.
+        </div>
+      </div>
+
+      <!-- 3. SELECTED OPTION 02 WITH DUAL SCOPE SYSTEM -->
+      <div class="pkg-container">
+        <div class="pkg-top">
+          <div class="pkg-left">
+            <div class="pkg-badge">★ Recommended Option 02 Selected</div>
+            <div class="pkg-name">Option 02: Digital Authority System &amp; Executive Brand Suite</div>
+            <div class="pkg-desc"><strong>BEST FOR:</strong> A serious business that wants credibility, better enquiry quality, and complete market authority.</div>
+          </div>
+          <div class="pkg-pricing">
+            <div class="price-was">₹1,48,500 Quoted</div>
+            <div class="price-now">₹1,25,000</div>
+            <div class="price-tag">Negotiated One-Time Investment</div>
+          </div>
+        </div>
+
+        <div class="scope-grid">
+          <!-- Column 1: Core Contracted Scope -->
+          <div class="scope-card">
+            <div>
+              <div class="scope-header">
+                <span class="scope-title">Core Web &amp; Enquiry Scope (Contracted)</span>
+                <span class="badge-scope core">100% Built</span>
+              </div>
+              <ul class="check-list core">
+                <li><span class="check-mark">✓</span> <strong>Website Planning &amp; Structure</strong> — Full architecture &amp; sitemap</li>
+                <li><span class="check-mark">✓</span> <strong>Wireframe Planning</strong> — Custom layout UX &amp; technical hierarchy</li>
+                <li><span class="check-mark">✓</span> <strong>Homepage &amp; Service Page Design</strong> — DSC, RC1, ARC, TGA</li>
+                <li><span class="check-mark">✓</span> <strong>Contact Flow Design</strong> — Sample submission &amp; testing funnel</li>
+                <li><span class="check-mark">✓</span> <strong>Call-to-Action Improvement</strong> — Conversion-focused enquiry routes</li>
+                <li><span class="check-mark">✓</span> <strong>WhatsApp Enquiry Planning</strong> — Direct instant engineer connect</li>
+                <li><span class="check-mark">✓</span> <strong>Stronger METTLER TOLEDO Trust Layer</strong> — Partner integration</li>
+              </ul>
+            </div>
+            <div class="card-footer-pill pill-core">
+              ✓ Foundation of industrial trust, clarity &amp; lead conversion.
+            </div>
+          </div>
+
+          <!-- Column 2: Extra Work / Complimentary Executive Brand Suite (BONUS) -->
+          <div class="scope-card bonus">
+            <div>
+              <div class="scope-header">
+                <span class="scope-title">Complimentary Executive Branding Suite</span>
+                <span class="badge-scope bonus">Extra Work · Bonus</span>
+              </div>
+              <ul class="check-list bonus">
+                <li><span class="check-mark">✓</span> <strong>Master Logo Design:</strong> Sacred geometry ΔH logomark + 9 vector suites</li>
+                <li><span class="check-mark">✓</span> <strong>4K 3D Motion Video Design:</strong> Ultra-HD animated 3D video renders</li>
+                <li><span class="check-mark">✓</span> <strong>12-Person Staff ID Card System:</strong> Retouched photos, codes, print PSDs</li>
+                <li><span class="check-mark">✓</span> <strong>Corporate Visiting Cards:</strong> 10 distinct print-ready executive variations</li>
+                <li><span class="check-mark">✓</span> <strong>Official Corporate Letterhead:</strong> Executive A4 print-ready stationery</li>
+                <li><span class="check-mark">✓</span> <strong>Presentation &amp; Pitch Deck:</strong> Multi-slide deck &amp; company profile template</li>
+                <li><span class="check-mark">✓</span> <strong>Integrated Brand Vision:</strong> Color tokens, CoA &amp; 54 collateral templates</li>
+              </ul>
+            </div>
+            <div class="card-footer-pill pill-bonus">
+              ★ ₹0 Extra Cost — Delivered as an Executive Courtesy Bonus.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. PAYMENT RECORD & STATEMENT OF ACCOUNT -->
+      <div class="section-label">Payment Record &amp; Current Statement of Account</div>
+      <div class="ledger-container">
+        <div class="ledger-top">
+          <span class="ledger-headline">Verified Bank Receipts &amp; Outstanding Milestone Balance</span>
+          <span style="font-size: 7.2px; font-weight: 600; color: #4338CA;">Direct Settlement Account Ref: ...4283</span>
+        </div>
+        <table class="ledger-tbl">
+          <thead>
+            <tr>
+              <th style="width: 25%;">Milestone Tranche</th>
+              <th style="width: 35%;">Transaction Reference / Date</th>
+              <th style="width: 15%; text-align: center;">Mode</th>
+              <th style="width: 13%; text-align: right;">Amount (INR)</th>
+              <th style="width: 12%; text-align: center;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Payment 01: Advance Tranche</strong></td>
+              <td>IMPS Ref: <strong>610112598723</strong> (11-Apr-2026)</td>
+              <td style="text-align: center; font-family: monospace;">IMPS</td>
+              <td style="text-align: right; font-family: monospace; font-weight: 700;">₹25,000.00</td>
+              <td style="text-align: center;"><span class="pill-paid">Paid / Cleared</span></td>
+            </tr>
+            <tr>
+              <td><strong>Payment 02: Progress Tranche</strong></td>
+              <td>NEFT Ref: <strong>SBIN326108411093</strong> (18-Apr-2026)</td>
+              <td style="text-align: center; font-family: monospace;">NEFT</td>
+              <td style="text-align: right; font-family: monospace; font-weight: 700;">₹30,000.00</td>
+              <td style="text-align: center;"><span class="pill-paid">Paid / Cleared</span></td>
+            </tr>
+            <tr style="background: #FFFBEB;">
+              <td><strong>Payment 03: Milestone Balance</strong></td>
+              <td>Walkthrough, Deliverables Sign-off &amp; Go-Live Handover</td>
+              <td style="text-align: center; font-family: monospace;">NEFT/IMPS</td>
+              <td style="text-align: right; font-family: monospace; font-weight: 800; color: #B45309;">₹70,000.00</td>
+              <td style="text-align: center;"><span class="pill-due">Balance Due</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- High-Contrast Summary Bar -->
+        <div class="summary-strip">
+          <div class="s-box">
+            <span class="s-caption">Agreed Project Total</span>
+            <span class="s-number">₹1,25,000.00</span>
+          </div>
+          <div class="s-box">
+            <span class="s-caption">Total Paid to Date (2 Payments)</span>
+            <span class="s-number green">₹55,000.00</span>
+          </div>
+          <div class="s-box" style="text-align: right;">
+            <span class="s-caption" style="color: #FDE68A;">Outstanding Project Balance</span>
+            <span class="s-number gold">₹70,000.00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. BOTTOM TWO BOXES -->
+      <div class="bottom-grid">
+        <!-- Box Left: Not Included -->
+        <div class="b-box">
+          <div class="b-head">Not Included Unless Added Separately</div>
+          <ul class="b-list">
+            <li>Domain, hosting, or third-party software</li>
+            <li>API charges or subscriptions</li>
+            <li>Content writing or photography</li>
+            <li>Client login portal or dashboard</li>
+            <li>Mobile app or downloadable application</li>
+            <li>CRM integrations or automation systems</li>
+          </ul>
+        </div>
+
+        <!-- Box Right: Payment Terms -->
+        <div class="b-box">
+          <div class="b-head">Payment Terms</div>
+          <div class="terms-flex">
+            <div class="term-card">
+              <div class="term-val">30%</div>
+              <div class="term-desc">Advance to Begin</div>
+              <div style="font-size: 6.8px; color: #15803D; font-weight: 800; margin-top: 1.5px;">✓ Cleared</div>
+            </div>
+            <div class="term-card">
+              <div class="term-val">50%</div>
+              <div class="term-desc">Design Approval</div>
+              <div style="font-size: 6.8px; color: #B45309; font-weight: 800; margin-top: 1.5px;">Review</div>
+            </div>
+            <div class="term-card">
+              <div class="term-val">20%</div>
+              <div class="term-desc">Final Handover</div>
+              <div style="font-size: 6.8px; color: #64748B; font-weight: 700; margin-top: 1.5px;">Go-Live</div>
+            </div>
+          </div>
+          <div style="font-size: 6.8px; color: #71717A; font-style: italic; margin-top: 5px; text-align: center;">
+            Monthly retainers billed in advance at the start of each cycle.
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. REMITTANCE COORDINATES (CLEAN MINIMALIST, NO PERSONAL NAMES) -->
+      <div class="remittance-bar">
+        <div class="rem-group">
+          <div class="rem-item">
+            <span class="rem-lbl">Beneficiary Entity</span>
+            <span class="rem-val">AGNAA DESIGN STUDIO</span>
+          </div>
+          <div class="rem-item">
+            <span class="rem-lbl">Account Number</span>
+            <span class="rem-val">50100430844283</span>
+          </div>
+          <div class="rem-item">
+            <span class="rem-lbl">IFSC Code</span>
+            <span class="rem-val">HDFC0003788</span>
+          </div>
+          <div class="rem-item">
+            <span class="rem-lbl">UPI Number (GPay · PhonePe · Paytm)</span>
+            <span class="rem-val">8826214348 <span style="font-weight: 400; color: #64748B; font-size: 7.2px;">/ 882621438</span></span>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <span style="font-size: 6.8px; background: #F8FAFC; color: #475569; border: 1px solid #E2E8F0; padding: 2.5px 8px; border-radius: 4px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase;">Direct Settlement</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 7. FOOTER -->
+    <div class="footer">
+      <div>
+        <strong>AGNAA DESIGN STUDIO</strong> · Designing business systems, not just visuals
+      </div>
+      <div>
+        sridhar.ar@agnaa.in · agnaa.in · Hyderabad, India
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

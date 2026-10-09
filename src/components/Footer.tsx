@@ -8,7 +8,7 @@ import { AgnaaLogo } from './AgnaaLogo';
 
 export const Footer = () => {
   const pathname = usePathname();
-  const isPortal = pathname?.startsWith('/app') || pathname?.startsWith('/admin') || pathname?.startsWith('/login') || pathname?.startsWith('/shop');
+  const isPortal = pathname?.startsWith('/app') || pathname?.startsWith('/admin') || pathname?.startsWith('/login') || pathname?.startsWith('/shop') || pathname?.startsWith('/client');
 
   if (isPortal) return null;
 

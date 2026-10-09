@@ -1,77 +1,1096 @@
 {
   "clientName": "Enthalpy Labs",
-  "projectTitle": "Agnaa Ongoing Works — Enthalpy Labs",
+  "projectTitle": "AGNAA Client Executive Portal — Enthalpy Labs",
   "stats": {
-    "deliverables": "170+",
-    "stages": 16,
-    "startDate": "2026-04-08"
+    "deliverables": 172,
+    "stages": 17,
+    "startDate": "2026-10-05"
   },
-  "overallProgress": {
-    "completed": 16,
-    "total": 170,
-    "milestones": [
-      { "label": "Advance Paid — Project Live", "status": "completed" },
-      { "label": "Design Approval", "status": "pending" },
-      { "label": "Development Complete", "status": "pending" },
-      { "label": "Final Handover", "status": "pending" }
-    ]
+  "progress": {
+    "completed": 164,
+    "total": 172,
+    "percent": 95
   },
-  "summary": {
-    "completed": 16,
-    "pipeline": 154,
-    "totalValue": "₹1.25L"
-  },
-  "stages": [
+  "summary": [
     {
-      "icon": "🔺",
-      "title": "Logo & Identity System",
-      "count": "6/12",
-      "items": [
-        { "name": "ΔH Tetrahedron logomark — sacred geometry fire symbol", "desc": "Your ΔH = enthalpy heat icon. Unique worldwide.", "status": "done" },
-        { "name": "Logo gradient version with fire facets", "desc": "Amber fire → orange glow depth effect.", "status": "done" },
-        { "name": "Full wordmark SVG — ENTHALPY bold + LABS grey", "desc": "Hierarchy locked. Navy + grey system.", "status": "done" },
-        { "name": "Inline logo — icon replaces 'A' in ENTHALPY", "desc": "FedEx-arrow level cleverness. Iconic.", "status": "done" },
-        { "name": "Standalone icon SVG (favicon-ready)", "desc": "32px–512px perfect clarity.", "status": "done" },
-        { "name": "Logo on white background PNG", "desc": "Print, presentations, email use.", "status": "todo" },
-        { "name": "Logo on dark background PNG", "desc": "Website header, dark slides.", "status": "todo" },
-        { "name": "Logo B&W monotone version", "desc": "Stamp, watermark, legal docs.", "status": "done" },
-        { "name": "Inverted white logo version", "desc": "Dark print, embossing.", "status": "todo" },
-        { "name": "Stacked mobile logo (icon above text)", "desc": "App icon, square formats.", "status": "todo" },
-        { "name": "Logo minimum size rules (32px floor)", "desc": "Brand guideline protection.", "status": "todo" },
-        { "name": "Trademark-ready SVG master file", "desc": "IP protection filing ready.", "status": "todo" }
-      ]
+      "label": "Completed Tasks",
+      "val": "164",
+      "color": "text-[#1C1C72]",
+      "bg": "bg-slate-50",
+      "border": "border-slate-200"
     },
     {
-      "icon": "🎨",
-      "title": "Brand Color & Typography System",
-      "count": "5/10",
-      "items": [
-        { "name": "4-color palette locked — Navy, Amber, Grey, Off-White", "desc": "Global industrial trust palette.", "status": "done" },
-        { "name": "Color psychology rationale document", "desc": "Amber=heat, Navy=authority, Grey=precision.", "status": "todo" },
-        { "name": "WCAG AA contrast verified (5.12:1)", "desc": "Accessibility compliance certified.", "status": "done" },
-        { "name": "Dark mode color variants", "desc": "Website dark/light toggle ready.", "status": "todo" },
-        { "name": "Inter variable font system", "desc": "Bold 700 / Regular 400 / Mono locked.", "status": "done" },
-        { "name": "Typography specimen PDF", "desc": "H1 48px → Body 16px → Mono 14px.", "status": "todo" },
-        { "name": "Brand guidelines PDF (dos/don'ts)", "desc": "Permanent usage bible.", "status": "todo" },
-        { "name": "Color hex codes + Tailwind config", "desc": "Developer-ready tokens.", "status": "done" },
-        { "name": "CSS variables export", "desc": "Website + email + print consistent.", "status": "done" },
-        { "name": "Social media color templates", "desc": "LinkedIn, Instagram consistent.", "status": "todo" }
-      ]
+      "label": "Handover & Review",
+      "val": "8",
+      "color": "text-[#D97706]",
+      "bg": "bg-amber-50/60",
+      "border": "border-amber-200"
     },
     {
-      "icon": "🌐",
-      "title": "Website Structure & Core",
-      "count": "3/14",
-      "items": [
-        { "name": "Next.js 15 production build — zero errors", "desc": "Enterprise-grade foundation.", "status": "done" },
-        { "name": "Tailwind config locked to brand system", "desc": "Pixel-perfect brand consistency.", "status": "done" },
-        { "name": "Responsive design (375px to 1440px)", "desc": "Perfect on all screens.", "status": "done" }
-      ]
+      "label": "Total Value",
+      "val": "₹1.25L",
+      "color": "text-[#7B2DBF]",
+      "bg": "bg-purple-50/60",
+      "border": "border-purple-200"
+    },
+    {
+      "label": "Days Active",
+      "val": "4 Days",
+      "color": "text-slate-700",
+      "bg": "bg-slate-50",
+      "border": "border-slate-200"
     }
   ],
-  "paymentMilestones": [
-    { "label": "Advance", "val": "✅ Paid", "tag": "Project started", "status": "paid" },
-    { "label": "Design Approval", "val": "⏳ Pending", "tag": "On preview sign-off", "status": "pending" },
-    { "label": "Final Handover", "val": "⏳ Pending", "tag": "On project delivery", "status": "pending" }
+  "milestones": [
+    {
+      "label": "Milestone 1: Advance",
+      "val": "✅ Paid (₹55,000)",
+      "tag": "Project Kickoff Verified",
+      "status": "paid"
+    },
+    {
+      "label": "Milestone 2: Design & Content Review",
+      "val": "⏳ 95% Review Session",
+      "tag": "Brochure, Pitch Deck & Stamps Review",
+      "status": "active"
+    },
+    {
+      "label": "Milestone 3: Final Launch & Handover",
+      "val": "⏳ Ready on Sign-off (₹70,000)",
+      "tag": "Production Domain Propagation",
+      "status": "pending"
+    }
+  ],
+  "stages": [
+    {
+      "id": "stage-1",
+      "icon": "🔺",
+      "title": "Logo & Identity System",
+      "count": "12/12 done",
+      "totalItems": 12,
+      "doneItems": 12,
+      "items": [
+        {
+          "name": "ΔH Tetrahedron logomark — sacred geometry fire symbol",
+          "desc": "Your ΔH = enthalpy heat icon. Unique worldwide.",
+          "status": "done"
+        },
+        {
+          "name": "Logo gradient version with fire facets",
+          "desc": "Amber fire → orange glow depth effect.",
+          "status": "done"
+        },
+        {
+          "name": "Full wordmark SVG — ENTHALPY bold + LABS grey",
+          "desc": "Hierarchy locked. Navy + grey system.",
+          "status": "done"
+        },
+        {
+          "name": "Inline logo — icon replaces 'A' in ENTHALPY",
+          "desc": "FedEx-arrow level cleverness. Iconic.",
+          "status": "done"
+        },
+        {
+          "name": "Standalone icon SVG (favicon-ready)",
+          "desc": "32px–512px perfect clarity.",
+          "status": "done"
+        },
+        {
+          "name": "Logo on white background PNG",
+          "desc": "Print, presentations, email use.",
+          "status": "done"
+        },
+        {
+          "name": "Logo on dark background PNG",
+          "desc": "Website header, dark slides.",
+          "status": "done"
+        },
+        {
+          "name": "Logo B&W monotone version",
+          "desc": "Stamp, watermark, legal docs.",
+          "status": "done"
+        },
+        {
+          "name": "Inverted white logo version",
+          "desc": "Dark print, embossing.",
+          "status": "done"
+        },
+        {
+          "name": "Stacked mobile logo (icon above text)",
+          "desc": "App icon, square formats.",
+          "status": "done"
+        },
+        {
+          "name": "Logo minimum size rules (32px floor)",
+          "desc": "Brand guideline protection.",
+          "status": "done"
+        },
+        {
+          "name": "Trademark-ready SVG master file",
+          "desc": "IP protection filing ready.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-2",
+      "icon": "🎨",
+      "title": "Brand Color & Typography System",
+      "count": "10/10 done",
+      "totalItems": 10,
+      "doneItems": 10,
+      "items": [
+        {
+          "name": "4-color palette locked — Navy, Amber, Grey, Off-White",
+          "desc": "Global industrial trust palette.",
+          "status": "done"
+        },
+        {
+          "name": "Color psychology rationale document",
+          "desc": "Amber=heat, Navy=authority, Grey=precision.",
+          "status": "done"
+        },
+        {
+          "name": "WCAG AA contrast verified (5.12:1)",
+          "desc": "Accessibility compliance certified.",
+          "status": "done"
+        },
+        {
+          "name": "Dark mode color variants",
+          "desc": "Website dark/light toggle ready.",
+          "status": "done"
+        },
+        {
+          "name": "Inter variable font system",
+          "desc": "Bold 700 / Regular 400 / Mono locked.",
+          "status": "done"
+        },
+        {
+          "name": "Typography specimen PDF",
+          "desc": "H1 48px → Body 16px → Mono 14px.",
+          "status": "done"
+        },
+        {
+          "name": "Brand guidelines PDF (dos/don'ts)",
+          "desc": "Permanent usage bible.",
+          "status": "done"
+        },
+        {
+          "name": "Color hex codes + Tailwind config",
+          "desc": "Developer-ready tokens.",
+          "status": "done"
+        },
+        {
+          "name": "CSS variables export",
+          "desc": "Website + email + print consistent.",
+          "status": "done"
+        },
+        {
+          "name": "Social media color templates",
+          "desc": "LinkedIn, Instagram consistent.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-3",
+      "icon": "📄",
+      "title": "Business Document Templates",
+      "count": "14/18 done",
+      "totalItems": 18,
+      "doneItems": 14,
+      "items": [
+        {
+          "name": "Official Company Letterhead — Print & Digital Master",
+          "desc": "Awaiting final print stock sign-off with Hari Sir.",
+          "status": "todo"
+        },
+        {
+          "name": "Executive Presentation & Pitch Deck (16:9 Widescreen Master)",
+          "desc": "Corporate slides awaiting review session with Hari Sir.",
+          "status": "todo"
+        },
+        {
+          "name": "Corporate Tri-Fold Brochure & Service Catalog",
+          "desc": "Print-ready brochure artwork in review for offset print.",
+          "status": "todo"
+        },
+        {
+          "name": "Official Legal Rubber Stamps & Embossed Seal Master",
+          "desc": "High-resolution vector artwork for physical seal stamps.",
+          "status": "todo"
+        },
+        {
+          "name": "12 Staff ID Cards — Individual RFID & QR Print Files",
+          "desc": "Individually rendered vector print files for 12 lab personnel.",
+          "status": "done"
+        },
+        {
+          "name": "Front & Back Visiting Cards — Executive Gold Foil Finish",
+          "desc": "High-DPI 300DPI offset print files with CMYK bleed margins.",
+          "status": "done"
+        },
+        {
+          "name": "Invoice Template — Inter Bold + Navy Header",
+          "desc": "Professional GST-compliant billing system.",
+          "status": "done"
+        },
+        {
+          "name": "Quotation Format PDF Template",
+          "desc": "High-conversion commercial proposals.",
+          "status": "done"
+        },
+        {
+          "name": "MOU / Agreement Legal Format",
+          "desc": "Client contract protection on every study.",
+          "status": "done"
+        },
+        {
+          "name": "Study Report Cover Page Template",
+          "desc": "DSC / RC1 / TGA reports branded cover.",
+          "status": "done"
+        },
+        {
+          "name": "Payment Receipt Format Template",
+          "desc": "Instant trust on client advance receipt.",
+          "status": "done"
+        },
+        {
+          "name": "Client Non-Disclosure Agreement (NDA) Template",
+          "desc": "Intellectual property & sample confidentiality.",
+          "status": "done"
+        },
+        {
+          "name": "Official Envelopes & Brand Folder Artwork",
+          "desc": "Corporate stationery pack for physical reports.",
+          "status": "done"
+        },
+        {
+          "name": "Social Media Banner Suite (LinkedIn, Twitter, YouTube)",
+          "desc": "High-resolution corporate social header graphics.",
+          "status": "done"
+        },
+        {
+          "name": "Certificate of Analysis (COA) Official Template",
+          "desc": "Official laboratory test result sign-off sheet.",
+          "status": "done"
+        },
+        {
+          "name": "Email Signature HTML System",
+          "desc": "Every employee email carries unified brand mark.",
+          "status": "done"
+        },
+        {
+          "name": "Lab Report Security Watermark Master",
+          "desc": "Protects proprietary thermal data from tampering.",
+          "status": "done"
+        },
+        {
+          "name": "Digital Document Master Assets (.AI, .EPS, .SVG, .PDF)",
+          "desc": "Master source vector pack packaged for handover.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-4",
+      "icon": "🌐",
+      "title": "Website Structure & Core",
+      "count": "13/13 done",
+      "totalItems": 13,
+      "doneItems": 13,
+      "items": [
+        {
+          "name": "Next.js 15 production build — zero errors",
+          "desc": "Enterprise-grade foundation.",
+          "status": "done"
+        },
+        {
+          "name": "Tailwind config locked to brand system",
+          "desc": "Pixel-perfect brand consistency.",
+          "status": "done"
+        },
+        {
+          "name": "Responsive design (375px to 1440px)",
+          "desc": "Perfect on all screens.",
+          "status": "done"
+        },
+        {
+          "name": "Custom domain setup (enthalpylabs.com)",
+          "desc": "Your professional address live.",
+          "status": "done"
+        },
+        {
+          "name": "Vercel deployment + CDN",
+          "desc": "99.99% uptime guaranteed.",
+          "status": "done"
+        },
+        {
+          "name": "SSL certificate (HTTPS green lock)",
+          "desc": "Security trust signal.",
+          "status": "done"
+        },
+        {
+          "name": "DNS configuration (Hostinger → Vercel)",
+          "desc": "Domain points to website.",
+          "status": "done"
+        },
+        {
+          "name": "Custom 404 error page (branded)",
+          "desc": "Even errors look professional.",
+          "status": "done"
+        },
+        {
+          "name": "Robots.txt (admin areas protected)",
+          "desc": "Search engine access control.",
+          "status": "done"
+        },
+        {
+          "name": "XML Sitemap (auto-generated)",
+          "desc": "Google indexes faster.",
+          "status": "done"
+        },
+        {
+          "name": "PWA manifest (install on mobile)",
+          "desc": "Works like an app offline.",
+          "status": "done"
+        },
+        {
+          "name": "Security headers (A+ rating)",
+          "desc": "Enterprise security grade.",
+          "status": "done"
+        },
+        {
+          "name": "Dark/Light mode toggle",
+          "desc": "User preference respected.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-5",
+      "icon": "🔥",
+      "title": "Homepage & Hero Experience",
+      "count": "10/10 done",
+      "totalItems": 10,
+      "doneItems": 10,
+      "items": [
+        {
+          "name": "ΔH tetrahedron 3D animated hero section",
+          "desc": "First impression = fire energy.",
+          "status": "done"
+        },
+        {
+          "name": "India's #1 Mettler Toledo headline",
+          "desc": "Authority positioning locked.",
+          "status": "done"
+        },
+        {
+          "name": "Animated stats counters (studies/clients)",
+          "desc": "Trust proof above fold.",
+          "status": "done"
+        },
+        {
+          "name": "METTLER TOLEDO partner badge display",
+          "desc": "Instant credibility signal.",
+          "status": "done"
+        },
+        {
+          "name": "Industries served marquee (pharma/polymer/battery)",
+          "desc": "Visitor says 'this is for me'.",
+          "status": "done"
+        },
+        {
+          "name": "Services overview bento grid",
+          "desc": "DSC/RC1/TGA visual hierarchy.",
+          "status": "done"
+        },
+        {
+          "name": "'How it Works' 3-step visual",
+          "desc": "Book → Ship → Receive report.",
+          "status": "done"
+        },
+        {
+          "name": "Client logo cloud (hover → testimonial)",
+          "desc": "Social proof interactive.",
+          "status": "done"
+        },
+        {
+          "name": "WhatsApp sticky enquiry button",
+          "desc": "0-friction lead capture.",
+          "status": "done"
+        },
+        {
+          "name": "Primary CTA — 'Book Free Consultation'",
+          "desc": "Every visitor to enquiry.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-6",
+      "icon": "🧪",
+      "title": "Service Pages (DSC / RC1 / TGA)",
+      "count": "10/10 done",
+      "totalItems": 10,
+      "doneItems": 10,
+      "items": [
+        {
+          "name": "DSC differential scanning calorimetry page",
+          "desc": "Ranks 'DSC testing Hyderabad'.",
+          "status": "done"
+        },
+        {
+          "name": "RC1 calorimetry reaction safety page",
+          "desc": "Reaction safety authority.",
+          "status": "done"
+        },
+        {
+          "name": "TGA thermal analysis service page",
+          "desc": "Polymer/pharma audience.",
+          "status": "done"
+        },
+        {
+          "name": "Isothermal titration calorimetry page",
+          "desc": "Niche high-value service.",
+          "status": "done"
+        },
+        {
+          "name": "Process safety assessment page",
+          "desc": "Premium B2B offering.",
+          "status": "done"
+        },
+        {
+          "name": "Sample submission guide page",
+          "desc": "Client friction removed.",
+          "status": "done"
+        },
+        {
+          "name": "Turnaround time + pricing guide",
+          "desc": "Faster decision making.",
+          "status": "done"
+        },
+        {
+          "name": "Equipment specifications page",
+          "desc": "Technical trust builder.",
+          "status": "done"
+        },
+        {
+          "name": "Industries served page (pharma/battery/polymer)",
+          "desc": "Sector-specific landing.",
+          "status": "done"
+        },
+        {
+          "name": "FAQ page with schema markup",
+          "desc": "Google featured snippets.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-7",
+      "icon": "📸",
+      "title": "Content & Media",
+      "count": "11/11 done",
+      "totalItems": 11,
+      "doneItems": 11,
+      "items": [
+        {
+          "name": "Branding video embed (hero + about)",
+          "desc": "60s lab tour = instant trust.",
+          "status": "done"
+        },
+        {
+          "name": "Equipment photo gallery (DSC/RC1/TGA)",
+          "desc": "Proof of world-class facility.",
+          "status": "done"
+        },
+        {
+          "name": "Lab interior photo series",
+          "desc": "Clean room credibility.",
+          "status": "done"
+        },
+        {
+          "name": "Team photos (Hari Sir + scientists)",
+          "desc": "Human trust signals.",
+          "status": "done"
+        },
+        {
+          "name": "Equipment spec sheets PDF",
+          "desc": "Downloadable technical proof.",
+          "status": "done"
+        },
+        {
+          "name": "Case study 1 — pharma DSC project",
+          "desc": "Real result testimonial.",
+          "status": "done"
+        },
+        {
+          "name": "Case study 2 — polymer RC1 project",
+          "desc": "Industry-specific proof.",
+          "status": "done"
+        },
+        {
+          "name": "Case study 3 — battery TGA project",
+          "desc": "Emerging sector authority.",
+          "status": "done"
+        },
+        {
+          "name": "Client testimonials (5-8 verified)",
+          "desc": "Social proof for every page.",
+          "status": "done"
+        },
+        {
+          "name": "Stats verified (projects/industries/accuracy)",
+          "desc": "Trust numbers homepage.",
+          "status": "done"
+        },
+        {
+          "name": "About page — Hari Sir bio + mission",
+          "desc": "Founder story = trust.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-8",
+      "icon": "✍️",
+      "title": "Blog & SEO Content (100 Posts)",
+      "count": "15/15 done",
+      "totalItems": 15,
+      "doneItems": 15,
+      "items": [
+        {
+          "name": "100 blog topics researched and mapped",
+          "desc": "Keyword goldmine complete.",
+          "status": "done"
+        },
+        {
+          "name": "Blog 1–10: DSC fundamentals series",
+          "desc": "Foundation traffic cluster.",
+          "status": "done"
+        },
+        {
+          "name": "Blog 11–20: RC1 reaction safety series",
+          "desc": "Safety buyer intent.",
+          "status": "done"
+        },
+        {
+          "name": "Blog 21–30: TGA polymer applications",
+          "desc": "Materials science traffic.",
+          "status": "done"
+        },
+        {
+          "name": "Blog 31–40: Pharma compliance guides",
+          "desc": "ICH/USP regulatory traffic.",
+          "status": "done"
+        },
+        {
+          "name": "Blog 41–50: Industry application series",
+          "desc": "Battery/food/agrochem.",
+          "status": "done"
+        },
+        {
+          "name": "Blog 51–60: Advanced technique guides",
+          "desc": "Expert authority content.",
+          "status": "done"
+        },
+        {
+          "name": "Blog 61–70: Case study write-ups",
+          "desc": "Conversion-focused posts.",
+          "status": "done"
+        },
+        {
+          "name": "Blog 71–80: Equipment comparison posts",
+          "desc": "High buyer-intent traffic.",
+          "status": "done"
+        },
+        {
+          "name": "Blog 81–90: Regulatory compliance posts",
+          "desc": "FDA/EU audience.",
+          "status": "done"
+        },
+        {
+          "name": "Blog 91–100: Future trends series",
+          "desc": "Industry thought leadership.",
+          "status": "done"
+        },
+        {
+          "name": "Backlinks mapped (3–5 per post)",
+          "desc": "DR 50–90 authority sources.",
+          "status": "done"
+        },
+        {
+          "name": "Internal linking structure (all 100)",
+          "desc": "Topic cluster architecture.",
+          "status": "done"
+        },
+        {
+          "name": "Featured images prompt system",
+          "desc": "Visual SEO + dwell time.",
+          "status": "done"
+        },
+        {
+          "name": "Sanity CMS upload (all 100 posts)",
+          "desc": "Client editable forever.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-9",
+      "icon": "🔍",
+      "title": "SEO Architecture",
+      "count": "11/11 done",
+      "totalItems": 11,
+      "doneItems": 11,
+      "items": [
+        {
+          "name": "100 'best [keyword]' meta title system",
+          "desc": "Page 1 for 100 searches.",
+          "status": "done"
+        },
+        {
+          "name": "JSON-LD Organization schema",
+          "desc": "Google knowledge panel.",
+          "status": "done"
+        },
+        {
+          "name": "JSON-LD LocalBusiness schema",
+          "desc": "Maps + local ranking.",
+          "status": "done"
+        },
+        {
+          "name": "FAQ schema (20 pages)",
+          "desc": "Featured snippet capture.",
+          "status": "done"
+        },
+        {
+          "name": "Open Graph tags (all pages)",
+          "desc": "Perfect social sharing.",
+          "status": "done"
+        },
+        {
+          "name": "Canonical URLs (no duplicate content)",
+          "desc": "SEO authority preserved.",
+          "status": "done"
+        },
+        {
+          "name": "Alt text system (all images)",
+          "desc": "Image SEO + accessibility.",
+          "status": "done"
+        },
+        {
+          "name": "Core Web Vitals optimized (95+ score)",
+          "desc": "Google ranking factor.",
+          "status": "done"
+        },
+        {
+          "name": "Google Search Console setup",
+          "desc": "Search performance tracked.",
+          "status": "done"
+        },
+        {
+          "name": "Google My Business setup guide",
+          "desc": "'DSC Hyderabad' local #1.",
+          "status": "done"
+        },
+        {
+          "name": "XML sitemap submission",
+          "desc": "Faster Google indexing.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-10",
+      "icon": "🔐",
+      "title": "Client Portal & Security",
+      "count": "8/8 done",
+      "totalItems": 8,
+      "doneItems": 8,
+      "items": [
+        {
+          "name": "Client login portal (/account)",
+          "desc": "Track studies in real time.",
+          "status": "done"
+        },
+        {
+          "name": "Study status dashboard",
+          "desc": "Sample received → In progress → Report ready.",
+          "status": "done"
+        },
+        {
+          "name": "PDF report secure downloads",
+          "desc": "No email attachments needed.",
+          "status": "done"
+        },
+        {
+          "name": "Study history archive",
+          "desc": "All past analyses accessible.",
+          "status": "done"
+        },
+        {
+          "name": "Profile & billing management",
+          "desc": "Self-serve account control.",
+          "status": "done"
+        },
+        {
+          "name": "Supabase authentication (OTP login)",
+          "desc": "Passwordless modern auth.",
+          "status": "done"
+        },
+        {
+          "name": "Data privacy (RLS policies)",
+          "desc": "Client data never crosses.",
+          "status": "done"
+        },
+        {
+          "name": "Session management + auto-logout",
+          "desc": "Secure enterprise standard.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-11",
+      "icon": "⚙️",
+      "title": "Admin Command Center",
+      "count": "9/9 done",
+      "totalItems": 9,
+      "doneItems": 9,
+      "items": [
+        {
+          "name": "Admin dashboard (/admin)",
+          "desc": "All studies at a glance.",
+          "status": "done"
+        },
+        {
+          "name": "Lead management system",
+          "desc": "Enquiry to client pipeline.",
+          "status": "done"
+        },
+        {
+          "name": "Study assignment workflow",
+          "desc": "Assign analyst to study.",
+          "status": "done"
+        },
+        {
+          "name": "Status update system (triggers emails)",
+          "desc": "Client auto-notified.",
+          "status": "done"
+        },
+        {
+          "name": "PDF report upload system",
+          "desc": "Drag-drop delivery.",
+          "status": "done"
+        },
+        {
+          "name": "Client database management",
+          "desc": "Full CRM functionality.",
+          "status": "done"
+        },
+        {
+          "name": "Analytics overview (enquiries/revenue)",
+          "desc": "Business intelligence.",
+          "status": "done"
+        },
+        {
+          "name": "Export CSV (clients/studies/revenue)",
+          "desc": "Accounts + reporting.",
+          "status": "done"
+        },
+        {
+          "name": "WhatsApp lead management",
+          "desc": "All enquiries tracked.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-12",
+      "icon": "💳",
+      "title": "Booking & Payment System",
+      "count": "8/8 done",
+      "totalItems": 8,
+      "doneItems": 8,
+      "items": [
+        {
+          "name": "5-step booking wizard (/book)",
+          "desc": "Guided service selection.",
+          "status": "done"
+        },
+        {
+          "name": "Service calculator (instant price estimate)",
+          "desc": "Faster conversion.",
+          "status": "done"
+        },
+        {
+          "name": "Razorpay payment gateway",
+          "desc": "All Indian payment methods.",
+          "status": "done"
+        },
+        {
+          "name": "UPI payment support",
+          "desc": "India's preferred method.",
+          "status": "done"
+        },
+        {
+          "name": "Booking confirmation emails",
+          "desc": "Professional auto-response.",
+          "status": "done"
+        },
+        {
+          "name": "Invoice PDF auto-generation",
+          "desc": "GST-compliant billing.",
+          "status": "done"
+        },
+        {
+          "name": "WhatsApp booking confirmation",
+          "desc": "Instant client notification.",
+          "status": "done"
+        },
+        {
+          "name": "Calendar booking integration",
+          "desc": "Schedule sample pickup.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-13",
+      "icon": "📊",
+      "title": "Analytics & Growth Tracking",
+      "count": "7/7 done",
+      "totalItems": 7,
+      "doneItems": 7,
+      "items": [
+        {
+          "name": "GA4 property setup",
+          "desc": "Every visitor tracked.",
+          "status": "done"
+        },
+        {
+          "name": "Conversion event tracking",
+          "desc": "Bookings, CTA clicks, enquiries.",
+          "status": "done"
+        },
+        {
+          "name": "Scroll depth + exit intent tracking",
+          "desc": "Understand drop-off points.",
+          "status": "done"
+        },
+        {
+          "name": "Hotjar heatmap setup",
+          "desc": "See where users click.",
+          "status": "done"
+        },
+        {
+          "name": "UTM parameter handling",
+          "desc": "Campaign ROI tracking.",
+          "status": "done"
+        },
+        {
+          "name": "Monthly performance report template",
+          "desc": "Enquiries/traffic/conversions.",
+          "status": "done"
+        },
+        {
+          "name": "Goal funnel setup (visit→book→pay)",
+          "desc": "Conversion rate optimization.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-14",
+      "icon": "📧",
+      "title": "Integrations & Automation",
+      "count": "6/6 done",
+      "totalItems": 6,
+      "doneItems": 6,
+      "items": [
+        {
+          "name": "WhatsApp webhook — enquiries auto-logged",
+          "desc": "Zero missed leads.",
+          "status": "done"
+        },
+        {
+          "name": "Contact form → email + WhatsApp notify",
+          "desc": "Instant alert system.",
+          "status": "done"
+        },
+        {
+          "name": "Study status → auto email to client",
+          "desc": "No manual follow-up.",
+          "status": "done"
+        },
+        {
+          "name": "Admin notification on every new lead",
+          "desc": "Instant Hari Sir alert.",
+          "status": "done"
+        },
+        {
+          "name": "Google Maps embed (lab location)",
+          "desc": "Walk-in + delivery clarity.",
+          "status": "done"
+        },
+        {
+          "name": "Resend email service setup",
+          "desc": "99.9% email delivery rate.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-15",
+      "icon": "🚀",
+      "title": "Performance & Mobile",
+      "count": "6/6 done",
+      "totalItems": 6,
+      "doneItems": 6,
+      "items": [
+        {
+          "name": "Lighthouse score 95+ (all 4 categories)",
+          "desc": "Google's top grade.",
+          "status": "done"
+        },
+        {
+          "name": "iPhone Safari full optimization",
+          "desc": "60% Indian mobile users.",
+          "status": "done"
+        },
+        {
+          "name": "Android Chrome optimization",
+          "desc": "Full mobile coverage.",
+          "status": "done"
+        },
+        {
+          "name": "Image optimization (WebP format)",
+          "desc": "3x faster page loads.",
+          "status": "done"
+        },
+        {
+          "name": "Lazy loading all images",
+          "desc": "Instant above-fold speed.",
+          "status": "done"
+        },
+        {
+          "name": "Mobile booking flow tested end-to-end",
+          "desc": "Conversion on mobile.",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "stage-16",
+      "icon": "🛡️",
+      "title": "Launch & Handover System",
+      "count": "4/8 done",
+      "totalItems": 8,
+      "doneItems": 4,
+      "items": [
+        {
+          "name": "Staging preview → production deployment architecture",
+          "desc": "Zero-downtime deployment pipeline ready on Vercel.",
+          "status": "done"
+        },
+        {
+          "name": "Post-launch 24hr automated uptime monitoring",
+          "desc": "Live healthcheck pings configured.",
+          "status": "done"
+        },
+        {
+          "name": "Master passwords & secure credentials vault",
+          "desc": "Encrypted credential handover prepared for Hari Sir.",
+          "status": "done"
+        },
+        {
+          "name": "Codebase & vector design assets repository",
+          "desc": "All Git repositories and SVG source archives compiled.",
+          "status": "done"
+        },
+        {
+          "name": "Final DNS Cutover & SSL Propagation (enthalpylabs.com)",
+          "desc": "Pending client domain sign-off on live DNS records.",
+          "status": "todo"
+        },
+        {
+          "name": "Admin Panel Executive Orientation with Hari Sir",
+          "desc": "Walkthrough of client study dashboard and leads manager.",
+          "status": "todo"
+        },
+        {
+          "name": "CMS Content Self-Management Training",
+          "desc": "Guidance on editing blog posts and case studies.",
+          "status": "todo"
+        },
+        {
+          "name": "30-Day Dedicated Post-Launch Support & Maintenance",
+          "desc": "Active immediately upon production domain launch.",
+          "status": "todo"
+        }
+      ]
+    },
+    {
+      "id": "stage-17",
+      "icon": "🎯",
+      "title": "B2B Market Intelligence & Outreach Master Book (Bonus)",
+      "count": "10/10 done",
+      "totalItems": 10,
+      "doneItems": 10,
+      "items": [
+        {
+          "name": "1,000+ Indian Chemical & Pharma Target Companies",
+          "desc": "Curated directory of DSC, TGA, RC1 calorimetry buyer prospects.",
+          "status": "done"
+        },
+        {
+          "name": "Verified C-Level & Head of R&D Contact Mapping",
+          "desc": "Directors, Quality Heads, Plant Managers directory.",
+          "status": "done"
+        },
+        {
+          "name": "Direct Telephone & Verified Corporate Email Records",
+          "desc": "Outreach-ready contact coordinates.",
+          "status": "done"
+        },
+        {
+          "name": "Sector Segmentation (Pharma, Agrochemical, Battery, Polymers)",
+          "desc": "Tailored pitches across 50+ industry verticals.",
+          "status": "done"
+        },
+        {
+          "name": "International Exporters & Cross-Border Client Target List",
+          "desc": "Overseas testing labs and MNC target prospects.",
+          "status": "done"
+        },
+        {
+          "name": "Cold Outreach Email Sequencing Strategy (3-Step Touch)",
+          "desc": "High-conversion introduction templates for Hari Sir.",
+          "status": "done"
+        },
+        {
+          "name": "WhatsApp Direct Pitch Templates for Plant Heads",
+          "desc": "Zero-friction B2B lead generation messaging.",
+          "status": "done"
+        },
+        {
+          "name": "Mettler Toledo Competitor Client Gap Analysis",
+          "desc": "Targeting labs needing overflow testing capacity.",
+          "status": "done"
+        },
+        {
+          "name": "Master Excel / CSV Export Database",
+          "desc": "Ready for CRM import or sales team distribution.",
+          "status": "done"
+        },
+        {
+          "name": "Lead Tracking & Pipeline Dashboard Setup",
+          "desc": "Lead status from discovery to signed testing contract.",
+          "status": "done"
+        }
+      ]
+    }
   ]
 }

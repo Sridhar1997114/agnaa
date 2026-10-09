@@ -53,6 +53,7 @@ portfolio/
 pro.agnaa.in/
 031026_*/
 *.pdf
+!public/downloads/*.pdf
 agreement_rate_sheet.html
 quotation_120x40.html
 gemini-code-*.js
