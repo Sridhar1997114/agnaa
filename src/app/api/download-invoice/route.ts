@@ -1,25 +1,23 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { INVOICE_PDF_BASE64 } from './pdf-data';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'public', 'downloads', 'AGNAA_Official_Invoice_EnthalpyLabs.pdf');
-    if (!fs.existsSync(filePath)) {
-      return new NextResponse('Invoice PDF not found', { status: 404 });
-    }
-    const fileBuffer = fs.readFileSync(filePath);
+    const fileBuffer = Buffer.from(INVOICE_PDF_BASE64, 'base64');
+    
     return new NextResponse(fileBuffer, {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'inline; filename="AGNAA_Official_Invoice_EnthalpyLabs.pdf"',
-        'Cache-Control': 'public, max-age=3600',
+        'Content-Length': fileBuffer.length.toString(),
+        'Cache-Control': 'public, max-age=86400',
       },
     });
   } catch (error) {
+    console.error('Error serving invoice PDF:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
