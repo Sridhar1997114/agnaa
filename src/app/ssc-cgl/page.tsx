@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 
 // Types
-type Category = "all" | "acronyms" | "current_affairs" | "quant" | "reasoning" | "english" | "ga";
+type Category = "all" | "blindspots" | "acronyms" | "current_affairs" | "quant" | "reasoning" | "english" | "ga";
 
 interface CheatItem {
   id: string;
@@ -521,6 +521,136 @@ const CHEAT_ITEMS: CheatItem[] = [
     solution5s: "Surname Maharaj => KATHAK in 1s.",
     correctAnswer: "B (Kathak)",
     tags: ["Culture", "Classical Dance", "Maestros", "Rank 5"]
+  },
+
+  // --- SUPER-IMPORTANT FATAL BLINDSPOTS (TOPPERS SECRETS) ---
+  {
+    id: "blind-sophie",
+    category: "blindspots",
+    topic: "Algebra Sophie Germain Identity",
+    rank: 1,
+    priority: "Very High",
+    title: "x⁴ + x²y² + y⁴ = (x² + xy + y²)(x² - xy + y²)",
+    formulaOrRule: "If x² + xy + y² = A and x² - xy + y² = B => x² + y² = (A + B)/2 and xy = (A - B)/2 | Product = A · B",
+    shortcut5s: "Zero manual factorization! A = Product / B. Then x² + y² is average of A & B; xy is half the difference.",
+    trapWarning: "Trying to solve for x and y individually using long quadratic roots.",
+    exampleQ: "If x⁴ + x²y² + y⁴ = 21 and x² + xy + y² = 7, find the value of (x² + y²).",
+    options: ["A) 4", "B) 5", "C) 6", "D) 7"],
+    solution5s: "B = 21 / 7 = 3. x² + y² = (7 + 3) / 2 = 5 in 1s.",
+    correctAnswer: "B (5)",
+    tags: ["Blindspots", "Algebra", "Sophie Germain", "High Trap", "Must Know"]
+  },
+  {
+    id: "blind-ci-8m",
+    category: "blindspots",
+    topic: "Compound Interest 8-Monthly / 10-Monthly",
+    rank: 1,
+    priority: "Very High",
+    title: "Rate & Time Scaling for Fractional Compounding",
+    formulaOrRule: "Compounded 'k-monthly' => Effective Rate R' = R × (k / 12) | Number of Periods n = Total Months / k",
+    shortcut5s: "2 Years = 24 months. 8-Monthly => n = 24 / 8 = 3 periods. If R = 15% p.a. => R' = 15 × (8/12) = 10%. Standard 3-year 10% CI multiplier = 1.331.",
+    trapWarning: "Dividing rate by 8 or multiplying time by 8 without 12-month normalization.",
+    exampleQ: "What is CI on Rs 12,000 for 2 years at 15% p.a., compounded 8-monthly?",
+    options: ["A) Rs 3,600", "B) Rs 3,972", "C) Rs 4,200", "D) Rs 4,500"],
+    solution5s: "n = 24/8 = 3 periods. R' = 15 × (8/12) = 10%. 3-period 10% CI = 33.1%. CI = 12000 × 0.331 = Rs 3,972 in 3s.",
+    correctAnswer: "B (Rs 3,972)",
+    tags: ["Blindspots", "Compound Interest", "8 Monthly", "High Trap", "Must Know"]
+  },
+  {
+    id: "blind-geom-apollonius",
+    category: "blindspots",
+    topic: "Geometry Apollonius Theorem (Medians)",
+    rank: 2,
+    priority: "Very High",
+    title: "Median Length & 4/3 Ratio Invariant",
+    formulaOrRule: "In ΔABC, if AD is median to BC => AB² + AC² = 2(AD² + BD²) | Sum of Squares of Sides = 4/3 × (Sum of Squares of Medians)",
+    shortcut5s: "Direct substitution: 2(AD² + (BC/2)²). Sum of 3 medians squared is ALWAYS 3/4 of sum of 3 sides squared.",
+    trapWarning: "Confusing median with angle bisector or altitude.",
+    exampleQ: "In ΔABC, AB = 6 cm, AC = 8 cm, and median AD = 5 cm. What is the length of side BC?",
+    options: ["A) 8 cm", "B) 10 cm", "C) 12 cm", "D) 14 cm"],
+    solution5s: "6² + 8² = 2(5² + BD²) => 100 = 2(25 + BD²) => 50 = 25 + BD² => BD² = 25 => BD = 5 => BC = 10 cm in 2s.",
+    correctAnswer: "B (10 cm)",
+    tags: ["Blindspots", "Geometry", "Apollonius", "Medians", "Must Know"]
+  },
+  {
+    id: "blind-tsd-breakdown",
+    category: "blindspots",
+    topic: "Time Speed Distance Train Breakdown",
+    rank: 1,
+    priority: "Very High",
+    title: "Shifted Breakdown Distance-Delta Shortcut",
+    formulaOrRule: "Normal Speed = (Shifted Distance ΔD) / [ Normal Time Difference = Delay Difference × (S_original / (S_original - S_reduced)) ]",
+    shortcut5s: "If 24 km further saves (40 - 28) = 12 min late with speed 3/4 (time 4:3, 1 unit diff) => normal time for 24 km = 3 × 12 = 36 min = 3/5 hr => Speed = 24 / (3/5) = 40 km/h.",
+    trapWarning: "Setting up 4 simultaneous linear equations with distance D and speed S.",
+    exampleQ: "A train meets with an accident 50km from start and runs at 3/4 speed, reaching 40 min late. Had it happened 24km further, it would be 28 min late. Find normal speed.",
+    options: ["A) 36 km/h", "B) 40 km/h", "C) 45 km/h", "D) 48 km/h"],
+    solution5s: "24 km saves 12 min. Speed 3/4 => Time 4/3 (diff = 1 unit = 12 min). Normal time = 36 min = 0.6 hr. Speed = 24 / 0.6 = 40 km/h in 3s.",
+    correctAnswer: "B (40 km/h)",
+    tags: ["Blindspots", "TSD", "Train Breakdown", "High Trap", "Must Know"]
+  },
+  {
+    id: "blind-eng-dangling",
+    category: "blindspots",
+    topic: "English Dangling Participle & Inversion",
+    rank: 1,
+    priority: "Very High",
+    title: "Dangling Participle & Negative Inversion Reflex",
+    formulaOrRule: "Introductory participial phrase MUST modify the grammatical subject immediately following comma | Negative adverb opener (Hardly/Seldom/Rarely) MUST invert: Adverb + Aux Verb + Subject",
+    shortcut5s: "Scan sentence openers: 'Walking in the park, a snake bit him' is WRONG (snake wasn't walking). 'Seldom WE see' is WRONG ('Seldom DO WE see').",
+    trapWarning: "Failing to notice that the subject following the comma cannot perform the participle action.",
+    exampleQ: "Find error: 'Seldom we have seen such courage in the face of adversity.'",
+    options: ["A) Seldom we have", "B) seen such courage", "C) in the face of", "D) adversity"],
+    solution5s: "Negative adverb 'Seldom' opening sentence requires INVERSION: 'Seldom HAVE WE seen'. Error in A in 1s.",
+    correctAnswer: "A (Seldom we have)",
+    tags: ["Blindspots", "English", "Inversion", "Dangling Participle", "Must Know"]
+  },
+  {
+    id: "blind-eng-only-one",
+    category: "blindspots",
+    topic: "English 'One of the' vs 'The ONLY ONE of the'",
+    rank: 2,
+    priority: "Very High",
+    title: "Relative Pronoun Verb Agreement Split",
+    formulaOrRule: "'One of the + Plural Noun + Who/Which' => PLURAL VERB | 'The ONLY ONE of the + Plural Noun + Who/Which' => SINGULAR VERB",
+    shortcut5s: "Check if the word 'ONLY' appears before 'one of the'. 'ONLY' locks singular verb (HAS/IS/WAS); without 'only', verb is plural (HAVE/ARE/WERE).",
+    trapWarning: "Always choosing singular verb without checking relative pronoun.",
+    exampleQ: "Find error: 'He is the only one of the candidates who have qualified the physical test.'",
+    options: ["A) He is the only one", "B) of the candidates", "C) who have qualified", "D) the physical test"],
+    solution5s: "'THE ONLY ONE' forces singular agreement on relative clause => requires 'who HAS qualified'. Error in C in 1s.",
+    correctAnswer: "C (who have qualified)",
+    tags: ["Blindspots", "English", "Subject Verb Agreement", "High Trap", "Must Know"]
+  },
+  {
+    id: "blind-pol-writs",
+    category: "blindspots",
+    topic: "Polity 5 Writs & Scope (Article 32 & 226)",
+    rank: 1,
+    priority: "Very High",
+    title: "Writs Latin Meaning & Target Scope",
+    formulaOrRule: "Habeas Corpus (To have the body - public & private) | Mandamus (We command - public duty only) | Prohibition (Preventive) | Certiorari (To be certified - Curative & Preventive) | Quo-Warranto (By what authority - public office)",
+    shortcut5s: "Only 'Habeas Corpus' can be issued against private individuals! 'Mandamus' CANNOT be issued against the President or Governors.",
+    trapWarning: "Assuming Mandamus can be issued against private companies or the President.",
+    exampleQ: "Which constitutional writ can be issued against BOTH public authorities and private individuals?",
+    options: ["A) Mandamus", "B) Habeas Corpus", "C) Quo-Warranto", "D) Certiorari"],
+    solution5s: "Only Habeas Corpus applies to illegal detention by private or public bodies. Option B in 1s.",
+    correctAnswer: "B (Habeas Corpus)",
+    tags: ["Blindspots", "Polity", "Writs", "Article 32", "Must Know"]
+  },
+  {
+    id: "blind-pol-tears",
+    category: "blindspots",
+    topic: "Polity 12 Schedules (TEARS OF OLD PM)",
+    rank: 2,
+    priority: "Very High",
+    title: "Mnemonic TEARS OF OLD PM & Language Amendments",
+    formulaOrRule: "T=Territory(1), E=Emoluments(2), A=Affirmation(3), R=Rajya Sabha(4), S=Scheduled Areas(5), O=Other Tribes AMTM(6), F=Federal Lists(7), O=Official Languages(8), L=Land Reforms(9), D=Defection(10), P=Panchayat(11), M=Municipality(12)",
+    shortcut5s: "Language amendments: 21st (Sindhi), 71st (Konkani, Manipuri, Nepali - KMN), 92nd (Bodo, Dogri, Maithili, Santhali - BDMS).",
+    trapWarning: "Confusing 5th Schedule (general tribal areas) with 6th Schedule (AMTM states: Assam, Meghalaya, Tripura, Mizoram).",
+    exampleQ: "Which Amendment added Bodo, Dogri, Maithili, and Santhali (BDMS) to the 8th Schedule?",
+    options: ["A) 21st Amendment", "B) 71st Amendment", "C) 92nd Amendment", "D) 103rd Amendment"],
+    solution5s: "92nd Amendment (2003) added BDMS (19 to 22) in 1s.",
+    correctAnswer: "C (92nd Amendment)",
+    tags: ["Blindspots", "Polity", "Schedules", "Amendments", "Must Know"]
   }
 ];
 
@@ -700,6 +830,7 @@ export default function SscCglPortal() {
               {(
                 [
                   { id: "all", label: "All Weapons" },
+                  { id: "blindspots", label: "🚨 Fatal Blindspots" },
                   { id: "acronyms", label: "Govt Acronyms" },
                   { id: "current_affairs", label: "Current Affairs" },
                   { id: "quant", label: "Quant (17)" },
@@ -895,7 +1026,7 @@ export default function SscCglPortal() {
         )}
 
         {/* 3. SUBJECT-WISE TOPIC FORMULAS & ≤5s SHORTCUT CARDS */}
-        {(activeTab === "all" || activeTab === "quant" || activeTab === "reasoning" || activeTab === "english" || activeTab === "ga") && (
+        {(activeTab === "all" || activeTab === "blindspots" || activeTab === "quant" || activeTab === "reasoning" || activeTab === "english" || activeTab === "ga") && (
           <section>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
