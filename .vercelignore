@@ -11,6 +11,9 @@ node_modules
 "earth-agnaa"
 "pro.agnaa.in"
 *.pdf
+!public/ssc-cgl-pdfs/*.pdf
+!public/downloads/*.pdf
 *.epub
 *.zip
 *.tar.gz
+

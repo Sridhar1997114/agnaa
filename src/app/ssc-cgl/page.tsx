@@ -1104,7 +1104,7 @@ export default function SscCglPortal() {
 
                   <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
                     <a
-                      href={`/ssc-cgl-pdfs/${pdf.filename}`}
+                      href={`/api/ssc-cgl-pdfs/${pdf.filename}`}
                       download={pdf.filename}
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-md shadow-indigo-950/40 transition-all active:scale-95"
                     >
@@ -1112,7 +1112,7 @@ export default function SscCglPortal() {
                       Download PDF
                     </a>
                     <a
-                      href={`/ssc-cgl-pdfs/${pdf.filename}`}
+                      href={`/api/ssc-cgl-pdfs/${pdf.filename}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xs text-slate-400 hover:text-white underline font-medium"
