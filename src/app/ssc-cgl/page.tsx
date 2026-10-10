@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 
 // Types
-type Category = "all" | "blindspots" | "acronyms" | "current_affairs" | "quant" | "reasoning" | "english" | "ga";
+type Category = "all" | "blindspots" | "monthly_pdfs" | "acronyms" | "current_affairs" | "quant" | "reasoning" | "english" | "ga";
 
 interface CheatItem {
   id: string;
@@ -238,6 +238,137 @@ const CURRENT_AFFAIRS_DATA: CurrentAffairItem[] = [
     details: "BRICS expansion added Egypt, Ethiopia, Iran, UAE, and Saudi Arabia. G20 admitted the African Union (AU) as a permanent member under India's 2023 Presidency.",
     examQuestion: "Which continental bloc became a permanent member of the G20 at the New Delhi Summit?",
     fastAnswer: "African Union (AU - 55 member states)"
+  }
+];
+
+// 2.5 Master & Monthly PDFs Download Directory
+interface PdfDocItem {
+  title: string;
+  filename: string;
+  type: "Master Bible" | "Topic Paper" | "Monthly Current Affairs" | "Speed Guide";
+  description: string;
+  badge: string;
+}
+
+const MASTER_AND_MONTHLY_PDFS: PdfDocItem[] = [
+  {
+    title: "SSC CGL 200 Marks 50-Page Ultimate Master Bible",
+    filename: "SSC_CGL_200_Marks_50_Page_Ultimate_Master_Bible.pdf",
+    type: "Master Bible",
+    description: "Official 50-page full syllabus compendium with 97 worked exam drills, formulas, and proofs.",
+    badge: "50 Pages • Master"
+  },
+  {
+    title: "Topic-Wise ≤5s Question Papers & Speed Shortcuts",
+    filename: "SSC_CGL_Topic_Wise_5_Second_Speed_Question_Papers.pdf",
+    type: "Topic Paper",
+    description: "Rank #1 to lowest weightage topic papers with 5-second shortcuts and optical answers.",
+    badge: "50 Topics • High-Yield"
+  },
+  {
+    title: "SSC CGL Master Formula Vault & Practice Bank",
+    filename: "SSC_CGL_Master_Formula_Vault_and_Practice_Bank.pdf",
+    type: "Master Bible",
+    description: "Formula tables across all 4 subjects with exam trap warnings.",
+    badge: "Formula Vault"
+  },
+  {
+    title: "October 2026 Current Affairs & Speed Drills",
+    filename: "October_2026_Current_Affairs_and_Speed_Drills.pdf",
+    type: "Monthly Current Affairs",
+    description: "Nobel Prizes 2026, 16th BRICS Summit, LAC border pact, National Unity Day, and ≤5s drills.",
+    badge: "Latest • Oct 2026"
+  },
+  {
+    title: "September 2026 Current Affairs & Speed Drills",
+    filename: "September_2026_Current_Affairs_and_Speed_Drills.pdf",
+    type: "Monthly Current Affairs",
+    description: "Paris Paralympics 29 medals, Chandrayaan-4, One Nation One Election, Chess Olympiad double Gold.",
+    badge: "Sept 2026"
+  },
+  {
+    title: "August 2026 Current Affairs & Speed Drills",
+    filename: "August_2026_Current_Affairs_and_Speed_Drills.pdf",
+    type: "Monthly Current Affairs",
+    description: "Paris Olympics medals, INS Arighaat commissioning, Bio-RIDE scheme, Central Europe diplomacy.",
+    badge: "Aug 2026"
+  },
+  {
+    title: "July 2026 Current Affairs & Speed Drills",
+    filename: "July_2026_Current_Affairs_and_Speed_Drills.pdf",
+    type: "Monthly Current Affairs",
+    description: "Union Budget 2026-27, UNESCO 46th Session (Moidams 43rd site), SSLV commercial qualification.",
+    badge: "July 2026"
+  },
+  {
+    title: "June 2026 Current Affairs & Speed Drills",
+    filename: "June_2026_Current_Affairs_and_Speed_Drills.pdf",
+    type: "Monthly Current Affairs",
+    description: "ICC T20 World Cup champions, Tarang Shakti multinational air drill, 50th G7 Summit Apulia.",
+    badge: "June 2026"
+  },
+  {
+    title: "May 2026 Current Affairs & Speed Drills",
+    filename: "May_2026_Current_Affairs_and_Speed_Drills.pdf",
+    type: "Monthly Current Affairs",
+    description: "18th Lok Sabha elections, Agnikul 3D-printed rocket launch, SMART missile torpedo system.",
+    badge: "May 2026"
+  },
+  {
+    title: "April 2026 Current Affairs & Speed Drills",
+    filename: "April_2026_Current_Affairs_and_Speed_Drills.pdf",
+    type: "Monthly Current Affairs",
+    description: "Navy Chief Admiral Dinesh Tripathi, Exercise Dustlik, World 3rd solar ranking, POEM-3 re-entry.",
+    badge: "April 2026"
+  },
+  {
+    title: "March 2026 Current Affairs & Speed Drills",
+    filename: "March_2026_Current_Affairs_and_Speed_Drills.pdf",
+    type: "Monthly Current Affairs",
+    description: "Agni-5 MIRV Mission Divyastra, CAA rules notification, WPL title, Election Commissioners appointed.",
+    badge: "March 2026"
+  },
+  {
+    title: "February 2026 Current Affairs & Speed Drills",
+    filename: "February_2026_Current_Affairs_and_Speed_Drills.pdf",
+    type: "Monthly Current Affairs",
+    description: "Interim Budget Rs 11.11L Cr capex, PM-Surya Ghar free solar power, 5 Bharat Ratna awards, Dharma Guardian.",
+    badge: "Feb 2026"
+  },
+  {
+    title: "January 2026 Current Affairs & Speed Drills",
+    filename: "January_2026_Current_Affairs_and_Speed_Drills.pdf",
+    type: "Monthly Current Affairs",
+    description: "16th Finance Commission Terms, Desert Cyclone drill, ISRO XPoSat black hole observatory, Australian Open.",
+    badge: "Jan 2026"
+  },
+  {
+    title: "Level 1 Instant Speed Kill (1–2s) PDF",
+    filename: "SSC_CGL_Level_1_Instant_Kill_1_to_2s.pdf",
+    type: "Speed Guide",
+    description: "Zero-pen optical property matches for Tier-1.",
+    badge: "Level 1 (1-2s)"
+  },
+  {
+    title: "Level 2 Rapid Elimination (2–5s) PDF",
+    filename: "SSC_CGL_Level_2_Rapid_Elimination_2_to_5s.pdf",
+    type: "Speed Guide",
+    description: "Angle substitutions and syntax elimination hooks.",
+    badge: "Level 2 (2-5s)"
+  },
+  {
+    title: "Level 3 Condensed Tactics (5–10s) PDF",
+    filename: "SSC_CGL_Level_3_Condensed_Tactics_5_to_10s.pdf",
+    type: "Speed Guide",
+    description: "Two-step algebraic and arithmetic condensed tactics.",
+    badge: "Level 3 (5-10s)"
+  },
+  {
+    title: "Ultra-Smart Guessing & Speed Guide PDF",
+    filename: "SSC_CGL_Ultra_Smart_Guessing_and_Speed_Conditioning.pdf",
+    type: "Speed Guide",
+    description: "Mathematical EV proof (+0.75 net marks) and distractor elimination rules.",
+    badge: "Meta-Guessing"
   }
 ];
 
@@ -830,6 +961,7 @@ export default function SscCglPortal() {
               {(
                 [
                   { id: "all", label: "All Weapons" },
+                  { id: "monthly_pdfs", label: "📥 Monthly & Master PDFs" },
                   { id: "blindspots", label: "🚨 Fatal Blindspots" },
                   { id: "acronyms", label: "Govt Acronyms" },
                   { id: "current_affairs", label: "Current Affairs" },
@@ -934,6 +1066,64 @@ export default function SscCglPortal() {
               )}
             </div>
           </div>
+        )}
+
+        {/* 0. MASTER & MONTHLY PDF DOWNLOADS SECTION */}
+        {(activeTab === "all" || activeTab === "monthly_pdfs") && (
+          <section className="mb-12">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                <Download className="w-5 h-5 text-indigo-400" />
+                Monthly &amp; Master PDF Vault (Direct Download &bull; 100% Free)
+              </h2>
+              <span className="text-xs text-slate-400 font-medium">{MASTER_AND_MONTHLY_PDFS.length} Offline Compendiums</span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {MASTER_AND_MONTHLY_PDFS.map((pdf, idx) => (
+                <div
+                  key={idx}
+                  className="bg-[#12121E] border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-4 transition-all hover:shadow-xl hover:shadow-indigo-950/20 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className={`px-2 py-0.5 rounded text-xs font-bold ${
+                        pdf.type === "Master Bible"
+                          ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
+                          : pdf.type === "Monthly Current Affairs"
+                          ? "bg-teal-500/20 text-teal-300 border border-teal-500/30"
+                          : "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30"
+                      }`}>
+                        {pdf.badge}
+                      </span>
+                      <span className="text-[10px] text-slate-500 font-mono">.PDF</span>
+                    </div>
+                    <h3 className="text-sm font-bold text-white mt-2 leading-snug">{pdf.title}</h3>
+                    <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">{pdf.description}</p>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
+                    <a
+                      href={`/ssc-cgl-pdfs/${pdf.filename}`}
+                      download={pdf.filename}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-md shadow-indigo-950/40 transition-all active:scale-95"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      Download PDF
+                    </a>
+                    <a
+                      href={`/ssc-cgl-pdfs/${pdf.filename}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-slate-400 hover:text-white underline font-medium"
+                    >
+                      Open in Browser &rarr;
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
         {/* 1. GOVERNMENT SCHEMES & ACRONYMS SECTION */}
