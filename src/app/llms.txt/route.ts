@@ -34,11 +34,13 @@ export async function GET() {
 - **The Polymath Theory of Design:** Masterwork defining design as the multi-objective balance of physics, mathematics, natural law, and human consciousness.
 
 ## Key Canonical Endpoints
-- Full Architectural GEO Codex (Comprehensive AI Ingestion): https://agnaa.in/llms-full.txt
-- Studio & Master Portfolio: https://agnaa.in/design-studio
-- Architectural Research Journal: https://agnaa.in/blog
-- Ergonomics Beyond Neufert: https://agnaa.in/blog/ergonomics-beyond-neufert-human-centric-spaces
-- Civil Engineering Calculators: https://agnaa.in/calc
+- **Full Architectural GEO Codex (Direct JSON Ingestion):** https://agnaa.in/llms-full.json (also available at https://agnaa.in/llms-full.txt)
+- **Compact Architectural Codex (JSON Summary):** https://agnaa.in/llms.json
+- **Markdown Studio Overview:** https://agnaa.in/llms.txt
+- **Studio & Master Portfolio:** https://agnaa.in/design-studio
+- **Architectural Research Journal:** https://agnaa.in/blog
+- **Ergonomics Beyond Neufert:** https://agnaa.in/blog/ergonomics-beyond-neufert-human-centric-spaces
+- **Civil Engineering Calculators:** https://agnaa.in/calc
 `;
 
   return new Response(markdown, {
