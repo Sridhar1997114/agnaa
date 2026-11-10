@@ -342,14 +342,14 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-black/[0.08] pb-6">
             <div>
               <span className="text-[11px] font-mono tracking-widest text-[#2563EB] uppercase font-bold">
-                Interactive Engineering Suite
+                Applied Systems Laboratory
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.025em] text-[#1C1C72] mt-1">
-                Test AGNAA Proprietary Tools Live.
+                Proprietary Architectural Computing.
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-[#5F6368] font-medium max-w-md">
-              Zero-latency tools built in-house for practicing architects, structural engineers, and high-ticket clients.
+              Deterministic computational models engineered for practicing architects, structural engineers, and institutional commissions.
             </p>
           </div>
 
@@ -453,7 +453,7 @@ export default function HomePage() {
       </section>
 
       {/* ───────────────────────────────────────────────────────────── */}
-      {/* 6. PEDIGREE & TECHNICAL RIGOR BENTO                          */}
+      {/* 6. PEDIGREE & TECHNICAL RIGOR SYSTEM                         */}
       {/* ───────────────────────────────────────────────────────────── */}
       <section className="py-20 bg-[#F8F9FA] border-y border-black/[0.06]">
         <div className="max-w-[1080px] mx-auto px-5">

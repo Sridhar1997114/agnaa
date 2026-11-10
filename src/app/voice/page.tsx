@@ -92,7 +92,7 @@ export default function VoicePage() {
             A discreet glassmorphism pill that hovers smoothly over your software. Never steals keyboard focus from AutoCAD, Revit, or your active editor.
           </p>
 
-          {/* Interactive Mock HUD Widget */}
+          {/* Speech Recognition Floating HUD */}
           <div className="inline-block p-1 bg-gradient-to-r from-[#1C1C72] to-[#7B2DBF] rounded-full shadow-[0_15px_40px_rgba(123,45,191,0.25)] mb-12">
             <div className="bg-[#0B0B14] px-6 py-3 rounded-full flex items-center gap-4 text-sm font-bold">
               <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
@@ -109,10 +109,10 @@ export default function VoicePage() {
             </div>
           </div>
 
-          {/* Live Simulator Preview Card */}
+          {/* Acoustic Processing Terminal */}
           <div className="bg-[#12121C] rounded-2xl p-6 md:p-8 border border-[#242436] text-left shadow-2xl">
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#202030] mb-6">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#A78BFA]">Interactive Mode Simulator</span>
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#A78BFA]">Acoustic Recognition Engine</span>
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => handleSimulate('cad')}
@@ -219,7 +219,7 @@ export default function VoicePage() {
           </h2>
 
           <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
-            AGNAA Voice is free software developed to democratize digital accessibility for students, engineers, and creators. If this tool saves you hours of time every week, consider supporting our foundation’s green canopy, tree economy, and urban civic initiatives.
+            AGNAA Voice is sovereign open-access software engineered to democratize precision architectural computing for students, engineers, and creators. If this tool saves you hours of time every week, consider supporting our foundation’s green canopy, tree economy, and urban civic initiatives.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

@@ -160,7 +160,7 @@ export default function ClientLoginPage() {
               className="text-slate-400 hover:text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 mx-auto transition-colors"
             >
               <Info className="h-3.5 w-3.5" />
-              {showDetails ? "Hide Demo Credentials" : "Show Demo Credentials"}
+              {showDetails ? "Hide Access Credentials" : "View Sample Client Credentials"}
             </button>
 
             <AnimatePresence>

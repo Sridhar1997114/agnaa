@@ -23,7 +23,7 @@ export default function DesignStudioPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProject, setSelectedProject] = useState<StudioProject | null>(null);
 
-  // Filter Bento showcases
+  // Filter curated showcases
   const filteredBento = useMemo(() => {
     if (activeDiscipline === 'All Disciplines') return BENTO_SHOWCASES;
     return BENTO_SHOWCASES.filter(p => p.discipline === activeDiscipline);
@@ -77,18 +77,17 @@ export default function DesignStudioPage() {
         
         {/* ── 1. MONUMENTAL EDITORIAL HERO ── */}
         <header className="space-y-6 text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-slate-200/90 text-[10px] sm:text-[11px] font-black tracking-[0.25em] text-[#1C1C72] uppercase shadow-sm">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-slate-200/90 text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.25em] text-[#1C1C72] uppercase shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#2563EB] animate-pulse" />
             <Sparkles size={13} className="text-[#7B2DBF]" />
             <span>AGNAA INTERDISCIPLINARY DESIGN STUDIO • TOTAL DESIGN</span>
           </div>
 
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter pb-2 leading-[1.06]">
-            <span className="bg-clip-text text-transparent bg-gradient-to-br from-[#1C1C72] via-[#1C1C72] to-[#2563EB]">DESIGN STUDIO</span>{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#2563EB] to-[#7B2DBF] font-black">& ARCHIVE</span>
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-[-0.035em] text-[#1C1C72] pb-2 leading-[1.04]">
+            Design Studio & Archive.
           </h1>
 
-          <p className="text-slate-600 text-base sm:text-xl font-bold max-w-3xl mx-auto leading-relaxed">
+          <p className="text-slate-600 text-base sm:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
             Directed by <strong className="text-[#1C1C72]">Ar. Sridhar Chauhan</strong> (SPA Delhi, CA/2023/161405). 
             Unifying monumental architecture, local AI software tools, bespoke joinery, and 4K cinema under one holistic practice.
           </p>
@@ -96,24 +95,24 @@ export default function DesignStudioPage() {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
             <button 
               onClick={directGeneralWhatsApp}
-              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-[#1C1C72] via-[#2563EB] to-[#7B2DBF] text-white text-xs sm:text-sm font-black hover:opacity-95 transition-all shadow-[0_10px_30px_rgba(28,28,114,0.18)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#1C1C72] hover:bg-[#2563EB] text-white text-xs sm:text-sm font-bold tracking-tight transition-all shadow-[0_10px_30px_rgba(28,28,114,0.18)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
             >
               <MessageCircle size={16} />
-              <span>Direct WhatsApp: Ar. Sridhar</span>
+              <span>Consult Studio Principal</span>
               <ArrowUpRight size={15} />
             </button>
 
             <a
               href="#open-tools"
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-white border border-slate-200/90 text-xs font-black uppercase tracking-wider text-[#1C1C72] hover:border-[#7B2DBF] transition-all shadow-sm"
+              className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-white border border-slate-200/90 text-xs font-bold uppercase tracking-wider text-[#1C1C72] hover:border-[#7B2DBF] transition-all shadow-sm"
             >
               <Download size={15} className="text-[#7B2DBF]" />
-              <span>Free Software & A2 Sheets</span>
+              <span>Open Instruments & Drawing Archive</span>
             </a>
 
-            <div className="inline-flex items-center gap-2 px-5 py-4 rounded-full bg-[#F5F5F7] border border-slate-200 text-xs font-black uppercase tracking-wider text-[#1C1C72] shadow-sm">
+            <div className="inline-flex items-center gap-2 px-5 py-4 rounded-full bg-[#F5F5F7] border border-slate-200 text-xs font-mono font-bold uppercase tracking-wider text-[#1C1C72] shadow-sm">
               <CheckCircle2 size={16} className="text-[#2563EB]" />
-              <span>{MASTER_STUDIO_REGISTRY.length}+ Verified Works</span>
+              <span>{MASTER_STUDIO_REGISTRY.length} Documented Commissions</span>
             </div>
           </div>
         </header>
@@ -203,15 +202,15 @@ export default function DesignStudioPage() {
         <section id="selected-showcases" className="space-y-8 scroll-mt-28">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-slate-200 pb-6">
             <div>
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100/80 text-[#7B2DBF] text-[10px] font-black uppercase tracking-widest mb-2 border border-purple-200/60">
-                <Sparkles size={12} /> Curated Showcase Gallery
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1C72]/5 text-[#1C1C72] text-[10px] font-mono font-bold uppercase tracking-widest mb-2 border border-black/[0.08]">
+                <Sparkles size={12} className="text-[#7B2DBF]" /> Curated Commissions
               </span>
-              <h2 className="text-3xl sm:text-5xl font-black text-[#1C1C72] tracking-tight">
-                Selected Works Bento
+              <h2 className="text-3xl sm:text-5xl font-bold text-[#1C1C72] tracking-[-0.03em]">
+                Selected Works.
               </h2>
             </div>
 
-            {/* Apple Segmented Discipline Switcher */}
+            {/* Segmented Discipline Switcher */}
             <div className="flex flex-wrap items-center gap-2 bg-[#F5F5F7] p-1.5 rounded-2xl border border-slate-200">
               {CATEGORIES.map((cat) => {
                 const isSelected = activeDiscipline === cat;
@@ -219,7 +218,7 @@ export default function DesignStudioPage() {
                   <button
                     key={cat}
                     onClick={() => setActiveDiscipline(cat)}
-                    className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                       isSelected
                         ? 'bg-[#1C1C72] text-white shadow-md'
                         : 'text-slate-600 hover:text-[#1C1C72] hover:bg-white/80'
@@ -232,7 +231,7 @@ export default function DesignStudioPage() {
             </div>
           </div>
 
-          {/* Apple Asymmetric Bento Grid */}
+          {/* Selected Commissions Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px] sm:auto-rows-[340px]">
             {filteredBento.map((card, idx) => (
               <motion.div
@@ -317,17 +316,17 @@ export default function DesignStudioPage() {
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="relative z-10 max-w-3xl space-y-4 mb-12">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] font-black uppercase tracking-widest border border-white/20">
-                <Laptop size={12} /> Open-Source Tools & Working Standards
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] font-mono font-bold uppercase tracking-widest border border-white/20">
+                <Laptop size={12} /> Sovereign Architecture & Computational Systems
               </span>
 
-              <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-                Free Offline AI Software & Standard A2 Drawing Sheets
+              <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight">
+                Open Computational Instruments & Standard A2 Drawing Archive.
               </h2>
 
               <p className="text-sm sm:text-base text-blue-100 font-medium leading-relaxed">
-                We believe in packaging open-source intelligence directly for the desktop. 
-                Download our offline voice AI tools, neural speech synthesizers, and complete standard A2 architectural detail sheets—zero subscription required.
+                We design and package sovereign digital intelligence directly for the desktop. 
+                Download zero-cloud neural speech models, acoustic transcribers, and comprehensive institutional A2 architectural working detail sheets — open access, zero telemetry.
               </p>
             </div>
 
@@ -442,7 +441,7 @@ export default function DesignStudioPage() {
                     <th className="py-4 px-6">Client / Context</th>
                     <th className="py-4 px-6">Location</th>
                     <th className="py-4 px-6">Year</th>
-                    <th className="py-4 px-6 text-right">Action</th>
+                    <th className="py-4 px-6 text-right">Dossier</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -495,16 +494,14 @@ export default function DesignStudioPage() {
                       </td>
 
                       <td className="py-4 px-6 text-right">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            connectOnWhatsApp(item);
-                          }}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] group-hover:bg-[#1C1C72] text-[#1C1C72] group-hover:text-white text-[11px] font-black transition-all"
+                        <Link
+                          href={`/design-studio/${item.id}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] group-hover:bg-[#1C1C72] text-[#1C1C72] group-hover:text-white text-[11px] font-mono font-bold transition-all"
                         >
-                          <MessageCircle size={12} />
-                          <span>WhatsApp</span>
-                        </button>
+                          <span>Inspect</span>
+                          <ArrowUpRight size={12} />
+                        </Link>
                       </td>
                     </tr>
                   ))}
@@ -517,8 +514,8 @@ export default function DesignStudioPage() {
         {/* ── 6. DIRECT AR. SRIDHAR CONCIERGE ── */}
         <section className="bg-[#F5F5F7] rounded-[36px] p-8 sm:p-14 border border-slate-200/90 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="space-y-3 max-w-2xl text-center md:text-left">
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#7B2DBF]">Direct Principal Access</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#1C1C72] tracking-tight">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-[#7B2DBF]">Direct Principal Access</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#1C1C72] tracking-tight">
               Begin an Interdisciplinary Commission
             </h2>
             <p className="text-slate-600 text-sm font-medium leading-relaxed">
@@ -529,10 +526,10 @@ export default function DesignStudioPage() {
           <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
             <button
               onClick={directGeneralWhatsApp}
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-[#1C1C72] via-[#2563EB] to-[#7B2DBF] text-white font-black text-sm uppercase tracking-wider flex items-center gap-2.5 shadow-xl hover:opacity-95 transition-all cursor-pointer"
+              className="px-8 py-4 rounded-full bg-[#1C1C72] hover:bg-[#2563EB] text-white font-bold text-sm tracking-tight flex items-center gap-2.5 shadow-xl hover:opacity-95 transition-all cursor-pointer"
             >
               <MessageCircle size={16} />
-              <span>Direct WhatsApp: +91 8826214348</span>
+              <span>Direct Principal Consultation: +91 8826214348</span>
               <ArrowUpRight size={15} />
             </button>
           </div>

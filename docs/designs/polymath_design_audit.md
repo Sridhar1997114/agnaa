@@ -60,3 +60,44 @@
 * **Action:**
   1. Removed synthetic hardcoded equalizer divs in Engine 02; replaced with live technical latency indicators (*Whisper F8 Model Active, Sub-0.4s Local Latency*).
   2. Redesigned the mobile drawer in `Header.tsx` to replace `text-3xl font-black` screaming text with disciplined `text-xl font-bold` tracking-tight hierarchy.
+
+### 6. Apple.com Editorial Rigor: Complete Purge of Designer/Developer Jargon
+* **Philosophy:** Apple.com, Dieter Rams, and Massimo Vignelli never expose implementation styles or internal Figma layout names to patrons (*"bento"*, *"matrix"*, *"simulator"*, *"extra modules"*). Architecture is presented through restrained, authoritative nouns, physical specifications, and institutional clarity.
+* **Forensic Remediations Executed:**
+  1. **"Selected Works Bento" Excision:**
+     - **File:** `src/app/design-studio/page.tsx`
+     - **Before:** `Curated Showcase Gallery` / `Selected Works Bento`
+     - **After:** `Curated Commissions` / `Selected Works.` (Apple keynote cadence)
+     - **Hero Typography:** Replaced flashy multi-color text clip gradients with solid Midnight Navy (`#1C1C72`) monumental typography: `Design Studio & Archive.`
+     - **Primary Call to Action:** Replaced commoditized `Direct WhatsApp: Ar. Sridhar` with `Consult Studio Principal`.
+     - **Open Archive Call to Action:** Replaced `Free Software & A2 Sheets` with `Open Instruments & Drawing Archive`.
+     - **Master Archive Table Action:** Purged `WhatsApp` buttons in table rows; replaced with direct `<Link href={`/design-studio/${item.id}`}><span>Inspect</span><ArrowUpRight size={12} /></Link>` to deep technical dossiers.
+     - **Section 6 Footer Concierge:** Replaced `Direct WhatsApp: +91 8826214348` with `Direct Principal Consultation: +91 8826214348`.
+  2. **Navigation Matrix Elimination:**
+     - **File:** `src/components/Header.tsx`
+     - **Before:** `Navigation Matrix` / `Technical Suite`
+     - **After:** `Studio Navigation` / `Engineering Systems`
+  3. **Applied Systems Laboratory Grounding:**
+     - **File:** `src/app/page.tsx`
+     - **Before:** `Interactive Engineering Suite` / `Test AGNAA Proprietary Tools Live.`
+     - **After:** `Applied Systems Laboratory` / `Proprietary Architectural Computing.`
+  4. **Acoustic Waveform Input Realism:**
+     - **File:** `src/components/home/VoiceSimulatorIsland.tsx`
+     - **Before:** `Site-to-CAD Autonomous Voice Transcription` / `Simulated Audio Stream`
+     - **After:** `Autonomous CAD Speech Interface` / `Acoustic Waveform Input`
+  5. **Precision Engineering Instruments Standardization:**
+     - **File:** `src/app/calc/page.tsx`
+     - **Before:** `8 Core Important Calculators + Extra Modules Available` / `Extra Module Suite` / `Extra & Specialized Calculators`
+     - **After:** `12 Precision Engineering Instruments • Zero Cloud Latency` / `Extended Analytical Instruments` / `Specialized Architectural Solvers`
+  6. **Voice Recognition Terminal Refinement:**
+     - **File:** `src/app/voice/page.tsx`
+     - **Before:** `Interactive Mode Simulator` / `AGNAA Voice is free software...`
+     - **After:** `Acoustic Recognition Engine` / `AGNAA Voice is sovereign open-access software engineered to democratize precision architectural computing...`
+  7. **Statutory Schedule Standardization:**
+     - **File:** `src/app/estimate/page.tsx`
+     - **Before:** `Material Specifications Matrix` / `Itemized Resource & BOQ Matrix`
+     - **After:** `Material Specifications Schedule` / `Itemized Resource & BOQ Schedule`
+  8. **Client Portal Access Realism:**
+     - **File:** `src/app/client/page.tsx`
+     - **Before:** `Show Demo Credentials`
+     - **After:** `View Sample Client Credentials`

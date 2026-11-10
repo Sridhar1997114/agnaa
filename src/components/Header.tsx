@@ -121,7 +121,7 @@ export const Header = () => {
             </div>
             
             <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-6">
-              <div className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#5F6368]">Navigation Matrix</div>
+              <div className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#5F6368]">Studio Navigation</div>
               <div className="flex flex-col gap-4">
                 {navLinks.map(link => (
                   <Link 
@@ -136,7 +136,7 @@ export const Header = () => {
               
               <div className="h-px w-full bg-black/[0.06] my-2"></div>
               
-              <div className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#5F6368]">Technical Suite</div>
+              <div className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#5F6368]">Engineering Systems</div>
               <Link 
                 href="/calc"
                 className={`text-lg font-bold tracking-tight flex items-center gap-3 ${pathname === '/calc' ? 'text-[#7B2DBF]' : 'text-[#1C1C72]'}`}

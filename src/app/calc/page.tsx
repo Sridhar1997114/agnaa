@@ -19,7 +19,7 @@ const CATEGORIES = [
   { id: 'Tools', label: 'Vastu & Plot Tools' }
 ];
 
-// Custom Bento Layout Spans for 12 Items (4 columns grid)
+// Custom Grid Layout Spans for 12 Items (4 columns grid)
 const BENTO_LAYOUTS: Record<string, { colSpan: string; rowSpan: string; theme: string; tag?: string }> = {
   'gn-floor': { 
     colSpan: 'col-span-1 md:col-span-2 lg:col-span-2', 
@@ -238,9 +238,9 @@ export default function CalculatorsHub() {
               Official architectural & structural estimation suite for plot owners, luxury villa builders & commercial investors.
             </p>
 
-            <div className="flex items-center justify-center gap-2 text-xs font-bold text-slate-400">
+            <div className="flex items-center justify-center gap-2 text-xs font-mono font-bold text-slate-500">
               <CheckCircle size={14} className="text-emerald-500" />
-              <span>8 Core Important Calculators + Extra Modules Available</span>
+              <span>12 Precision Engineering Instruments • Zero Cloud Latency</span>
             </div>
           </motion.div>
 
@@ -279,7 +279,7 @@ export default function CalculatorsHub() {
             </div>
           </div>
 
-          {/* ─── 8 IMPORTANT CALCULATORS (PRIMARY BENTO GRID) ─── */}
+          {/* ─── 8 IMPORTANT CALCULATORS (PRIMARY ARCHITECTURAL GRID) ─── */}
           {importantCalculators.length > 0 && (
             <div className="space-y-6">
               <div className="flex items-center justify-between px-2">
@@ -343,15 +343,15 @@ export default function CalculatorsHub() {
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100/80 text-[#7B2DBF] text-[10px] font-black uppercase tracking-widest mb-2">
-                      <Sparkles size={12} /> Extra Module Suite
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1C72]/5 text-[#1C1C72] text-[10px] font-mono font-bold uppercase tracking-widest mb-2 border border-black/[0.08]">
+                      <Sparkles size={12} className="text-[#7B2DBF]" /> Extended Analytical Instruments
                     </div>
-                    <h2 className="text-2xl sm:text-3xl font-black text-[#1C1C72] tracking-tight">
-                      Extra & Specialized Calculators
+                    <h2 className="text-2xl sm:text-3xl font-bold text-[#1C1C72] tracking-tight">
+                      Specialized Architectural Solvers
                     </h2>
                   </div>
-                  <p className="text-xs font-semibold text-slate-400 max-w-md">
-                    Additional architectural estimation tools for AAC block masonry, carpet efficiency ratios, commercial ROI, and plot area unit conversions.
+                  <p className="text-xs font-medium text-slate-500 max-w-md">
+                    Deterministic calculation modules for AAC masonry volume, carpet efficiency ratios, commercial yield, and geometric plot transformations.
                   </p>
                 </div>
 

@@ -1018,7 +1018,7 @@ function EstimateContent() {
         <div className="w-full bg-white rounded-[32px] border border-slate-200/80 shadow-xl shadow-slate-200/50 p-6 sm:p-10 mb-8 backdrop-blur-xl">
           <div className="mb-6">
             <h2 className="text-sm font-black uppercase tracking-[0.2em] text-[#0F172A]">
-              Material Specifications Matrix • {activePackage.name} Quality Tier
+              Material Specifications Schedule • {activePackage.name} Quality Tier
             </h2>
             <p className="text-xs text-slate-500">
               Contractually guaranteed brand names and technical specifications for {fullLocation}.
@@ -1220,7 +1220,7 @@ function EstimateContent() {
 
                 {/* 5. 14-Trade BOQ Summary */}
                 <div className="p-4">
-                  <div className="text-[10px] font-black text-[#1C1C72] uppercase tracking-wider mb-2">Itemized Resource & BOQ Matrix</div>
+                  <div className="text-[10px] font-black text-[#1C1C72] uppercase tracking-wider mb-2">Itemized Resource & BOQ Schedule</div>
                   <table className="w-full text-[10px] border-collapse">
                     <thead>
                       <tr className="bg-[#1C1C72] text-white text-left">

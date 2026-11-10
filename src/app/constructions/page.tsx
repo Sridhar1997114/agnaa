@@ -326,7 +326,7 @@ export default function ConstructionsPage() {
             </button>
           </div>
 
-          {/* Interactive Calculator Bento */}
+          {/* Interactive Calculator Suite */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             {/* Input Controls (5 cols) */}

@@ -115,7 +115,7 @@ export const DISCIPLINE_PILLARS: DisciplinePillar[] = [
   }
 ];
 
-// ── 12 FLAGSHIP BENTO SHOWCASES (ACROSS ALL 4 DISCIPLINES) ──
+// ── 12 CURATED ARCHITECTURAL COMMISSIONS (ACROSS ALL 4 DISCIPLINES) ──
 export const BENTO_SHOWCASES: StudioProject[] = [
   {
     id: 'nizamuddin-dargah-aga-khan',
@@ -305,6 +305,8 @@ export const BENTO_SHOWCASES: StudioProject[] = [
     specs: ['Unreal Engine 5 Lumen raytracing', 'Physically accurate camera focal lengths', 'Custom architectural sound design', '4K 60fps master deliverables']
   }
 ];
+
+export const CURATED_COMMISSIONS: StudioProject[] = BENTO_SHOWCASES;
 
 // ── MASTER ARCHITECTURAL & SYSTEMS LEDGER (ALL 52+ VERIFIED COMMISSIONS) ──
 export const MASTER_STUDIO_REGISTRY: StudioProject[] = [

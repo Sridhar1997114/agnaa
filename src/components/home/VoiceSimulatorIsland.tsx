@@ -27,7 +27,7 @@ export function VoiceSimulatorIsland() {
 
         <div>
           <h3 className="text-xl font-bold text-[#1C1C72]">
-            Site-to-CAD Autonomous Voice Transcription
+            Autonomous CAD Speech Interface
           </h3>
           <p className="text-sm text-[#5F6368] mt-2 leading-relaxed">
             Zero-latency technical speech transcription tuned for Indian site terminology, structural notations, and multilingual architectural dictation.
@@ -56,12 +56,12 @@ export function VoiceSimulatorIsland() {
           </button>
         </div>
 
-        {/* Audio Waveform Simulator */}
+        {/* Acoustic Waveform Monitor */}
         <div className="p-4 rounded-2xl bg-white border border-black/[0.06] space-y-3">
           <div className="flex items-center justify-between text-xs font-mono text-[#5F6368]">
             <span className="flex items-center gap-1.5">
               <Volume2 size={14} className="text-[#2563EB]" />
-              <span>Simulated Audio Stream</span>
+              <span>Acoustic Waveform Input</span>
             </span>
             <span className="text-[#10B981] font-bold">16kHz PCM</span>
           </div>

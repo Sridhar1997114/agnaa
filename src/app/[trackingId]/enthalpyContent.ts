@@ -568,7 +568,7 @@ export const ENTHALPY_HTML = `
     <div class="item">
       <div class="item-status"></div>
       <div class="item-body">
-        <div class="item-name">Services overview bento grid</div>
+        <div class="item-name">Services overview showcase</div>
         <div class="item-desc">DSC/RC1/TGA visual hierarchy.</div>
       </div>
     </div>
