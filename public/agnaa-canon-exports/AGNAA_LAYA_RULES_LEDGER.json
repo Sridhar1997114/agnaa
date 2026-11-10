@@ -1,0 +1,878 @@
+[
+  {
+    "canonId": "AGNAA-CANON-01",
+    "plateCode": "PLATE 03-01",
+    "title": "The Master Suite: Volumetric Headroom, Anthropometrics & Solar Axis",
+    "nbcClause": "NBC 2026, Vol. 1, Part 3, Clause 12.2 (Habitable Rooms)",
+    "intentChoiceCategory": "residential_master_suite",
+    "relevanceKeywords": [
+      "master bedroom",
+      "habitable room height",
+      "ceiling height",
+      "VRF plenum",
+      "Neufert bed clearance",
+      "Nairutya master bed"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Is the clear finished headroom >= 3.00 m after VRF duct drops?",
+        "expectedBoolean": true,
+        "failingRemedy": "Increase slab casting height to min 3.35 m or re-route ductwork to dressing corridor plenum."
+      },
+      {
+        "question": "Is the bed perimeter clearance >= 900 mm on three sides?",
+        "expectedBoolean": true,
+        "failingRemedy": "Expand master suite width or reduce bed frame width to standard 1800 mm King footprint."
+      },
+      {
+        "question": "Is the master suite anchored in the South-West (Nairutya) sector?",
+        "expectedBoolean": true,
+        "failingRemedy": "Re-zone master suite to South-West or provide secondary thermal masonry buffer on West facade."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Statutory Minimum Clear Height",
+        "value": "2.75 m (9 ft 0 in)",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Statutory Air-Conditioned Relaxation",
+        "value": "2.40 m (7 ft 10 in)",
+        "legalStatus": "permissible_relaxation"
+      },
+      {
+        "label": "Minimum Clear Width",
+        "value": "2.40 m (7 ft 10 in)",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Natural Ventilation Opening Ratio",
+        "value": "10% of floor area minimum",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Bed Perimeter Aisle",
+        "dimension": "900 mm (3 ft 0 in)",
+        "clearanceStandard": "Single-person clear unhindered passage"
+      },
+      {
+        "label": "Wardrobe to Bed Foot Aisle",
+        "dimension": "1200 mm (4 ft 0 in)",
+        "clearanceStandard": "Hinged shutter swing + walking buffer"
+      },
+      {
+        "label": "Window Sill Eye-Level Datum",
+        "dimension": "800 mm (2 ft 7 in)",
+        "clearanceStandard": "Aligns garden line-of-sight from seated bed height (450 mm)"
+      }
+    ],
+    "vastuSector": "Nairutya Sthira Pada (South-West Heavy Earth Quad)",
+    "agnaaBenchmark": "AGNAA elevates statutory 2.75 m ceilings to an engineered standard of 3.35 m to 3.50 m (11.0 to 11.5 ft). This accommodates a 350 mm dropped ceiling for concealed VRF/VRV air conditioning while leaving a generous 3.0 m clear finished headroom."
+  },
+  {
+    "canonId": "AGNAA-CANON-02",
+    "plateCode": "PLATE 03-02",
+    "title": "The Culinary Machine: Ergonomic Work Triangles & Agni Exhaust Physics",
+    "nbcClause": "NBC 2026, Vol. 1, Part 3, Clause 12.3 (Kitchens)",
+    "intentChoiceCategory": "culinary_space",
+    "relevanceKeywords": [
+      "kitchen design",
+      "work triangle",
+      "Neufert kitchen",
+      "Agni kitchen",
+      "wet kitchen scullery",
+      "kitchen island clearance"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Is the work triangle perimeter between 4.0 m and 7.9 m?",
+        "expectedBoolean": true,
+        "failingRemedy": "Reposition refrigerator or prep sink closer to primary induction hob."
+      },
+      {
+        "question": "Is the opposing counter aisle >= 1200 mm?",
+        "expectedBoolean": true,
+        "failingRemedy": "Widen kitchen clearance to prevent traffic collision during cooking."
+      },
+      {
+        "question": "Is the primary cooking zone placed in the South-East (Agni) quadrant?",
+        "expectedBoolean": true,
+        "failingRemedy": "Relocate gas/induction hob to South-East corner with dedicated vertical exhaust."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Standalone Kitchen Min Area",
+        "value": "5.0 m\u00b2",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Combined Kitchen-Dining Min Area",
+        "value": "7.5 m\u00b2",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Minimum Counter Frontage Width",
+        "value": "1.8 m",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Direct External Window Area",
+        "value": "1.0 m\u00b2 minimum",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Dual-Cook Parallel Aisle",
+        "dimension": "1200 mm (4 ft 0 in)",
+        "clearanceStandard": "Simultaneous oven door swing + walking buffer"
+      },
+      {
+        "label": "Sink to Hob Prep Counter",
+        "dimension": "900 mm (3 ft 0 in)",
+        "clearanceStandard": "Uninterrupted food preparation cutting board surface"
+      },
+      {
+        "label": "Work Triangle Perimeter",
+        "dimension": "4.0 m to 7.9 m",
+        "clearanceStandard": "Prevents redundant steps and fatigue"
+      }
+    ],
+    "vastuSector": "Agni Kona (South-East Quad)",
+    "agnaaBenchmark": "Show Kitchen anchored by a monolithic 3.0 m x 1.2 m quartz island facing living-dining, seamlessly paired with a concealed heavy-duty Wet Scullery equipped with commercial 1200-CFM exterior ducted extraction."
+  },
+  {
+    "canonId": "AGNAA-CANON-03",
+    "plateCode": "PLATE 04-01",
+    "title": "Vertical Sculpture: Tread-Riser Blondel Cadence & Headroom Arcs",
+    "nbcClause": "NBC 2026, Vol. 1, Part 4, Clause 4.4.3 (Staircases)",
+    "intentChoiceCategory": "staircase_design",
+    "relevanceKeywords": [
+      "staircase design",
+      "Blondel formula",
+      "tread riser",
+      "NBC staircase",
+      "Vastu staircase",
+      "cantilever stair"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Does the flight satisfy Blondel's 2R + T = 600 to 640 mm?",
+        "expectedBoolean": true,
+        "failingRemedy": "Adjust riser/tread count to achieve 150mm riser and 300mm tread."
+      },
+      {
+        "question": "Is the continuous clear headroom >= 2200 mm across all steps and landings?",
+        "expectedBoolean": true,
+        "failingRemedy": "Shift upper floor slab cut-out opening back by one tread length."
+      },
+      {
+        "question": "Does the flight ascend in a clockwise (Dakshinavarta) direction?",
+        "expectedBoolean": true,
+        "failingRemedy": "Mirror stair orientation so ascent turns right."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Statutory Minimum Flight Width",
+        "value": "1000 mm (Residential) / 1500 mm (Public)",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Statutory Maximum Riser",
+        "value": "190 mm (Residential Cap) / 150 mm (Public)",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Statutory Minimum Tread",
+        "value": "250 mm (Residential) / 300 mm (Public)",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Continuous Headroom Arc",
+        "value": "2200 mm minimum",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Blondel Formula Target",
+        "dimension": "2R + T = 600 - 640 mm",
+        "clearanceStandard": "Universal human locomotive stride efficiency"
+      },
+      {
+        "label": "Optimal Precision Riser",
+        "dimension": "150 mm (5.9 in)",
+        "clearanceStandard": "Prevents shin-splint fatigue and trip hazard"
+      },
+      {
+        "label": "Full Foot Contact Tread",
+        "dimension": "300 mm (11.8 in)",
+        "clearanceStandard": "Ensures full heel-to-toe contact during rapid descent"
+      }
+    ],
+    "vastuSector": "Dakshinavarta (Clockwise Ascent) & Sthira Pada Anchor",
+    "agnaaBenchmark": "1200 mm to 1350 mm wide cantilevered treads emerging seamlessly from a reinforced concrete shear wall, clad in flamed leathered granite with zero visible stringers."
+  },
+  {
+    "canonId": "AGNAA-CANON-04",
+    "plateCode": "PLATE 03-03",
+    "title": "Wet Environments: Luxury Ablution & External Pipe Shafts",
+    "nbcClause": "NBC 2026, Vol. 1, Part 3, Clause 12.4 & Part 9 (Plumbing)",
+    "intentChoiceCategory": "wet_area_plumbing",
+    "relevanceKeywords": [
+      "bathroom design",
+      "plumbing shaft",
+      "Neufert toilet",
+      "sunken slab",
+      "waterproofing",
+      "Vastu bathroom"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Is the bathroom floor recessed 50 mm below adjoining bedroom FFL?",
+        "expectedBoolean": true,
+        "failingRemedy": "Cast sunken slab or install marble threshold water stop."
+      },
+      {
+        "question": "Are soil and waste pipe stacks routed through external inspectable shafts?",
+        "expectedBoolean": true,
+        "failingRemedy": "Re-route plumbing stacks into external 600x900 mm masonry shaft."
+      },
+      {
+        "question": "Is the WC positioned away from the North-East (Ishan) sector?",
+        "expectedBoolean": true,
+        "failingRemedy": "Relocate toilet fixture to North-West or West zone."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Combined Bath + WC Min Area",
+        "value": "2.8 m\u00b2",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Standalone Bathroom Min Area",
+        "value": "1.8 m\u00b2",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Water Closet Min Area",
+        "value": "1.1 m\u00b2",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Minimum Ventilator Opening",
+        "value": "0.3 m\u00b2 to exterior",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "WC Centerline to Side Clearances",
+        "dimension": "450 mm (1 ft 6 in)",
+        "clearanceStandard": "Unrestricted elbow freedom and paper reach"
+      },
+      {
+        "label": "Shower Recessed Floor Drop",
+        "dimension": "50 mm (2 in)",
+        "clearanceStandard": "Prevents flood overflow into dry vanity area"
+      },
+      {
+        "label": "Vanity Counter Ergonomic Height",
+        "dimension": "850 - 900 mm",
+        "clearanceStandard": "Prevents lower back hunching during washing"
+      }
+    ],
+    "vastuSector": "Vayu Kona (North-West) & Invert Slope Direction",
+    "agnaaBenchmark": "Master bathroom sized at 18 m\u00b2 to 24 m\u00b2 featuring freestanding monolithic stone tub, double floating quartz vanity, enclosed private WC cabin with acoustic glass, and walk-in rain shower."
+  },
+  {
+    "canonId": "AGNAA-CANON-05",
+    "plateCode": "PLATE 04-02",
+    "title": "Life Safety Egress: Travel Distance Arcs & Fire Corridors",
+    "nbcClause": "NBC 2026, Vol. 1, Part 4, Clause 4.4.2 & Table 5 (Egress)",
+    "intentChoiceCategory": "fire_life_safety_egress",
+    "relevanceKeywords": [
+      "travel distance",
+      "dead-end corridor",
+      "NBC fire safety",
+      "fire exit width",
+      "egress geometry",
+      "Mahamarma axis"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Is the travel distance from any point to an exit <= 30.0 m?",
+        "expectedBoolean": true,
+        "failingRemedy": "Add secondary egress staircase or reconfigure room layout."
+      },
+      {
+        "question": "Are all dead-end corridors <= 6.0 m in length?",
+        "expectedBoolean": true,
+        "failingRemedy": "Open dead-end corridor to exterior balcony or add return loop."
+      },
+      {
+        "question": "Is the primary circulation axis free from structural column encroachments?",
+        "expectedBoolean": true,
+        "failingRemedy": "Adjust structural column grid to clear primary corridor spine."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Max Travel Distance (Un-sprinklered)",
+        "value": "30.0 m (98 ft 5 in)",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Max Travel Distance (Sprinklered)",
+        "value": "45.0 m (147 ft 7 in)",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Max Dead-End Corridor Limit",
+        "value": "6.0 m (19 ft 8 in)",
+        "legalStatus": "strict_prohibition"
+      },
+      {
+        "label": "Minimum Clear Corridor Width",
+        "value": "1.0 m (Res) / 1.5 m (Comm)",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Unit Exit Width",
+        "dimension": "500 mm (1 ft 8 in)",
+        "clearanceStandard": "Discharges 45 persons per minute in panic flow"
+      },
+      {
+        "label": "Two-Person Passing Clearance",
+        "dimension": "1200 mm (4 ft 0 in)",
+        "clearanceStandard": "Two adults passing without shoulder brushing"
+      },
+      {
+        "label": "Door Swing Encroachment",
+        "dimension": "Max 50% corridor width",
+        "clearanceStandard": "Door swing must not choke required evacuation width"
+      }
+    ],
+    "vastuSector": "Mahamarma Axis Purity (Brahmasutra / Yamasutra)",
+    "agnaaBenchmark": "In all luxury villas, internal travel distance is restricted to a maximum of 22 metres (far exceeding the statutory 30m code), ensuring children and elderly reach exits in under 15 seconds."
+  },
+  {
+    "canonId": "AGNAA-CANON-06",
+    "plateCode": "PLATE 03-04",
+    "title": "Subterranean Anatomy: Basement Tanking & Sump Drainage",
+    "nbcClause": "NBC 2026, Vol. 1, Part 3, Clause 12.8 & Part 6 (Foundations)",
+    "intentChoiceCategory": "subterranean_basement",
+    "relevanceKeywords": [
+      "basement height",
+      "retaining wall",
+      "tanking",
+      "French drain",
+      "subterranean ventilation",
+      "GHMC basement setback"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Is the basement clear finished height >= 2.75 m?",
+        "expectedBoolean": true,
+        "failingRemedy": "Deepen basement excavation to achieve minimum 3.0 m clear height."
+      },
+      {
+        "question": "Is a dual-pump sump pit provided with emergency backup power?",
+        "expectedBoolean": true,
+        "failingRemedy": "Detail 1.2x1.2m sump pit with twin submersible grinder pumps."
+      },
+      {
+        "question": "Are retaining walls protected with continuous external drainage boards?",
+        "expectedBoolean": true,
+        "failingRemedy": "Specify dimpled HDPE drainage board and French drain pipe at footing."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Basement Minimum Clear Height",
+        "value": "2.40 m (7 ft 10 in)",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Mechanical Ventilation ACH",
+        "value": "6 Air Changes / Hour minimum",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Statutory Setback Clearance",
+        "value": "Strict prohibition of basement encroachment",
+        "legalStatus": "strict_prohibition"
+      },
+      {
+        "label": "Waterproofing Warranty Standard",
+        "value": "100% tanking envelope",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Luxury Subterranean Clear Headroom",
+        "dimension": "3200 mm (10 ft 6 in)",
+        "clearanceStandard": "Eliminates subterranean compression"
+      },
+      {
+        "label": "Sump Pit Clearance Margin",
+        "dimension": "1200 x 1200 x 1500 mm",
+        "clearanceStandard": "Accommodates dual submersible pumps with backup float switches"
+      },
+      {
+        "label": "Perforated French Drain Diameter",
+        "dimension": "150 mm (6 in)",
+        "clearanceStandard": "Continuous gravitational sub-soil relief"
+      }
+    ],
+    "vastuSector": "Bhoomi Garbha (Subterranean Mass Stability)",
+    "agnaaBenchmark": "Basements cast at 3.65 m slab-to-slab to provide 3.2 m finished headroom after installing floating acoustic sub-floors and ducted fresh-air ERV systems (Energy Recovery Ventilators)."
+  },
+  {
+    "canonId": "AGNAA-CANON-07",
+    "plateCode": "PLATE 03-05",
+    "title": "Vehicular Ingress: Ramp Gradients & Turning Radii",
+    "nbcClause": "NBC 2026, Vol. 1, Part 3 & Part 10 (Parking and Vehicular Access)",
+    "intentChoiceCategory": "vehicular_circulation",
+    "relevanceKeywords": [
+      "ramp slope",
+      "turning radius",
+      "parking bay dimensions",
+      "driveway aisle",
+      "NBC parking",
+      "porte-cochere"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Is the ramp gradient <= 1:10 (10%) with 3.0 m transition slopes?",
+        "expectedBoolean": true,
+        "failingRemedy": "Lengthen ramp run or reduce floor-to-floor drop to meet 1:10 slope."
+      },
+      {
+        "question": "Is the turning radius >= 6.0 m for luxury vehicular sweep?",
+        "expectedBoolean": true,
+        "failingRemedy": "Widen turning bay to minimum 6.0 m radius."
+      },
+      {
+        "question": "Are standard parking bays >= 2.5 m x 5.0 m with 6.0 m driveway aisle?",
+        "expectedBoolean": true,
+        "failingRemedy": "Re-space column grid to 8.4 m to accommodate 3 clear bays between columns."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Maximum Vehicular Ramp Gradient",
+        "value": "1:10 (10%) for Four-Wheelers",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Standard Parking Bay Dimensions",
+        "value": "2.5 m x 5.0 m (8 ft 2 in x 16 ft 5 in)",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Two-Way Driveway Aisle Width",
+        "value": "6.0 m (19 ft 8 in) minimum",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Minimum Turning Radius",
+        "value": "6.0 m Outer Radius",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Luxury Sedan Turning Radius",
+        "dimension": "6.0 m (19 ft 8 in)",
+        "clearanceStandard": "Uninterrupted single-turn vehicular sweep"
+      },
+      {
+        "label": "Ramp Crest & Sag Transition Length",
+        "dimension": "3.0 m at 1:20 (5%) slope",
+        "clearanceStandard": "Prevents vehicle front spoiler and catalytic converter scraping"
+      },
+      {
+        "label": "Door Swing Parking Clearance",
+        "dimension": "800 mm between cars",
+        "clearanceStandard": "Full door opening without striking adjacent vehicle"
+      }
+    ],
+    "vastuSector": "Vahana Pravesha (Auspicious Vehicular Ingress)",
+    "agnaaBenchmark": "Ramps engineered at an ultra-gentle 1:12 (8.3%) slope with 6.5 m wide two-way passage, illuminated by continuous indirect warm wall grazing LEDs and finished in flamed bush-hammered granite."
+  },
+  {
+    "canonId": "AGNAA-CANON-08",
+    "plateCode": "PLATE 06-01",
+    "title": "Earthquake Resilience: Soft-Storey Stilts & Shear Wall Cores",
+    "nbcClause": "NBC 2026, Vol. 1, Part 6 & IS 1893 (Part 1): 2016",
+    "intentChoiceCategory": "structural_seismic_safety",
+    "relevanceKeywords": [
+      "soft storey",
+      "IS 1893",
+      "seismic design",
+      "stilt parking collapse",
+      "shear wall core",
+      "ductile detailing"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Are ground stilt columns designed for 2.5x shear or braced with shear walls?",
+        "expectedBoolean": true,
+        "failingRemedy": "Introduce full-height RCC shear core flanking stair/lift shafts."
+      },
+      {
+        "question": "Is the column grid continuous from foundation to roof with zero floating columns?",
+        "expectedBoolean": true,
+        "failingRemedy": "Re-align upper partition walls to match ground column grid."
+      },
+      {
+        "question": "Are ductile confinement ties spaced at <= 100 mm in the end zones?",
+        "expectedBoolean": true,
+        "failingRemedy": "Detail IS 13920 seismic confinement hoops @ 100 mm c/c."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Soft Storey Seismic Shear Multiplier",
+        "value": "2.5x Calculated Shear Force",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "IS 13920 Confinement Tie Spacing",
+        "value": "100 mm c/c throughout lo zone",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Minimum Column Cross-Section",
+        "value": "300 mm minimum dimension",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Continuous Load Path Mandate",
+        "value": "Zero floating column transfers",
+        "legalStatus": "strict_prohibition"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Optimal 3-Car Column Bay",
+        "dimension": "8000 - 8400 mm c/c",
+        "clearanceStandard": "Accommodates 3 full parking bays between columns"
+      },
+      {
+        "label": "Column Confinement Zone (lo)",
+        "dimension": "Max of column depth, width, or 450 mm",
+        "clearanceStandard": "IS 13920 ductile plastic hinge zone"
+      },
+      {
+        "label": "Concrete Clear Cover to Ties",
+        "dimension": "40 mm minimum",
+        "clearanceStandard": "Fire and corrosion protection of structural steel"
+      }
+    ],
+    "vastuSector": "Stambha Sthirata & Mahamarma Avoidance",
+    "agnaaBenchmark": "AGNAA eliminates soft-storey vulnerability by embedding full-height 250 mm reinforced concrete shear cores around elevator and stair shafts, carrying 100% of lateral seismic forces."
+  },
+  {
+    "canonId": "AGNAA-CANON-09",
+    "plateCode": "PLATE 08-01",
+    "title": "Bioclimatic Physics: Stack-Effect Buoyancy & Courtyard Sinks",
+    "nbcClause": "NBC 2026, Vol. 2, Part 8 & Part 11 (Sustainability & Environment)",
+    "intentChoiceCategory": "bioclimatic_sustainability",
+    "relevanceKeywords": [
+      "stack effect",
+      "courtyard ventilation",
+      "Brahmasthan",
+      "Koenigsberger tropical",
+      "chajja shading",
+      "natural cooling"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Is the aggregate fenestration area >= 10% of room carpet area?",
+        "expectedBoolean": true,
+        "failingRemedy": "Enlarge exterior window openings or add clerestory daylight slits."
+      },
+      {
+        "question": "Are South and West windows protected by deep chajjas (>= 750 mm)?",
+        "expectedBoolean": true,
+        "failingRemedy": "Add architectural louvers or cantilevered concrete sunshades."
+      },
+      {
+        "question": "Is the central Brahmasthan core kept open as a vertical thermal chimney?",
+        "expectedBoolean": true,
+        "failingRemedy": "Remove central partition walls to create skylit double-height void."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Minimum Fenestration Ratio",
+        "value": "10% of carpet area minimum",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Solar Heat Gain Coefficient (SHGC)",
+        "value": "<= 0.25 (Low-E Double Glazing)",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Ventilation Air Changes per Hour",
+        "value": "3 to 6 ACH natural ventilation",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Daylight Factor (DF)",
+        "value": ">= 1.5% in habitable zones",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Daylight Penetration Depth",
+        "dimension": "2.5 x Window Head Height",
+        "clearanceStandard": "Deep plan natural daylight reach"
+      },
+      {
+        "label": "Optimal Air Velocity for Comfort",
+        "dimension": "0.5 - 1.0 m/s",
+        "clearanceStandard": "Perceived cooling reduction of 2\u00b0C - 3\u00b0C"
+      },
+      {
+        "label": "Cantilevered Chajja Projection",
+        "dimension": "750 - 900 mm",
+        "clearanceStandard": "Complete cutoff of solar rays > 60\u00b0 altitude"
+      }
+    ],
+    "vastuSector": "Brahmasthan Void (The Celestial Ether Core)",
+    "agnaaBenchmark": "Double-height central rain atriums equipped with automated motorized glass louvers that open at sunset to flush out accumulated daytime heat, lowering ambient temperatures by 4\u00b0C to 6\u00b0C."
+  },
+  {
+    "canonId": "AGNAA-CANON-10",
+    "plateCode": "PLATE 08-02",
+    "title": "Architectural Acoustics: Mass-Air-Mass & Flanking Isolation",
+    "nbcClause": "NBC 2026, Vol. 2, Part 8, Section 4 (Acoustics & Sound Insulation)",
+    "intentChoiceCategory": "architectural_acoustics",
+    "relevanceKeywords": [
+      "STC 50",
+      "acoustic insulation",
+      "soundproofing",
+      "Egan acoustics",
+      "bedroom noise 35dBA",
+      "flanking sound"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Do bedroom party walls achieve STC >= 50 dBA?",
+        "expectedBoolean": true,
+        "failingRemedy": "Specify staggered stud wall with 50mm acoustic mineral wool infill."
+      },
+      {
+        "question": "Are back-to-back electrical switch boxes staggered by >= 600 mm?",
+        "expectedBoolean": true,
+        "failingRemedy": "Offset electrical boxes to different stud cavities and seal with putty pads."
+      },
+      {
+        "question": "Are private bedroom suites acoustically buffered from noisy road frontages?",
+        "expectedBoolean": true,
+        "failingRemedy": "Place dressing rooms or bathrooms along noisy facade as acoustic buffer."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Party Wall Sound Transmission Class",
+        "value": "STC >= 50 dBA",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Maximum Bedroom Ambient Noise",
+        "value": "<= 35 dBA",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Living Room Ambient Noise Limit",
+        "value": "<= 45 dBA",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Acoustic Sealant Bead Standard",
+        "value": "100% perimeter sealing",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Acoustic Cavity Rockwool Density",
+        "dimension": "48 kg/m\u00b3 density, 50 mm thick",
+        "clearanceStandard": "Mass-Air-Mass resonance absorption"
+      },
+      {
+        "label": "Staggered Stud Decoupling Offset",
+        "dimension": "25 mm air gap",
+        "clearanceStandard": "Eliminates direct mechanical sound vibration transmission"
+      },
+      {
+        "label": "Electrical Back-to-Back Offset",
+        "dimension": "600 mm minimum stagger",
+        "clearanceStandard": "Prevents acoustic flanking leaks across junction boxes"
+      }
+    ],
+    "vastuSector": "Shabda Shanti (Auditory Harmony of Sleeping Chambers)",
+    "agnaaBenchmark": "All private suite walls engineered with double staggered steel studs, 50 mm 48 kg/m\u00b3 acoustic mineral wool, resilient isolation clips, and two layers of 15 mm high-density acoustic drywall with damping polymer."
+  },
+  {
+    "canonId": "AGNAA-CANON-11",
+    "plateCode": "PLATE 08-03",
+    "title": "Daylight Engineering: 2.5H Depth & Circadian Illuminance",
+    "nbcClause": "NBC 2026, Vol. 2, Part 8, Section 1 (Lighting & Daylighting)",
+    "intentChoiceCategory": "lighting_daylight_design",
+    "relevanceKeywords": [
+      "daylight factor",
+      "2.5H rule",
+      "circadian lighting",
+      "lux levels",
+      "light shelf",
+      "Pratah Surya"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Is the room depth <= 2.5 times window head height for daylight coverage?",
+        "expectedBoolean": true,
+        "failingRemedy": "Add light shelves, skylights, or secondary fenestration."
+      },
+      {
+        "question": "Does task lighting achieve 400-500 lux on kitchen counters and desks?",
+        "expectedBoolean": true,
+        "failingRemedy": "Install under-cabinet LED task strips with CRI >= 90."
+      },
+      {
+        "question": "Are primary morning daylight apertures oriented toward East or North?",
+        "expectedBoolean": true,
+        "failingRemedy": "Re-orient fenestration or introduce East clerestory slits."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Minimum Daylight Factor",
+        "value": ">= 1.5% in Habitable Rooms",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Lighting Power Density (LPD)",
+        "value": "<= 6.0 W/m\u00b2 maximum",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Unified Glare Rating (UGR)",
+        "value": "<= 19 in Work/Study Zones",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Daylight Zone Perimeter Margin",
+        "value": "4.5 m from fenestration",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Daylight Effective Depth (D)",
+        "dimension": "2.5 x Window Head Height (H)",
+        "clearanceStandard": "Deep floor plate natural daylight reach"
+      },
+      {
+        "label": "Task Lighting Lux Target",
+        "dimension": "400 - 500 Lux",
+        "clearanceStandard": "Visual acuity without eye strain for culinary/study tasks"
+      },
+      {
+        "label": "Ambient Living Lux Target",
+        "dimension": "150 - 200 Lux",
+        "clearanceStandard": "Warm, restful glare-free domestic atmosphere"
+      }
+    ],
+    "vastuSector": "Pratah Surya (Morning Solar Ultraviolet Sanitation)",
+    "agnaaBenchmark": "Integrated DALI-2 computerized lighting automation that adjusts indoor color temperature smoothly from 5000K crisp white at 9 AM to 2700K warm candlelight at 8 PM, preserving human melatonin cycles."
+  },
+  {
+    "canonId": "AGNAA-CANON-12",
+    "plateCode": "PLATE 12-01",
+    "title": "Architectural Detailing: Capillary Breaks & Joint Integrity",
+    "nbcClause": "NBC 2026, Vol. 2, Part 12 (Architectural Detailing & Building Physics)",
+    "intentChoiceCategory": "architectural_detailing",
+    "relevanceKeywords": [
+      "drip groove",
+      "Edward Allen detailing",
+      "capillary break",
+      "coping slope",
+      "movement joint",
+      "Sandhi Vidhana"
+    ],
+    "decisionChecks": [
+      {
+        "question": "Are all horizontal sills, chajjas, and copings sloped outward at >= 1:50?",
+        "expectedBoolean": true,
+        "failingRemedy": "Slope coping stones outward and install continuous drip groove."
+      },
+      {
+        "question": "Is a continuous 10x10 mm drip groove provided under all projecting edges?",
+        "expectedBoolean": true,
+        "failingRemedy": "Cut continuous 10x10 mm drip groove 20 mm from outer edge."
+      },
+      {
+        "question": "Do facade movement joints follow the 2:1 width-to-depth elastomeric ratio?",
+        "expectedBoolean": true,
+        "failingRemedy": "Insert closed-cell backer rod to establish 2:1 sealant joint depth."
+      }
+    ],
+    "statutoryParameters": [
+      {
+        "label": "Minimum Coping & Sill Slope",
+        "value": "1:50 positive slope outward",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Structural Expansion Joint Interval",
+        "value": "Every 30.0 m in RCC frames",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Drip Groove Dimensions",
+        "value": "10 x 10 mm continuous groove",
+        "legalStatus": "mandatory_minimum"
+      },
+      {
+        "label": "Sealant Joint Width-to-Depth Ratio",
+        "value": "2 : 1 with backer rod",
+        "legalStatus": "mandatory_minimum"
+      }
+    ],
+    "ergonomicClearances": [
+      {
+        "label": "Continuous Drip Groove Size",
+        "dimension": "10 x 10 mm",
+        "clearanceStandard": "Breaks capillary surface tension and forces water detachment"
+      },
+      {
+        "label": "Drip Groove Setback from Edge",
+        "dimension": "20 mm from outer face",
+        "clearanceStandard": "Prevents spalling of concrete or stone edge"
+      },
+      {
+        "label": "Sealant Joint Width-to-Depth",
+        "dimension": "2 : 1 (e.g. 20 mm wide x 10 mm deep)",
+        "clearanceStandard": "Optimal elastomeric elongation without adhesive failure"
+      }
+    ],
+    "vastuSector": "Sandhi Vidhana (The Science of Tectonic Joints)",
+    "agnaaBenchmark": "Every parapet coping, cantilevered slab, and window sill features a 15 mm negative reveal paired with an inverted 10x10 mm continuous drip groove cut into flamed Deccan granite."
+  }
+]

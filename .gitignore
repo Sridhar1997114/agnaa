@@ -66,3 +66,12 @@ ChatGPT Image*
 public/downloads/*-Local-*.zip
 public/downloads/Agnaa-Voice-v2.0-Windows-Portable.zip
 .env*
+
+# External Integrations & Cloned MCP/Skill Repositories
+integrations/
+
+
+# Additional build artifacts and large binaries
+/.next_3001/
+public/downloads/*.exe
+public/downloads/Agnaa-Voice-*.zip

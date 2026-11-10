@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useId } from 'react';
 
-// Unique ID counter to avoid SVG ID collisions when multiple logos render on one page
-let _agnaaLogoIdCounter = 0;
-
-export const AgnaaLogo = ({ className = "w-auto h-10" }: { className?: string }) => {
-  const uid = React.useMemo(() => `agl${++_agnaaLogoIdCounter}`, []);
+export const AgnaaLogo = ({ className = "w-auto h-10", id }: { className?: string; id?: string }) => {
+  const reactId = useId();
+  // Sanitize reactId to form a valid, deterministic SVG and CSS identifier
+  const uid = id || `agl_${reactId.replace(/[^a-zA-Z0-9_-]/g, '')}`;
 
   return (
     <svg viewBox="0 0 4000 4000" className={className} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AGNAA Logo">

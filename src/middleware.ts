@@ -14,46 +14,44 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(`https://${canonicalHost}${pathname}${search}`), 301);
   }
 
+  // Dynamic subdomain path rewriter supporting nested routes
+  const rewriteSubdomain = (baseRoute: string) => {
+    const targetPath = pathname.startsWith(baseRoute)
+      ? pathname
+      : pathname === '/'
+        ? baseRoute
+        : `${baseRoute}${pathname}`;
+    return NextResponse.rewrite(new URL(targetPath, request.url));
+  };
+
   // ─── ADMIN Subdomain ────────────────────────────────────────────────
   if (hostname.startsWith('admin.agnaa.in') || hostname.startsWith('admin.localhost')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/admin', request.url));
-    }
+    return rewriteSubdomain('/admin');
   }
 
   // ─── PRO Subdomain ──────────────────────────────────────────────────
   if (hostname.startsWith('pro.agnaa.in') || hostname.startsWith('pro.localhost')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/pro', request.url));
-    }
+    return rewriteSubdomain('/pro');
   }
 
   // ─── MAP / GeoGIS Subdomain ─────────────────────────────────────────
   if (hostname.startsWith('map.agnaa.in') || hostname.startsWith('map.localhost')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/map', request.url));
-    }
+    return rewriteSubdomain('/map');
   }
 
   // ─── ARC Studio Canvas Subdomain ────────────────────────────────────
   if (hostname.startsWith('arc.agnaa.in') || hostname.startsWith('arc.localhost')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/arc', request.url));
-    }
+    return rewriteSubdomain('/arc');
   }
 
   // ─── BLOG / Journal Subdomain ───────────────────────────────────────
   if (hostname.startsWith('blog.agnaa.in') || hostname.startsWith('blog.localhost')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/blog', request.url));
-    }
+    return rewriteSubdomain('/blog');
   }
 
   // ─── CALC / Precision Calculator Subdomain ──────────────────────────
   if (hostname.startsWith('calc.agnaa.in') || hostname.startsWith('calc.localhost')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/calc', request.url));
-    }
+    return rewriteSubdomain('/calc');
   }
 
   // ─── SEVA / Foundation & Education Subdomain ──────────────────────
@@ -65,9 +63,7 @@ export async function middleware(request: NextRequest) {
     hostname.startsWith('earth.agnaa.in') || 
     hostname.startsWith('earth.localhost')
   ) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/foundation', request.url));
-    }
+    return rewriteSubdomain('/foundation');
   }
 
   // ─── PRO Auth Protection (cookie-based) ──────────────────────────────
@@ -91,9 +87,7 @@ export async function middleware(request: NextRequest) {
 
   // ─── Shop Subdomain ──────────────────────────────────────────────────
   if (hostname.startsWith('shop.agnaa.in') || hostname.startsWith('shop.localhost')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/shop', request.url));
-    }
+    return rewriteSubdomain('/shop');
   }
 
   if (pathname.startsWith('/shop') && !hostname.startsWith('shop.') && !hostname.includes('localhost')) {
@@ -115,9 +109,7 @@ export async function middleware(request: NextRequest) {
 
   // ─── Cost Subdomain ──────────────────────────────────────────────────
   if (hostname.startsWith('cost.agnaa.in')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/cost', request.url));
-    }
+    return rewriteSubdomain('/cost');
   }
 
   // ─── Agnaa Intelligence / AI Subdomain ──────────────────────────────
@@ -131,23 +123,17 @@ export async function middleware(request: NextRequest) {
   }
 
   if (hostname.startsWith('ai.agnaa.in') || hostname.startsWith('ai.localhost')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/agnaa-intelligence', request.url));
-    }
+    return rewriteSubdomain('/agnaa-intelligence');
   }
 
   // ─── Brand Subdomain ────────────────────────────────────────────────
   if (hostname.startsWith('brand.enthalpylabs.com') || hostname.startsWith('brand.localhost')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/brand', request.url));
-    }
+    return rewriteSubdomain('/brand');
   }
 
   // ─── Client Subdomain ───────────────────────────────────────────────
   if (hostname.startsWith('client.agnaa.in') || hostname.startsWith('client.localhost') || hostname.startsWith('clients.agnaa.in')) {
-    if (pathname === '/') {
-      return NextResponse.rewrite(new URL('/client', request.url));
-    }
+    return rewriteSubdomain('/client');
   }
 
   return NextResponse.next();

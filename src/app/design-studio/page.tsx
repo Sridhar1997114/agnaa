@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Building2, Code2, Sparkles, Film, ArrowUpRight, Search, 
@@ -294,10 +295,14 @@ export default function DesignStudioPage() {
                         {card.bentoHighlight}
                       </span>
 
-                      <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#1C1C72] text-xs font-black shadow-lg group-hover:bg-[#7B2DBF] group-hover:text-white transition-all transform group-hover:translate-x-1 shrink-0 ml-auto">
-                        <Eye size={13} />
-                        <span>Inspect Specs</span>
-                      </span>
+                      <Link
+                        href={`/design-studio/${card.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#1C1C72] text-xs font-black shadow-lg hover:bg-[#7B2DBF] hover:text-white transition-all transform hover:scale-105 shrink-0 ml-auto z-20 cursor-pointer"
+                      >
+                        <FileText size={13} />
+                        <span>Dossier ↗</span>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -597,13 +602,23 @@ export default function DesignStudioPage() {
                   Statutory Accreditation: <strong className="text-[#1C1C72]">CA/2023/161405</strong>
                 </div>
 
-                <button
-                  onClick={() => connectOnWhatsApp(selectedProject)}
-                  className="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-[#1C1C72] to-[#7B2DBF] text-white text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg hover:opacity-95 transition-all cursor-pointer"
-                >
-                  <MessageCircle size={15} />
-                  <span>Consult Ar. Sridhar on WhatsApp</span>
-                </button>
+                <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                  <Link
+                    href={`/design-studio/${selectedProject.id}`}
+                    className="w-full sm:w-auto px-5 py-3 rounded-full bg-[#1C1C72] text-white text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:bg-[#7B2DBF] transition-all cursor-pointer"
+                  >
+                    <FileText size={15} />
+                    <span>Open Dossier ↗</span>
+                  </Link>
+
+                  <button
+                    onClick={() => connectOnWhatsApp(selectedProject)}
+                    className="w-full sm:w-auto px-5 py-3 rounded-full bg-gradient-to-r from-[#1C1C72] to-[#7B2DBF] text-white text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg hover:opacity-95 transition-all cursor-pointer"
+                  >
+                    <MessageCircle size={15} />
+                    <span>Consult on WhatsApp</span>
+                  </button>
+                </div>
               </div>
             </motion.div>
           </div>

@@ -1,17 +1,9 @@
-"use client";
-
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { MapPin, Phone, Facebook, Twitter, Instagram, Youtube, Linkedin } from 'lucide-react';
 import { AgnaaLogo } from './AgnaaLogo';
 
 export const Footer = () => {
-  const pathname = usePathname();
-  const isPortal = pathname?.startsWith('/app') || pathname?.startsWith('/admin') || pathname?.startsWith('/login') || pathname?.startsWith('/shop') || pathname?.startsWith('/client');
-
-  if (isPortal) return null;
-
   return (
     <footer className="bg-[#F5F5F7] border-t border-gray-200 pt-16 md:pt-20 pb-10 text-gray-500 font-medium">
       <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 mb-16">

@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, Outfit, Cormorant_Garamond } from "next/font/google";
+import Script from "next/script";
+import { Inter, Space_Grotesk, Outfit, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { FooterWrapper } from "@/components/FooterWrapper";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const space = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
-const cormorant = Cormorant_Garamond({ 
-  subsets: ["latin"], 
-  variable: "--font-cormorant",
-  weight: ["400", "700"],
-  style: ["italic", "normal"]
-});
+const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: "AGNAA | Architects & Turnkey Villa Construction Hyderabad",
@@ -66,7 +63,6 @@ export const metadata: Metadata = {
 export const viewport: import("next").Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
 };
 
 // LocalBusiness & ArchitecturalFirm Comprehensive Schema
@@ -177,43 +173,45 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdLocalBusiness) }}
         />
 
+      </head>
+      <body className={`${inter.variable} ${space.variable} ${outfit.variable} ${spaceMono.variable} font-sans`}>
         {/* Google Analytics 4 (GA4) Tracking Script */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${gaId}', { page_path: window.location.pathname });
-            `,
-          }}
+        <Script
+          id="google-analytics-tag"
+          src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+          strategy="afterInteractive"
         />
+        <Script id="google-analytics-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gaId}', { page_path: window.location.pathname });
+          `}
+        </Script>
 
         {/* Meta / Facebook Pixel Script */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '${fbPixelId}');
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
-      </head>
-      <body className={`${inter.variable} ${space.variable} ${outfit.variable} ${cormorant.variable} font-sans`}>
+        <Script id="meta-pixel-init" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '${fbPixelId}');
+            fbq('track', 'PageView');
+          `}
+        </Script>
         <Header />
         <main className="min-h-screen">
           {children}
         </main>
-        <Footer />
+        <FooterWrapper>
+          <Footer />
+        </FooterWrapper>
       </body>
     </html>
   );

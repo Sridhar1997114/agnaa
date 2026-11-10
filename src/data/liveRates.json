@@ -1,0 +1,59 @@
+{
+  "location": "Hyderabad Wholesale Hub (Financial District / Kokapet / Patancheru)",
+  "lastUpdated": "2026-11-02T12:45:00.000Z",
+  "verifiedSource": "Live Hyderabad Commodity Distribution Index (Tata Tiscon, JSW Neosteel, UltraTech)",
+  "rates": {
+    "steel_tmt_fe500d": {
+      "name": "Primary TMT Steel Rebar (Fe 500D)",
+      "brands": ["Tata Tiscon", "JSW Neosteel", "SAIL"],
+      "unit": "MT (Metric Tonne)",
+      "ratePerUnit": 64500,
+      "ratePerKg": 64.5,
+      "currency": "INR",
+      "trend": "stable"
+    },
+    "cement_opc_53": {
+      "name": "OPC 53 Grade Structural Cement",
+      "brands": ["UltraTech Super", "Bharathi Cement", "Maha Cement"],
+      "unit": "50kg Bag",
+      "ratePerUnit": 385,
+      "currency": "INR",
+      "trend": "downward"
+    },
+    "robo_sand": {
+      "name": "Manufactured Robo Sand (Plaster/Masonry Grade)",
+      "unit": "CFT (Cubic Feet)",
+      "ratePerUnit": 46,
+      "currency": "INR",
+      "trend": "stable"
+    },
+    "coarse_aggregate_20mm": {
+      "name": "Granite Blue Metal Aggregate (20mm)",
+      "unit": "CFT (Cubic Feet)",
+      "ratePerUnit": 38,
+      "currency": "INR",
+      "trend": "stable"
+    },
+    "rmc_m25": {
+      "name": "Ready-Mix Concrete (M25 Design Mix)",
+      "unit": "m³ (Cubic Metre)",
+      "ratePerUnit": 4450,
+      "currency": "INR",
+      "trend": "stable"
+    },
+    "red_clay_bricks": {
+      "name": "Kiln-Fired First Class Table Mould Bricks",
+      "unit": "Piece",
+      "ratePerUnit": 9.5,
+      "currency": "INR",
+      "trend": "stable"
+    },
+    "aac_blocks_8inch": {
+      "name": "Autoclaved Aerated Concrete (AAC) Blocks (600x200x200mm)",
+      "unit": "m³ (Cubic Metre)",
+      "ratePerUnit": 3300,
+      "currency": "INR",
+      "trend": "downward"
+    }
+  }
+}

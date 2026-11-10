@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: process.env.PORT === '3001' ? '.next_3001' : '.next',
   compress: true,
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -11,6 +12,9 @@ const nextConfig = {
     ],
   },
   async headers() {
+    if (process.env.NODE_ENV !== 'production') {
+      return [];
+    }
     return [
       {
         source: '/(.*)',
