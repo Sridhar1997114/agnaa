@@ -12,8 +12,8 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: "AGNAA | Architects & Turnkey Villa Construction Hyderabad",
-  description: "Led by Ar. M. Sridhar Chauhan (SPA Delhi). 114+ luxury villas & turnkey constructions in Financial District, Kokapet & Jubilee Hills, Hyderabad.",
+  title: "AGNAA | Architecture, Urban Design, Institutional & Turnkey Execution",
+  description: "Directed by Ar. M. Sridhar Chauhan (SPA Delhi, CA/2023/161405). Comprehensive architectural practice, urban master planning, institutional campuses, high-density residential habitats & bespoke turnkey estates in Hyderabad.",
   metadataBase: new URL('https://agnaa.in'),
   icons: {
     icon: [
@@ -26,31 +26,35 @@ export const metadata: Metadata = {
   },
   keywords: [
     "Architects in Hyderabad",
+    "Urban Design Master Planning India",
+    "Institutional Campus Architects",
+    "Mass Housing & Habitat Architecture",
     "Luxury Villa Architects Hyderabad",
     "Architects Financial District Hyderabad",
-    "Turnkey Villa Construction Hyderabad",
+    "Turnkey Architecture & Construction Hyderabad",
     "Ar. M. Sridhar Chauhan",
     "SPA Delhi Architects Hyderabad",
     "Architects in Gachibowli",
     "Architects Kokapet",
     "GHMC Setback Rules",
     "NBC 2026 Architectural Standards",
+    "National Building Code Visualized",
     "Best Architecture Firms Hyderabad"
   ],
   alternates: {
     canonical: 'https://agnaa.in',
   },
   openGraph: {
-    title: 'AGNAA | Architects & Turnkey Villa Construction Hyderabad',
-    description: 'Led by Ar. M. Sridhar Chauhan (SPA Delhi). 114+ delivered luxury villas & turnkey constructions in Financial District, Kokapet & Jubilee Hills, Hyderabad.',
+    title: 'AGNAA | Architecture, Urban Design, Institutional & Turnkey Execution',
+    description: 'Directed by Ar. M. Sridhar Chauhan (SPA Delhi, CA/2023/161405). Comprehensive architectural practice, urban master planning, institutional campuses, high-density residential habitats & bespoke turnkey estates across Hyderabad.',
     url: 'https://agnaa.in',
     siteName: 'AGNAA Design Studio',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AGNAA | Architects & Turnkey Villa Construction Hyderabad',
-    description: 'Led by Ar. M. Sridhar Chauhan (SPA Delhi). 114+ delivered luxury villas & turnkey constructions across Hyderabad.',
+    title: 'AGNAA | Architecture, Urban Design, Institutional & Turnkey Execution',
+    description: 'Directed by Ar. M. Sridhar Chauhan (SPA Delhi, CA/2023/161405). 114+ delivered masterworks spanning urban planning, institutional campuses & bespoke turnkey estates.',
   },
   other: {
     'geo.region': 'IN-TG',
@@ -110,7 +114,12 @@ const jsonLdLocalBusiness = {
     '@type': 'Person',
     name: 'Ar. M. Sridhar Chauhan',
     jobTitle: 'Principal Architect & Founder',
-    alumniOf: 'School of Planning and Architecture, New Delhi (SPA Delhi)',
+    identifier: 'CA/2023/161405',
+    alumniOf: {
+      '@type': 'EducationalOrganization',
+      name: 'School of Planning and Architecture, New Delhi (SPA Delhi)',
+      sameAs: 'https://en.wikipedia.org/wiki/School_of_Planning_and_Architecture,_New_Delhi',
+    },
   },
   areaServed: [
     'Hyderabad', 
@@ -126,30 +135,54 @@ const jsonLdLocalBusiness = {
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'AGNAA Architecture & Construction Services',
+    name: 'AGNAA Architecture, Urban Design & Civil Services',
     itemListElement: [
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Luxury Residential & Villa Architecture',
-          description: 'Contemporary villa design with bioclimatic principles, Deccan solar orientation, and bespoke spatial envelopes.'
+          name: 'Urban Design & Territorial Master Planning',
+          description: 'Regional master plans, industrial corridors, transit-oriented development, and ecological zoning envelopes under HMDA Master Plan 2031.'
         }
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Turnkey Villa Construction (EPC)',
-          description: 'Full-cycle residential construction with milestone escrow verification, M30/M35 RCC foundations, and ₹1,750–₹3,000+/sft transparent rates.'
+          name: 'Institutional, Campus & Cultural Architecture',
+          description: 'University campuses, research laboratories, civic assembly halls, and cultural heritage complexes meeting high-occupancy NBC Part 4 life safety standards.'
         }
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'GHMC & TG-bPASS Municipal Sanction Planning',
-          description: '100% compliant building permission drawings harmonized with Telangana G.O. Ms. No. 168 and NBC 2026.'
+          name: 'High-Density Housing & Mixed-Use Habitats',
+          description: 'Multi-acre residential communities and high-rise apartment ensembles optimizing solar azimuth, natural cross-ventilation, and permissible FAR/FSI.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Bespoke Turnkey Residential Estates & Sanctuaries',
+          description: 'Contemporary estate and villa design with bioclimatic principles, Deccan solar orientation, and COA Rule 33 Pure Agent zero-markup material escrow.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'The Visualized National Building Code (NBC 2026)',
+          description: 'Illustrated vector companions and algorithmic calculators decoding complex statutory building codes for architects, engineers, and civic authorities.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Computational Architecture & On-Device AI Tools',
+          description: 'AGNAA Voice v2.0 offline Whisper F8 CAD dictation and Checkpoint-250 LoRA reasoning engine for statutory byelaw and Ayadi Shadvarga calculations.'
         }
       }
     ]

@@ -54,13 +54,13 @@ export default function HomePage() {
           <h1 className="text-5xl sm:text-7xl lg:text-[76px] font-bold tracking-[-0.035em] text-[#1C1C72] leading-[1.04]">
             From Code to Concrete.
             <span className="block text-2xl sm:text-4xl lg:text-[36px] font-semibold text-[#5F6368] mt-3 tracking-[-0.02em]">
-              Spatial Luxury Villas & Computational Architecture
+              Urban Design, Institutional Campuses & Living Habitats
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg font-normal text-[#5F6368] tracking-[-0.01em] max-w-2xl mx-auto leading-relaxed">
-            Directed by Ar. M. Sridhar Chauhan (SPA Delhi). A sovereign interdisciplinary studio uniting high-performance turnkey villa construction in Hyderabad with bespoke furniture and local zero-latency AI systems.
+            Directed by Ar. M. Sridhar Chauhan (SPA Delhi). A sovereign interdisciplinary studio executing territorial urban master planning, institutional campuses, high-density residential habitats, and turnkey bespoke estates with zero-latency in-house AI systems.
           </p>
 
           {/* Dual Action CTAs */}
@@ -150,10 +150,10 @@ export default function HomePage() {
                   <span className="text-xs font-semibold text-[#5F6368]">114+ Delivered Works</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1C1C72]">
-                  Private Luxury Villas & Turnkey Execution.
+                  Urban Design, Institutional Campuses & Living Habitats.
                 </h3>
                 <p className="text-sm text-[#5F6368] leading-relaxed">
-                  Full-stack architectural design, statutory sanctions (GHMC G.O. 168 / TG-bPASS / NBC 2026), and turnkey construction with zero-markup materials and verified craftsman escrow across Hyderabad’s Financial District, Kokapet, and Jubilee Hills.
+                  Full-scale territorial urban planning, institutional and university campuses, high-density residential habitats, and turnkey bespoke estates with direct-to-source civil material escrow and verified master craftsmen across Hyderabad and beyond.
                 </p>
 
                 <ul className="space-y-2 text-xs font-medium text-[#1C1C72] pt-2">
@@ -586,7 +586,7 @@ export default function HomePage() {
             Commission a spatial or computational work.
           </h2>
           <p className="text-base sm:text-lg text-[#5F6368] leading-relaxed max-w-xl mx-auto">
-            Whether commissioning a luxury villa residence in Hyderabad, structural byelaw sanctions, or custom AI engineering, connect directly with Ar. Sridhar Chauhan.
+            Whether commissioning an institutional campus, an urban master plan, high-density residential habitats, or custom architectural AI engineering, connect directly with Ar. Sridhar Chauhan.
           </p>
 
           <div className="pt-4 flex flex-wrap items-center justify-center gap-4">

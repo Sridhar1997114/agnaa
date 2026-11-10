@@ -48,18 +48,18 @@ export const DISCIPLINE_PILLARS: DisciplinePillar[] = [
   {
     id: 'Spatial Architecture',
     title: 'Spatial Architecture & Urbanism',
-    subtitle: 'From Monumental Sanctions to Luxury Villas',
-    description: 'State landmarks, 30-storey luxury residential towers, UNESCO buffer pavilions, and private luxury villas designed from first-principles physics and statutory rigor.',
+    subtitle: 'Urban Design, Civic Campuses & Sovereign Habitats',
+    description: 'Territorial master plans, university and cultural campuses, high-density residential habitats, and bespoke turnkey estates designed from first-principles physics and statutory rigor.',
     countBadge: '24+ Commissions',
     standardsBadge: 'NBC 2026 & GHMC Licensed',
     accentColor: '#1C1C72',
     gradient: 'from-[#1C1C72] to-[#2563EB]',
     iconName: 'Building2',
     keyDeliverables: [
-      'Statutory Sanction Drawings (GHMC/HMDA/NBC)',
-      'Structural Load-Path Coordination',
-      'Micro-climate & Daylighting Engineering',
-      'Turnkey Architecture & Construction Drawings'
+      'Territorial Urban Master Plans & TOD Envelopes',
+      'Institutional & Campus Architecture (NBC Part 4 Egress)',
+      'High-Density Residential Habitats & Living Ensembles',
+      'Bespoke Turnkey Architecture & Pure Agent Escrow'
     ]
   },
   {

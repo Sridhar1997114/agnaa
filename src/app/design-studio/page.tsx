@@ -89,7 +89,7 @@ export default function DesignStudioPage() {
 
           <p className="text-slate-600 text-base sm:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
             Directed by <strong className="text-[#1C1C72]">Ar. Sridhar Chauhan</strong> (SPA Delhi, CA/2023/161405). 
-            Unifying monumental architecture, local AI software tools, bespoke joinery, and 4K cinema under one holistic practice.
+            Unifying territorial urban master planning, institutional campuses, high-density residential habitats, bespoke joinery, and sovereign on-device AI under one holistic practice.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
@@ -519,7 +519,7 @@ export default function DesignStudioPage() {
               Begin an Interdisciplinary Commission
             </h2>
             <p className="text-slate-600 text-sm font-medium leading-relaxed">
-              Every commission—from civic landmarks and luxury residences to custom software systems and timber fabrication—is directed personally by Ar. Sridhar Chauhan (SPA Delhi, CA/2023/161405).
+              Every commission—from regional urban master plans and university campuses to high-density habitats, bespoke timber joinery, and custom AI software—is directed personally by Ar. Sridhar Chauhan (SPA Delhi, CA/2023/161405).
             </p>
           </div>
 
